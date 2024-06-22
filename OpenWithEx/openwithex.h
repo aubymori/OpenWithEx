@@ -5,9 +5,6 @@
 #ifndef _openwithex_h_
 #define _openwithex_h_
 
-/* Uncomment to build with XP-style dialogs */
-//#define XP
-
 extern HMODULE g_hAppInstance;
 extern HMODULE g_hMuiInstance;
 
