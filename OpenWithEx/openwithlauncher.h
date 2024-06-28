@@ -1,7 +1,6 @@
-#include "openwithex.h"
+#pragma once
 
-#ifndef _openwithlauncher_h_
-#define _openwithlauncher_h_
+#include "openwithex.h"
 
 enum IMMERSIVE_OPENWITH_FLAGS
 {
@@ -13,5 +12,3 @@ class IOpenWithLauncher : public IUnknown
 public:
 	virtual HRESULT Launch(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags) = 0;
 };
-
-#endif

@@ -1,11 +1,10 @@
+#pragma once
+
 #include "openwithex.h"
 #include "impdialog.h"
 #include <shobjidl.h>
 #include <commctrl.h>
 #include <vector>
-
-#ifndef _openasdlg_h_
-#define _openasdlg_h_
 
 #define I_RECOMMENDED 1
 #define I_OTHER       2
@@ -41,5 +40,3 @@ public:
 	COpenAsDlg(LPCWSTR lpszPath, bool bOverride, bool bUri);
 	~COpenAsDlg();
 };
-
-#endif

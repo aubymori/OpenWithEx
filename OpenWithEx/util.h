@@ -1,9 +1,6 @@
-#include <windows.h>
+#pragma once
 
-#ifndef _util_h_
-#define _util_h_
+#include <windows.h>
 
 int LocalizedMessageBox(HWND hWndParent, UINT uMsgId, UINT uType);
 HKEY GetExtensionRegKey(LPCWSTR lpszExtension);
-
-#endif

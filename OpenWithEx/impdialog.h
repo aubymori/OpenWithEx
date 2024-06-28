@@ -1,7 +1,6 @@
-#include <windows.h>
+#pragma once
 
-#ifndef _impdialog_h_
-#define _impdialog_h_
+#include <windows.h>
 
 class CImpDialog
 {
@@ -20,5 +19,3 @@ protected:
 public:
 	INT_PTR ShowDialog(HWND hWndParent);
 };
-
-#endif

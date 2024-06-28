@@ -1,9 +1,8 @@
+#pragma once
+
 #include <windows.h>
 #include <shobjidl.h>
 #include "util.h"
-
-#ifndef _openwithex_h_
-#define _openwithex_h_
 
 /* Uncomment to build with XP-style dialogs */
 //#define XP
@@ -50,5 +49,3 @@ extern SHCreateAssocHandler_t SHCreateAssocHandler;
 #define IDS_PROGRAMS          406
 #define IDS_ALLFILES          407
 #define IDS_BROWSETITLE       408
-
-#endif

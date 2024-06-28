@@ -1,8 +1,7 @@
+#pragma once
+
 #include "openwithex.h"
 #include "impdialog.h"
-
-#ifndef _cantopendlg_h_
-#define _cantopendlg_h_
 
 class CCantOpenDlg : public CImpDialog
 {
@@ -15,5 +14,3 @@ private:
 public:
 	CCantOpenDlg(LPCWSTR lpszPath);
 };
-
-#endif
