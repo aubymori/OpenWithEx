@@ -141,7 +141,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MinimumRequiredVersion>6.0</MinimumRequiredVersion>
-      <AdditionalDependencies>shell32.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shell32.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;crypt32.lib;bcrypt.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalManifestDependencies>"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'";%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -162,23 +162,28 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MinimumRequiredVersion>6.0</MinimumRequiredVersion>
-      <AdditionalDependencies>shell32.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shell32.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;crypt32.lib;bcrypt.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalManifestDependencies>"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'";%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="assocuserchoice.cpp" />
     <ClCompile Include="cantopendlg.cpp" />
     <ClCompile Include="impdialog.cpp" />
     <ClCompile Include="mui.c" />
     <ClCompile Include="noopendlg.cpp" />
     <ClCompile Include="openasdlg.cpp" />
     <ClCompile Include="openwithex.cpp" />
+    <ClCompile Include="test\test_userchoice.cpp" />
+    <ClCompile Include="versionhelper.h" />
+    <ClCompile Include="shellprotectedreglock.cpp" />
     <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="openwithex.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="assocuserchoice.h" />
     <ClInclude Include="cantopendlg.h" />
     <ClInclude Include="impdialog.h" />
     <ClInclude Include="mui.h" />
@@ -186,6 +191,9 @@
     <ClInclude Include="openasdlg.h" />
     <ClInclude Include="openwithex.h" />
     <ClInclude Include="openwithlauncher.h" />
+    <ClInclude Include="raiihelpers.h" />
+    <ClInclude Include="shellprotectedreglock.h" />
+    <ClInclude Include="test\test_userchoice.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

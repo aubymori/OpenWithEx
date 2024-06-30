@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Test Files">
+      <UniqueIdentifier>{e02f0e6c-a2ca-4e13-95f9-f717598dcf5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="openwithex.cpp">
@@ -35,6 +38,18 @@
     </ClCompile>
     <ClCompile Include="noopendlg.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shellprotectedreglock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="assocuserchoice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="versionhelper.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_userchoice.cpp">
+      <Filter>Test Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +81,18 @@
     </ClInclude>
     <ClInclude Include="openwithlauncher.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raiihelpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="assocuserchoice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shellprotectedreglock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\test_userchoice.h">
+      <Filter>Test Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,6 +5,9 @@
 #include <propvarutil.h>
 #include <propkey.h>
 
+#include "assocuserchoice.h"
+#include "versionhelper.h"
+
 LPCWSTR s_szSysTypes[] = {
 	L".bin",
 	L".dat",
@@ -589,8 +592,11 @@ void COpenAsDlg::_OnOk()
 	if (pSelected)
 	{
 		EndDialog(m_hWnd, IDOK);
+
 		LPWSTR lpszPath = nullptr;
 		pSelected->GetName(&lpszPath);
+
+		// This should probably be replaced - IAssocHandler::Invoke maybe?
 		if (lpszPath)
 		{
 			WCHAR szParams[MAX_PATH + 2] = { 0 };
@@ -603,15 +609,73 @@ void COpenAsDlg::_OnOk()
 				NULL,
 				SW_SHOWNORMAL
 			);
-			CoTaskMemFree(lpszPath);
 		}
 
 		if (bAssoc)
 		{
-			WCHAR FUCK[256];
-			swprintf_s(FUCK, L"0x%X\n", pSelected->MakeDefault(L"open"));
-			OutputDebugStringW(FUCK);
+			// We're setting the file association now, so let's have some
+			// fun!
+			if (!CVersionHelper::IsWindows10OrGreater())
+			{
+				// We don't currently handle pre-Windows 10 cases.
+				return;
+			}
+
+			IObjectWithProgID *pProgIdObj = nullptr;
+			if (FAILED(pSelected->QueryInterface(IID_PPV_ARGS(&pProgIdObj))))
+			{
+				// This should be the case, even if the object doesn't actually
+				// have a ProgID. While the implementation of this interface is
+				// not documented, it seems to even be expected by Windows 10's
+				// own implementation.
+				return;
+			}
+
+			bool bCancelAssoc = false;
+
+			/*
+			 * KNOWING THE PROGID IS IMPORTANT!
+			 * 
+			 * Windows makes file associations via the ProgID, not the file path.
+			 * It seems that the system generates a ProgID from the App Paths
+			 * when there is no ProgID (GetProgID returns nullptr).
+			 * 
+			 * We currently don't handle this case, so in the event the application
+			 * doesn't explicitly have a ProgID here, then we just exit for now.
+			 * 
+			 * This does unfortunately mean that only a few programs can actually
+			 * be associated, because most applications don't have explicit ProgIDs.
+			 */
+
+			// Get the ProgID of the element:
+			LPWSTR lpszProgId = nullptr;
+			pProgIdObj->GetProgID(&lpszProgId);
+
+			if (!lpszProgId)
+			{
+				OutputDebugStringW(L"Application doesn't have a ProgID; exiting.");
+				bCancelAssoc = true;
+			}
+
+			if (!bCancelAssoc)
+			{
+				OutputDebugStringW(L"\nProgID: ");
+				OutputDebugStringW(lpszProgId);
+				OutputDebugStringW(L"\n");
+
+				//lpszProgId = L"Applications\\notepad++.exe";
+
+				SetUserChoiceAndHashResult userChoiceResult =
+					SetUserChoiceAndHash(
+						(LPCWSTR)&m_szExtOrProtocol,
+						lpszProgId
+					);
+			}
+
+			CoTaskMemFree(lpszProgId);
 		}
+
+		CoTaskMemFree(lpszPath);
 	}
 }
 
