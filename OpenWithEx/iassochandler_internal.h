@@ -56,12 +56,12 @@ IAssocHandlerInfo : public IUnknown
 	 * a generated ProgID from the application path if no ProgID exists for the
 	 * handler.
 	 */
-	virtual LRESULT GetInternalProgID(ASSOC_PROGID_FORMAT fmt, LPWSTR *ppszProgId) = 0;
+	virtual HRESULT GetInternalProgID(ASSOC_PROGID_FORMAT fmt, LPWSTR *ppszProgId) = 0;
 
 	/**
-	 * Gets flags for the association handler.
+	 * Gets the type of the association handler.
 	 * 
-	 * @see {@link AssocHandlerFlags}
+	 * @see {@link AHTYPE}
 	 */
-	virtual LRESULT GetFlags(LPDWORD pdwOut) = 0;
+	virtual HRESULT GetType(LPDWORD pdwOut) = 0;
 };
