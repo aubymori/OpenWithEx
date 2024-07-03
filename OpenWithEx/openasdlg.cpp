@@ -7,7 +7,7 @@
 
 #include "assocuserchoice.h"
 #include "versionhelper.h"
-#include "iassochandlerinfo.h"
+#include "iassochandler_internal.h"
 
 LPCWSTR s_szSysTypes[] = {
 	L".bin",

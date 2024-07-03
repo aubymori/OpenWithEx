@@ -1,7 +1,7 @@
 #pragma once
 
 /*
- * Private undocumented interface from shell32/Windows.Storage.dll:
+ * Private undocumented interfaces from shell32/Windows.Storage.dll:
  * 
  * IAssocHandlerInfo
  * {D5C0CDAC-7A15-4F0A-87BA-2E7AAF19E0EC}
