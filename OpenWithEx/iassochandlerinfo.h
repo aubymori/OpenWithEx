@@ -10,7 +10,7 @@
 #include <windows.h>
 
 /**
- * Format for IAssocHandler::GetInternalProgID.
+ * Format for IAssocHandlerInfo::GetInternalProgID.
  * 
  * These are names I came up with myself, since we don't have the original
  * enum definition at all. We do know the enum name itself from the symbols.
@@ -19,6 +19,24 @@ enum class ASSOC_PROGID_FORMAT : int
 {
 	USE_GENERATED_PROGID_IF_NECESSARY = 0,
 	ALWAYS_USE_GENERATED_PROGID = 1,
+};
+
+/**
+ * These are internal flags returned by IAssocHandlerInfo::GetFlags.
+ * 
+ * Names are taken from:
+ * https://github.com/marlersoft/cwin32/blob/c0dbf4dbe4867bd197ea499f4770d4c10893448e/include/ui/shell.h#L3506-L3515
+ */
+enum class AHTYPE : int
+{
+	UNDEFINED = 0x0,
+	USER_APPLICATION = 0x8,
+	ANY_APPLICATION = 0x10,
+	MACHINE_DEFAULT = 0x20,
+	PROGID = 0x40,
+	APPLICATION = 0x80,
+	CLASS_APPLICATION = 0x100,
+	ANY_PROGID = 0x200,
 };
 
 MIDL_INTERFACE("D5C0CDAC-7A15-4F0A-87BA-2E7AAF19E0EC")
@@ -40,8 +58,10 @@ IAssocHandlerInfo : public IUnknown
 	 */
 	virtual LRESULT GetInternalProgID(ASSOC_PROGID_FORMAT fmt, LPWSTR *ppszProgId) = 0;
 
-	// This method was removed at some point, so the compiler will cluster it with
-	// other no-op functions of the same prototype. As such, even its name is
-	// unknown.
-	virtual LRESULT placeholder0(void *) = 0;
+	/**
+	 * Gets flags for the association handler.
+	 * 
+	 * @see {@link AssocHandlerFlags}
+	 */
+	virtual LRESULT GetFlags(LPDWORD pdwOut) = 0;
 };
