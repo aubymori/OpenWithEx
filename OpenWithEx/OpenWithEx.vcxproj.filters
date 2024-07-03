@@ -94,5 +94,8 @@
     <ClInclude Include="test\test_userchoice.h">
       <Filter>Test Files</Filter>
     </ClInclude>
+    <ClInclude Include="iassochandlerinfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

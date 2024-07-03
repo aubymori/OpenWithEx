@@ -7,6 +7,7 @@
 
 #include "assocuserchoice.h"
 #include "versionhelper.h"
+#include "iassochandlerinfo.h"
 
 LPCWSTR s_szSysTypes[] = {
 	L".bin",
@@ -631,6 +632,16 @@ void COpenAsDlg::_OnOk()
 				return;
 			}
 
+			IAssocHandlerInfo *pAssocInfo = nullptr;
+			if (FAILED(pSelected->QueryInterface(IID_PPV_ARGS(&pAssocInfo))))
+			{
+				// This is an undocumented interface implemented by IAssocHandler which
+				// provides another method for getting the ProgID.
+				// This is the preferred method, but if we fail, we'll just notify this
+				// via the debug console for now.
+				OutputDebugStringW(L"Failed to query interface IAssocHandlerInfo.\n");
+			}
+
 			bool bCancelAssoc = false;
 
 			/*
@@ -638,21 +649,42 @@ void COpenAsDlg::_OnOk()
 			 * 
 			 * Windows makes file associations via the ProgID, not the file path.
 			 * It seems that the system generates a ProgID from the App Paths
-			 * when there is no ProgID (GetProgID returns nullptr).
+			 * when there is no ProgID (IObjectWithProgID::GetProgID returns nullptr).
 			 * 
-			 * We currently don't handle this case, so in the event the application
-			 * doesn't explicitly have a ProgID here, then we just exit for now.
+			 * If there is an existing registration of the application name in the
+			 * App Paths, then we get that (from the undocumented IAssocHandlerInfo
+			 * interface). If we fail to get that, then we will fail to make the
+			 * association.
 			 * 
-			 * This does unfortunately mean that only a few programs can actually
-			 * be associated, because most applications don't have explicit ProgIDs.
+			 * This means that we currently can't make new registrations from
+			 * new handlers added via the file browser. They lack a ProgID at all, and
+			 * so we just don't generate one.
 			 */
 
 			// Get the ProgID of the element:
 			LPWSTR lpszProgId = nullptr;
-			pProgIdObj->GetProgID(&lpszProgId);
+
+			if (pAssocInfo)
+			{
+				// If we could get the IAssocHandlerInfo interface, then we'll call
+				// GetInternalProgID. This automatically handles generated ProgIDs
+				// like "Applications\notepad++.exe".
+				pAssocInfo->GetInternalProgID(
+					ASSOC_PROGID_FORMAT::USE_GENERATED_PROGID_IF_NECESSARY,
+					&lpszProgId
+				);
+			}
+			else
+			{
+				// If we couldn't, then we'll fall back to the IObjectWithProgID
+				// method. This does not handle the above case, so it's inherently
+				// limited.
+				pProgIdObj->GetProgID(&lpszProgId);
+			}
 
 			if (!lpszProgId)
 			{
+				// If we couldn't get any ProgID at all, then we cancel the registration.
 				OutputDebugStringW(L"Application doesn't have a ProgID; exiting.");
 				bCancelAssoc = true;
 			}
@@ -662,8 +694,6 @@ void COpenAsDlg::_OnOk()
 				OutputDebugStringW(L"\nProgID: ");
 				OutputDebugStringW(lpszProgId);
 				OutputDebugStringW(L"\n");
-
-				//lpszProgId = L"Applications\\notepad++.exe";
 
 				SetUserChoiceAndHashResult userChoiceResult =
 					SetUserChoiceAndHash(
