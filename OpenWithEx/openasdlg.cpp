@@ -464,8 +464,10 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 		{
 			int cchBuffer = lstrlenW(buffer) + 1;
 			pszCompanyName = std::make_unique<WCHAR[]>(cchBuffer);
-			memcpy(pszCompanyName.get(), buffer, cchBuffer * sizeof(WCHAR));
+			wcscpy_s(pszCompanyName.get(), cchBuffer, buffer);
 		}
+
+		CoTaskMemFree(buffer);
 	}
 
 	if (FAILED(hr))
@@ -611,7 +613,7 @@ void COpenAsDlg::_BrowseForProgram()
 			else
 			{
 				IAssocHandler *pHandler = nullptr;
-				SHCreateAssocHandler(8, m_szExtOrProtocol, lpszPath, &pHandler);
+				SHCreateAssocHandler(AHTYPE_USER_APPLICATION, m_szExtOrProtocol, lpszPath, &pHandler);
 				if (pHandler)
 				{
 					m_handlers.push_back(pHandler);
@@ -746,6 +748,16 @@ void COpenAsDlg::_OnOk()
 						(LPCWSTR)&m_szExtOrProtocol,
 						lpszProgId
 					);
+			}
+
+			if (pAssocInfo)
+			{
+				pAssocInfo->Release();
+			}
+
+			if (pProgIdObj)
+			{
+				pProgIdObj->Release();
 			}
 
 			CoTaskMemFree(lpszProgId);
