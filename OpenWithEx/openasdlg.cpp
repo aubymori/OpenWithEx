@@ -4,6 +4,7 @@
 #include <uxtheme.h>
 #include <propvarutil.h>
 #include <propkey.h>
+#include <memory>
 
 #include "assocuserchoice.h"
 #include "versionhelper.h"
@@ -448,21 +449,62 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 		(LPARAM)&lvi
 	);
 
-	LPWSTR pszPath = nullptr;
-	pItem->GetName(&pszPath);
+	IAssocHandlerWithCompanyName *pCompanyNameInfo = nullptr;
+	HRESULT hr = pItem->QueryInterface(IID_PPV_ARGS(&pCompanyNameInfo));
+	std::unique_ptr<WCHAR[]> pszCompanyName = nullptr;
 
-	IShellItem2 *psi = nullptr;
-	HRESULT hr = SHCreateItemFromParsingName(pszPath, nullptr, IID_PPV_ARGS(&psi));
-	CoTaskMemFree(pszPath);
 	if (SUCCEEDED(hr))
 	{
-		PROPVARIANT pvar;
-		PropVariantInit(&pvar);
-		psi->GetProperty(PKEY_Company, &pvar);
-		if (pvar.vt == VT_LPWSTR && pvar.pwszVal)
-		{
-			//MessageBoxW(NULL, pvar.pwszVal, NULL, NULL);
+		// If we could get the IAssocHandlerWithCompanyName object, then we just
+		// query that for the company name.
+		LPWSTR buffer = nullptr;
+		hr = pCompanyNameInfo->GetCompany(&buffer);
 
+		if (buffer)
+		{
+			int cchBuffer = lstrlenW(buffer) + 1;
+			pszCompanyName = std::make_unique<WCHAR[]>(cchBuffer);
+			memcpy(pszCompanyName.get(), buffer, cchBuffer * sizeof(WCHAR));
+		}
+	}
+
+	if (FAILED(hr))
+	{
+		// If we failed to get the IAssocHandlerWithCompanyName object, or failed to
+		// query the company name from that, then we will attempt to query it from
+		// the shell item properties instead.
+		LPWSTR pszPath = nullptr;
+
+		// BUGBUG: UWP applications report their display names (i.e. "Photos") instead
+		// of their location when calling this function. Thus, they will fail this
+		// procedure.
+		pItem->GetName(&pszPath);
+
+		IShellItem2 *psi = nullptr;
+		hr = SHCreateItemFromParsingName(pszPath, nullptr, IID_PPV_ARGS(&psi));
+		CoTaskMemFree(pszPath);
+
+		if (SUCCEEDED(hr))
+		{
+			PROPVARIANT pvar;
+			PropVariantInit(&pvar);
+			psi->GetProperty(PKEY_Company, &pvar);
+
+			if (pvar.vt == VT_LPWSTR && pvar.pwszVal)
+			{
+				int cchCompanyName = lstrlenW(pvar.pwszVal) + 1;
+				pszCompanyName = std::make_unique<WCHAR[]>(cchCompanyName);
+				memcpy(pszCompanyName.get(), pvar.pwszVal, cchCompanyName * sizeof(WCHAR));
+			}
+
+			PropVariantClear(&pvar);
+		}
+	}
+
+	if (SUCCEEDED(hr))
+	{
+		if (pszCompanyName)
+		{
 			LVTILEINFO lvti = { sizeof(LVTILEINFO) };
 			lvti.iItem = index;
 			lvti.cColumns = 1;
@@ -476,7 +518,7 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 			);
 
 			LVITEMW lvi = { 0 };
-			lvi.pszText = pvar.pwszVal;
+			lvi.pszText = pszCompanyName.get();
 			lvi.iSubItem = 1;
 			SendDlgItemMessageW(
 				m_hWnd, IDD_OPENWITH_LISTVIEW,
@@ -484,7 +526,11 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 				(LPARAM)&lvi
 			);
 		}
-		PropVariantClear(&pvar);
+	}
+
+	if (pCompanyNameInfo)
+	{
+		pCompanyNameInfo->Release();
 	}
 #endif
 }

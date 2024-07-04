@@ -185,7 +185,7 @@
   <ItemGroup>
     <ClInclude Include="assocuserchoice.h" />
     <ClInclude Include="cantopendlg.h" />
-    <ClInclude Include="iassochandlerinfo.h" />
+    <ClInclude Include="iassochandler_internal.h" />
     <ClInclude Include="impdialog.h" />
     <ClInclude Include="mui.h" />
     <ClInclude Include="noopendlg.h" />
