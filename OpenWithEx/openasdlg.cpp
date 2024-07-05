@@ -16,6 +16,82 @@ LPCWSTR s_szSysTypes[] = {
 	L".dos"
 };
 
+/*
+ * Get the app icon.
+ * 
+ * @param lpszIconPath  The path of the binary containing the icon, or an
+ *                      indirect string in the case of UWP applications.
+ * @param iIndex        The index of the icon in the binary.
+ * 
+ */
+inline static int GetAppIconIndex(LPCWSTR lpszIconPath, int iIndex)
+{
+	/*
+	 * This seems to be an edge case handled in TWinUI.
+	 * 
+	 * I did not bother looking into it further.
+	 */
+	if (iIndex == -1)
+	{
+		return Shell_GetCachedImageIndexW(L"shell32.dll", 2, 0);
+	}
+
+	/*
+	 * Get the app icon for UWP applications.
+	 *
+	 * In the documentation for Shell_GetCachedImageIndex, Microsoft straight up
+	 * lies about the purpose of the `uIconFlags` argument, stating that it is
+	 * not used. It is, in fact, used.
+	 *
+	 * TWinUI happily supplies an argument for it in
+	 * `CImmersiveOpenWithUI::_GetIcon()`.
+	 *
+	 * https://learn.microsoft.com/en-us/windows/win32/api/shlobj_core/nf-shlobj_core-shell_getcachedimageindexa
+	 *
+	 * I copied this logic from TWinUI, but I spent some time figuring out why it
+	 * works as well.
+	 *
+	 * The gist of it is that this uIconFlags argument, like arguments of the same
+	 * name on other functions, is one of the GIL_ variables. Of course, Microsoft
+	 * didn't bother documenting this, but it can be observed by a simple GitHub
+	 * search of the variable name, which will show you leaked Windows source code
+	 * in the search results with proper documentation available.
+	 *
+	 * https://files.catbox.moe/z4xgza.png
+	 *
+	 * When you call IAssocHandler::GetIconLocation() on a UWP handler, instead of
+	 * getting an absolute file system path, you get a uniform resource locator
+	 * wrapped in a custom format which begins with "@". I have no idea what this
+	 * is exactly, but apparently it's called an "indirect string" and will always
+	 * start with an "@" character.
+	 *
+	 * https://learn.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-shloadindirectstring
+	 *
+	 * Anyway, TWinUI doesn't bother with this indirect string, and neither will
+	 * we. It just sets the flags to GIL_ASYNC | GIL_NOTFILENAME and calls into
+	 * `Shell_GetCachedImageIndexW()` like normal. This is enough to get the
+	 * icon of a UWP application, and has worked perfectly in my testing.
+	 * 
+	 * According to Microsoft's C headers, GIL_NOTFILENAME causes the system to
+	 * call into ExtractIcon() to get the icon. This flag results in no icon
+	 * being displayed at all without GIL_ASYNC, so it seems that this only works
+	 * asynchronously.
+	 * 
+	 * https://github.com/tpn/winsdk-10/blob/master/Include/10.0.10240.0/um/ShlObj.h#L258
+	 * 
+	 * The aforementioned function `CImmersiveOpenWithUI::_GetIcon()` in TWinUI
+	 * does perform some additional work in case `Shell_GetCachedImageIndex()`
+	 * doesn't work, but we don't handle any such case as of right now.
+	 */
+	UINT uIconFlags = NULL;
+	if (lpszIconPath && lpszIconPath[0] == L'@')
+		uIconFlags = GIL_ASYNC | GIL_NOTFILENAME;
+
+	return Shell_GetCachedImageIndexW(
+		lpszIconPath, iIndex, uIconFlags
+	);
+}
+
 INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
@@ -390,8 +466,8 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 		&iIndex
 	);
 
-	tvi.iImage = Shell_GetCachedImageIndexW(
-		pszPath, iIndex, NULL
+	tvi.iImage = GetAppIconIndex(
+		pszPath, iIndex
 	);
 	tvi.iSelectedImage = tvi.iImage;
 
@@ -436,8 +512,9 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 		&pszIconPath,
 		&iIndex
 	);
-	lvi.iImage = Shell_GetCachedImageIndexW(
-		pszIconPath, iIndex, NULL
+
+	lvi.iImage = GetAppIconIndex(
+		pszIconPath, iIndex
 	);
 	CoTaskMemFree(pszIconPath);
 
