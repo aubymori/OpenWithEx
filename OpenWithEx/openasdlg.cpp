@@ -719,22 +719,25 @@ void COpenAsDlg::_OnOk()
 	{
 		EndDialog(m_hWnd, IDOK);
 
-		LPWSTR lpszPath = nullptr;
-		pSelected->GetName(&lpszPath);
+		// Start the program with the file:
+		IShellItem2 *pShellItem = nullptr;
+		HRESULT hr = SHCreateItemFromParsingName(m_szPath, nullptr, IID_PPV_ARGS(&pShellItem));
 
-		// This should probably be replaced - IAssocHandler::Invoke maybe?
-		if (lpszPath)
+		if (SUCCEEDED(hr) && pShellItem)
 		{
-			WCHAR szParams[MAX_PATH + 2] = { 0 };
-			swprintf_s(szParams, L"\"%s\"", m_szPath);
-			ShellExecuteW(
-				NULL,
-				L"open",
-				lpszPath,
-				szParams,
-				NULL,
-				SW_SHOWNORMAL
-			);
+			IDataObject *pInvocationObj = nullptr;
+			hr = pShellItem->BindToHandler(nullptr, BHID_DataObject, IID_PPV_ARGS(&pInvocationObj));
+
+			if (SUCCEEDED(hr))
+			{
+				pSelected->Invoke(pInvocationObj);
+
+				if (pInvocationObj)
+					pInvocationObj->Release();
+
+				if (pShellItem)
+					pShellItem->Release();
+			}
 		}
 
 		if (bAssoc)
@@ -839,8 +842,6 @@ void COpenAsDlg::_OnOk()
 
 			CoTaskMemFree(lpszProgId);
 		}
-
-		CoTaskMemFree(lpszPath);
 	}
 }
 
