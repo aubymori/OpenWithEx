@@ -1,7 +1,8 @@
 #include "test_userchoice.h"
 
 #include "../assocuserchoice.h"
-#include "../raiihelpers.h"
+
+#include "../wil/resource.h"
 
 /**
  * Generate a UserChoice hash; compare it with the one that is stored.
@@ -29,31 +30,25 @@ CheckUserChoiceHashResult CheckUserChoiceHash(
 		return CheckUserChoiceHashResult::ERR_OTHER;
 	}
 
-	HKEY hKeyAssoc;
+	wil::unique_hkey hKeyAssoc;
 	if (RegOpenKeyExW(HKEY_CURRENT_USER, keyPath.get(), 0, KEY_READ, &hKeyAssoc) != ERROR_SUCCESS)
 	{
 		return CheckUserChoiceHashResult::ERR_OTHER;
 	}
 
-	// Auto-close key after return:
-	std::unique_ptr<HKEY__, RegCloseKeyDeleter> assocKeyDeletionManager(hKeyAssoc);
-
 	FILETIME lastWriteFileTime;
 	{
 		// Get the last-write file time from the UserChoice root.
 
-		HKEY hKeyUserChoice;
-		if (RegOpenKeyExW(hKeyAssoc, L"UserChoice", 0, KEY_READ, &hKeyUserChoice) != ERROR_SUCCESS)
+		wil::unique_hkey hKeyUserChoice;
+		if (RegOpenKeyExW(hKeyAssoc.get(), L"UserChoice", 0, KEY_READ, &hKeyUserChoice) != ERROR_SUCCESS)
 		{
 			return CheckUserChoiceHashResult::ERR_OTHER;
 		}
 
-		// Auto-close key after return:
-		std::unique_ptr<HKEY__, RegCloseKeyDeleter> userChoiceKeyDeletionManager(hKeyUserChoice);
-
 		if (
 			RegQueryInfoKeyW(
-				hKeyUserChoice,
+				hKeyUserChoice.get(),
 				nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
 				&lastWriteFileTime
 			) != ERROR_SUCCESS)
@@ -74,7 +69,7 @@ CheckUserChoiceHashResult CheckUserChoiceHash(
 	DWORD dwDataSizeBytes = 0;
 	if (
 		RegGetValueW(
-			hKeyAssoc,
+			hKeyAssoc.get(),
 			L"UserChoice",
 			L"ProgId",
 			RRF_RT_REG_SZ,
@@ -93,7 +88,7 @@ CheckUserChoiceHashResult CheckUserChoiceHash(
 	std::unique_ptr<WCHAR[]> pszProgId = std::make_unique<WCHAR[]>(dwDataSizeChars);
 	if (
 		RegGetValueW(
-			hKeyAssoc,
+			hKeyAssoc.get(),
 			L"UserChoice",
 			L"ProgId",
 			RRF_RT_REG_SZ,
@@ -112,7 +107,7 @@ CheckUserChoiceHashResult CheckUserChoiceHash(
 	dwDataSizeBytes = 0;
 	if (
 		RegGetValueW(
-			hKeyAssoc,
+			hKeyAssoc.get(),
 			L"UserChoice",
 			L"Hash",
 			RRF_RT_REG_SZ,
@@ -130,7 +125,7 @@ CheckUserChoiceHashResult CheckUserChoiceHash(
 	std::unique_ptr<WCHAR[]> pszStoredHash = std::make_unique<WCHAR[]>(dwDataSizeChars);
 	if (
 		RegGetValueW(
-			hKeyAssoc,
+			hKeyAssoc.get(),
 			L"UserChoice",
 			L"Hash",
 			RRF_RT_REG_SZ,

@@ -2,6 +2,9 @@
 #include "openwithex.h"
 #include <stdio.h>
 
+#include "wil/com.h"
+#include "wil/resource.h"
+
 int LocalizedMessageBox(
 	HWND hWndParent,
 	UINT uMsgId,
@@ -33,7 +36,7 @@ HKEY GetExtensionRegKey(
 		return NULL;
 	}
 
-	HKEY hk = NULL;
+	wil::unique_hkey hk = NULL;
 	RegOpenKeyExW(
 		HKEY_CLASSES_ROOT,
 		lpszExtension,
@@ -45,7 +48,7 @@ HKEY GetExtensionRegKey(
 	WCHAR szKeyName[MAX_PATH] = { 0 };
 	DWORD dwKeyNameSize = sizeof(szKeyName);
 	RegQueryValueExW(
-		hk,
+		hk.get(),
 		L"",
 		NULL,
 		NULL,
@@ -53,7 +56,7 @@ HKEY GetExtensionRegKey(
 		&dwKeyNameSize
 	);
 
-	RegCloseKey(hk);
+	hk.reset();
 
 	if (!*szKeyName)
 	{
