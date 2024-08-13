@@ -29,9 +29,12 @@
 #include "shellprotectedreglock.h" // for SH***ProtectedValue APIs
 
 #include <memory>
-#include "raiihelpers.h"
 
 #include "assocuserchoice.h"
+
+#include "wil/com.h"
+#include "wil/registry.h"
+#include "wil/resource.h"
 
 /**
  * A constant copy of the User Experience string.
@@ -495,7 +498,7 @@ static HRESULT WriteToRegistry(
 {
 	std::unique_ptr<WCHAR[]> pszAssocKeyPath = GetAssociationKeyPath(lpszExtension);
 
-	HKEY hKeyAssoc = nullptr;
+	wil::unique_hkey hKeyAssoc = nullptr;
 
 	LSTATUS ls;
 	ls = RegCreateKeyExW(
@@ -510,9 +513,6 @@ static HRESULT WriteToRegistry(
 		nullptr
 	);
 
-	// Auto-close key after return:
-	std::unique_ptr<HKEY__, RegCloseKeyDeleter> hKeyAssocDeletionManager(hKeyAssoc);
-
 	if (ls != ERROR_SUCCESS)
 	{
 		return HRESULT_FROM_WIN32(ls);
@@ -524,7 +524,7 @@ static HRESULT WriteToRegistry(
 	// NOTE: This only applies to file extensions, not URL protocols.
 	if (lpszExtension && lpszExtension[0] == '.')
 	{
-		ls = SHDeleteProtectedValue(hKeyAssoc, NULL, L"UserChoice", true);
+		ls = SHDeleteProtectedValue(hKeyAssoc.get(), NULL, L"UserChoice", true);
 	}
 
 	// According to Mozilla, some keys may be protected from modification by
@@ -532,7 +532,7 @@ static HRESULT WriteToRegistry(
 	// to bypass this.
 	// https://github.com/mozilla/gecko-dev/blob/master/toolkit/mozapps/defaultagent/SetDefaultBrowser.cpp#L186-L191
 	std::unique_ptr<WCHAR[]> pszTempName = GetRandomUUID();
-	ls = RegRenameKey(hKeyAssoc, nullptr, pszTempName.get());
+	ls = RegRenameKey(hKeyAssoc.get(), nullptr, pszTempName.get());
 
 	if (ls != ERROR_SUCCESS)
 	{
@@ -563,7 +563,7 @@ static HRESULT WriteToRegistry(
 
 	DWORD progIdByteCount = (lstrlenW(lpszProgId) + 1) * sizeof(WCHAR);
 	ls = SHSetProtectedValue(
-		hKeyAssoc,
+		hKeyAssoc.get(),
 		L"UserChoice",
 		L"ProgId",
 		false,
@@ -581,7 +581,7 @@ static HRESULT WriteToRegistry(
 
 	DWORD hashByteCount = (lstrlenW(pszHash.get()) + 1) * sizeof(WCHAR);
 	ls = SHSetProtectedValue(
-		hKeyAssoc,
+		hKeyAssoc.get(),
 		L"UserChoice",
 		L"Hash",
 		false,
@@ -602,7 +602,7 @@ static HRESULT WriteToRegistry(
 		return HRESULT_FROM_WIN32(ls);
 	}
 
-	ls = RegRenameKey(hKeyAssoc, nullptr, lpszExtension);
+	ls = RegRenameKey(hKeyAssoc.get(), nullptr, lpszExtension);
 
 	if (ls != ERROR_SUCCESS)
 	{
@@ -641,7 +641,7 @@ static HRESULT WriteToRegistry(
 //		szPathToSystem32
 //	);
 //
-//	HANDLE hFile = CreateFileW(
+//	wil::unique_hfile hFile(CreateFileW(
 //		pszPathToShell32.get(),
 //		GENERIC_READ,
 //		FILE_SHARE_READ,
@@ -649,11 +649,7 @@ static HRESULT WriteToRegistry(
 //		OPEN_EXISTING,
 //		FILE_ATTRIBUTE_SYSTEM,
 //		nullptr
-//	);
-//
-//	// This object is useless, but it enables RAII to call CloseHandle at the end
-//	// of function execution:
-//	std::unique_ptr<void, CloseHandleDeleter> hFileDeletionManager(hFile);
+//	));
 //
 //	// TODO: finish
 //}
@@ -668,20 +664,16 @@ static HRESULT WriteToRegistry(
  */
 std::unique_ptr<WCHAR[]> GetCurrentUserStringSid()
 {
-	HANDLE processToken;
+	wil::unique_handle processToken;
 	if (!OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &processToken))
 	{
 		return nullptr;
 	}
 
-	// This object is useless, but it enables RAII to call CloseHandle at the end
-	// of function execution:
-	std::unique_ptr<void, CloseHandleDeleter> processTokenDeletionManager(processToken);
-
 	// Get the buffer size into dwUserSize so we know how much to allocate:
 	DWORD dwUserSize = 0;
 	if (
-		GetTokenInformation(processToken, TokenUser, nullptr, 0, &dwUserSize) &&
+		GetTokenInformation(processToken.get(), TokenUser, nullptr, 0, &dwUserSize) &&
 		GetLastError() != ERROR_INSUFFICIENT_BUFFER
 	)
 	{
@@ -691,24 +683,20 @@ std::unique_ptr<WCHAR[]> GetCurrentUserStringSid()
 	}
 
 	std::unique_ptr<BYTE[]> userBytes = std::make_unique<BYTE[]>(dwUserSize);
-	if (!GetTokenInformation(processToken, TokenUser, userBytes.get(), dwUserSize, &dwUserSize))
+	if (!GetTokenInformation(processToken.get(), TokenUser, userBytes.get(), dwUserSize, &dwUserSize))
 	{
 		return nullptr;
 	}
 
-	WCHAR *rawSid = nullptr;
+	wil::unique_hlocal_string rawSid = nullptr;
 	if (!ConvertSidToStringSidW( ((PTOKEN_USER)userBytes.get())->User.Sid, &rawSid ))
 	{
 		return nullptr;
 	}
 
-	// This object is useless, but it enables RAII to call LocalFree at the end
-	// of function execution:
-	std::unique_ptr<WCHAR, LocalFreeDeleter> sidDeletionManager(rawSid);
-
-	int cchSid = lstrlenW(rawSid) + 1;
+	int cchSid = lstrlenW(rawSid.get()) + 1;
 	std::unique_ptr<WCHAR[]> sid = std::make_unique<WCHAR[]>(cchSid);
-	memcpy(sid.get(), rawSid, cchSid * sizeof(WCHAR));
+	memcpy(sid.get(), rawSid.get(), cchSid * sizeof(WCHAR));
 
 	return sid;
 }

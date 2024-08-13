@@ -6,6 +6,9 @@
 #include <commctrl.h>
 #include <vector>
 
+#include "wil/com.h"
+#include "wil/resource.h"
+
 #define I_RECOMMENDED 1
 #define I_OTHER       2
 
@@ -18,7 +21,7 @@ private:
 	bool   m_bOverride;
 	bool   m_bUri;
 	bool   m_bRecommended;
-	std::vector<IAssocHandler *> m_handlers;
+	std::vector<wil::com_ptr<IAssocHandler>> m_handlers;
 #ifdef XP
 	std::vector<HTREEITEM> m_treeItems;
 	HTREEITEM m_hRecommended;
@@ -26,11 +29,11 @@ private:
 #endif
 
 	INT_PTR CALLBACK v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	IAssocHandler *_GetSelectedItem();
+	wil::com_ptr<IAssocHandler> _GetSelectedItem();
 	int _FindItemIndex(LPCWSTR lpszPath);
 	void _SelectItemByIndex(int index);
 	void _SetupCategories();
-	void _AddItem(IAssocHandler *pItem, int index, bool bForceSelect);
+	void _AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bForceSelect);
 	void _GetHandlers();
 
 	void _BrowseForProgram();

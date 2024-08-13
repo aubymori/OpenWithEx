@@ -10,6 +10,9 @@
 #include "versionhelper.h"
 #include "iassochandler_internal.h"
 
+#include "wil/com.h"
+#include "wil/resource.h"
+
 LPCWSTR s_szSysTypes[] = {
 	L".bin",
 	L".dat",
@@ -252,7 +255,7 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 	return FALSE;
 }
 
-IAssocHandler *COpenAsDlg::_GetSelectedItem()
+wil::com_ptr<IAssocHandler> COpenAsDlg::_GetSelectedItem()
 {
 #ifdef XP
 	HTREEITEM hSelected = (HTREEITEM)SendDlgItemMessageW(
@@ -299,18 +302,17 @@ IAssocHandler *COpenAsDlg::_GetSelectedItem()
 
 int COpenAsDlg::_FindItemIndex(LPCWSTR lpszPath)
 {
-	IAssocHandler *pResult = nullptr;
+	wil::com_ptr<IAssocHandler> pResult = nullptr;
+
 	for (size_t i = 0; i < m_handlers.size(); i++)
 	{
-		IAssocHandler *pHandler = m_handlers.at(i);
-		LPWSTR lpszCurPath = nullptr;
+		wil::com_ptr<IAssocHandler> pHandler = m_handlers.at(i);
+		wil::unique_cotaskmem_string lpszCurPath = nullptr;
 		pHandler->GetName(&lpszCurPath);
 		if (lpszCurPath)
 		{
-			if (0 == _wcsicmp(lpszPath, lpszCurPath))
+			if (0 == _wcsicmp(lpszPath, lpszCurPath.get()))
 				pResult = pHandler;
-
-			CoTaskMemFree(lpszCurPath);
 		}
 
 		if (pResult)
@@ -346,7 +348,7 @@ void COpenAsDlg::_SelectItemByIndex(int index)
 		(LPARAM)&lvi
 	);
 
-	IAssocHandler *pHandler = m_handlers.at(index);
+	wil::com_ptr<IAssocHandler> pHandler = m_handlers.at(index);
 	if (pHandler)
 	{
 		LVGROUP lvg = { sizeof(LVGROUP) };
@@ -450,14 +452,15 @@ void COpenAsDlg::_SetupCategories()
 #endif
 }
 
-void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
+void COpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bForceSelect)
 {
 #ifdef XP
 	TVITEMW tvi = { 0 };
 	tvi.mask = TVIF_TEXT | TVIF_PARAM | TVIF_IMAGE | TVIF_SELECTEDIMAGE;
 	pItem->GetUIName(&tvi.pszText);
 	tvi.cchTextMax = MAX_PATH;
-	tvi.lParam = (LPARAM)pItem;
+
+	tvi.lParam = (LPARAM)pItem.get();
 
 	LPWSTR pszPath = nullptr;
 	int    iIndex = 0;
@@ -497,7 +500,10 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 	}
 	pItem->GetUIName(&lvi.pszText);
 	lvi.cchTextMax = MAX_PATH;
-	lvi.lParam = (LPARAM)pItem;
+
+	// This is somewhat unsafe, but we're expecting that the item doesn't get
+	// unallocated before the list view item is destroyed.
+	lvi.lParam = (LPARAM)pItem.get();
 
 	if (index == 0 || bForceSelect)
 	{
@@ -506,7 +512,7 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 		lvi.state = LVIS_SELECTED;
 	}
 	
-	LPWSTR pszIconPath = nullptr;
+	wil::unique_cotaskmem_string pszIconPath = nullptr;
 	int    iIndex   = 0;
 	pItem->GetIconLocation(
 		&pszIconPath,
@@ -514,9 +520,8 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 	);
 
 	lvi.iImage = GetAppIconIndex(
-		pszIconPath, iIndex
+		pszIconPath.get(), iIndex
 	);
-	CoTaskMemFree(pszIconPath);
 
 	SendDlgItemMessageW(
 		m_hWnd,
@@ -526,7 +531,7 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 		(LPARAM)&lvi
 	);
 
-	IAssocHandlerWithCompanyName *pCompanyNameInfo = nullptr;
+	wil::com_ptr_nothrow<IAssocHandlerWithCompanyName> pCompanyNameInfo = nullptr;
 	HRESULT hr = pItem->QueryInterface(IID_PPV_ARGS(&pCompanyNameInfo));
 	std::unique_ptr<WCHAR[]> pszCompanyName = nullptr;
 
@@ -534,17 +539,15 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 	{
 		// If we could get the IAssocHandlerWithCompanyName object, then we just
 		// query that for the company name.
-		LPWSTR buffer = nullptr;
+		wil::unique_cotaskmem_string buffer = nullptr;
 		hr = pCompanyNameInfo->GetCompany(&buffer);
 
 		if (buffer)
 		{
-			int cchBuffer = lstrlenW(buffer) + 1;
+			int cchBuffer = lstrlenW(buffer.get()) + 1;
 			pszCompanyName = std::make_unique<WCHAR[]>(cchBuffer);
-			wcscpy_s(pszCompanyName.get(), cchBuffer, buffer);
+			wcscpy_s(pszCompanyName.get(), cchBuffer, buffer.get());
 		}
-
-		CoTaskMemFree(buffer);
 	}
 
 	if (FAILED(hr))
@@ -552,21 +555,19 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 		// If we failed to get the IAssocHandlerWithCompanyName object, or failed to
 		// query the company name from that, then we will attempt to query it from
 		// the shell item properties instead.
-		LPWSTR pszPath = nullptr;
+		wil::unique_cotaskmem_string pszPath = nullptr;
 
 		// BUGBUG: UWP applications report their display names (i.e. "Photos") instead
 		// of their location when calling this function. Thus, they will fail this
 		// procedure.
 		pItem->GetName(&pszPath);
 
-		IShellItem2 *psi = nullptr;
-		hr = SHCreateItemFromParsingName(pszPath, nullptr, IID_PPV_ARGS(&psi));
-		CoTaskMemFree(pszPath);
+		wil::com_ptr<IShellItem2> psi = nullptr;
+		hr = SHCreateItemFromParsingName(pszPath.get(), nullptr, IID_PPV_ARGS(&psi));
 
 		if (SUCCEEDED(hr))
 		{
-			PROPVARIANT pvar;
-			PropVariantInit(&pvar);
+			wil::unique_prop_variant pvar;
 			psi->GetProperty(PKEY_Company, &pvar);
 
 			if (pvar.vt == VT_LPWSTR && pvar.pwszVal)
@@ -575,8 +576,6 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 				pszCompanyName = std::make_unique<WCHAR[]>(cchCompanyName);
 				memcpy(pszCompanyName.get(), pvar.pwszVal, cchCompanyName * sizeof(WCHAR));
 			}
-
-			PropVariantClear(&pvar);
 		}
 	}
 
@@ -606,24 +605,19 @@ void COpenAsDlg::_AddItem(IAssocHandler *pItem, int index, bool bForceSelect)
 			);
 		}
 	}
-
-	if (pCompanyNameInfo)
-	{
-		pCompanyNameInfo->Release();
-	}
 #endif
 }
 
 void COpenAsDlg::_GetHandlers()
 {
-	IEnumAssocHandlers *pEnumHandler = nullptr;
+	wil::com_ptr<IEnumAssocHandlers> pEnumHandler = nullptr;
 	SHAssocEnumHandlers(
 		m_szExtOrProtocol,
 		ASSOC_FILTER_NONE,
 		&pEnumHandler
 	);
 
-	IAssocHandler *pAssoc = nullptr;
+	wil::com_ptr<IAssocHandler> pAssoc = nullptr;
 	ULONG pceltFetched = 0;
 	while (SUCCEEDED(pEnumHandler->Next(1, &pAssoc, &pceltFetched)) && pAssoc)
 	{
@@ -637,12 +631,12 @@ void COpenAsDlg::_GetHandlers()
 
 void COpenAsDlg::_BrowseForProgram()
 {
-	IShellItem *psi = nullptr;
+	wil::com_ptr<IShellItem> psi = nullptr;
 	WCHAR szPath[MAX_PATH] = { 0 };
 	ExpandEnvironmentStringsW(L"%ProgramFiles%", szPath, MAX_PATH);
 	SHCreateItemFromParsingName(szPath, nullptr, IID_PPV_ARGS(&psi));
 
-	IFileOpenDialog *pdlg = nullptr;
+	wil::com_ptr_nothrow<IFileOpenDialog> pdlg = nullptr;
 	CoCreateInstance(
 		CLSID_FileOpenDialog,
 		NULL,
@@ -653,7 +647,7 @@ void COpenAsDlg::_BrowseForProgram()
 	if (!pdlg)
 		return;
 
-	pdlg->SetFolder(psi);
+	pdlg->SetFolder(psi.get());
 
 	WCHAR szPrograms[MAX_PATH] = { 0 };
 	WCHAR szAllFiles[MAX_PATH] = { 0 };
@@ -673,31 +667,30 @@ void COpenAsDlg::_BrowseForProgram()
 
 	pdlg->Show(m_hWnd);
 
-	IShellItem *pResult = nullptr;
+	wil::com_ptr_nothrow<IShellItem> pResult = nullptr;
 	pdlg->GetResult(&pResult);
 
 	if (pResult)
 	{
-		LPWSTR lpszPath = nullptr;
+		wil::unique_cotaskmem_string lpszPath = nullptr;
 		pResult->GetDisplayName(SIGDN_FILESYSPATH, &lpszPath);
 		if (lpszPath)
 		{
-			int index = _FindItemIndex(lpszPath);
+			int index = _FindItemIndex(lpszPath.get());
 			if (index != -1)
 			{
 				_SelectItemByIndex(index);
 			}
 			else
 			{
-				IAssocHandler *pHandler = nullptr;
-				SHCreateAssocHandler(AHTYPE_USER_APPLICATION, m_szExtOrProtocol, lpszPath, &pHandler);
+				wil::com_ptr<IAssocHandler> pHandler = nullptr;
+				SHCreateAssocHandler(AHTYPE_USER_APPLICATION, m_szExtOrProtocol, lpszPath.get(), &pHandler);
 				if (pHandler)
 				{
 					m_handlers.push_back(pHandler);
 					_AddItem(pHandler, m_handlers.size() - 1, true);
 					_SelectItemByIndex(m_handlers.size() - 1);
 				}
-				CoTaskMemFree(lpszPath);
 			}
 		}
 	}
@@ -714,29 +707,23 @@ void COpenAsDlg::_OnOk()
 		MAX_PATH
 	);
 
-	IAssocHandler *pSelected = _GetSelectedItem();
+	wil::com_ptr<IAssocHandler> pSelected = _GetSelectedItem();
 	if (pSelected)
 	{
 		EndDialog(m_hWnd, IDOK);
 
 		// Start the program with the file:
-		IShellItem2 *pShellItem = nullptr;
+		wil::com_ptr<IShellItem2> pShellItem = nullptr;
 		HRESULT hr = SHCreateItemFromParsingName(m_szPath, nullptr, IID_PPV_ARGS(&pShellItem));
 
 		if (SUCCEEDED(hr) && pShellItem)
 		{
-			IDataObject *pInvocationObj = nullptr;
+			wil::com_ptr<IDataObject> pInvocationObj = nullptr;
 			hr = pShellItem->BindToHandler(nullptr, BHID_DataObject, IID_PPV_ARGS(&pInvocationObj));
 
 			if (SUCCEEDED(hr))
 			{
-				pSelected->Invoke(pInvocationObj);
-
-				if (pInvocationObj)
-					pInvocationObj->Release();
-
-				if (pShellItem)
-					pShellItem->Release();
+				pSelected->Invoke(pInvocationObj.get());
 			}
 		}
 
@@ -750,7 +737,7 @@ void COpenAsDlg::_OnOk()
 				return;
 			}
 
-			IObjectWithProgID *pProgIdObj = nullptr;
+			wil::com_ptr<IObjectWithProgID> pProgIdObj = nullptr;
 			if (FAILED(pSelected->QueryInterface(IID_PPV_ARGS(&pProgIdObj))))
 			{
 				// This should be the case, even if the object doesn't actually
@@ -760,7 +747,7 @@ void COpenAsDlg::_OnOk()
 				return;
 			}
 
-			IAssocHandlerInfo *pAssocInfo = nullptr;
+			wil::com_ptr<IAssocHandlerInfo> pAssocInfo = nullptr;
 			if (FAILED(pSelected->QueryInterface(IID_PPV_ARGS(&pAssocInfo))))
 			{
 				// This is an undocumented interface implemented by IAssocHandler which
@@ -790,7 +777,7 @@ void COpenAsDlg::_OnOk()
 			 */
 
 			// Get the ProgID of the element:
-			LPWSTR lpszProgId = nullptr;
+			wil::unique_cotaskmem_string lpszProgId = nullptr;
 
 			if (pAssocInfo)
 			{
@@ -820,27 +807,15 @@ void COpenAsDlg::_OnOk()
 			if (!bCancelAssoc)
 			{
 				OutputDebugStringW(L"\nProgID: ");
-				OutputDebugStringW(lpszProgId);
+				OutputDebugStringW(lpszProgId.get());
 				OutputDebugStringW(L"\n");
 
 				SetUserChoiceAndHashResult userChoiceResult =
 					SetUserChoiceAndHash(
 						(LPCWSTR)&m_szExtOrProtocol,
-						lpszProgId
+						lpszProgId.get()
 					);
 			}
-
-			if (pAssocInfo)
-			{
-				pAssocInfo->Release();
-			}
-
-			if (pProgIdObj)
-			{
-				pProgIdObj->Release();
-			}
-
-			CoTaskMemFree(lpszProgId);
 		}
 	}
 }
@@ -878,10 +853,10 @@ COpenAsDlg::~COpenAsDlg()
 {
 	for (size_t i = 0; i < m_handlers.size(); i++)
 	{
-		IAssocHandler *pItem = m_handlers.at(i);
+		wil::com_ptr<IAssocHandler> pItem = m_handlers.at(i);
 		if (pItem)
 		{
-			pItem->Release();
+			pItem.reset();
 		}
 	}
 	m_handlers.clear();
