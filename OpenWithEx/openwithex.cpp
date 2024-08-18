@@ -3,6 +3,7 @@
 #include "cantopendlg.h"
 #include "openasdlg.h"
 #include "noopendlg.h"
+#include "openwithexlauncher.h"
 #include <shlobj.h>
 #include <shlwapi.h>
 #include <stdio.h>
@@ -24,6 +25,15 @@ int WINAPI wWinMain(
 	_In_     int       nCmdShow
 )
 {
+#ifndef NDEBUG
+	FILE *dummy;
+	AllocConsole();
+	SetConsoleTitleW(L"OpenWithEx");
+	_wfreopen_s(&dummy, L"CONOUT$", L"w", stdout);
+#endif
+
+	debuglog(L"OpenWithEx Debug Console\n\n");
+
 	g_hAppInstance = hInstance;
 	g_hMuiInstance = GetMUIModule(g_hAppInstance);
 	if (!g_hMuiInstance)
@@ -71,12 +81,43 @@ int WINAPI wWinMain(
 		/* COM bullshit */
 		if (0 == _wcsicmp(argv[i], L"-embedding"))
 		{
+#if 0
 			LocalizedMessageBox(
 				NULL,
 				IDS_ERR_EMBEDDING,
 				MB_ICONERROR
 			);
 			return -1;
+#endif
+			debuglog(L"Started as COM server.\n");
+			DWORD dwRegister = 0;
+			IOpenWithLauncher *powl = new COpenWithExLauncher;
+			debuglog(L"Entering CoRegisterClassObject\n");
+			HRESULT hr = CoRegisterClassObject(CLSID_ExecuteUnknown, powl, CLSCTX_LOCAL_SERVER, NULL, &dwRegister);
+			debuglog(L"Exiting CoRegisterClassObject\n");
+			if (SUCCEEDED(hr))
+			{
+				MSG msg;
+				while (true)
+				{
+					if (GetMessageW(&msg, NULL, 0, 0) <= 0)
+					{
+						CoRevokeClassObject(dwRegister);
+						return 0;
+					}
+					TranslateMessage(&msg);
+					DispatchMessageW(&msg);
+				}
+			}
+			else
+			{
+				LocalizedMessageBox(
+					NULL,
+					IDS_ERR_EMBEDDING,
+					MB_ICONERROR
+				);
+				return -1;
+			}
 		}
 		/* Implies the type is already registered and user explicitly wants to
 	       open with */

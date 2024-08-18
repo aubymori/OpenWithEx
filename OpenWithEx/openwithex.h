@@ -1,6 +1,7 @@
 #pragma once
 
 #include <windows.h>
+#include <stdio.h>
 #include <shobjidl.h>
 #include "util.h"
 
@@ -12,6 +13,17 @@ extern HMODULE g_hMuiInstance;
 
 typedef HRESULT(WINAPI *SHCreateAssocHandler_t)(UINT uFlags, LPCWSTR pszExt, LPCWSTR pszApp, IAssocHandler **ppah);
 extern SHCreateAssocHandler_t SHCreateAssocHandler;
+
+DEFINE_GUID(CLSID_ExecuteUnknown, 0xE44E9428, 0xBDBC, 0x4987, 0xA0,0x99, 0x40,0xDC,0x8F,0xD2,0x55,0xE7);
+
+inline void debuglog(const wchar_t *format, ...)
+{
+#ifndef NDEBUG
+	va_list args;
+	va_start(args, format);
+	vwprintf_s(format, args);
+#endif
+}
 
 /* Icons */
 #define IDI_OPENWITH 100
