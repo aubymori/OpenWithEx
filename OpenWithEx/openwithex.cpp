@@ -7,6 +7,8 @@
 #include <shlobj.h>
 #include <shlwapi.h>
 #include <stdio.h>
+#include "wil/com.h"
+#include "wil/resource.h"
 
 HMODULE g_hAppInstance = nullptr;
 HMODULE g_hMuiInstance = nullptr;
@@ -90,33 +92,29 @@ int WINAPI wWinMain(
 			return -1;
 #endif
 			debuglog(L"Started as COM server.\n");
-			DWORD dwRegister = 0;
-			IOpenWithLauncher *powl = new COpenWithExLauncher;
-			debuglog(L"Entering CoRegisterClassObject\n");
-			HRESULT hr = CoRegisterClassObject(CLSID_ExecuteUnknown, powl, CLSCTX_LOCAL_SERVER, NULL, &dwRegister);
-			debuglog(L"Exiting CoRegisterClassObject\n");
-			if (SUCCEEDED(hr))
+
+#if !NDEBUG && 0
+			debuglog(L"Waiting for debugger...\n");
+			while (!IsDebuggerPresent())
+				Sleep(100);
+			debuglog(L"Debugger attached!\n");
+#endif
+			
+			wil::com_ptr<COpenWithExLauncher> powl = new COpenWithExLauncher();
+			
+			if (powl)
 			{
-				MSG msg;
-				while (true)
+				HRESULT hr = powl->RunMessageLoop();
+				
+				if (FAILED(hr))
 				{
-					if (GetMessageW(&msg, NULL, 0, 0) <= 0)
-					{
-						CoRevokeClassObject(dwRegister);
-						return 0;
-					}
-					TranslateMessage(&msg);
-					DispatchMessageW(&msg);
+					LocalizedMessageBox(
+						NULL,
+						IDS_ERR_EMBEDDING,
+						MB_ICONERROR
+					);
+					return -1;
 				}
-			}
-			else
-			{
-				LocalizedMessageBox(
-					NULL,
-					IDS_ERR_EMBEDDING,
-					MB_ICONERROR
-				);
-				return -1;
 			}
 		}
 		/* Implies the type is already registered and user explicitly wants to

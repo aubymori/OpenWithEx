@@ -44,6 +44,8 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>false</EnableASAN>
+    <EnableFuzzer>false</EnableFuzzer>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -51,6 +53,8 @@
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>false</EnableASAN>
+    <EnableFuzzer>false</EnableFuzzer>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -136,6 +140,8 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -155,6 +161,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -194,10 +201,42 @@
     <ClInclude Include="openwithex.h" />
     <ClInclude Include="iopenwithlauncher.h" />
     <ClInclude Include="openwithexlauncher.h" />
-    <ClInclude Include="raiihelpers.h" />
     <ClInclude Include="shellprotectedreglock.h" />
     <ClInclude Include="test\test_userchoice.h" />
     <ClInclude Include="util.h" />
+    <ClInclude Include="wil\com.h" />
+    <ClInclude Include="wil\common.h" />
+    <ClInclude Include="wil\com_apartment_variable.h" />
+    <ClInclude Include="wil\coroutine.h" />
+    <ClInclude Include="wil\cppwinrt.h" />
+    <ClInclude Include="wil\cppwinrt_authoring.h" />
+    <ClInclude Include="wil\cppwinrt_helpers.h" />
+    <ClInclude Include="wil\cppwinrt_notifiable_module_lock.h" />
+    <ClInclude Include="wil\cppwinrt_register_com_server.h" />
+    <ClInclude Include="wil\cppwinrt_wrl.h" />
+    <ClInclude Include="wil\filesystem.h" />
+    <ClInclude Include="wil\nt_result_macros.h" />
+    <ClInclude Include="wil\registry.h" />
+    <ClInclude Include="wil\registry_helpers.h" />
+    <ClInclude Include="wil\resource.h" />
+    <ClInclude Include="wil\result.h" />
+    <ClInclude Include="wil\result_macros.h" />
+    <ClInclude Include="wil\result_originate.h" />
+    <ClInclude Include="wil\rpc_helpers.h" />
+    <ClInclude Include="wil\safecast.h" />
+    <ClInclude Include="wil\stl.h" />
+    <ClInclude Include="wil\token_helpers.h" />
+    <ClInclude Include="wil\Tracelogging.h" />
+    <ClInclude Include="wil\traceloggingconfig.h" />
+    <ClInclude Include="wil\win32_helpers.h" />
+    <ClInclude Include="wil\win32_result_macros.h" />
+    <ClInclude Include="wil\windowing.h" />
+    <ClInclude Include="wil\winrt.h" />
+    <ClInclude Include="wil\wistd_config.h" />
+    <ClInclude Include="wil\wistd_functional.h" />
+    <ClInclude Include="wil\wistd_memory.h" />
+    <ClInclude Include="wil\wistd_type_traits.h" />
+    <ClInclude Include="wil\wrl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

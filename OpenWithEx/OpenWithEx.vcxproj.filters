@@ -100,10 +100,106 @@
     <ClInclude Include="iassochandler_internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="raiihelpers.h">
+    <ClInclude Include="openwithexlauncher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="openwithexlauncher.h">
+    <ClInclude Include="wil\com.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\com_apartment_variable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\coroutine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\cppwinrt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\cppwinrt_authoring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\cppwinrt_helpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\cppwinrt_notifiable_module_lock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\cppwinrt_register_com_server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\cppwinrt_wrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\filesystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\nt_result_macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\registry_helpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\result.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\result_macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\result_originate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\rpc_helpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\safecast.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\stl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\token_helpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\Tracelogging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\traceloggingconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\win32_helpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\win32_result_macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\windowing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\winrt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\wistd_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\wistd_functional.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\wistd_memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\wistd_type_traits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wil\wrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
