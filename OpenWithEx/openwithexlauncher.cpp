@@ -23,18 +23,6 @@
 	}
 #endif
 
-const IID s_supportedInterfaces[] = {
-	IID_IUnknown,
-	IID_IExecuteCommandApplicationHostEnvironment,
-	IID_IServiceProvider,
-	IID_IObjectWithSite,
-	IID_IObjectWithSelection,
-	IID_IInitializeCommand,
-	IID_IExecuteCommand,
-	IID_IOpenWithLauncher,
-	IID_IClassFactory
-};
-
 #pragma region "Debugging"
 #ifndef NDEBUG
 DWORD COpenWithExLauncher::s_instCounter = 0;
@@ -89,7 +77,15 @@ HRESULT COpenWithExLauncher::QueryInterface(REFIID riid, LPVOID *ppvObj)
 
 	bool bFailedToFind = true;
 
-	QI_PUT_OUT(IUnknown)
+	// For whatever reason, static_cast<IUnknown *> raises a comple error for me
+	// (aubymori), but not for the other person (kawapure). Masterful gambit,
+	// Microsoft!
+	if (riid == IID_IUnknown)
+	{
+		*ppvObj = this;
+		Log(method, L"Found interface IUnknown\n");
+		bFailedToFind = false;
+	}
 	QI_PUT_OUT(IExecuteCommandApplicationHostEnvironment)
 	QI_PUT_OUT(IServiceProvider)
 	QI_PUT_OUT(IObjectWithSite)
@@ -354,31 +350,14 @@ HRESULT COpenWithExLauncher::CreateInstance(IUnknown *pUnkOuter, REFIID riid, vo
 	(void)StringFromCLSID(riid, &lpString);
 	Log(method, L"riid is %s\n", lpString);
 
-	//void *pIntermediate = nullptr;
-	//HRESULT hr = QueryInterface(riid, &pIntermediate);
-
-	//if (FAILED(hr))
-	//{
-	//	Log(method, L"Exiting method (failure)\n");
-	//	return E_FAIL;
-	//}
-
 	if (riid == IID_IUnknown)
 	{
 		Log(method, L"riid is IUnknown, putting that out...\n");
-		*ppvObject = static_cast<IUnknown *>(this);
+		*ppvObject = this;
 	}
 
 	Log(method, L"Exiting method\n");
 	return S_OK;
-	/*LPWSTR lpString = nullptr;
-	(void)StringFromCLSID(riid, &lpString);
-	if (lpString && lpString[0])
-	{
-		MessageBoxW(NULL, lpString, NULL, NULL);
-		CoTaskMemFree(lpString);
-	}
-	return E_FAIL;*/
 }
 
 HRESULT COpenWithExLauncher::LockServer(BOOL fLock)
