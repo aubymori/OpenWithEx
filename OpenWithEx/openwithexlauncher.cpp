@@ -387,9 +387,13 @@ HRESULT COpenWithExLauncher::Execute()
 		{
 			Log(method, L"Got selected shell item\n");
 			LPWSTR pszPath = nullptr;
-			if (SUCCEEDED(psi->GetDisplayName(SIGDN_FILESYSPATH, &pszPath)))
+			HRESULT hr = psi->GetDisplayName(SIGDN_FILESYSPATH, &pszPath);
+			if (FAILED(hr))
 			{
-				Log(method, L"Path: %s\n", pszPath);
+				hr = psi->GetDisplayName(SIGDN_URL, &pszPath);
+			}
+			if (SUCCEEDED(hr))
+			{
 				wcscpy_s(szPath, pszPath);
 				CoTaskMemFree(pszPath);
 			}
