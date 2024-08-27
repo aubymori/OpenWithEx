@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include "wil/com.h"
 #include "wil/resource.h"
+#include "iobjectwithopenwithflags.h"
 
 // Disable debug calls if we are in release mode:
 #ifdef NDEBUG
@@ -89,6 +90,7 @@ HRESULT COpenWithExLauncher::QueryInterface(REFIID riid, LPVOID *ppvObj)
 	QI_PUT_OUT(IExecuteCommandApplicationHostEnvironment)
 	QI_PUT_OUT(IServiceProvider)
 	QI_PUT_OUT(IObjectWithSite)
+	QI_PUT_OUT(IObjectWithAssociationElement)
 	QI_PUT_OUT(IObjectWithSelection)
 	QI_PUT_OUT(IInitializeCommand)
 	QI_PUT_OUT(IExecuteCommand)
@@ -218,6 +220,33 @@ HRESULT COpenWithExLauncher::SetSite(IUnknown *pUnkSite)
 }
 #pragma endregion // "IObjectWithSite"
 
+#pragma region "IObjectWithAssociationElement"
+HRESULT COpenWithExLauncher::SetAssocElement(IAssociationElement *pae)
+{
+	DebugSetMethodName(L"COpenWithExLauncher::SetAssocElement");
+
+	Log(method, L"Entered method\n");
+	IUnknown_Set((IUnknown **)&m_pAssocElm, pae);
+	Log(method, L"Exiting method\n");
+	return S_OK;
+}
+
+HRESULT COpenWithExLauncher::GetAssocElement(REFIID riid, void **ppv)
+{
+	DebugSetMethodName(L"COpenWithExLauncher::GetAssocElement");
+
+	Log(method, L"Entered method\n");
+	if (m_pAssocElm)
+	{
+		LogReturn(m_pAssocElm->QueryInterface(riid, ppv), method, L"Exited method\n");
+	}
+	else
+	{
+		LogReturn(E_FAIL, method, L"Exited method\n");
+	}
+}
+#pragma endregion // "IObjectWithAssociationElement"
+
 #pragma region "IObjectWithSelection"
 HRESULT COpenWithExLauncher::GetSelection(REFIID riid, void **ppv)
 {
@@ -262,6 +291,8 @@ HRESULT COpenWithExLauncher::SetKeyState(DWORD grfKeyState)
 	DebugSetMethodName(L"COpenWithExLauncher::SetKeyState");
 
 	Log(method, L"Entering method\n");
+	Log(method, L"Setting key state to 0x%X\n", grfKeyState);
+	m_dwKeyState = grfKeyState;
 	Log(method, L"Exiting method\n");
 	return S_OK;
 }
@@ -271,6 +302,8 @@ HRESULT COpenWithExLauncher::SetParameters(__RPC__in_string LPCWSTR pszParameter
 	DebugSetMethodName(L"COpenWithExLauncher::SetParameters");
 
 	Log(method, L"Entering method\n");
+	Log(method, L"Setting parameters to %s\n", pszParameters);
+	Str_SetPtrW(&m_pszParameters, pszParameters);
 	Log(method, L"Exiting method\n");
 	return S_OK;
 }
@@ -280,6 +313,8 @@ HRESULT COpenWithExLauncher::SetPosition(POINT pt)
 	DebugSetMethodName(L"COpenWithExLauncher::SetPosition");
 
 	Log(method, L"Entering method\n");
+	Log(method, L"Setting position to (%i, %i)\n", pt.x, pt.y);
+	m_position = pt;
 	Log(method, L"Exiting method\n");
 	return S_OK;
 }
@@ -289,6 +324,8 @@ HRESULT COpenWithExLauncher::SetShowWindow(int nShow)
 	DebugSetMethodName(L"COpenWithExLauncher::SetShowWindow");
 
 	Log(method, L"Entering method\n");
+	Log(method, L"Setting show window to %i\n", nShow);
+	m_nShow = nShow;
 	Log(method, L"Exiting method\n");
 	return S_OK;
 }
@@ -298,6 +335,8 @@ HRESULT COpenWithExLauncher::SetNoShowUI(BOOL fNoShowUI)
 	DebugSetMethodName(L"COpenWithExLauncher::SetNoShowUI");
 
 	Log(method, L"Entering method\n");
+	Log(method, L"Setting no show UI to %s\n", fNoShowUI ? L"TRUE" : L"FALSE");
+	m_fNoShowUI = fNoShowUI;
 	Log(method, L"Exiting method\n");
 	return S_OK;
 }
@@ -307,6 +346,8 @@ HRESULT COpenWithExLauncher::SetDirectory(__RPC__in_string LPCWSTR pszDirectory)
 	DebugSetMethodName(L"COpenWithExLauncher::SetDirectory");
 
 	Log(method, L"Entering method\n");
+	Log(method, L"Setting directory to %s\n", pszDirectory);
+	Str_SetPtrW(&m_pszDirectory, pszDirectory);
 	Log(method, L"Exiting method\n");
 	return S_OK;
 }
@@ -326,7 +367,7 @@ HRESULT COpenWithExLauncher::Launch(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE
 {
 	debuglog(
 		L"[COpenWithExLauncher] IOpenWithLauncher::Launch info:\n"
-		L"\nhWndParent: 0x % X\nlpszPath: % s\nflags : 0x % X\n",
+		L"\nhWndParent: 0x%X\nlpszPath: %s\nflags : 0x%X\n",
 		hWndParent, lpszPath, flags
 	);
 	return S_OK;
@@ -398,6 +439,9 @@ COpenWithExLauncher::~COpenWithExLauncher()
 	if (m_pSite)
 		m_pSite->Release();
 
+	if (m_pAssocElm)
+		m_pAssocElm->Release();
+
 	if (m_pSelection)
 		m_pSelection->Release();
 
@@ -414,8 +458,8 @@ HRESULT COpenWithExLauncher::RunMessageLoop()
 
 	Log(method, L"Entering CoRegisterClassObject\n");
 
-	wil::com_ptr<IExecuteCommand> aaaa;
-	HRESULT hr = QueryInterface(IID_IExecuteCommand, (void **)&aaaa);
+	wil::com_ptr<IExecuteCommand> pExec;
+	HRESULT hr = QueryInterface(IID_IExecuteCommand, (void **)&pExec);
 
 	if (FAILED(hr))
 	{
@@ -423,7 +467,7 @@ HRESULT COpenWithExLauncher::RunMessageLoop()
 		return hr;
 	}
 
-	hr = CoRegisterClassObject(CLSID_ExecuteUnknown, aaaa.get(), CLSCTX_LOCAL_SERVER, NULL, &dwRegister);
+	hr = CoRegisterClassObject(CLSID_ExecuteUnknown, pExec.get(), CLSCTX_LOCAL_SERVER, NULL, &dwRegister);
 	Log(method, L"Exiting CoRegisterClassObject\n");
 	if (FAILED(hr))
 	{
@@ -442,7 +486,7 @@ HRESULT COpenWithExLauncher::RunMessageLoop()
 
 		if (msg.message)
 		{
-			Log(method, L"Received message %x %x %x %x\n", msg.message, msg.hwnd, msg.wParam, msg.lParam);
+			Log(method, L"Received message 0x%X 0x%X 0x%X 0x%X\n", msg.message, msg.hwnd, msg.wParam, msg.lParam);
 		}
 
 		TranslateMessage(&msg);

@@ -194,7 +194,10 @@
     <ClInclude Include="assocuserchoice.h" />
     <ClInclude Include="cantopendlg.h" />
     <ClInclude Include="iassochandler_internal.h" />
+    <ClInclude Include="iassociationelement.h" />
     <ClInclude Include="impdialog.h" />
+    <ClInclude Include="iobjectwithassociationelement.h" />
+    <ClInclude Include="iobjectwithopenwithflags.h" />
     <ClInclude Include="mui.h" />
     <ClInclude Include="noopendlg.h" />
     <ClInclude Include="openasdlg.h" />

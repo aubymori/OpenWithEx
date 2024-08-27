@@ -202,5 +202,14 @@
     <ClInclude Include="wil\wrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="iobjectwithassociationelement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iassociationelement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iobjectwithopenwithflags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

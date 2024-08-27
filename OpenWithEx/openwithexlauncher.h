@@ -1,11 +1,13 @@
 #pragma once
 #include "iopenwithlauncher.h"
+#include "iobjectwithassociationelement.h"
 
 class COpenWithExLauncher
 	: public IUnknown
 	, public IExecuteCommandApplicationHostEnvironment
 	, public IServiceProvider
 	, public IObjectWithSite
+	, public IObjectWithAssociationElement
 	, public IObjectWithSelection
 	, public IInitializeCommand
 	, public IExecuteCommand
@@ -13,10 +15,25 @@ class COpenWithExLauncher
 	, public IClassFactory
 {
 private:
+	// IUnknown
 	ULONG m_cRef;
+
+	// IObjectWithSite
 	IUnknown *m_pSite;
+
+	// IObjectWithAssociationElement
+	IAssociationElement *m_pAssocElm;
+
+	// IObjectWithSelection
 	IShellItemArray *m_pSelection;
 
+	// IExecuteCommand
+	DWORD  m_dwKeyState;
+	LPWSTR m_pszParameters;
+	POINT  m_position;
+	int    m_nShow;
+	LPWSTR m_pszDirectory;
+	BOOL   m_fNoShowUI;
 public:
 	// IUnknown
 	HRESULT QueryInterface(REFIID riid, LPVOID *ppvObj) override;
@@ -32,6 +49,10 @@ public:
 	// IObjectWithSite
 	HRESULT GetSite(REFIID riid, void **ppvSite) override;
 	HRESULT SetSite(IUnknown *pUnkSite) override;
+
+	// IObjectWithAssociationElement
+	HRESULT SetAssocElement(IAssociationElement *pae);
+	HRESULT GetAssocElement(REFIID riid, void **ppv);
 	
 	// IObjectWithSelection
 	HRESULT GetSelection(REFIID riid, void **ppv) override;
@@ -42,17 +63,11 @@ public:
 
 	// IExecuteCommand
 	HRESULT STDMETHODCALLTYPE SetKeyState(DWORD grfKeyState) override;
-
 	HRESULT STDMETHODCALLTYPE SetParameters(__RPC__in_string LPCWSTR pszParameters) override;
-
 	HRESULT STDMETHODCALLTYPE SetPosition(POINT pt) override;
-
 	HRESULT STDMETHODCALLTYPE SetShowWindow(int nShow) override;
-
 	HRESULT STDMETHODCALLTYPE SetNoShowUI(BOOL fNoShowUI) override;
-
 	HRESULT STDMETHODCALLTYPE SetDirectory(__RPC__in_string LPCWSTR pszDirectory) override;
-
 	HRESULT STDMETHODCALLTYPE Execute(void) override;
 
 	// IOpenWithLauncher

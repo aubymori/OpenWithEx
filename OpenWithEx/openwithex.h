@@ -11,6 +11,11 @@
 extern HMODULE g_hAppInstance;
 extern HMODULE g_hMuiInstance;
 
+enum IMMERSIVE_OPENWITH_FLAGS
+{
+
+};
+
 typedef HRESULT(WINAPI *SHCreateAssocHandler_t)(UINT uFlags, LPCWSTR pszExt, LPCWSTR pszApp, IAssocHandler **ppah);
 extern SHCreateAssocHandler_t SHCreateAssocHandler;
 
