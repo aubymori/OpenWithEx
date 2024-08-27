@@ -48,7 +48,7 @@ inline void debuglog(const wchar_t *format, ...)
 /* Controls */
 #define IDD_OPENWITH_ICON     300
 #define IDD_OPENWITH_FILE     301
-#define IDD_OPENWITH_LISTVIEW 302
+#define IDD_OPENWITH_PROGLIST 302
 #define IDD_OPENWITH_ASSOC    303
 #define IDD_OPENWITH_BROWSE   304
 #define IDD_OPENWITH_DESC     305

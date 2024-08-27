@@ -156,13 +156,13 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 			/* Theme list view */
 #ifndef XP
 			SetWindowTheme(
-				GetDlgItem(hWnd, IDD_OPENWITH_LISTVIEW),
+				GetDlgItem(hWnd, IDD_OPENWITH_PROGLIST),
 				L"Explorer",
 				NULL
 			);
 			SendDlgItemMessageW(
 				hWnd,
-				IDD_OPENWITH_LISTVIEW,
+				IDD_OPENWITH_PROGLIST,
 				LVM_SETVIEW,
 				LV_VIEW_TILE,
 				NULL
@@ -175,7 +175,7 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 #ifndef XP
 			SendDlgItemMessageW(
 				hWnd,
-				IDD_OPENWITH_LISTVIEW,
+				IDD_OPENWITH_PROGLIST,
 				LVM_SETIMAGELIST,
 				LVSIL_NORMAL,
 				(LPARAM)himl
@@ -183,7 +183,7 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 #endif
 			SendDlgItemMessageW(
 				hWnd,
-				IDD_OPENWITH_LISTVIEW,
+				IDD_OPENWITH_PROGLIST,
 #ifdef XP
 				TVM_SETIMAGELIST,
 				TVSIL_NORMAL,
@@ -209,13 +209,13 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 			col.mask = LVCF_SUBITEM;
 			col.iSubItem = 0;
 			SendDlgItemMessageW(
-				hWnd, IDD_OPENWITH_LISTVIEW,
+				hWnd, IDD_OPENWITH_PROGLIST,
 				LVM_INSERTCOLUMNW, NULL,
 				(LPARAM)&col
 			);
 			col.iSubItem = 1;
 			SendDlgItemMessageW(
-				hWnd, IDD_OPENWITH_LISTVIEW,
+				hWnd, IDD_OPENWITH_PROGLIST,
 				LVM_INSERTCOLUMNW, NULL,
 				(LPARAM)&col
 			);
@@ -277,7 +277,7 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 					}
 					break;
 				case NM_DBLCLK:
-					if (nmh->idFrom == IDD_OPENWITH_LISTVIEW)
+					if (nmh->idFrom == IDD_OPENWITH_PROGLIST)
 					{
 						_OnOk();
 					}
@@ -314,7 +314,7 @@ wil::com_ptr<IAssocHandler> COpenAsDlg::_GetSelectedItem()
 	return (IAssocHandler *)tvi.lParam;
 #else
 	int index = SendDlgItemMessageW(
-		m_hWnd, IDD_OPENWITH_LISTVIEW,
+		m_hWnd, IDD_OPENWITH_PROGLIST,
 		LVM_GETNEXTITEM, -1, LVNI_SELECTED
 	);
 
@@ -326,7 +326,7 @@ wil::com_ptr<IAssocHandler> COpenAsDlg::_GetSelectedItem()
 	lvi.mask = LVIF_PARAM;
 
 	SendDlgItemMessageW(
-		m_hWnd, IDD_OPENWITH_LISTVIEW,
+		m_hWnd, IDD_OPENWITH_PROGLIST,
 		LVM_GETITEMW, NULL,
 		(LPARAM)&lvi
 	);
@@ -376,9 +376,9 @@ void COpenAsDlg::_SelectItemByIndex(int index)
 	lvi.stateMask = LVIS_SELECTED;
 	lvi.state = LVIS_SELECTED;
 
-	SetFocus(GetDlgItem(m_hWnd, IDD_OPENWITH_LISTVIEW));
+	SetFocus(GetDlgItem(m_hWnd, IDD_OPENWITH_PROGLIST));
 	SendDlgItemMessageW(
-		m_hWnd, IDD_OPENWITH_LISTVIEW,
+		m_hWnd, IDD_OPENWITH_PROGLIST,
 		LVM_SETITEMW, NULL,
 		(LPARAM)&lvi
 	);
@@ -391,7 +391,7 @@ void COpenAsDlg::_SelectItemByIndex(int index)
 		lvg.stateMask = LVGS_COLLAPSED;
 
 		SendDlgItemMessageW(
-			m_hWnd, IDD_OPENWITH_LISTVIEW,
+			m_hWnd, IDD_OPENWITH_PROGLIST,
 			LVM_SETGROUPINFO,
 			(S_OK == pHandler->IsRecommended()) ? I_RECOMMENDED : I_OTHER,
 			(LPARAM)&lvg
@@ -399,7 +399,7 @@ void COpenAsDlg::_SelectItemByIndex(int index)
 	}
 
 	SendDlgItemMessageW(
-		m_hWnd, IDD_OPENWITH_LISTVIEW,
+		m_hWnd, IDD_OPENWITH_PROGLIST,
 		LVM_ENSUREVISIBLE, index,
 		TRUE
 	);
@@ -446,7 +446,7 @@ void COpenAsDlg::_SetupCategories()
 #else
 	SendDlgItemMessageW(
 		m_hWnd,
-		IDD_OPENWITH_LISTVIEW,
+		IDD_OPENWITH_PROGLIST,
 		LVM_ENABLEGROUPVIEW,
 		TRUE,
 		NULL
@@ -463,7 +463,7 @@ void COpenAsDlg::_SetupCategories()
 	recommended.cchHeader = MAX_PATH;
 	SendDlgItemMessageW(
 		m_hWnd,
-		IDD_OPENWITH_LISTVIEW,
+		IDD_OPENWITH_PROGLIST,
 		LVM_INSERTGROUP,
 		-1,
 		(LPARAM)&recommended
@@ -479,7 +479,7 @@ void COpenAsDlg::_SetupCategories()
 
 	SendDlgItemMessageW(
 		m_hWnd,
-		IDD_OPENWITH_LISTVIEW,
+		IDD_OPENWITH_PROGLIST,
 		LVM_INSERTGROUP,
 		-1,
 		(LPARAM)&other
@@ -560,7 +560,7 @@ void COpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bFo
 
 	SendDlgItemMessageW(
 		m_hWnd,
-		IDD_OPENWITH_LISTVIEW,
+		IDD_OPENWITH_PROGLIST,
 		LVM_INSERTITEMW,
 		NULL,
 		(LPARAM)&lvi
@@ -625,7 +625,7 @@ void COpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bFo
 			lvti.puColumns = cols;
 
 			SendDlgItemMessageW(
-				m_hWnd, IDD_OPENWITH_LISTVIEW,
+				m_hWnd, IDD_OPENWITH_PROGLIST,
 				LVM_SETTILEINFO, 0,
 				(LPARAM)&lvti
 			);
@@ -634,7 +634,7 @@ void COpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bFo
 			lvi.pszText = pszCompanyName.get();
 			lvi.iSubItem = 1;
 			SendDlgItemMessageW(
-				m_hWnd, IDD_OPENWITH_LISTVIEW,
+				m_hWnd, IDD_OPENWITH_PROGLIST,
 				LVM_SETITEMTEXTW, index,
 				(LPARAM)&lvi
 			);
