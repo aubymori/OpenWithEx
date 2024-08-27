@@ -27,14 +27,16 @@ int LocalizedMessageBox(
   * For example, passing L".dll" in will return a handle to
   * `HKEY_CLASSES_ROOT\dllfile`.
   */
-HKEY GetExtensionRegKey(
-	LPCWSTR lpszExtension
+bool GetExtensionRegKey(
+	LPCWSTR  lpszExtension,
+	HKEY    *pHkOut
 )
 {
-	if (!lpszExtension || !*lpszExtension)
+	if (!lpszExtension || !*lpszExtension || !pHkOut)
 	{
-		return NULL;
+		return false;
 	}
+	*pHkOut = NULL;
 
 	wil::unique_hkey hk = NULL;
 	RegOpenKeyExW(
@@ -60,7 +62,7 @@ HKEY GetExtensionRegKey(
 
 	if (!*szKeyName)
 	{
-		return NULL;
+		return false;
 	}
 
 	HKEY result = NULL;
@@ -71,5 +73,6 @@ HKEY GetExtensionRegKey(
 		KEY_READ,
 		&result
 	);
-	return result;
+	*pHkOut = result;
+	return (result != NULL);
 }

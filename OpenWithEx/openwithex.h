@@ -13,8 +13,13 @@ extern HMODULE g_hMuiInstance;
 
 enum IMMERSIVE_OPENWITH_FLAGS
 {
-
+	IOWF_DEFAULT            = 0x00000000,
+	IOWF_ALLOW_REGISTRATION = 0x00000001,
+	IOWF_FORCE_REGISTRATION = 0x00000004,
+	IOWF_FILE_IS_URI        = 0x00000008
 };
+
+void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags);
 
 typedef HRESULT(WINAPI *SHCreateAssocHandler_t)(UINT uFlags, LPCWSTR pszExt, LPCWSTR pszApp, IAssocHandler **ppah);
 extern SHCreateAssocHandler_t SHCreateAssocHandler;

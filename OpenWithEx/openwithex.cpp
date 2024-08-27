@@ -9,16 +9,83 @@
 #include <stdio.h>
 #include "wil/com.h"
 #include "wil/resource.h"
+#include "wil/registry.h"
 
 HMODULE g_hAppInstance = nullptr;
 HMODULE g_hMuiInstance = nullptr;
 
 SHCreateAssocHandler_t SHCreateAssocHandler = nullptr;
 
-WCHAR  szPath[MAX_PATH] = { 0 };
-LPWSTR pszExtension = nullptr;
-bool   bOverride = false;
-bool   bUri = false;
+WCHAR szPath[MAX_PATH] = { 0 };
+
+void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags)
+{
+	bool bUri = false;
+	bool bPreregistered = false;
+
+	bUri = UrlIsW(lpszPath, URLIS_URL) || (flags & IOWF_FILE_IS_URI);
+	if (!bUri)
+	{
+		LPWSTR pszExtension = PathFindExtensionW(lpszPath);
+		wil::unique_hkey hk;
+		GetExtensionRegKey(pszExtension, &hk);
+		bPreregistered = (hk.get() != NULL);
+
+		/* Check if the file is a system file and open the no-open dialog if it is. */
+		if (pszExtension && *pszExtension)
+		{	
+			LSTATUS ls = RegQueryValueExW(
+				hk.get(),
+				L"NoOpen",
+				NULL,
+				NULL,
+				NULL,
+				NULL
+			);
+			if (ls == ERROR_SUCCESS)
+			{
+				CNoOpenDlg noDlg(lpszPath);
+				INT_PTR result = noDlg.ShowDialog(hWndParent);
+				if (result == IDCANCEL)
+				{
+					return;
+				}
+			}
+		}
+
+		/* The Can't open dialog is only shown on files with an extension
+		   that is not already registered. */
+		if (!bPreregistered && !SHRestricted(REST_NOINTERNETOPENWITH)
+			&& pszExtension && *pszExtension)
+		{
+			CCantOpenDlg coDlg(lpszPath);
+			INT_PTR result = coDlg.ShowDialog(hWndParent);
+			if (result == IDCANCEL)
+			{
+				return;
+			}
+			else if (result == IDD_CANTOPEN_USEWEB)
+			{
+				WCHAR szFormat[MAX_PATH] = { 0 };
+				WCHAR szUrl[MAX_PATH] = { 0 };
+				LoadStringW(g_hMuiInstance, IDS_SEARCH_FORMAT, szFormat, MAX_PATH);
+				swprintf_s(szUrl, szFormat, pszExtension + 1);
+				ShellExecuteW(
+					NULL,
+					L"open",
+					szUrl,
+					NULL,
+					NULL,
+					SW_SHOWNORMAL
+				);
+				return;
+			}
+		}
+	}
+
+	COpenAsDlg oaDialog(lpszPath, flags, bUri, bPreregistered);
+	oaDialog.ShowDialog(hWndParent);
+}
 
 int WINAPI wWinMain(
 	_In_     HINSTANCE hInstance,
@@ -83,29 +150,11 @@ int WINAPI wWinMain(
 		/* COM bullshit */
 		if (0 == _wcsicmp(argv[i], L"-embedding"))
 		{
-#if 0
-			LocalizedMessageBox(
-				NULL,
-				IDS_ERR_EMBEDDING,
-				MB_ICONERROR
-			);
-			return -1;
-#endif
-			debuglog(L"Started as COM server.\n");
-
-#if !NDEBUG && 0
-			debuglog(L"Waiting for debugger...\n");
-			while (!IsDebuggerPresent())
-				Sleep(100);
-			debuglog(L"Debugger attached!\n");
-#endif
-			
+			debuglog(L"Started as COM server.\n");			
 			wil::com_ptr<COpenWithExLauncher> powl = new COpenWithExLauncher();
-			
 			if (powl)
 			{
 				HRESULT hr = powl->RunMessageLoop();
-				
 				if (FAILED(hr))
 				{
 					LocalizedMessageBox(
@@ -115,13 +164,8 @@ int WINAPI wWinMain(
 					);
 					return -1;
 				}
+				return 0;
 			}
-		}
-		/* Implies the type is already registered and user explicitly wants to
-	       open with */
-		else if (0 == _wcsicmp(argv[i], L"-override"))
-		{
-			bOverride = true;
 		}
 		/* Assume path is last arg that doesn't start with - */
 		else if (i == argc - 1 && *argv[i] != L'-' && 0 != _wcsicmp(argv[i], szModulePath))
@@ -141,65 +185,7 @@ int WINAPI wWinMain(
 		return -1;
 	}
 
-	bUri = UrlIsW(szPath, URLIS_URL);
-	if (!bUri)
-	{
-		LPWSTR pszExtension = PathFindExtensionW(szPath);
-
-		/* Check if the file is a system file and open the no-open dialog if it is. */
-		if (pszExtension && *pszExtension)
-		{
-			HKEY hk = GetExtensionRegKey(pszExtension);
-			LSTATUS ls = RegQueryValueExW(
-				hk,
-				L"NoOpen",
-				NULL,
-				NULL,
-				NULL,
-				NULL
-			);
-			RegCloseKey(hk);
-			if (ls == ERROR_SUCCESS)
-			{
-				CNoOpenDlg noDlg(szPath);
-				INT_PTR result = noDlg.ShowDialog(NULL);
-				if (result == IDCANCEL)
-				{
-					return 0;
-				}
-			}
-		}
-
-		if (!bOverride && !SHRestricted(REST_NOINTERNETOPENWITH)
-			&& pszExtension && *pszExtension)
-		{
-			CCantOpenDlg coDlg(szPath);
-			INT_PTR result = coDlg.ShowDialog(NULL);
-			if (result == IDCANCEL)
-			{
-				return 0;
-			}
-			else if (result == IDD_CANTOPEN_USEWEB)
-			{
-				WCHAR szFormat[MAX_PATH] = { 0 };
-				WCHAR szUrl[MAX_PATH] = { 0 };
-				LoadStringW(g_hMuiInstance, IDS_SEARCH_FORMAT, szFormat, MAX_PATH);
-				swprintf_s(szUrl, szFormat, pszExtension + 1);
-				ShellExecuteW(
-					NULL,
-					L"open",
-					szUrl,
-					NULL,
-					NULL,
-					SW_SHOWNORMAL
-				);
-				return 0;
-			}
-		}
-	}
-
-	COpenAsDlg oaDialog(szPath, bOverride, bUri);
-	oaDialog.ShowDialog(NULL);
+	ShowOpenWithDialog(NULL, szPath, IOWF_ALLOW_REGISTRATION);
 
 	CoUninitialize();
 	return 0;

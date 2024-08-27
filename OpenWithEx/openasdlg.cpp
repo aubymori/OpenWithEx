@@ -120,14 +120,18 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 			);
 
 			/* Set up checkbox */
-			if (!m_szExtOrProtocol || !*m_szExtOrProtocol)
+			if (!m_szExtOrProtocol || !*m_szExtOrProtocol
+			|| !(m_flags & IOWF_ALLOW_REGISTRATION)
+			|| (m_flags & IOWF_FORCE_REGISTRATION))
 			{
 				EnableWindow(
 					GetDlgItem(hWnd, IDD_OPENWITH_ASSOC),
 					FALSE
 				);
 			}
-			else
+			
+			if (m_flags & IOWF_FORCE_REGISTRATION
+			|| ((m_flags & IOWF_ALLOW_REGISTRATION) && !m_bPreregistered))
 			{
 				SendDlgItemMessageW(
 					hWnd,
@@ -712,18 +716,22 @@ void COpenAsDlg::_OnOk()
 	{
 		EndDialog(m_hWnd, IDOK);
 
-		// Start the program with the file:
-		wil::com_ptr<IShellItem2> pShellItem = nullptr;
-		HRESULT hr = SHCreateItemFromParsingName(m_szPath, nullptr, IID_PPV_ARGS(&pShellItem));
-
-		if (SUCCEEDED(hr) && pShellItem)
+		// Don't launch when changing default from properties.
+		if (!(m_flags & IOWF_FORCE_REGISTRATION))
 		{
-			wil::com_ptr<IDataObject> pInvocationObj = nullptr;
-			hr = pShellItem->BindToHandler(nullptr, BHID_DataObject, IID_PPV_ARGS(&pInvocationObj));
+			// Start the program with the file:
+			wil::com_ptr<IShellItem2> pShellItem = nullptr;
+			HRESULT hr = SHCreateItemFromParsingName(m_szPath, nullptr, IID_PPV_ARGS(&pShellItem));
 
-			if (SUCCEEDED(hr))
+			if (SUCCEEDED(hr) && pShellItem)
 			{
-				pSelected->Invoke(pInvocationObj.get());
+				wil::com_ptr<IDataObject> pInvocationObj = nullptr;
+				hr = pShellItem->BindToHandler(nullptr, BHID_DataObject, IID_PPV_ARGS(&pInvocationObj));
+
+				if (SUCCEEDED(hr))
+				{
+					pSelected->Invoke(pInvocationObj.get());
+				}
 			}
 		}
 
@@ -820,11 +828,12 @@ void COpenAsDlg::_OnOk()
 	}
 }
 
-COpenAsDlg::COpenAsDlg(LPCWSTR lpszPath, bool bOverride, bool bUri)
+COpenAsDlg::COpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool bUri, bool bPreregistered)
 	: CImpDialog(g_hMuiInstance, IDD_OPENWITH_WITHDESC)
 	, m_szExtOrProtocol{ 0 }
-	, m_bOverride(bOverride)
+	, m_flags(flags)
 	, m_bUri(bUri)
+	, m_bPreregistered(bPreregistered)
 	, m_bRecommended(false)
 {
 	wcscpy_s(m_szPath, lpszPath);
@@ -845,7 +854,8 @@ COpenAsDlg::COpenAsDlg(LPCWSTR lpszPath, bool bOverride, bool bUri)
 		}
 	}
 
-	if (m_bOverride || m_bUri || !m_szExtOrProtocol || !*m_szExtOrProtocol)
+	if (m_bUri || !m_szExtOrProtocol || !*m_szExtOrProtocol
+	|| !(flags & IOWF_ALLOW_REGISTRATION) || m_bPreregistered)
 		m_uDlgId = IDD_OPENWITH;
 }
 

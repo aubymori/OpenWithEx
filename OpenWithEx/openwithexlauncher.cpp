@@ -357,6 +357,57 @@ HRESULT COpenWithExLauncher::Execute()
 	DebugSetMethodName(L"COpenWithExLauncher::Execute");
 
 	Log(method, L"Entering method\n");
+
+	/* Get flags */
+	IMMERSIVE_OPENWITH_FLAGS flags = IOWF_DEFAULT;
+	if (m_pSite)
+	{
+		Log(method, L"Site exists, trying to get flags\n");
+		wil::com_ptr<IObjectWithOpenWithFlags> powf;
+		if (SUCCEEDED(IUnknown_QueryService(
+			m_pSite,
+			IID_IObjectWithOpenWithFlags,
+			IID_IObjectWithOpenWithFlags,
+			(void **)powf.put()
+		)))
+		{
+			Log(method, L"IObjectWithOpenWithFlags object obtained\n");
+			powf->get_Flags(&flags);
+		}
+	}
+	// This get_Flags function is a bit finnicky, just always allow registration.
+	*(DWORD *)&flags |= IOWF_ALLOW_REGISTRATION;
+	Log(method, L"Flags: 0x%X\n", flags);
+
+	WCHAR szPath[MAX_PATH];
+	if (m_pSelection)
+	{
+		wil::com_ptr<IShellItem> psi;
+		if (SUCCEEDED(m_pSelection->GetItemAt(0, psi.put())))
+		{
+			Log(method, L"Got selected shell item\n");
+			LPWSTR pszPath = nullptr;
+			if (SUCCEEDED(psi->GetDisplayName(SIGDN_FILESYSPATH, &pszPath)))
+			{
+				Log(method, L"Path: %s\n", pszPath);
+				wcscpy_s(szPath, pszPath);
+				CoTaskMemFree(pszPath);
+			}
+		}
+	}
+	if (*szPath)
+	{
+		ShowOpenWithDialog(NULL, szPath, flags);
+	}
+	else
+	{
+		LocalizedMessageBox(
+			NULL,
+			IDS_ERR_NOPATH,
+			MB_ICONERROR
+		);
+	}
+	PostThreadMessageW(GetCurrentThreadId(), 0x8001, 0, 0);
 	Log(method, L"Exiting method\n");
 	return S_OK;
 }
@@ -370,6 +421,8 @@ HRESULT COpenWithExLauncher::Launch(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE
 		L"\nhWndParent: 0x%X\nlpszPath: %s\nflags : 0x%X\n",
 		hWndParent, lpszPath, flags
 	);
+	ShowOpenWithDialog(hWndParent, lpszPath, flags);
+	PostThreadMessageW(GetCurrentThreadId(), 0x8001, 0, 0);
 	return S_OK;
 }
 #pragma endregion // "IOpenWithLauncher"
@@ -487,6 +540,10 @@ HRESULT COpenWithExLauncher::RunMessageLoop()
 		if (msg.message)
 		{
 			Log(method, L"Received message 0x%X 0x%X 0x%X 0x%X\n", msg.message, msg.hwnd, msg.wParam, msg.lParam);
+			if (msg.message == 0x8001)
+			{
+				break;
+			}
 		}
 
 		TranslateMessage(&msg);

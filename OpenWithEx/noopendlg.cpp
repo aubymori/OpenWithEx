@@ -11,7 +11,8 @@ INT_PTR CALLBACK CNoOpenDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 		case WM_INITDIALOG:
 		{
 		   /* Load friendly type name for display */
-			HKEY hk = GetExtensionRegKey(m_pszExtension);
+			HKEY hk = NULL;
+			GetExtensionRegKey(m_pszExtension, &hk);
 			WCHAR szIndirectString[MAX_PATH + 200] = { 0 };
 			DWORD dwIndirectStringSize = sizeof(szIndirectString);
 			RegQueryValueExW(
@@ -22,6 +23,7 @@ INT_PTR CALLBACK CNoOpenDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 				(LPBYTE)szIndirectString,
 				&dwIndirectStringSize
 			);
+			RegCloseKey(hk);
 
 			WCHAR szFriendlyTypeName[MAX_PATH] = { 0 };
 			if (*szIndirectString)

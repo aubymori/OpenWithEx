@@ -18,8 +18,9 @@ private:
 	WCHAR  m_szPath[MAX_PATH];
 	LPWSTR m_pszFileName;
 	WCHAR  m_szExtOrProtocol[MAX_PATH];
-	bool   m_bOverride;
+	IMMERSIVE_OPENWITH_FLAGS m_flags;
 	bool   m_bUri;
+	bool   m_bPreregistered;
 	bool   m_bRecommended;
 	std::vector<wil::com_ptr<IAssocHandler>> m_handlers;
 #ifdef XP
@@ -40,6 +41,6 @@ private:
 	void _OnOk();
 
 public:
-	COpenAsDlg(LPCWSTR lpszPath, bool bOverride, bool bUri);
+	COpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool bUri, bool bPreregistered);
 	~COpenAsDlg();
 };
