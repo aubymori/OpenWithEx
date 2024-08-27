@@ -379,7 +379,7 @@ HRESULT COpenWithExLauncher::Execute()
 	*(DWORD *)&flags |= IOWF_ALLOW_REGISTRATION;
 	Log(method, L"Flags: 0x%X\n", flags);
 
-	WCHAR szPath[MAX_PATH];
+	WCHAR szPath[MAX_PATH] = { 0 };
 	if (m_pSelection)
 	{
 		wil::com_ptr<IShellItem> psi;
