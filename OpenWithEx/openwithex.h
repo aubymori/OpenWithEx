@@ -6,7 +6,7 @@
 #include "util.h"
 
 /* Uncomment to build with XP-style dialogs */
-#define XP
+//#define XP
 
 extern HMODULE g_hAppInstance;
 extern HMODULE g_hMuiInstance;

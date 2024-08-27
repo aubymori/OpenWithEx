@@ -276,6 +276,12 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 						}
 					}
 					break;
+				case NM_DBLCLK:
+					if (nmh->idFrom == IDD_OPENWITH_LISTVIEW)
+					{
+						_OnOk();
+					}
+					break;
 			}
 			break;
 		}
@@ -693,7 +699,6 @@ void COpenAsDlg::_BrowseForProgram()
 	WCHAR szTitle[MAX_PATH] = { 0 };
 	LoadStringW(g_hMuiInstance, IDS_BROWSETITLE, szTitle, MAX_PATH);
 	pdlg->SetTitle(szTitle);
-
 	pdlg->Show(m_hWnd);
 
 	wil::com_ptr_nothrow<IShellItem> pResult = nullptr;
