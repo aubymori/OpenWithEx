@@ -130,15 +130,26 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 				);
 			}
 			
-			if (m_flags & IOWF_FORCE_REGISTRATION
-			|| ((m_flags & IOWF_ALLOW_REGISTRATION) && !m_bPreregistered))
+			if (m_szExtOrProtocol && *m_szExtOrProtocol)
 			{
-				SendDlgItemMessageW(
-					hWnd,
-					IDD_OPENWITH_ASSOC,
-					BM_SETCHECK,
-					BST_CHECKED,
-					NULL
+				if (m_flags & IOWF_FORCE_REGISTRATION
+				|| ((m_flags & IOWF_ALLOW_REGISTRATION) && !m_bPreregistered))
+				{
+					SendDlgItemMessageW(
+						hWnd,
+						IDD_OPENWITH_ASSOC,
+						BM_SETCHECK,
+						BST_CHECKED,
+						NULL
+					);
+				}
+			}
+			
+			if (!m_szExtOrProtocol || !*m_szExtOrProtocol || m_bUri)
+			{
+				ShowWindow(
+					GetDlgItem(hWnd, IDD_OPENWITH_LINK),
+					SW_HIDE
 				);
 			}
 
@@ -240,7 +251,9 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 			}
 			break;
 		case WM_NOTIFY:
-			switch (((LPNMHDR)lParam)->code)
+		{
+			LPNMHDR nmh = (LPNMHDR)lParam;
+			switch (nmh->code)
 			{
 #ifdef XP
 				case TVN_SELCHANGED:
@@ -251,9 +264,21 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 						GetDlgItem(hWnd, IDOK),
 						_GetSelectedItem() != nullptr
 					);
-
+					break;
+				case NM_CLICK:
+					if (nmh->idFrom == IDD_OPENWITH_LINK)
+					{
+						PNMLINK link = (PNMLINK)nmh;
+						if (0 == wcscmp(link->item.szID, L"Browse"))
+						{
+							OpenDownloadURL(m_szExtOrProtocol);
+							EndDialog(hWnd, IDCANCEL);
+						}
+					}
+					break;
 			}
 			break;
+		}
 	}
 
 	return FALSE;

@@ -6,7 +6,7 @@
 #include "util.h"
 
 /* Uncomment to build with XP-style dialogs */
-//#define XP
+#define XP
 
 extern HMODULE g_hAppInstance;
 extern HMODULE g_hMuiInstance;
@@ -19,6 +19,7 @@ enum IMMERSIVE_OPENWITH_FLAGS
 	IOWF_FILE_IS_URI        = 0x00000008
 };
 
+void OpenDownloadURL(LPCWSTR pszExtension);
 void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags);
 
 typedef HRESULT(WINAPI *SHCreateAssocHandler_t)(UINT uFlags, LPCWSTR pszExt, LPCWSTR pszApp, IAssocHandler **ppah);
@@ -51,23 +52,24 @@ inline void debuglog(const wchar_t *format, ...)
 #define IDD_OPENWITH_ASSOC    303
 #define IDD_OPENWITH_BROWSE   304
 #define IDD_OPENWITH_DESC     305
+#define IDD_OPENWITH_LINK     306
 
-#define IDD_CANTOPEN_ICON     306
-#define IDD_CANTOPEN_FILE     307
-#define IDD_CANTOPEN_USEWEB   308
-#define IDD_CANTOPEN_OPENWITH 309
+#define IDD_CANTOPEN_ICON     400
+#define IDD_CANTOPEN_FILE     401
+#define IDD_CANTOPEN_USEWEB   402
+#define IDD_CANTOPEN_OPENWITH 403
 
-#define IDD_NOOPEN_ICON       310
-#define IDD_NOOPEN_LABEL      311
-#define IDD_NOOPEN_OPENWITH   312
+#define IDD_NOOPEN_ICON       500
+#define IDD_NOOPEN_LABEL      501
+#define IDD_NOOPEN_OPENWITH   502
 
 /* Strings */
-#define IDS_ERR_EMBEDDING     400
-#define IDS_ERR_NOPATH        401
-#define IDS_ERR_SHELL32       402
-#define IDS_SEARCH_FORMAT     403
-#define IDS_RECOMMENDED       404
-#define IDS_OTHER             405
-#define IDS_PROGRAMS          406
-#define IDS_ALLFILES          407
-#define IDS_BROWSETITLE       408
+#define IDS_ERR_EMBEDDING     1000
+#define IDS_ERR_NOPATH        1001
+#define IDS_ERR_SHELL32       1002
+#define IDS_SEARCH_FORMAT     1003
+#define IDS_RECOMMENDED       1004
+#define IDS_OTHER             1005
+#define IDS_PROGRAMS          1006
+#define IDS_ALLFILES          1007
+#define IDS_BROWSETITLE       1008

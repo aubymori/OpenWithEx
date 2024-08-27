@@ -5,7 +5,7 @@ STRINGTABLE
 	IDS_ERR_EMBEDDING  "Operation not supported"
 	IDS_ERR_NOPATH     "No path specified"
 	IDS_ERR_SHELL32    "The function with ordinal no. 765 (SHCreateAssocHandler) could not be found in the dynamic link library SHELL32.dll."
-	IDS_SEARCH_FORMAT  "https://www.bing.com/search?q=open+%s+file"
+	IDS_SEARCH_FORMAT  "http://go.microsoft.com/fwlink/?LinkId=57426&Ext=%s"
 #ifdef XP
 	IDS_RECOMMENDED    "Recommended Programs:"
 	IDS_OTHER          "Other Programs:"
@@ -37,7 +37,7 @@ FONT 8, "MS Shell Dlg"
 	CONTROL "", IDD_OPENWITH_LISTVIEW, "SysTreeView32", TVS_SHOWSELALWAYS | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 49, 225, 129, TVS_EX_DIMMEDCHECKBOXES
 	CONTROL "&Always use the selected program to open this kind of file", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 183, 202, 10
 	CONTROL "&Browse...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 196, 50, 14
-	CONTROL "If the program you want is not in the list or on your computer, you can look for the appropriate program on the Web.", 13585, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 222, 242, 16
+	CONTROL "If the program you want is not in the list or on your computer, you can <A ID=""Browse"">look for the appropriate program on the Web</A>.", IDD_OPENWITH_LINK, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 222, 242, 16
 	CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 251, 50, 14
 	CONTROL "Cancel", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 251, 50, 14
 }
@@ -58,7 +58,7 @@ FONT 8, "MS Shell Dlg"
 		CONTROL "", IDD_OPENWITH_DESC, EDIT, ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 18, 163, 205, 14
 		CONTROL "&Always use the selected program to open this kind of file", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 183, 202, 10
 		CONTROL "&Browse...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 196, 50, 14
-		CONTROL "If the program you want is not in the list or on your computer, you can look for the appropriate program on the Web.", 13585, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 222, 242, 16
+		CONTROL "If the program you want is not in the list or on your computer, you can <A ID=""Browse"">look for the appropriate program on the Web</A>.", IDD_OPENWITH_LINK, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 222, 242, 16
 		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 251, 50, 14
 		CONTROL "Cancel", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 251, 50, 14
 }
@@ -76,7 +76,7 @@ FONT 8, "MS Shell Dlg"
 	CONTROL "", IDD_OPENWITH_LISTVIEW, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
 	CONTROL "&Always use the selected program to open this kind of file", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 211, 202, 10
 	CONTROL "&Browse...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 211, 50, 14
-	CONTROL "If the program you want is not in the list or on your computer, you can look for the appropriate program on the Web.", 13585, STATIC, WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 230, 359, 16
+	CONTROL "If the program you want is not in the list or on your computer, you can <A ID=""Browse"">look for the appropriate program on the Web</A>.", IDD_OPENWITH_LINK, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 230, 359, 16
 	CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 264, 251, 50, 14
 	CONTROL "Cancel", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 251, 50, 14
 }
@@ -96,7 +96,7 @@ FONT 8, "MS Shell Dlg"
 	CONTROL "", IDD_OPENWITH_DESC, EDIT, ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 6, 193, 346, 14
 	CONTROL "&Always use the selected program to open this kind of file", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 211, 202, 10
 	CONTROL "&Browse...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 211, 50, 14
-	CONTROL "If the program you want is not in the list or on your computer, you can look for the appropriate program on the Web.", 13585, STATIC, WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 230, 359, 16
+	CONTROL "If the program you want is not in the list or on your computer, you can <A ID=""Browse"">look for the appropriate program on the Web</A>.", IDD_OPENWITH_LINK, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 230, 359, 16
 	CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 264, 251, 50, 14
 	CONTROL "Cancel", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 251, 50, 14
 }

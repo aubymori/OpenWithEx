@@ -18,6 +18,22 @@ SHCreateAssocHandler_t SHCreateAssocHandler = nullptr;
 
 WCHAR szPath[MAX_PATH] = { 0 };
 
+void OpenDownloadURL(LPCWSTR pszExtension)
+{
+	WCHAR szFormat[MAX_PATH] = { 0 };
+	WCHAR szUrl[MAX_PATH] = { 0 };
+	LoadStringW(g_hMuiInstance, IDS_SEARCH_FORMAT, szFormat, MAX_PATH);
+	swprintf_s(szUrl, szFormat, pszExtension + 1);
+	ShellExecuteW(
+		NULL,
+		L"open",
+		szUrl,
+		NULL,
+		NULL,
+		SW_SHOWNORMAL
+	);
+}
+
 void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags)
 {
 	bool bUri = false;
@@ -66,18 +82,7 @@ void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FL
 			}
 			else if (result == IDD_CANTOPEN_USEWEB)
 			{
-				WCHAR szFormat[MAX_PATH] = { 0 };
-				WCHAR szUrl[MAX_PATH] = { 0 };
-				LoadStringW(g_hMuiInstance, IDS_SEARCH_FORMAT, szFormat, MAX_PATH);
-				swprintf_s(szUrl, szFormat, pszExtension + 1);
-				ShellExecuteW(
-					NULL,
-					L"open",
-					szUrl,
-					NULL,
-					NULL,
-					SW_SHOWNORMAL
-				);
+				OpenDownloadURL(pszExtension);
 				return;
 			}
 		}
