@@ -197,7 +197,7 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 #ifdef XP
 			SendDlgItemMessageW(
 				hWnd,
-				IDD_OPENWITH_LISTVIEW,
+				IDD_OPENWITH_PROGLIST,
 				TVM_SETIMAGELIST,
 				TVSIL_STATE,
 				(LPARAM)himlSmall
@@ -294,7 +294,7 @@ wil::com_ptr<IAssocHandler> COpenAsDlg::_GetSelectedItem()
 {
 #ifdef XP
 	HTREEITEM hSelected = (HTREEITEM)SendDlgItemMessageW(
-		m_hWnd, IDD_OPENWITH_LISTVIEW,
+		m_hWnd, IDD_OPENWITH_PROGLIST,
 		TVM_GETNEXTITEM, TVGN_CARET,
 		NULL
 	);
@@ -306,7 +306,7 @@ wil::com_ptr<IAssocHandler> COpenAsDlg::_GetSelectedItem()
 	tvi.hItem = hSelected;
 
 	SendDlgItemMessageW(
-		m_hWnd, IDD_OPENWITH_LISTVIEW,
+		m_hWnd, IDD_OPENWITH_PROGLIST,
 		TVM_GETITEM, NULL,
 		(LPARAM)&tvi
 	);
@@ -362,9 +362,9 @@ void COpenAsDlg::_SelectItemByIndex(int index)
 	HTREEITEM hItem = m_treeItems.at(index);
 	if (hItem)
 	{
-		SetFocus(GetDlgItem(m_hWnd, IDD_OPENWITH_LISTVIEW));
+		SetFocus(GetDlgItem(m_hWnd, IDD_OPENWITH_PROGLIST));
 		SendDlgItemMessageW(
-			m_hWnd, IDD_OPENWITH_LISTVIEW,
+			m_hWnd, IDD_OPENWITH_PROGLIST,
 			TVM_SELECTITEM, TVGN_CARET,
 			(LPARAM)hItem
 		);
@@ -425,7 +425,7 @@ void COpenAsDlg::_SetupCategories()
 
 	m_hRecommended = (HTREEITEM)SendDlgItemMessageW(
 		m_hWnd,
-		IDD_OPENWITH_LISTVIEW,
+		IDD_OPENWITH_PROGLIST,
 		TVM_INSERTITEMW,
 		NULL,
 		(LPARAM)&insert
@@ -438,7 +438,7 @@ void COpenAsDlg::_SetupCategories()
 	insert.item = other;
 	m_hOther = (HTREEITEM)SendDlgItemMessageW(
 		m_hWnd,
-		IDD_OPENWITH_LISTVIEW,
+		IDD_OPENWITH_PROGLIST,
 		TVM_INSERTITEMW,
 		NULL,
 		(LPARAM)&insert
@@ -519,7 +519,7 @@ void COpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bFo
 
 	m_treeItems.push_back((HTREEITEM)SendDlgItemMessageW(
 		m_hWnd,
-		IDD_OPENWITH_LISTVIEW,
+		IDD_OPENWITH_PROGLIST,
 		TVM_INSERTITEMW,
 		NULL,
 		(LPARAM)&insert
