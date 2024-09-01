@@ -2,11 +2,13 @@
 This application is a replacement for OpenWith.exe meant to replicate the Open With dialog from Windows XP,
 Vista and 7.
 
-**Left**: Windows XP design
+**Windows XP design**:
 
-**Right**: Windows Vista/7 design
+![Windows XP](preview-xp.png)
 
-![Windows XP](preview-xp.png) ![Windows Vista/7](preview.png)
+**Windows Vista/7 design**:
+
+![Windows Vista/7](preview.png)
 
 ## Installation
 **NOTE: This software is in early development and you should not use it on a daily basis over the regular
