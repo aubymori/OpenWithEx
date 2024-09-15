@@ -121,8 +121,8 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 
 			/* Set up checkbox */
 			if (!m_szExtOrProtocol || !*m_szExtOrProtocol
-			|| !(m_flags & IOWF_ALLOW_REGISTRATION)
-			|| (m_flags & IOWF_FORCE_REGISTRATION))
+			|| !(m_flags & IMMERSIVE_OPENWITH_OVERRIDE)
+			|| (m_flags & IMMERSIVE_OPENWITH_DONOT_EXEC))
 			{
 				EnableWindow(
 					GetDlgItem(hWnd, IDD_OPENWITH_ASSOC),
@@ -132,8 +132,8 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 			
 			if (m_szExtOrProtocol && *m_szExtOrProtocol)
 			{
-				if (m_flags & IOWF_FORCE_REGISTRATION
-				|| ((m_flags & IOWF_ALLOW_REGISTRATION) && !m_bPreregistered))
+				if (m_flags & IMMERSIVE_OPENWITH_DONOT_EXEC
+				|| ((m_flags & IMMERSIVE_OPENWITH_OVERRIDE) && !m_bPreregistered))
 				{
 					SendDlgItemMessageW(
 						hWnd,
@@ -747,7 +747,7 @@ void COpenAsDlg::_OnOk()
 		EndDialog(m_hWnd, IDOK);
 
 		// Don't launch when changing default from properties.
-		if (!(m_flags & IOWF_FORCE_REGISTRATION))
+		if (!(m_flags & IMMERSIVE_OPENWITH_DONOT_EXEC))
 		{
 			// Start the program with the file:
 			wil::com_ptr<IShellItem2> pShellItem = nullptr;
@@ -885,7 +885,7 @@ COpenAsDlg::COpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool bU
 	}
 
 	if (m_bUri || !m_szExtOrProtocol || !*m_szExtOrProtocol
-	|| !(flags & IOWF_ALLOW_REGISTRATION) || m_bPreregistered)
+	|| !(flags & IMMERSIVE_OPENWITH_OVERRIDE) || m_bPreregistered)
 		m_uDlgId = IDD_OPENWITH;
 }
 

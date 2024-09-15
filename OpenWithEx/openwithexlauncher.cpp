@@ -359,7 +359,7 @@ HRESULT COpenWithExLauncher::Execute()
 	Log(method, L"Entering method\n");
 
 	/* Get flags */
-	IMMERSIVE_OPENWITH_FLAGS flags = IOWF_DEFAULT;
+	IMMERSIVE_OPENWITH_FLAGS flags = IMMERSIVE_OPENWITH_NONE;
 	if (m_pSite)
 	{
 		Log(method, L"Site exists, trying to get flags\n");
@@ -376,7 +376,7 @@ HRESULT COpenWithExLauncher::Execute()
 		}
 	}
 	// This get_Flags function is a bit finnicky, just always allow registration.
-	*(DWORD *)&flags |= IOWF_ALLOW_REGISTRATION;
+	*(DWORD *)&flags |= IMMERSIVE_OPENWITH_OVERRIDE;
 	Log(method, L"Flags: 0x%X\n", flags);
 
 	WCHAR szPath[MAX_PATH] = { 0 };

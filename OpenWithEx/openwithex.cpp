@@ -39,7 +39,7 @@ void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FL
 	bool bUri = false;
 	bool bPreregistered = false;
 
-	bUri = UrlIsW(lpszPath, URLIS_URL) || (flags & IOWF_FILE_IS_URI);
+	bUri = UrlIsW(lpszPath, URLIS_URL) || (flags & IMMERSIVE_OPENWITH_PROTOCOL);
 	if (!bUri)
 	{
 		LPWSTR pszExtension = PathFindExtensionW(lpszPath);
@@ -190,7 +190,7 @@ int WINAPI wWinMain(
 		return -1;
 	}
 
-	ShowOpenWithDialog(NULL, szPath, IOWF_ALLOW_REGISTRATION);
+	ShowOpenWithDialog(NULL, szPath, IMMERSIVE_OPENWITH_OVERRIDE);
 
 	CoUninitialize();
 	return 0;
