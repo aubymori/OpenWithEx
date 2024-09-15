@@ -823,7 +823,7 @@ void COpenAsDlg::_OnOk()
 				// GetInternalProgID. This automatically handles generated ProgIDs
 				// like "Applications\notepad++.exe".
 				pAssocInfo->GetInternalProgID(
-					ASSOC_PROGID_FORMAT::USE_GENERATED_PROGID_IF_NECESSARY,
+					ASSOC_PROGID_FORMAT::APF_DEFAULT,
 					&lpszProgId
 				);
 			}

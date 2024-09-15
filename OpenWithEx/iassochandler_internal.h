@@ -20,14 +20,11 @@
 
 /**
  * Format for IAssocHandlerInfo::GetInternalProgID.
- * 
- * These are names I came up with myself, since we don't have the original
- * enum definition at all. We do know the enum name itself from the symbols.
  */
 enum class ASSOC_PROGID_FORMAT : int
 {
-	USE_GENERATED_PROGID_IF_NECESSARY = 0,
-	ALWAYS_USE_GENERATED_PROGID = 1,
+	APF_DEFAULT = 0,
+	APF_APPLICATION = 1,
 };
 
 ///**
