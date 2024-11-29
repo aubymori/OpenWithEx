@@ -5,12 +5,15 @@
 class CShellProtectedRegLock
 {
 protected:
-	PTOKEN_USER m_pTokenUser;
-	HKEY m_hKey;
-	PACL m_pAcl;
-	PSECURITY_DESCRIPTOR m_pSecurityDescriptor;
+	PTOKEN_USER _pToken;
+	HKEY _hkeySecurity;
+	PACL _pDacl;
+	PSECURITY_DESCRIPTOR _psd;
 
+	// Custom method:
 	HRESULT QueryUserToken(HKEY hKey, LPCWSTR lpwszValue);
+
+	// Custom method:
 	static HRESULT OpenEffectiveToken(OUT PSID *ppSid);
 
 public:

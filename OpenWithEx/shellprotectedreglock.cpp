@@ -1,6 +1,6 @@
 /**
  * Reimplementation of CShellProtectedRegLock and SH****ProtectedValue APIs.
- * by Isabella (kawapure)
+ * by Isabella Lulamoon (kawapure)
  * 
  * These are associated with the User Choice protection system. I believe
  * that they are exclusively used for it.
@@ -43,61 +43,41 @@
 
 #include "shellprotectedreglock.h"
 
-/**
- * "Restricted Code" SID
- * 
- * An identity that's used by a process that's running in a restricted security
- * context. When code runs at the restricted security level, the Restricted SID
- * is added to the user's access token.
- * 
- * The union hack is used to hardcode the SID, avoiding some calls into functions
- * to parse one from a string. This will not work if Windows ever decides to work
- * on big-endian CPUs, I suppose.
- * 
- * https://github.com/MicrosoftDocs/windowsserverdocs/blob/main/WindowsServerDocs/identity/ad-ds/manage/understand-security-identifiers.md
- * 
- * S-1-5-12
- */
-union
-{
-	BYTE bytes[];
-	SID sid;
-} SID_RESTRICTED_CODE = { 0x1, 0x1, 0, 0, 0, 0, 0, 0x5, 0x12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+SID c_sidLocalSystem = { 0x1, 0x1, { 0, 0, 0, 0, 0, 0x5 }, 0x12 };
 
 CShellProtectedRegLock::~CShellProtectedRegLock()
 {
-	if (m_hKey)
-		RegCloseKey(m_hKey);
-	LocalFree(m_pTokenUser);
-	LocalFree(m_pSecurityDescriptor);
+	if (_hkeySecurity)
+		RegCloseKey(_hkeySecurity);
+	LocalFree(_pToken);
+	LocalFree(_psd);
 }
 
 HRESULT CShellProtectedRegLock::QueryUserToken(HKEY hKey, LPCWSTR lpwszValue)
 {
-	constexpr int TOKEN_INFO_BUFFER_SIZE = 2048;
+	constexpr int kTokenInfoBufferSize = 2048;
 	PSID pSid = nullptr;
 	HRESULT hr = OpenEffectiveToken(&pSid);
 	DWORD dwLastError = 0;
 
-	m_pTokenUser = (PTOKEN_USER)LocalAlloc(LPTR, TOKEN_INFO_BUFFER_SIZE);
+	_pToken = (PTOKEN_USER)LocalAlloc(LPTR, kTokenInfoBufferSize);
 
-	if (m_pTokenUser)
+	if (_pToken)
 	{
-		//LPVOID pvTokenInfo = nullptr;
-		DWORD dwTokenLength = TOKEN_INFO_BUFFER_SIZE;
-		if (!GetTokenInformation(pSid, TokenUser, m_pTokenUser, dwTokenLength, &dwTokenLength))
+		DWORD dwTokenLength = kTokenInfoBufferSize;
+		if (!GetTokenInformation(pSid, TokenUser, _pToken, dwTokenLength, &dwTokenLength))
 		{
 			dwLastError = GetLastError();
 
 			if (dwLastError == ERROR_INSUFFICIENT_BUFFER)
 			{
-				LocalFree(m_pTokenUser);
+				LocalFree(_pToken);
 
-				m_pTokenUser = (PTOKEN_USER)LocalAlloc(LPTR, dwTokenLength);
+				_pToken = (PTOKEN_USER)LocalAlloc(LPTR, dwTokenLength);
 
-				if (m_pTokenUser)
+				if (_pToken)
 				{
-					if (GetTokenInformation(pSid, TokenUser, m_pTokenUser, dwTokenLength, &dwTokenLength))
+					if (GetTokenInformation(pSid, TokenUser, _pToken, dwTokenLength, &dwTokenLength))
 					{
 						hr = S_OK;
 					}
@@ -113,15 +93,15 @@ HRESULT CShellProtectedRegLock::QueryUserToken(HKEY hKey, LPCWSTR lpwszValue)
 			}
 		}
 	}
-	else // !m_pTokenUser
+	else // !_pToken
 	{
 		hr = E_FAIL;
 	}
 
 	if (FAILED(hr))
 	{
-		LocalFree(m_pTokenUser);
-		m_pTokenUser = nullptr;
+		LocalFree(_pToken);
+		_pToken = nullptr;
 	}
 
 	if (pSid)
@@ -175,7 +155,7 @@ LSTATUS CShellProtectedRegLock::Init(HKEY hKey, LPCWSTR lpwszValue)
 			0,
 			READ_CONTROL | WRITE_DAC,
 			nullptr,
-			&m_hKey,
+			&_hkeySecurity,
 			nullptr
 		);
 	}
@@ -190,9 +170,9 @@ void CShellProtectedRegLock::Lock()
 	ACL_SIZE_INFORMATION sizeInfo;
 
 	if (
-		m_hKey &&
-		!EqualSid(&SID_RESTRICTED_CODE, m_pTokenUser->User.Sid) &&
-		GetAclInformation(m_pAcl, &sizeInfo, sizeof(sizeInfo), AclSizeInformation)
+		_hkeySecurity &&
+		!EqualSid(&c_sidLocalSystem, _pToken->User.Sid) &&
+		GetAclInformation(_pDacl, &sizeInfo, sizeof(sizeInfo), AclSizeInformation)
 	)
 	{
 		DWORD dwBytesInUse = sizeInfo.AclBytesInUse;
@@ -200,12 +180,12 @@ void CShellProtectedRegLock::Lock()
 
 		ACL_REVISION_INFORMATION revisionInfo;
 
-		if (GetAclInformation(m_pAcl, &revisionInfo, sizeof(revisionInfo), AclRevisionInformation))
+		if (GetAclInformation(_pDacl, &revisionInfo, sizeof(revisionInfo), AclRevisionInformation))
 		{
 			dwRevision = revisionInfo.AclRevision;
 		}
 
-		DWORD dwSidLen = GetLengthSid(m_pTokenUser->User.Sid);
+		DWORD dwSidLen = GetLengthSid(_pToken->User.Sid);
 		DWORD dwAceListLength = dwSidLen + 8;
 		DWORD dwBufferSize = dwAceListLength + dwBytesInUse;
 		PACL pNewAcl = nullptr;
@@ -222,7 +202,7 @@ void CShellProtectedRegLock::Lock()
 			pNewAce->Header.AceType = ACCESS_DENIED_ACE_TYPE;
 			pNewAce->Header.AceSize = dwAceListLength;
 			pNewAce->Mask = KEY_SET_VALUE;
-			memcpy(&pNewAce->SidStart, m_pTokenUser->User.Sid, dwSidLen);
+			memcpy(&pNewAce->SidStart, _pToken->User.Sid, dwSidLen);
 
 			if (AddAce(pNewAcl, dwRevision, MAXDWORD, pNewAce, dwAceListLength))
 			{
@@ -233,7 +213,7 @@ void CShellProtectedRegLock::Lock()
 					for (int i = 0; i < sizeInfo.AceCount; i++)
 					{
 						PACL pCurrentAcl;
-						if (GetAce(m_pAcl, i, (LPVOID *)&pCurrentAcl))
+						if (GetAce(_pDacl, i, (LPVOID *)&pCurrentAcl))
 						{
 							if (!AddAce(pNewAcl, dwRevision, MAXDWORD, pCurrentAcl, pCurrentAcl->AclSize))
 							{
@@ -246,7 +226,7 @@ void CShellProtectedRegLock::Lock()
 				if (!bGiveUp)
 				{
 					SetSecurityInfo(
-						m_hKey,
+						_hkeySecurity,
 						SE_REGISTRY_KEY,
 						DACL_SECURITY_INFORMATION | UNPROTECTED_DACL_SECURITY_INFORMATION,
 						nullptr,
@@ -267,41 +247,41 @@ void CShellProtectedRegLock::Unlock()
 {
 	if (
 		GetSecurityInfo(
-			m_hKey,
+			_hkeySecurity,
 			SE_REGISTRY_KEY,
 			DACL_SECURITY_INFORMATION,
 			nullptr,
 			nullptr,
-			&m_pAcl,
+			&_pDacl,
 			nullptr,
-			&m_pSecurityDescriptor
+			&_psd
 		) == ERROR_SUCCESS
 	)
 	{
 		ACL_SIZE_INFORMATION sizeInfo;
 		PACCESS_DENIED_ACE pAce;
 
-		if (m_pAcl)
+		if (_pDacl)
 		{
-			if (GetAclInformation(m_pAcl, &sizeInfo, sizeof(sizeInfo), AclSizeInformation))
+			if (GetAclInformation(_pDacl, &sizeInfo, sizeof(sizeInfo), AclSizeInformation))
 			{
 				for (int i = sizeInfo.AceCount - 1; i >= 0; --i)
 				{
 					if (
-						GetAce(m_pAcl, i, (LPVOID *)&pAce) &&
+						GetAce(_pDacl, i, (LPVOID *)&pAce) &&
 						pAce->Header.AceType == ACCESS_DENIED_ACE_TYPE &&
 						pAce->Mask == KEY_SET_VALUE
 					)
 					{
-						if (DeleteAce(m_pAcl, i))
+						if (DeleteAce(_pDacl, i))
 						{
 							SetSecurityInfo(
-								m_hKey,
+								_hkeySecurity,
 								SE_REGISTRY_KEY,
 								DACL_SECURITY_INFORMATION,
 								nullptr,
 								nullptr,
-								m_pAcl,
+								_pDacl,
 								nullptr
 							);
 						}
