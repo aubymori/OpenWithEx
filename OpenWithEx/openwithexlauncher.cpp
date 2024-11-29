@@ -165,7 +165,7 @@ HRESULT COpenWithExLauncher::GetValue(AHE_TYPE *pahe)
 	}
 
 	Log(method, L"Exiting method\n");
-	return S_OK;
+	return pahe ? S_OK : E_FAIL;
 }
 #pragma endregion // "IExecuteCommandApplicationHostEnvironment"
 
