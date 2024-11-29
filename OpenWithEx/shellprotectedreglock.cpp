@@ -24,7 +24,7 @@
  * The only things I took liberties on were:
  *    - I moved "SHQueryToken<TOKEN_USER>" and its dependency
  *      "SHOpenEffectiveToken" to private methods of CShellProtectedRegLock.
- *    - I did not reimplement the helper function "CTLocalAllocPolicy". This
+ *    - I did not reimplement the helper class "CTLocalAllocPolicy". This
  *      can be found in the Windows Driver Kit, but it's a rather useless
  *      wrapper for LocalAlloc. It doesn't even manage RAII for C++, so I don't
  *      really know what it's meant for.
@@ -57,7 +57,7 @@ HRESULT CShellProtectedRegLock::QueryUserToken(HKEY hKey, LPCWSTR lpwszValue)
 {
 	constexpr int kTokenInfoBufferSize = 2048;
 	PSID pSid = nullptr;
-	HRESULT hr = OpenEffectiveToken(&pSid);
+	HRESULT hr = s_OpenEffectiveToken(&pSid);
 	DWORD dwLastError = 0;
 
 	_pToken = (PTOKEN_USER)LocalAlloc(LPTR, kTokenInfoBufferSize);
@@ -113,7 +113,7 @@ HRESULT CShellProtectedRegLock::QueryUserToken(HKEY hKey, LPCWSTR lpwszValue)
 }
 
 // static
-HRESULT CShellProtectedRegLock::OpenEffectiveToken(OUT PSID *ppSid)
+HRESULT CShellProtectedRegLock::s_OpenEffectiveToken(OUT PSID *ppSid)
 {
 	*ppSid = nullptr;
 

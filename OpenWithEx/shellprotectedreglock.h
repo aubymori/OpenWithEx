@@ -14,7 +14,7 @@ protected:
 	HRESULT QueryUserToken(HKEY hKey, LPCWSTR lpwszValue);
 
 	// Custom method:
-	static HRESULT OpenEffectiveToken(OUT PSID *ppSid);
+	static HRESULT s_OpenEffectiveToken(OUT PSID *ppSid);
 
 public:
 	~CShellProtectedRegLock();
