@@ -39,12 +39,12 @@ std::unique_ptr<WCHAR[]> GetCurrentUserStringSid();
  * Get the registry path for the given association, file extension or protocol.
  *
  * @param lpszExtension   File extension or protocol being retrieved.
- * @param bIsUri          Whether lpszExtension should act as a file extension
+ * @param fIsUri          Whether lpszExtension should act as a file extension
  *                        or URI protocol.
  *
  * @return A string pointer to the path, or nullptr on failure.
  */
-std::unique_ptr<WCHAR[]> GetAssociationKeyPath(LPCWSTR lpszExtension, bool bIsUri = false);
+std::unique_ptr<WCHAR[]> GetAssociationKeyPath(LPCWSTR lpszExtension, bool fIsUri = false);
 
 /**
  * Generate the UserChoice hash.

@@ -19,9 +19,9 @@ private:
 	LPWSTR m_pszFileName;
 	WCHAR  m_szExtOrProtocol[MAX_PATH];
 	IMMERSIVE_OPENWITH_FLAGS m_flags;
-	bool   m_bUri;
-	bool   m_bPreregistered;
-	bool   m_bRecommended;
+	bool   m_fUri;
+	bool   m_fPreregistered;
+	bool   m_fRecommended;
 	std::vector<wil::com_ptr<IAssocHandler>> m_handlers;
 #ifdef XP
 	std::vector<HTREEITEM> m_treeItems;
@@ -34,13 +34,13 @@ private:
 	int _FindItemIndex(LPCWSTR lpszPath);
 	void _SelectItemByIndex(int index);
 	void _SetupCategories();
-	void _AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bForceSelect);
+	void _AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool fForceSelect);
 	void _GetHandlers();
 
 	void _BrowseForProgram();
 	void _OnOk();
 
 public:
-	COpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool bUri, bool bPreregistered);
+	COpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool fUri, bool fPreregistered);
 	~COpenAsDlg();
 };

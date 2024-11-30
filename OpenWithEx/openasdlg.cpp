@@ -13,7 +13,7 @@
 #include "wil/com.h"
 #include "wil/resource.h"
 
-LPCWSTR s_szSysTypes[] = {
+LPCWSTR c_szSysTypes[] = {
 	L".bin",
 	L".dat",
 	L".dos"
@@ -86,7 +86,7 @@ inline static int GetAppIconIndex(LPCWSTR lpszIconPath, int iIndex)
 	 * does perform some additional work in case `Shell_GetCachedImageIndex()`
 	 * doesn't work, but we don't handle any such case as of right now.
 	 */
-	UINT uIconFlags = NULL;
+	UINT uIconFlags = 0;
 	if (lpszIconPath && lpszIconPath[0] == L'@')
 		uIconFlags = GIL_ASYNC | GIL_NOTFILENAME;
 
@@ -133,7 +133,7 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 			if (m_szExtOrProtocol && *m_szExtOrProtocol)
 			{
 				if (m_flags & IMMERSIVE_OPENWITH_DONOT_EXEC
-				|| ((m_flags & IMMERSIVE_OPENWITH_OVERRIDE) && !m_bPreregistered))
+				|| ((m_flags & IMMERSIVE_OPENWITH_OVERRIDE) && !m_fPreregistered))
 				{
 					SendDlgItemMessageW(
 						hWnd,
@@ -145,7 +145,7 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 				}
 			}
 			
-			if (!m_szExtOrProtocol || !*m_szExtOrProtocol || m_bUri)
+			if (!m_szExtOrProtocol || !*m_szExtOrProtocol || m_fUri)
 			{
 				ShowWindow(
 					GetDlgItem(hWnd, IDD_OPENWITH_LINK),
@@ -223,7 +223,7 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 
 			_GetHandlers();
 			
-			if (m_bRecommended)
+			if (m_fRecommended)
 				_SetupCategories();
 
 			for (size_t i = 0; i < m_handlers.size(); i++)
@@ -487,7 +487,7 @@ void COpenAsDlg::_SetupCategories()
 #endif
 }
 
-void COpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bForceSelect)
+void COpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool fForceSelect)
 {
 #ifdef XP
 	TVITEMW tvi = { 0 };
@@ -498,7 +498,7 @@ void COpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bFo
 	tvi.lParam = (LPARAM)pItem.get();
 
 	LPWSTR pszPath = nullptr;
-	int    iIndex = 0;
+	int iIndex = 0;
 	pItem->GetIconLocation(
 		&pszPath,
 		&iIndex
@@ -512,7 +512,7 @@ void COpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bFo
 	TVINSERTSTRUCTW insert = { 0 };
 	insert.item = tvi;
 	insert.hInsertAfter = TVI_LAST;
-	if (m_bRecommended)
+	if (m_fRecommended)
 	{
 		insert.hParent = (S_OK == pItem->IsRecommended()) ? m_hRecommended : m_hOther;
 	}
@@ -528,7 +528,7 @@ void COpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bFo
 	LVITEMW lvi = { 0 };
 	lvi.mask = LVIF_TEXT | LVIF_PARAM | LVIF_IMAGE;
 	lvi.iItem = index;
-	if (m_bRecommended)
+	if (m_fRecommended)
 	{
 		lvi.mask |= LVIF_GROUPID;
 		lvi.iGroupId = (S_OK == pItem->IsRecommended()) ? I_RECOMMENDED : I_OTHER;
@@ -540,7 +540,7 @@ void COpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bFo
 	// unallocated before the list view item is destroyed.
 	lvi.lParam = (LPARAM)pItem.get();
 
-	if (index == 0 || bForceSelect)
+	if (index == 0 || fForceSelect)
 	{
 		lvi.mask |= LVIF_STATE;
 		lvi.stateMask = LVIS_SELECTED;
@@ -548,7 +548,7 @@ void COpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bFo
 	}
 	
 	wil::unique_cotaskmem_string pszIconPath = nullptr;
-	int    iIndex   = 0;
+	int iIndex = 0;
 	pItem->GetIconLocation(
 		&pszIconPath,
 		&iIndex
@@ -574,14 +574,14 @@ void COpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool bFo
 	{
 		// If we could get the IAssocHandlerWithCompanyName object, then we just
 		// query that for the company name.
-		wil::unique_cotaskmem_string buffer = nullptr;
-		hr = pCompanyNameInfo->GetCompany(&buffer);
+		wil::unique_cotaskmem_string pszTempBuffer = nullptr;
+		hr = pCompanyNameInfo->GetCompany(&pszTempBuffer);
 
-		if (buffer)
+		if (pszTempBuffer)
 		{
-			int cchBuffer = lstrlenW(buffer.get()) + 1;
+			int cchBuffer = lstrlenW(pszTempBuffer.get()) + 1;
 			pszCompanyName = std::make_unique<WCHAR[]>(cchBuffer);
-			wcscpy_s(pszCompanyName.get(), cchBuffer, buffer.get());
+			wcscpy_s(pszCompanyName.get(), cchBuffer, pszTempBuffer.get());
 		}
 	}
 
@@ -656,9 +656,9 @@ void COpenAsDlg::_GetHandlers()
 	ULONG pceltFetched = 0;
 	while (SUCCEEDED(pEnumHandler->Next(1, &pAssoc, &pceltFetched)) && pAssoc)
 	{
-		if (!m_bRecommended && S_OK == pAssoc->IsRecommended())
+		if (!m_fRecommended && S_OK == pAssoc->IsRecommended())
 		{
-			m_bRecommended = true;
+			m_fRecommended = true;
 		}
 		m_handlers.push_back(pAssoc);
 	}
@@ -732,7 +732,7 @@ void COpenAsDlg::_BrowseForProgram()
 
 void COpenAsDlg::_OnOk()
 {
-	bool bAssoc = IsDlgButtonChecked(m_hWnd, IDD_OPENWITH_ASSOC);
+	bool fAssoc = IsDlgButtonChecked(m_hWnd, IDD_OPENWITH_ASSOC);
 	WCHAR szDesc[MAX_PATH] = { 0 };
 	GetDlgItemTextW(
 		m_hWnd,
@@ -765,7 +765,7 @@ void COpenAsDlg::_OnOk()
 			}
 		}
 
-		if (bAssoc)
+		if (fAssoc)
 		{
 			// We're setting the file association now, so let's have some
 			// fun!
@@ -795,7 +795,7 @@ void COpenAsDlg::_OnOk()
 				OutputDebugStringW(L"Failed to query interface IAssocHandlerInfo.\n");
 			}
 
-			bool bCancelAssoc = false;
+			bool fCancelAssoc = false;
 
 			/*
 			 * KNOWING THE PROGID IS IMPORTANT!
@@ -839,10 +839,10 @@ void COpenAsDlg::_OnOk()
 			{
 				// If we couldn't get any ProgID at all, then we cancel the registration.
 				OutputDebugStringW(L"Application doesn't have a ProgID; exiting.");
-				bCancelAssoc = true;
+				fCancelAssoc = true;
 			}
 
-			if (!bCancelAssoc)
+			if (!fCancelAssoc)
 			{
 				OutputDebugStringW(L"\nProgID: ");
 				OutputDebugStringW(lpszProgId.get());
@@ -858,17 +858,17 @@ void COpenAsDlg::_OnOk()
 	}
 }
 
-COpenAsDlg::COpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool bUri, bool bPreregistered)
+COpenAsDlg::COpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool fUri, bool fPreregistered)
 	: CImpDialog(g_hMuiInstance, IDD_OPENWITH_WITHDESC)
 	, m_szExtOrProtocol{ 0 }
 	, m_flags(flags)
-	, m_bUri(bUri)
-	, m_bPreregistered(bPreregistered)
-	, m_bRecommended(false)
+	, m_fUri(fUri)
+	, m_fPreregistered(fPreregistered)
+	, m_fRecommended(false)
 {
 	wcscpy_s(m_szPath, lpszPath);
 	m_pszFileName = PathFindFileNameW(m_szPath);
-	if (m_bUri)
+	if (m_fUri)
 	{
 		WCHAR *pColon = wcschr(m_szPath, L':');
 		/* Protocol length */
@@ -884,9 +884,13 @@ COpenAsDlg::COpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool bU
 		}
 	}
 
-	if (m_bUri || !m_szExtOrProtocol || !*m_szExtOrProtocol
-	|| !(flags & IMMERSIVE_OPENWITH_OVERRIDE) || m_bPreregistered)
+	if (
+		m_fUri || !m_szExtOrProtocol || !*m_szExtOrProtocol ||
+		!(flags & IMMERSIVE_OPENWITH_OVERRIDE) || m_fPreregistered
+	)
+	{
 		m_uDlgId = IDD_OPENWITH;
+	}
 }
 
 COpenAsDlg::~COpenAsDlg()

@@ -65,14 +65,14 @@ bool GetExtensionRegKey(
 		return false;
 	}
 
-	HKEY result = NULL;
+	HKEY hkResult = NULL;
 	RegOpenKeyExW(
 		HKEY_CLASSES_ROOT,
 		szKeyName,
 		NULL,
 		KEY_READ,
-		&result
+		&hkResult
 	);
-	*pHkOut = result;
-	return (result != NULL);
+	*pHkOut = hkResult;
+	return (hkResult != NULL);
 }

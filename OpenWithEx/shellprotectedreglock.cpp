@@ -206,7 +206,7 @@ void CShellProtectedRegLock::Lock()
 
 			if (AddAce(pNewAcl, dwRevision, MAXDWORD, pNewAce, dwAceListLength))
 			{
-				bool bGiveUp = false;
+				bool fGiveUp = false;
 
 				if (sizeInfo.AceCount)
 				{
@@ -217,13 +217,13 @@ void CShellProtectedRegLock::Lock()
 						{
 							if (!AddAce(pNewAcl, dwRevision, MAXDWORD, pCurrentAcl, pCurrentAcl->AclSize))
 							{
-								bGiveUp = true;
+								fGiveUp = true;
 							}
 						}
 					}
 				}
 
-				if (!bGiveUp)
+				if (!fGiveUp)
 				{
 					SetSecurityInfo(
 						_hkeySecurity,
@@ -321,7 +321,7 @@ LSTATUS SHDeleteProtectedValue(HKEY hKey, LPCWSTR pszSubKey, LPCWSTR pszValue, b
 		ls = SHDeleteValueW(hKey, L"UserChoice", pszValue);
 
 		HKEY hSubKey;
-		bool bShouldLock = true;
+		bool fShouldLock = true;
 		if (bDeleteSubKeys && RegOpenKeyExW(hKey, L"UserChoice", 0, KEY_QUERY_VALUE, &hSubKey))
 		{
 			DWORD cSubKeys;
@@ -334,13 +334,13 @@ LSTATUS SHDeleteProtectedValue(HKEY hKey, LPCWSTR pszSubKey, LPCWSTR pszValue, b
 				!RegDeleteKeyExW(hKey, L"UserChoice", 0, 0)
 			)
 			{
-				bShouldLock = false;
+				fShouldLock = false;
 			}
 
 			RegCloseKey(hKey);
 		}
 
-		if (bShouldLock)
+		if (fShouldLock)
 			lock.Lock();
 	}
 

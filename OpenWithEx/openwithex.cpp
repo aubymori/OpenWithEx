@@ -36,16 +36,16 @@ void OpenDownloadURL(LPCWSTR pszExtension)
 
 void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags)
 {
-	bool bUri = false;
-	bool bPreregistered = false;
+	bool fUri = false;
+	bool fPreregistered = false;
 
-	bUri = UrlIsW(lpszPath, URLIS_URL) || (flags & IMMERSIVE_OPENWITH_PROTOCOL);
-	if (!bUri)
+	fUri = UrlIsW(lpszPath, URLIS_URL) || (flags & IMMERSIVE_OPENWITH_PROTOCOL);
+	if (!fUri)
 	{
 		LPWSTR pszExtension = PathFindExtensionW(lpszPath);
 		wil::unique_hkey hk;
 		GetExtensionRegKey(pszExtension, &hk);
-		bPreregistered = (hk.get() != NULL);
+		fPreregistered = (hk.get() != NULL);
 
 		/* Check if the file is a system file and open the no-open dialog if it is. */
 		if (pszExtension && *pszExtension)
@@ -71,7 +71,7 @@ void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FL
 
 		/* The Can't open dialog is only shown on files with an extension
 		   that is not already registered. */
-		if (!bPreregistered && !SHRestricted(REST_NOINTERNETOPENWITH)
+		if (!fPreregistered && !SHRestricted(REST_NOINTERNETOPENWITH)
 			&& pszExtension && *pszExtension)
 		{
 			CCantOpenDlg coDlg(lpszPath);
@@ -88,7 +88,7 @@ void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FL
 		}
 	}
 
-	COpenAsDlg oaDialog(lpszPath, flags, bUri, bPreregistered);
+	COpenAsDlg oaDialog(lpszPath, flags, fUri, fPreregistered);
 	oaDialog.ShowDialog(hWndParent);
 }
 

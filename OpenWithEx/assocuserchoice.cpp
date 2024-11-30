@@ -18,7 +18,6 @@
  */
 
 #include <windows.h>
-//#include <appmodel.h> // Used in Mozilla's implementation for MSIX, unused here.
 #include <sddl.h> // for ConvertSidToStringSidW
 #include <wincrypt.h> // for CryptoAPI base64
 #include <bcrypt.h> // CNG MD5
@@ -69,8 +68,8 @@ LPCWSTR g_szConstantUserExperience =
  *         already at the next minute or greater.
  */
 static WORD GetMillisecondsToNextMinute(
-	PSYSTEMTIME pOperationStartTime,
-	PSYSTEMTIME pCurrentTime
+	SYSTEMTIME *pOperationStartTime,
+	SYSTEMTIME *pCurrentTime
 )
 {
 	SYSTEMTIME operationStartTimeMinute = *pOperationStartTime;
@@ -126,7 +125,7 @@ static WORD GetMillisecondsToNextMinute(
  * Compare two SYSTEMTIMEs as FILETIME after clearing everything
  * below minutes.
  */
-static bool CheckEqualMinutes(PSYSTEMTIME pSysTime1, PSYSTEMTIME pSysTime2)
+static bool CheckEqualMinutes(SYSTEMTIME *pSysTime1, SYSTEMTIME *pSysTime2)
 {
 	SYSTEMTIME sysTime1 = *pSysTime1;
 	SYSTEMTIME sysTime2 = *pSysTime2;
@@ -205,7 +204,7 @@ static std::unique_ptr<WCHAR[]> FormatUserChoiceString(
 	LPCWSTR lpszExtension,
 	LPCWSTR lpszUserSid,
 	LPCWSTR lpszProgId,
-	PSYSTEMTIME pTimestamp
+	SYSTEMTIME *pTimestamp
 )
 {
 	SYSTEMTIME timestamp = *pTimestamp;
@@ -269,7 +268,7 @@ static std::unique_ptr<WCHAR[]> FormatUserChoiceString(
  *
  * @return A string pointer to the MD5 hash of the input, nullptr on failure.
  */
-static std::unique_ptr<DWORD[]> CNG_MD5(LPCBYTE bytes, ULONG bytesLen)
+static std::unique_ptr<DWORD[]> CNG_MD5(const BYTE *pbData, ULONG bytesLen)
 {
 	constexpr ULONG MD5_BYTES = 16;
 	constexpr ULONG MD5_DWORDS = MD5_BYTES / sizeof(DWORD);
@@ -286,7 +285,7 @@ static std::unique_ptr<DWORD[]> CNG_MD5(LPCBYTE bytes, ULONG bytesLen)
 		if (NT_SUCCESS(BCryptCreateHash(hAlg, &hHash, nullptr, 0, nullptr, 0, 0)))
 		{
 			// BCryptHashData promises not to modify pbInput.
-			if (NT_SUCCESS(BCryptHashData(hHash, (LPBYTE)bytes, bytesLen, 0)))
+			if (NT_SUCCESS(BCryptHashData(hHash, (LPBYTE)pbData, bytesLen, 0)))
 			{
 				hash = std::make_unique<DWORD[]>(MD5_DWORDS);
 
@@ -308,13 +307,13 @@ static std::unique_ptr<DWORD[]> CNG_MD5(LPCBYTE bytes, ULONG bytesLen)
 /**
  * Base64 encodes a string.
  *
- * @param pBytes      A pointer to an array of bytes to encode in base64
- * @param dwBytesLen  The length of the bytes array
+ * @param pBytes      A pointer to an array of pbData to encode in base64
+ * @param dwBytesLen  The length of the pbData array
  *
  * @return A pointer to the input byte array encoded as a base64 string,
  *         nullptr on failure.
  */
-static std::unique_ptr<WCHAR[]> CryptoAPI_Base64Encode(LPCBYTE pBytes, DWORD dwBytesLen)
+static std::unique_ptr<WCHAR[]> CryptoAPI_Base64Encode(const BYTE *pBytes, DWORD dwBytesLen)
 {
 	DWORD base64Len = 0;
 
@@ -539,28 +538,6 @@ static HRESULT WriteToRegistry(
 		return HRESULT_FROM_WIN32(ls);
 	}
 
-	//// UserChoice key is removed by the system if the hash is invalid:
-	//HKEY hKeyUserChoice = nullptr;
-	//ls = RegCreateKeyExW(
-	//	hKeyAssoc,
-	//	L"UserChoice2",
-	//	0,
-	//	nullptr,
-	//	0,
-	//	KEY_READ | KEY_WRITE,
-	//	0,
-	//	&hKeyUserChoice,
-	//	nullptr
-	//);
-	//
-	//if (ls != ERROR_SUCCESS)
-	//{
-	//	return HRESULT_FROM_WIN32(ls);
-	//}
-	//
-	//// Auto-close key after return:
-	//std::unique_ptr<HKEY__, RegCloseKeyDeleter> hKeyUserChoiceDeletionManager(hKeyUserChoice);
-
 	DWORD progIdByteCount = (lstrlenW(lpszProgId) + 1) * sizeof(WCHAR);
 	ls = SHSetProtectedValue(
 		hKeyAssoc.get(),
@@ -570,14 +547,6 @@ static HRESULT WriteToRegistry(
 		lpszProgId,
 		progIdByteCount
 	);
-	//ls = RegSetValueExW(
-	//	hKeyUserChoice,
-	//	L"ProgID",
-	//	0,
-	//	REG_SZ,
-	//	(LPBYTE)lpszProgId,
-	//	progIdByteCount
-	//);
 
 	DWORD hashByteCount = (lstrlenW(pszHash.get()) + 1) * sizeof(WCHAR);
 	ls = SHSetProtectedValue(
@@ -588,14 +557,6 @@ static HRESULT WriteToRegistry(
 		pszHash.get(),
 		hashByteCount
 	);
-	//ls = RegSetValueExW(
-	//	hKeyUserChoice,
-	//	L"Hash",
-	//	0,
-	//	REG_SZ,
-	//	(LPBYTE)pszHash.get(),
-	//	hashByteCount
-	//);
 
 	if (ls != ERROR_SUCCESS)
 	{
@@ -612,48 +573,6 @@ static HRESULT WriteToRegistry(
 	return S_OK;
 }
 #pragma endregion
-#pragma endregion
-
-#pragma region WIP
-
-///**
-// * Gets the User Experience string.
-// * 
-// * This string is statically stored in shell32.dll, so it can simply be extracted from the
-// * file contents of this file.
-// */
-//static std::unique_ptr<WCHAR[]> GetUserExperience()
-//{
-//	constexpr LPCWSTR COMMON_PATTERN = L"User Choice set via Windows User Experience";
-//	LPCWSTR szPathToShell32Fmt = L"%s\\shell32.dll";
-//
-//	WCHAR szPathToSystem32[1024];
-//	GetSystemDirectoryW(szPathToSystem32, ARRAYSIZE(szPathToSystem32));
-//
-//	int cchPathToShell32 = _scwprintf(szPathToShell32Fmt, szPathToSystem32) + 1;
-//	std::unique_ptr<WCHAR[]> pszPathToShell32 = std::make_unique<WCHAR[]>(cchPathToShell32);
-//
-//	_snwprintf_s(
-//		pszPathToShell32.get(),
-//		cchPathToShell32,
-//		_TRUNCATE,
-//		szPathToShell32Fmt,
-//		szPathToSystem32
-//	);
-//
-//	wil::unique_hfile hFile(CreateFileW(
-//		pszPathToShell32.get(),
-//		GENERIC_READ,
-//		FILE_SHARE_READ,
-//		nullptr,
-//		OPEN_EXISTING,
-//		FILE_ATTRIBUTE_SYSTEM,
-//		nullptr
-//	));
-//
-//	// TODO: finish
-//}
-
 #pragma endregion
 
 /**
@@ -705,15 +624,15 @@ std::unique_ptr<WCHAR[]> GetCurrentUserStringSid()
  * Get the registry path for the given association, file extension or protocol.
  * 
  * @param lpszExtension   File extension or protocol being retrieved.
- * @param bIsUri          Whether lpszExtension should act as a file extension
+ * @param fIsUri          Whether lpszExtension should act as a file extension
  *                        or URI protocol.
  * 
  * @return A string pointer to the path, or nullptr on failure.
  */
-std::unique_ptr<WCHAR[]> GetAssociationKeyPath(LPCWSTR lpszExtension, bool bIsUri)
+std::unique_ptr<WCHAR[]> GetAssociationKeyPath(LPCWSTR lpszExtension, bool fIsUri)
 {
 	LPCWSTR keyPathFmt;
-	if (bIsUri)
+	if (fIsUri)
 	{
 		keyPathFmt = L"SOFTWARE\\Microsoft\\Windows\\Shell\\Associations\\UrlAssociations\\%s";
 	}
@@ -752,7 +671,7 @@ std::unique_ptr<WCHAR[]> GenerateUserChoiceHash(
 	LPCWSTR lpszExtension,
 	LPCWSTR lpszUserSid,
 	LPCWSTR lpszProgId,
-	PSYSTEMTIME pTimestamp
+	SYSTEMTIME *pTimestamp
 )
 {
 	std::unique_ptr<WCHAR[]> userChoice = FormatUserChoiceString(

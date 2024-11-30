@@ -81,3 +81,5 @@ inline void debuglog(const wchar_t *format, ...)
 #define IDS_PROGRAMS          1006
 #define IDS_ALLFILES          1007
 #define IDS_BROWSETITLE       1008
+
+// Extra newline required because we are included in an .rc file:

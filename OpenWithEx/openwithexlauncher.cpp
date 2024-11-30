@@ -49,7 +49,7 @@ void COpenWithExLauncher::Log(const wchar_t *szMethodName, const wchar_t *format
 	{                                                      \
 		*ppvObj = static_cast<INTERFACE *>(this);          \
 		Log(method, L"Found interface %s\n", L#INTERFACE); \
-        bFailedToFind = false;                             \
+        fFailedToFind = false;                             \
 	}
 
 HRESULT COpenWithExLauncher::QueryInterface(REFIID riid, LPVOID *ppvObj)
@@ -76,7 +76,7 @@ HRESULT COpenWithExLauncher::QueryInterface(REFIID riid, LPVOID *ppvObj)
 
 	*ppvObj = nullptr;
 
-	bool bFailedToFind = true;
+	bool fFailedToFind = true;
 
 	// For whatever reason, static_cast<IUnknown *> raises a comple error for me
 	// (aubymori), but not for the other person (kawapure). Masterful gambit,
@@ -85,7 +85,7 @@ HRESULT COpenWithExLauncher::QueryInterface(REFIID riid, LPVOID *ppvObj)
 	{
 		*ppvObj = this;
 		Log(method, L"Found interface IUnknown\n");
-		bFailedToFind = false;
+		fFailedToFind = false;
 	}
 	QI_PUT_OUT(IExecuteCommandApplicationHostEnvironment)
 	QI_PUT_OUT(IServiceProvider)
@@ -97,7 +97,7 @@ HRESULT COpenWithExLauncher::QueryInterface(REFIID riid, LPVOID *ppvObj)
 	QI_PUT_OUT(IOpenWithLauncher)
 	QI_PUT_OUT(IClassFactory);
 
-	if (!bFailedToFind)
+	if (!fFailedToFind)
 	{
 		hr = S_OK;
 		AddRef();
