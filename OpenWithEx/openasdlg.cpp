@@ -666,6 +666,8 @@ void COpenAsDlg::_GetHandlers()
 
 void COpenAsDlg::_BrowseForProgram()
 {
+	// TODO: We must handle IsBlockedFromOpenWithBrowse (shell32 ord#779)
+
 	wil::com_ptr<IShellItem> psi = nullptr;
 	WCHAR szPath[MAX_PATH] = { 0 };
 	ExpandEnvironmentStringsW(L"%ProgramFiles%", szPath, MAX_PATH);
@@ -797,6 +799,9 @@ void COpenAsDlg::_OnOk()
 
 			bool fCancelAssoc = false;
 
+			AHTYPE ahType;
+			pAssocInfo->GetHandlerType(&ahType);
+
 			/*
 			 * KNOWING THE PROGID IS IMPORTANT!
 			 * 
@@ -822,10 +827,31 @@ void COpenAsDlg::_OnOk()
 				// If we could get the IAssocHandlerInfo interface, then we'll call
 				// GetInternalProgID. This automatically handles generated ProgIDs
 				// like "Applications\notepad++.exe".
-				pAssocInfo->GetInternalProgID(
-					ASSOC_PROGID_FORMAT::APF_DEFAULT,
-					&lpszProgId
-				);
+				if (!(ahType & AHTYPE_ANY_PROGID | AHTYPE_PROGID | AHTYPE_MACHINEDEFAULT))
+				{
+					// If our association handler already supports ProgIDs, then we'll
+					// just retrieve that ProgID.
+					pAssocInfo->GetInternalProgID(
+						ASSOC_PROGID_FORMAT::APF_DEFAULT,
+						&lpszProgId
+					);
+				}
+				else
+				{
+					// If we don't already have a ProgID on our object, then we'll have
+					// to tell the system to make one. The following is what TWinUI does,
+					// although I'm not sure the significance of APF_APPLICATION here.
+					pAssocInfo->GetInternalProgID(
+						ASSOC_PROGID_FORMAT::APF_APPLICATION,
+						&lpszProgId
+					);
+
+					wil::com_ptr<IAssocHandlerMakeDefault> pMakeDefault = nullptr;
+					if (SUCCEEDED(pSelected->QueryInterface(IID_PPV_ARGS(&pMakeDefault))))
+					{
+						pMakeDefault->TryRegisterApplicationAssoc();
+					}
+				}
 			}
 			else
 			{

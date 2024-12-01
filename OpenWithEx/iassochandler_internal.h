@@ -69,7 +69,7 @@ IAssocHandlerInfo : public IUnknown
 	 * 
 	 * @see {@link AHTYPE}
 	 */
-	virtual HRESULT GetType(LPDWORD pdwOut) = 0;
+	virtual HRESULT GetHandlerType(AHTYPE *pAssociationTypeOut) = 0;
 };
 
 MIDL_INTERFACE("E1B15A0F-2139-44F2-8C6C-3D2CA890F9D9")
