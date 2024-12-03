@@ -54,8 +54,9 @@ inline void debuglog(const wchar_t *format, ...)
 /* Dialogs */
 #define IDD_OPENWITH          200
 #define IDD_OPENWITH_WITHDESC 201
-#define IDD_CANTOPEN          202
-#define IDD_NOOPEN            203
+#define IDD_OPENWITH_PROTOCOL 202
+#define IDD_CANTOPEN          203
+#define IDD_NOOPEN            204
 
 /* Controls */
 #define IDD_OPENWITH_ICON     300

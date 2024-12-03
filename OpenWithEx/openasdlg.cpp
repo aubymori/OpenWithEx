@@ -13,12 +13,6 @@
 #include "wil/com.h"
 #include "wil/resource.h"
 
-LPCWSTR c_szSysTypes[] = {
-	L".bin",
-	L".dat",
-	L".dos"
-};
-
 /*
  * Get the app icon.
  * 
@@ -116,7 +110,7 @@ INT_PTR CALLBACK COpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 			SetDlgItemTextW(
 				hWnd,
 				IDD_OPENWITH_FILE,
-				m_pszFileName
+				m_fUri ? m_szPath : m_pszFileName
 			);
 
 			/* Set up checkbox */
@@ -666,8 +660,6 @@ void COpenAsDlg::_GetHandlers()
 
 void COpenAsDlg::_BrowseForProgram()
 {
-	// TODO: We must handle IsBlockedFromOpenWithBrowse (shell32 ord#779)
-
 	wil::com_ptr<IShellItem> psi = nullptr;
 	WCHAR szPath[MAX_PATH] = { 0 };
 	ExpandEnvironmentStringsW(L"%ProgramFiles%", szPath, MAX_PATH);
@@ -755,25 +747,6 @@ void COpenAsDlg::_OnOk()
 	{
 		EndDialog(m_hWnd, IDOK);
 
-		// Don't launch when changing default from properties.
-		if (!(m_flags & IMMERSIVE_OPENWITH_DONOT_EXEC))
-		{
-			// Start the program with the file:
-			wil::com_ptr<IShellItem2> pShellItem = nullptr;
-			HRESULT hr = SHCreateItemFromParsingName(m_szPath, nullptr, IID_PPV_ARGS(&pShellItem));
-
-			if (SUCCEEDED(hr) && pShellItem)
-			{
-				wil::com_ptr<IDataObject> pInvocationObj = nullptr;
-				hr = pShellItem->BindToHandler(nullptr, BHID_DataObject, IID_PPV_ARGS(&pInvocationObj));
-
-				if (SUCCEEDED(hr))
-				{
-					pSelected->Invoke(pInvocationObj.get());
-				}
-			}
-		}
-
 		if (fAssoc)
 		{
 			// We're setting the file association now, so let's have some
@@ -811,22 +784,22 @@ void COpenAsDlg::_OnOk()
 
 			/*
 			 * KNOWING THE PROGID IS IMPORTANT!
-			 * 
+			 *
 			 * Windows makes file associations via the ProgID, not the file path.
 			 * It seems that the system generates a ProgID from the App Paths
 			 * when there is no ProgID (IObjectWithProgID::GetProgID returns nullptr).
-			 * 
+			 *
 			 * If there is an existing registration of the application name in the
 			 * App Paths, then we get that (from the undocumented IAssocHandlerInfo
 			 * interface). If we fail to get that, then we will fail to make the
 			 * association.
-			 * 
+			 *
 			 * This means that we currently can't make new registrations from
 			 * new handlers added via the file browser. They lack a ProgID at all, and
 			 * so we just don't generate one.
 			 */
 
-			// Get the ProgID of the element:
+			 // Get the ProgID of the element:
 			wil::unique_cotaskmem_string lpszProgId = nullptr;
 
 			if (pAssocInfo)
@@ -888,6 +861,25 @@ void COpenAsDlg::_OnOk()
 					);
 			}
 		}
+
+		// Don't launch when changing default from properties.
+		if (!(m_flags & IMMERSIVE_OPENWITH_DONOT_EXEC))
+		{
+			// Start the program with the file:
+			wil::com_ptr<IShellItem2> pShellItem = nullptr;
+			HRESULT hr = SHCreateItemFromParsingName(m_szPath, nullptr, IID_PPV_ARGS(&pShellItem));
+
+			if (SUCCEEDED(hr) && pShellItem)
+			{
+				wil::com_ptr<IDataObject> pInvocationObj = nullptr;
+				hr = pShellItem->BindToHandler(nullptr, BHID_DataObject, IID_PPV_ARGS(&pInvocationObj));
+
+				if (SUCCEEDED(hr))
+				{
+					pSelected->Invoke(pInvocationObj.get());
+				}
+			}
+		}
 	}
 }
 
@@ -917,8 +909,12 @@ COpenAsDlg::COpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool fU
 		}
 	}
 
-	if (
-		m_fUri || !m_szExtOrProtocol || !*m_szExtOrProtocol ||
+	if (m_fUri)
+	{
+		m_uDlgId = IDD_OPENWITH_PROTOCOL;
+	}
+	else if (
+		!m_szExtOrProtocol || !*m_szExtOrProtocol ||
 		!(flags & IMMERSIVE_OPENWITH_OVERRIDE) || m_fPreregistered
 	)
 	{

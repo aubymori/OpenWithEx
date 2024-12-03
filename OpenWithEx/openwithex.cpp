@@ -4,6 +4,7 @@
 #include "openasdlg.h"
 #include "noopendlg.h"
 #include "openwithexlauncher.h"
+#include "assocuserchoice.h"
 #include <shlobj.h>
 #include <shlwapi.h>
 #include <stdio.h>
@@ -47,7 +48,7 @@ void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FL
 		LPWSTR pszExtension = PathFindExtensionW(lpszPath);
 		wil::unique_hkey hk;
 		GetExtensionRegKey(pszExtension, &hk);
-		fPreregistered = (hk.get() != NULL);
+		fPreregistered = AssociationExists(pszExtension, fUri);
 
 		/* Check if the file is a system file and open the no-open dialog if it is. */
 		if (pszExtension && *pszExtension)

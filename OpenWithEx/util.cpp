@@ -2,6 +2,7 @@
 #include "openwithex.h"
 #include <stdio.h>
 
+#include "assocuserchoice.h"
 #include "wil/com.h"
 #include "wil/resource.h"
 
@@ -75,4 +76,30 @@ bool GetExtensionRegKey(
 	);
 	*pHkOut = hkResult;
 	return (hkResult != NULL);
+}
+
+/**
+  * Checks if an association exists for a file extension or
+  * URL protocol.
+  */
+bool AssociationExists(LPCWSTR lpszExtension, bool fIsUri)
+{
+	if (!lpszExtension)
+		return false;
+
+	wil::unique_hkey hk;
+	if (GetExtensionRegKey(lpszExtension, &hk) && hk.get())
+		return true;
+
+	std::unique_ptr<WCHAR[]> lpszKeyPath = GetAssociationKeyPath(lpszExtension, fIsUri);
+	if (STATUS_SUCCESS == RegOpenKeyExW(
+		HKEY_CURRENT_USER,
+		lpszKeyPath.get(),
+		NULL,
+		KEY_READ,
+		&hk
+	) && hk.get())
+		return true;
+
+	return false;
 }
