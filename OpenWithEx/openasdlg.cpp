@@ -712,6 +712,13 @@ void COpenAsDlg::_BrowseForProgram()
 		pResult->GetDisplayName(SIGDN_FILESYSPATH, &lpszPath);
 		if (lpszPath)
 		{
+			LPCWSTR lpszFileName = PathFindFileNameW(lpszPath.get());
+			if (IsBlockedFromOpenWithBrowse(lpszFileName))
+			{
+				ShellMessageBoxW(g_hShell32, m_hWnd, MAKEINTRESOURCEW(0x7503), MAKEINTRESOURCEW(0x7502), MB_ICONERROR);
+				return;
+			}
+
 			int index = _FindItemIndex(lpszPath.get());
 			if (index != -1)
 			{

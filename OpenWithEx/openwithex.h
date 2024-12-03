@@ -10,6 +10,7 @@
 
 extern HMODULE g_hAppInstance;
 extern HMODULE g_hMuiInstance;
+extern HMODULE g_hShell32;
 
 enum IMMERSIVE_OPENWITH_FLAGS
 {
@@ -30,8 +31,11 @@ enum IMMERSIVE_OPENWITH_FLAGS
 void OpenDownloadURL(LPCWSTR pszExtension);
 void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags);
 
-typedef HRESULT(WINAPI *SHCreateAssocHandler_t)(UINT uFlags, LPCWSTR pszExt, LPCWSTR pszApp, IAssocHandler **ppah);
+typedef HRESULT (WINAPI *SHCreateAssocHandler_t)(UINT uFlags, LPCWSTR pszExt, LPCWSTR pszApp, IAssocHandler **ppah);
 extern SHCreateAssocHandler_t SHCreateAssocHandler;
+
+typedef bool (WINAPI *IsBlockedFromOpenWithBrowse_t)(LPCWSTR lpszPath);
+extern IsBlockedFromOpenWithBrowse_t IsBlockedFromOpenWithBrowse;
 
 DEFINE_GUID(CLSID_ExecuteUnknown, 0xE44E9428, 0xBDBC, 0x4987, 0xA0,0x99, 0x40,0xDC,0x8F,0xD2,0x55,0xE7);
 

@@ -4,7 +4,7 @@ STRINGTABLE
 {
 	IDS_ERR_EMBEDDING  "Operation not supported"
 	IDS_ERR_NOPATH     "No path specified"
-	IDS_ERR_SHELL32    "The function with ordinal no. 765 (SHCreateAssocHandler) could not be found in the dynamic link library SHELL32.dll."
+	IDS_ERR_SHELL32    "A required function could not be found in the dynamic link library SHELL32.dll."
 	IDS_SEARCH_FORMAT  "http://go.microsoft.com/fwlink/?LinkId=57426&Ext=%s"
 #ifdef XP
 	IDS_RECOMMENDED    "Recommended Programs:"

@@ -13,8 +13,10 @@
 
 HMODULE g_hAppInstance = nullptr;
 HMODULE g_hMuiInstance = nullptr;
+HMODULE g_hShell32     = nullptr;
 
 SHCreateAssocHandler_t SHCreateAssocHandler = nullptr;
+IsBlockedFromOpenWithBrowse_t IsBlockedFromOpenWithBrowse = nullptr;
 
 WCHAR szPath[MAX_PATH] = { 0 };
 
@@ -123,13 +125,17 @@ int WINAPI wWinMain(
 
 	(void)CoInitialize(nullptr);
 
-	/* Load undocumented shell32 function */
-	HMODULE hShell32 = GetModuleHandleW(L"shell32.dll");
+	/* Load undocumented shell32 functions */
+	g_hShell32 = GetModuleHandleW(L"shell32.dll");
 	SHCreateAssocHandler = (SHCreateAssocHandler_t)GetProcAddress(
-		hShell32,
+		g_hShell32,
 		(LPCSTR)765 // Ordinal number
 	);
-	if (!SHCreateAssocHandler)
+	IsBlockedFromOpenWithBrowse = (IsBlockedFromOpenWithBrowse_t)GetProcAddress(
+		g_hShell32,
+		(LPCSTR)779
+	);
+	if (!SHCreateAssocHandler || !IsBlockedFromOpenWithBrowse)
 	{
 		LocalizedMessageBox(
 			NULL,
