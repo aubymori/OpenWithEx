@@ -862,6 +862,68 @@ void COpenAsDlg::_OnOk()
 			}
 		}
 
+		// Change the association description if applicable
+		if (m_uDlgId == IDD_OPENWITH_WITHDESC)
+		{
+			HWND hWndDescEditBox = GetDlgItem(m_hWnd, IDD_OPENWITH_DESC);
+
+			DWORD cchDescText = GetWindowTextLengthW(hWndDescEditBox);
+			std::unique_ptr<WCHAR[]> pszDescription = std::make_unique<WCHAR[]>(cchDescText + sizeof('\0'));
+			GetWindowTextW(hWndDescEditBox, pszDescription.get(), cchDescText + sizeof('\0'));
+
+			// Find the association handler path in the registry:
+			wil::unique_hkey hkAssocKey = nullptr;
+			RegOpenKeyExW(
+				HKEY_CLASSES_ROOT,
+				m_szExtOrProtocol,
+				NULL,
+				KEY_READ,
+				&hkAssocKey
+			);
+
+			DWORD cbProgId = 0;
+			RegGetValueW(
+				hkAssocKey.get(),
+				nullptr,
+				nullptr,
+				RRF_RT_REG_SZ,
+				nullptr,
+				nullptr,
+				&cbProgId
+			);
+			std::unique_ptr<WCHAR[]> pszProgId = std::make_unique<WCHAR[]>(cbProgId);
+			RegGetValueW(
+				hkAssocKey.get(),
+				nullptr,
+				nullptr,
+				RRF_RT_REG_SZ,
+				nullptr,
+				pszProgId.get(),
+				&cbProgId
+			);
+
+			wil::unique_hkey hkProgId = nullptr;
+			RegOpenKeyExW(
+				HKEY_CLASSES_ROOT,
+				pszProgId.get(),
+				NULL,
+				KEY_READ | KEY_WRITE,
+				&hkProgId
+			);
+
+			RegSetKeyValueW(
+				hkProgId.get(),
+				nullptr,
+				nullptr,
+				REG_SZ,
+				pszDescription.get(),
+				(cchDescText + 1) * sizeof(WCHAR)
+			);
+
+			// Notify shell to refresh icons:
+			SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, nullptr, nullptr);
+		}
+
 		// Don't launch when changing default from properties.
 		if (!(m_flags & IMMERSIVE_OPENWITH_DONOT_EXEC))
 		{
