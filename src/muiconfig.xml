@@ -4,8 +4,10 @@
                   <neutralResources>
                   </neutralResources>
                   <localizedResources>
+					    <!-- RT_DIALOG -->
+                        <resourceType typeNameId="#5"/>
 					    <!-- RT_STRING -->
-                        <resourceType typeNameId="#6"/>
+					    <resourceType typeNameId="#6"/>
                   </localizedResources>
             </win32Resources>
       </resources>
