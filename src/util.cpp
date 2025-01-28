@@ -13,7 +13,7 @@ int LocalizedMessageBox(
 )
 {
 	WCHAR szMsg[1024] = { 0 };
-	LoadStringW(g_hMuiInstance, uMsgId, szMsg, 1024);
+	LoadStringW(g_hInst, uMsgId, szMsg, 1024);
 	return MessageBoxW(
 		hWndParent,
 		szMsg,

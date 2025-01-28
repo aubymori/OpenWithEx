@@ -110,6 +110,24 @@
       <AdditionalDependencies>shell32.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalManifestDependencies>"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'";%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
     </Link>
+    <ResourceCompile>
+      <AdditionalOptions>/g 0x0409 /q "muiconfig.xml" /fm "$(IntermediateOutputPath)%(Filename).en-US.res" %(AdditionalOptions)</AdditionalOptions>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
+link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithex.en-US.res
+
+:: Example for other languages
+:: Uncomment when adding another language
+:: Final `del` line should not be copied with each new language
+
+:: rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ja-JP.res" openwithex.ja-JP.rc
+:: if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
+:: link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ja-JP.res"
+:: muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
+
+:: del "$(IntermediateOutputPath)temp.res"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -131,6 +149,24 @@
       <AdditionalDependencies>shell32.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalManifestDependencies>"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'";%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
     </Link>
+    <ResourceCompile>
+      <AdditionalOptions>/g 0x0409 /q "muiconfig.xml" /fm "$(IntermediateOutputPath)%(Filename).en-US.res" %(AdditionalOptions)</AdditionalOptions>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
+link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithex.en-US.res
+
+:: Example for other languages
+:: Uncomment when adding another language
+:: Final `del` line should not be copied with each new language
+
+:: rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ja-JP.res" openwithex.ja-JP.rc
+:: if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
+:: link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ja-JP.res"
+:: muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
+
+:: del "$(IntermediateOutputPath)temp.res"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -150,6 +186,24 @@
       <AdditionalDependencies>shell32.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;crypt32.lib;bcrypt.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalManifestDependencies>"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'";%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
     </Link>
+    <ResourceCompile>
+      <AdditionalOptions>/g 0x0409 /q "muiconfig.xml" /fm "$(IntermediateOutputPath)%(Filename).en-US.res" %(AdditionalOptions)</AdditionalOptions>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
+link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithex.en-US.res
+
+:: Example for other languages
+:: Uncomment when adding another language
+:: Final `del` line should not be copied with each new language
+
+:: rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ja-JP.res" openwithex.ja-JP.rc
+:: if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
+:: link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ja-JP.res"
+:: muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
+
+:: del "$(IntermediateOutputPath)temp.res"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -172,12 +226,29 @@
       <AdditionalDependencies>shell32.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;crypt32.lib;bcrypt.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalManifestDependencies>"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'";%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
     </Link>
+    <ResourceCompile>
+      <AdditionalOptions>/g 0x0409 /q "muiconfig.xml" /fm "$(IntermediateOutputPath)%(Filename).en-US.res" %(AdditionalOptions)</AdditionalOptions>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
+link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithex.en-US.res
+
+:: Example for other languages
+:: Uncomment when adding another language
+:: Final `del` line should not be copied with each new language
+
+:: rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ja-JP.res" openwithex.ja-JP.rc
+:: if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
+:: link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ja-JP.res"
+:: muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
+
+:: del "$(IntermediateOutputPath)temp.res"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="assocuserchoice.cpp" />
     <ClCompile Include="cantopendlg.cpp" />
     <ClCompile Include="impdialog.cpp" />
-    <ClCompile Include="mui.c" />
     <ClCompile Include="noopendlg.cpp" />
     <ClCompile Include="openasdlg.cpp" />
     <ClCompile Include="openwithex.cpp" />
@@ -188,6 +259,12 @@
     <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ResourceCompile Include="openwithex.en-US.rc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ResourceCompile>
     <ResourceCompile Include="openwithex.rc" />
   </ItemGroup>
   <ItemGroup>
@@ -198,7 +275,6 @@
     <ClInclude Include="impdialog.h" />
     <ClInclude Include="iobjectwithassociationelement.h" />
     <ClInclude Include="iobjectwithopenwithflags.h" />
-    <ClInclude Include="mui.h" />
     <ClInclude Include="noopendlg.h" />
     <ClInclude Include="openasdlg.h" />
     <ClInclude Include="openwithex.h" />
@@ -240,6 +316,9 @@
     <ClInclude Include="wil\wistd_memory.h" />
     <ClInclude Include="wil\wistd_type_traits.h" />
     <ClInclude Include="wil\wrl.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="muiconfig.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

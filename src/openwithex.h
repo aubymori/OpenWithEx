@@ -9,7 +9,7 @@
 //#define XP
 
 extern HMODULE g_hAppInstance;
-extern HMODULE g_hMuiInstance;
+extern HMODULE g_hInst;
 extern HMODULE g_hShell32;
 
 enum IMMERSIVE_OPENWITH_FLAGS

@@ -410,7 +410,7 @@ void COpenAsDlg::_SetupCategories()
 	recommended.state = TVIS_EXPANDED;
 	recommended.stateMask = TVIS_EXPANDED;
 	WCHAR szRecommended[MAX_PATH] = { 0 };
-	LoadStringW(g_hMuiInstance, IDS_RECOMMENDED, szRecommended, MAX_PATH);
+	LoadStringW(g_hInst, IDS_RECOMMENDED, szRecommended, MAX_PATH);
 	recommended.pszText = szRecommended;
 	recommended.cchTextMax = MAX_PATH;
 
@@ -427,7 +427,7 @@ void COpenAsDlg::_SetupCategories()
 
 	TVITEMW other = recommended;
 	WCHAR szOther[MAX_PATH] = { 0 };
-	LoadStringW(g_hMuiInstance, IDS_OTHER, szOther, MAX_PATH);
+	LoadStringW(g_hInst, IDS_OTHER, szOther, MAX_PATH);
 	other.pszText = szOther;
 	insert.item = other;
 	m_hOther = (HTREEITEM)SendDlgItemMessageW(
@@ -452,7 +452,7 @@ void COpenAsDlg::_SetupCategories()
 	recommended.state = LVGS_COLLAPSIBLE;
 	recommended.stateMask = LVGS_COLLAPSIBLE;
 	WCHAR szRecommended[MAX_PATH] = { 0 };
-	LoadStringW(g_hMuiInstance, IDS_RECOMMENDED, szRecommended, MAX_PATH);
+	LoadStringW(g_hInst, IDS_RECOMMENDED, szRecommended, MAX_PATH);
 	recommended.pszHeader = szRecommended;
 	recommended.cchHeader = MAX_PATH;
 	SendDlgItemMessageW(
@@ -466,7 +466,7 @@ void COpenAsDlg::_SetupCategories()
 	LVGROUP other = recommended;
 	other.iGroupId = I_OTHER;
 	WCHAR szOther[MAX_PATH] = { 0 };
-	LoadStringW(g_hMuiInstance, IDS_OTHER, szOther, MAX_PATH);
+	LoadStringW(g_hInst, IDS_OTHER, szOther, MAX_PATH);
 	other.pszHeader = szOther;
 	other.state = LVGS_COLLAPSIBLE | LVGS_COLLAPSED;
 	other.stateMask = LVGS_COLLAPSIBLE | LVGS_COLLAPSED;
@@ -680,8 +680,8 @@ void COpenAsDlg::_BrowseForProgram()
 
 	WCHAR szPrograms[MAX_PATH] = { 0 };
 	WCHAR szAllFiles[MAX_PATH] = { 0 };
-	LoadStringW(g_hMuiInstance, IDS_PROGRAMS, szPrograms, MAX_PATH);
-	LoadStringW(g_hMuiInstance, IDS_ALLFILES, szAllFiles, MAX_PATH);
+	LoadStringW(g_hInst, IDS_PROGRAMS, szPrograms, MAX_PATH);
+	LoadStringW(g_hInst, IDS_ALLFILES, szAllFiles, MAX_PATH);
 
 	COMDLG_FILTERSPEC filters[] = {
 		{ szPrograms, L"*.exe;*.pif;*.com;*.bat;*.cmd" },
@@ -691,7 +691,7 @@ void COpenAsDlg::_BrowseForProgram()
 	pdlg->SetFileTypes(ARRAYSIZE(filters), filters);
 
 	WCHAR szTitle[MAX_PATH] = { 0 };
-	LoadStringW(g_hMuiInstance, IDS_BROWSETITLE, szTitle, MAX_PATH);
+	LoadStringW(g_hInst, IDS_BROWSETITLE, szTitle, MAX_PATH);
 	pdlg->SetTitle(szTitle);
 	pdlg->Show(m_hWnd);
 
@@ -946,7 +946,7 @@ void COpenAsDlg::_OnOk()
 }
 
 COpenAsDlg::COpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool fUri, bool fPreregistered)
-	: CImpDialog(g_hMuiInstance, IDD_OPENWITH_WITHDESC)
+	: CImpDialog(g_hInst, IDD_OPENWITH_WITHDESC)
 	, m_szExtOrProtocol{ 0 }
 	, m_flags(flags)
 	, m_fUri(fUri)

@@ -1,5 +1,4 @@
 #include "openwithex.h"
-#include "mui.h"
 #include "cantopendlg.h"
 #include "openasdlg.h"
 #include "noopendlg.h"
@@ -12,9 +11,8 @@
 #include "wil/resource.h"
 #include "wil/registry.h"
 
-HMODULE g_hAppInstance = nullptr;
-HMODULE g_hMuiInstance = nullptr;
-HMODULE g_hShell32     = nullptr;
+HMODULE g_hInst     = nullptr;
+HMODULE g_hShell32  = nullptr;
 
 SHCreateAssocHandler_t SHCreateAssocHandler = nullptr;
 IsBlockedFromOpenWithBrowse_t IsBlockedFromOpenWithBrowse = nullptr;
@@ -25,7 +23,7 @@ void OpenDownloadURL(LPCWSTR pszExtension)
 {
 	WCHAR szFormat[MAX_PATH] = { 0 };
 	WCHAR szUrl[MAX_PATH] = { 0 };
-	LoadStringW(g_hMuiInstance, IDS_SEARCH_FORMAT, szFormat, MAX_PATH);
+	LoadStringW(g_hInst, IDS_SEARCH_FORMAT, szFormat, MAX_PATH);
 	swprintf_s(szUrl, szFormat, pszExtension + 1);
 	ShellExecuteW(
 		NULL,
@@ -111,18 +109,7 @@ int WINAPI wWinMain(
 
 	debuglog(L"OpenWithEx Debug Console\n\n");
 
-	g_hAppInstance = hInstance;
-	g_hMuiInstance = GetMUIModule(g_hAppInstance);
-	if (!g_hMuiInstance)
-	{
-		MessageBoxW(
-			NULL,
-			L"Failed to load language resources",
-			L"OpenWithEx",
-			MB_ICONERROR
-		);
-		return 1;
-	}
+	g_hInst = hInstance;
 
 	(void)CoInitialize(nullptr);
 

@@ -76,7 +76,7 @@ INT_PTR CALLBACK CCantOpenDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 }
 
 CCantOpenDlg::CCantOpenDlg(LPCWSTR lpszPath)
-	: CImpDialog(g_hMuiInstance, IDD_CANTOPEN)
+	: CImpDialog(g_hInst, IDD_CANTOPEN)
 {
 	wcscpy_s(m_szPath, lpszPath);
 	m_pszFileName = PathFindFileNameW(m_szPath);

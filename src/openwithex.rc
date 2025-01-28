@@ -3,3 +3,6 @@
 /* Open With in Windows 7 was hosted by rundll32.exe
    and as such, when shown in the taskbar, had its icon. */
 IDI_OPENWITH  ICON  "res/OpenWithEx.ico"
+
+/* Locales */
+#include "openwithex.en-US.rc"
