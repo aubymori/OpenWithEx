@@ -4,5 +4,13 @@
    and as such, when shown in the taskbar, had its icon. */
 IDI_OPENWITH  ICON  "res/OpenWithEx.ico"
 
-/* Locales */
+/** 
+  * !!! DON'T INCLUDE OTHER LOCALES HERE !!!
+  * For whatever reason, if you compile an RC file with resources
+  * for more than one language, the RC compiler refuses to output
+  * an MUI file and instead outputs everything in one language
+  * neutral file. The en-US locale is built along with the main
+  * project just to get an MUI checksum to copy to all the other
+  * MUI files.
+  */
 #include "openwithex.en-US.rc"
