@@ -36,6 +36,7 @@ private:
 	void _SetupCategories();
 	void _AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool fForceSelect);
 	void _GetHandlers();
+	HRESULT _ClearRecentlyInstalled();
 
 	void _BrowseForProgram();
 	void _OnOk();

@@ -197,7 +197,7 @@ HRESULT COpenWithExLauncher::GetSite(REFIID riid, void **ppvObject)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::GetSite");
 
-	Log(method, L"Entered method (exit will not be logged)\n");
+	Log(method, L"Entered method\n");
 
 	if (m_pSite)
 	{

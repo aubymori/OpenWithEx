@@ -731,6 +731,22 @@ void COpenAsDlg::_BrowseForProgram()
 	}
 }
 
+/**
+ * Clears the recently-installed flags to avoid a restart loop when new applications have been
+ * installed.
+ */
+HRESULT COpenAsDlg::_ClearRecentlyInstalled()
+{
+	for (wil::com_ptr<IAssocHandler> pHandler : m_handlers)
+	{
+		wil::com_ptr<IAssocHandlerPromptCount> pPromptCount;
+		RETURN_IF_FAILED(pHandler->QueryInterface(&pPromptCount));
+		pPromptCount->UpdatePromptCount(ASSOCHANDLER_PROMPTUPDATE_BEHAVIOR_CLEAR);
+	}
+
+	return S_OK;
+}
+
 void COpenAsDlg::_OnOk()
 {
 	bool fAssoc = IsDlgButtonChecked(m_hWnd, IDD_OPENWITH_ASSOC);
@@ -933,6 +949,12 @@ void COpenAsDlg::_OnOk()
 
 			if (SUCCEEDED(hr) && pShellItem)
 			{
+				// When invoking, we must clear the recently-installed list, or we will get into a
+				// restart loop as the operating system will invoke the open with UI when a new
+				// application is installed and the recently-installed list is marked. This includes
+				// programmatic use of IAssocHandler::Invoke. TWinUI also does this.
+				_ClearRecentlyInstalled();
+
 				wil::com_ptr<IDataObject> pInvocationObj = nullptr;
 				hr = pShellItem->BindToHandler(nullptr, BHID_DataObject, IID_PPV_ARGS(&pInvocationObj));
 

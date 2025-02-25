@@ -93,15 +93,22 @@ IAssocHandlerWithCompanyName : public IUnknown
 	virtual HRESULT GetCompany(LPWSTR *ppszCompanyName) = 0;
 };
 
+enum ASSOCHANDLER_PROMPTUPDATE_BEHAVIOR
+{
+     ASSOCHANDLER_PROMPTUPDATE_BEHAVIOR_CLEAR = 0x0,
+     ASSOCHANDLER_PROMPTUPDATE_BEHAVIOR_DECREMENT = 0x1,
+};
+
 MIDL_INTERFACE("2AD6D87E-5A40-400C-A06F-E25378B17013")
 IAssocHandlerPromptCount : public IUnknown
 {
-	/*
-	 * I think this is a notification prompt counter to make sure the user is
-	 * not flooded with a billion notifications for association change spam,
-	 * but I'm not entirely sure and I don't care to look into it right now.
+	/**
+	 * Updates the prompt count, which controls the OS automatically opening the
+	 * open with UI, i.e. when a new application is installed.
+	 * 
+	 * This is new behaviour as of Windows 10.
 	 */
-	virtual HRESULT UpdatePromptCount(DWORD/*ASSOCHANDLER_PROMPTUPDATE_BEHAVIOR*/) = 0;
+	virtual HRESULT UpdatePromptCount(ASSOCHANDLER_PROMPTUPDATE_BEHAVIOR) = 0;
 };
 
 MIDL_INTERFACE("571A5DB3-3B08-441F-B796-68E8164259BB")
