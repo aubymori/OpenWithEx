@@ -1,0 +1,88 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: MSBuild
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  # Path to the solution file relative to the root of the project.
+  SOLUTION_FILE_PATH: .
+
+  # Configuration type to build.
+  # You can convert this to a build matrix if you need coverage of multiple configuration types.
+  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+  BUILD_CONFIGURATION: Release
+
+permissions:
+  contents: read
+
+jobs:
+  build-x64:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'true'
+    - uses: ilammy/msvc-dev-cmd@v1.13.0
+      with:
+        arch: amd64
+    - name: Compile OpenWithEx (Release-x64)
+      run: | 
+        msbuild OpenWithEx.sln /p:Configuration=Release /p:Platform=x64
+    - name: Compile OpenWithEx (Debug-x64)
+      run: | 
+        msbuild OpenWithEx.sln /p:Configuration=Debug /p:Platform=x64
+    - name: Upload DLL (Release-x64)
+      uses: actions/upload-artifact@v4.4.0
+      with:
+        name: 
+        path: |
+          .\build\Release-x64\*.exe
+          .\build\Release-x64\*.pdb
+          .\build\Release-x64\en-US
+    - name: Upload DLL (Debug-x64)
+      uses: actions/upload-artifact@v4.4.0
+      with:
+        name: 
+        path: |
+          .\build\Debug-x64\*.exe
+          .\build\Debug-x64\*.pdb
+          .\build\Debug-x64\en-US
+  build-x32:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'true'
+    - uses: ilammy/msvc-dev-cmd@v1.13.0
+      with:
+        arch: win32
+    - name: Compile OpenWithEx (Release-Win32)
+      run: | 
+        msbuild OpenWithEx.sln /p:Configuration=Release /p:Platform=x86
+    - name: Compile OpenWithEx (Debug-Win32)
+      run: | 
+        msbuild OpenWithEx.sln /p:Configuration=Debug /p:Platform=x86
+    - name: Upload DLL (Release-Win32)
+      uses: actions/upload-artifact@v4.4.0
+      with:
+        name: 
+        path: |
+          .\build\Release-Win32\*.exe
+          .\build\Release-Win32\*.pdb
+          .\build\Release-Win32\en-US
+    - name: Upload DLL (Debug-Win32)
+      uses: actions/upload-artifact@v4.4.0
+      with:
+        name: 
+        path: |
+          .\build\Debug-Win32\*.exe
+          .\build\Debug-Win32\*.pdb
+          .\build\Debug-Win32\en-US
