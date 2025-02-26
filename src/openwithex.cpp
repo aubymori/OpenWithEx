@@ -1,6 +1,7 @@
 #include "openwithex.h"
 #include "cantopendlg.h"
 #include "vistaopenasdlg.h"
+#include "xpopenasdlg.h"
 #include "classicopenasdlg.h"
 #include "noopendlg.h"
 #include "openwithexlauncher.h"
@@ -23,10 +24,8 @@ WCHAR szPath[MAX_PATH] = { 0 };
 
 void OpenDownloadURL(LPCWSTR pszExtension)
 {
-	WCHAR szFormat[MAX_PATH] = { 0 };
 	WCHAR szUrl[MAX_PATH] = { 0 };
-	LoadStringW(g_hInst, IDS_SEARCH_FORMAT, szFormat, MAX_PATH);
-	swprintf_s(szUrl, szFormat, pszExtension + 1);
+	swprintf_s(szUrl, L"http://go.microsoft.com/fwlink/?LinkId=57426&Ext=%s", pszExtension + 1);
 	ShellExecuteW(
 		NULL,
 		L"open",
@@ -74,7 +73,8 @@ void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FL
 
 		/* The Can't open dialog is only shown on files with an extension
 		   that is not already registered. */
-		if (!fPreregistered && !SHRestricted(REST_NOINTERNETOPENWITH)
+		if ((g_style == OWXS_VISTA || g_style == OWXS_XP)
+		&& !fPreregistered && !SHRestricted(REST_NOINTERNETOPENWITH)
 			&& pszExtension && *pszExtension)
 		{
 			CCantOpenDlg coDlg(lpszPath);
@@ -98,6 +98,10 @@ void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FL
 			pDialog = new CVistaOpenAsDlg(lpszPath, flags, fUri, fPreregistered);
 			break;
 		case OWXS_XP:
+			pDialog = new CXPOpenAsDlg(lpszPath, flags, fUri, fPreregistered);
+			break;
+		case OWXS_2K:
+		case OWXS_NT4:
 			pDialog = new CClassicOpenAsDlg(lpszPath, flags, fUri, fPreregistered);
 			break;
 	}

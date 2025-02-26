@@ -2,141 +2,163 @@
 
 void CClassicOpenAsDlg::_InitProgList()
 {
+	LVCOLUMNW col = { 0 };
+	col.mask = LVCF_SUBITEM | LVCF_WIDTH;
+	col.iSubItem = 0;
+
+	HWND hwndProgList = GetDlgItem(m_hWnd, IDD_OPENWITH_PROGLIST);
+	RECT rc;
+	GetClientRect(hwndProgList, &rc);
+	col.cx = rc.right - GetSystemMetrics(SM_CXVSCROLL) - 4 * GetSystemMetrics(SM_CXEDGE);
+
+	SendDlgItemMessageW(
+		m_hWnd, IDD_OPENWITH_PROGLIST,
+		LVM_INSERTCOLUMNW, NULL,
+		(LPARAM)&col
+	);
+
 	HIMAGELIST himl = NULL;
-	Shell_GetImageLists(nullptr, &himl);
+	HIMAGELIST himlSmall = NULL;
+	Shell_GetImageLists(&himl, &himlSmall);
 	SendDlgItemMessageW(
 		m_hWnd,
 		IDD_OPENWITH_PROGLIST,
-		TVM_SETIMAGELIST,
-		TVSIL_NORMAL,
+		LVM_SETIMAGELIST,
+		LVSIL_NORMAL,
 		(LPARAM)himl
 	);
 	SendDlgItemMessageW(
 		m_hWnd,
 		IDD_OPENWITH_PROGLIST,
-		TVM_SETIMAGELIST,
-		TVSIL_STATE,
-		(LPARAM)himl
+		LVM_SETIMAGELIST,
+		LVSIL_SMALL,
+		(LPARAM)himlSmall
 	);
+
+	WCHAR szFormat[200];
+	WCHAR szTemp[MAX_PATH + 200];
+	GetDlgItemTextW(m_hWnd, IDD_OPENWITH_TEXT, szFormat, 200);
+	swprintf_s(szTemp, szFormat, m_fUri ? m_szPath : m_pszFileName);
+	SetDlgItemTextW(m_hWnd, IDD_OPENWITH_TEXT, szTemp);
+
+	GetDlgItemTextW(m_hWnd, IDD_OPENWITH_EXT, szFormat, 200);
+	swprintf_s(szTemp, szFormat, m_szExtOrProtocol);
+	SetDlgItemTextW(m_hWnd, IDD_OPENWITH_EXT, szTemp);
 }
 
 wil::com_ptr<IAssocHandler> CClassicOpenAsDlg::_GetSelectedItem()
 {
-	HTREEITEM hSelected = (HTREEITEM)SendDlgItemMessageW(
+	int index = SendDlgItemMessageW(
 		m_hWnd, IDD_OPENWITH_PROGLIST,
-		TVM_GETNEXTITEM, TVGN_CARET,
-		NULL
+		LVM_GETNEXTITEM, -1, LVNI_SELECTED
 	);
-	if (!hSelected)
+
+	if (index == -1)
 		return nullptr;
 
-	TVITEMW tvi = { 0 };
-	tvi.mask = TVIF_PARAM | TVIF_HANDLE;
-	tvi.hItem = hSelected;
+	LVITEMW lvi = { 0 };
+	lvi.iItem = index;
+	lvi.mask = LVIF_PARAM;
 
 	SendDlgItemMessageW(
 		m_hWnd, IDD_OPENWITH_PROGLIST,
-		TVM_GETITEM, NULL,
-		(LPARAM)&tvi
+		LVM_GETITEMW, NULL,
+		(LPARAM)&lvi
 	);
 
-	return (IAssocHandler *)tvi.lParam;
+	return (IAssocHandler *)lvi.lParam;
 }
 
 void CClassicOpenAsDlg::_SelectItemByIndex(int index)
 {
-	HTREEITEM hItem = m_treeItems.at(index);
-	if (hItem)
+	LVITEMW lvi = { 0 };
+	lvi.iItem = index;
+	lvi.mask = LVIF_STATE;
+	lvi.stateMask = LVIS_SELECTED;
+	lvi.state = LVIS_SELECTED;
+
+	SetFocus(GetDlgItem(m_hWnd, IDD_OPENWITH_PROGLIST));
+	SendDlgItemMessageW(
+		m_hWnd, IDD_OPENWITH_PROGLIST,
+		LVM_SETITEMW, NULL,
+		(LPARAM)&lvi
+	);
+
+	wil::com_ptr<IAssocHandler> pHandler = m_handlers.at(index);
+	if (pHandler)
 	{
-		SetFocus(GetDlgItem(m_hWnd, IDD_OPENWITH_PROGLIST));
+		LVGROUP lvg = { sizeof(LVGROUP) };
+		lvg.mask = LVGF_STATE;
+		lvg.stateMask = LVGS_COLLAPSED;
+
 		SendDlgItemMessageW(
 			m_hWnd, IDD_OPENWITH_PROGLIST,
-			TVM_SELECTITEM, TVGN_CARET,
-			(LPARAM)hItem
+			LVM_SETGROUPINFO,
+			(S_OK == pHandler->IsRecommended()) ? I_RECOMMENDED : I_OTHER,
+			(LPARAM)&lvg
 		);
 	}
+
+	SendDlgItemMessageW(
+		m_hWnd, IDD_OPENWITH_PROGLIST,
+		LVM_ENSUREVISIBLE, index,
+		TRUE
+	);
 }
 
 void CClassicOpenAsDlg::_SetupCategories()
 {
-	TVITEMW recommended = { 0 };
-	recommended.mask = TVIF_IMAGE | TVIF_SELECTEDIMAGE | TVIF_TEXT | TVIF_STATE;
-	recommended.iImage = Shell_GetCachedImageIndexW(L"shell32.dll", 19, NULL);
-	recommended.iSelectedImage = recommended.iImage;
-	recommended.state = TVIS_EXPANDED;
-	recommended.stateMask = TVIS_EXPANDED;
-	WCHAR szRecommended[MAX_PATH] = { 0 };
-	LoadStringW(g_hInst, IDS_RECOMMENDED_XP, szRecommended, MAX_PATH);
-	recommended.pszText = szRecommended;
-	recommended.cchTextMax = MAX_PATH;
 
-	TVINSERTSTRUCTW insert = { 0 };
-	insert.item = recommended;
-
-	m_hRecommended = (HTREEITEM)SendDlgItemMessageW(
-		m_hWnd,
-		IDD_OPENWITH_PROGLIST,
-		TVM_INSERTITEMW,
-		NULL,
-		(LPARAM)&insert
-	);
-
-	TVITEMW other = recommended;
-	WCHAR szOther[MAX_PATH] = { 0 };
-	LoadStringW(g_hInst, IDS_OTHER_XP, szOther, MAX_PATH);
-	other.pszText = szOther;
-	insert.item = other;
-	m_hOther = (HTREEITEM)SendDlgItemMessageW(
-		m_hWnd,
-		IDD_OPENWITH_PROGLIST,
-		TVM_INSERTITEMW,
-		NULL,
-		(LPARAM)&insert
-	);
 }
 
 void CClassicOpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool fForceSelect)
 {
-	TVITEMW tvi = { 0 };
+	LVITEMW lvi = { 0 };
 	wil::unique_cotaskmem_string pszDisplayName;
-	tvi.mask = TVIF_TEXT | TVIF_PARAM | TVIF_IMAGE | TVIF_SELECTEDIMAGE;
+	lvi.mask = LVIF_TEXT | LVIF_PARAM | LVIF_IMAGE;
+	lvi.iItem = index;
 	pItem->GetUIName(&pszDisplayName);
-	tvi.pszText = pszDisplayName.get();
-	tvi.cchTextMax = MAX_PATH;
+	lvi.pszText = pszDisplayName.get();
+	lvi.cchTextMax = wcslen(lvi.pszText) + 1;
 
-	tvi.lParam = (LPARAM)pItem.get();
+	// This is somewhat unsafe, but we're expecting that the item doesn't get
+	// unallocated before the list view item is destroyed.
+	lvi.lParam = (LPARAM)pItem.get();
 
-	LPWSTR pszPath = nullptr;
+	if (index == 0 || fForceSelect)
+	{
+		lvi.mask |= LVIF_STATE;
+		lvi.stateMask = LVIS_SELECTED;
+		lvi.state = LVIS_SELECTED;
+	}
+
+	wil::unique_cotaskmem_string pszIconPath = nullptr;
 	int iIndex = 0;
 	pItem->GetIconLocation(
-		&pszPath,
+		&pszIconPath,
 		&iIndex
 	);
 
-	tvi.iImage = GetAppIconIndex(
-		pszPath, iIndex
+	lvi.iImage = GetAppIconIndex(
+		pszIconPath.get(), iIndex
 	);
-	tvi.iSelectedImage = tvi.iImage;
 
-	TVINSERTSTRUCTW insert = { 0 };
-	insert.item = tvi;
-	insert.hInsertAfter = TVI_LAST;
-	if (m_fRecommended)
-	{
-		insert.hParent = (S_OK == pItem->IsRecommended()) ? m_hRecommended : m_hOther;
-	}
-
-	m_treeItems.push_back((HTREEITEM)SendDlgItemMessageW(
+	SendDlgItemMessageW(
 		m_hWnd,
 		IDD_OPENWITH_PROGLIST,
-		TVM_INSERTITEMW,
+		LVM_INSERTITEMW,
 		NULL,
-		(LPARAM)&insert
-	));
+		(LPARAM)&lvi
+	);
 }
 
 CClassicOpenAsDlg::CClassicOpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool fUri, bool fPreregistered)
-	: CBaseOpenAsDlg(lpszPath, flags, fUri, fPreregistered, IDD_OPENWITH_XP, IDD_OPENWITH_WITHDESC_XP, IDD_OPENWITH_PROTOCOL_XP, IDS_BROWSETITLE_XP)
+	: CBaseOpenAsDlg(
+		lpszPath, flags, fUri, fPreregistered,
+		(g_style == OWXS_NT4) ? IDD_OPENWITH_NT4 : IDD_OPENWITH_2K,
+		(g_style == OWXS_NT4) ? IDD_OPENWITH_WITHDESC_NT4 : IDD_OPENWITH_WITHDESC_2K,
+		(g_style == OWXS_NT4) ? IDD_OPENWITH_PROTOCOL_NT4 : IDD_OPENWITH_PROTOCOL_2K,
+		IDS_BROWSETITLE_XP)
 {
 
 }

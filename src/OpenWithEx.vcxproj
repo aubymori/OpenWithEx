@@ -248,6 +248,7 @@ link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOut
   <ItemGroup>
     <ClCompile Include="assocuserchoice.cpp" />
     <ClCompile Include="cantopendlg.cpp" />
+    <ClCompile Include="classicopenasdlg.cpp" />
     <ClCompile Include="impdialog.cpp" />
     <ClCompile Include="noopendlg.cpp" />
     <ClCompile Include="baseopenasdlg.cpp" />
@@ -258,7 +259,7 @@ link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOut
     <ClCompile Include="shellprotectedreglock.cpp" />
     <ClCompile Include="util.cpp" />
     <ClCompile Include="vistaopenasdlg.cpp" />
-    <ClCompile Include="classicopenasdlg.cpp" />
+    <ClCompile Include="xpopenasdlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="openwithex.en-US.rc">
@@ -272,6 +273,7 @@ link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOut
   <ItemGroup>
     <ClInclude Include="assocuserchoice.h" />
     <ClInclude Include="cantopendlg.h" />
+    <ClInclude Include="classicopenasdlg.h" />
     <ClInclude Include="iassochandler_internal.h" />
     <ClInclude Include="iassociationelement.h" />
     <ClInclude Include="impdialog.h" />
@@ -319,7 +321,7 @@ link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOut
     <ClInclude Include="wil\wistd_memory.h" />
     <ClInclude Include="wil\wistd_type_traits.h" />
     <ClInclude Include="wil\wrl.h" />
-    <ClInclude Include="classicopenasdlg.h" />
+    <ClInclude Include="xpopenasdlg.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="muiconfig.xml" />

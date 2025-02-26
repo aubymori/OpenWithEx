@@ -18,11 +18,7 @@ class CBaseOpenAsDlg : public CImpDialog
 {
 private:
 	UINT   m_uBrowseTitleId;
-	WCHAR  m_szPath[MAX_PATH];
-	LPWSTR m_pszFileName;
-	WCHAR  m_szExtOrProtocol[MAX_PATH];
 	IMMERSIVE_OPENWITH_FLAGS m_flags;
-	bool   m_fUri;
 	bool   m_fPreregistered;
 
 	INT_PTR CALLBACK v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -34,8 +30,12 @@ private:
 	void _OnOk();
 
 protected:
+	WCHAR  m_szExtOrProtocol[MAX_PATH];
+	WCHAR  m_szPath[MAX_PATH];
+	LPWSTR m_pszFileName;
+	bool   m_fUri;
 	std::vector<wil::com_ptr<IAssocHandler>> m_handlers;
-	bool m_fRecommended;
+	bool   m_fRecommended;
 
 	virtual void _InitProgList() = 0;
 	virtual wil::com_ptr<IAssocHandler> _GetSelectedItem() = 0;
