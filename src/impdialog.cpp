@@ -20,6 +20,24 @@ INT_PTR CALLBACK CImpDialog::s_DlgProc(
 			);
 		}
 	}
+	// For some reason, initializing through the server doesn't activate the window.
+	// Let's activate it manually when it's shown.
+	else if (uMsg == WM_WINDOWPOSCHANGED)
+	{	
+		CImpDialog *pThis = (CImpDialog *)GetWindowLongPtrW(hWnd, GWLP_USERDATA);
+		if (pThis && ((LPWINDOWPOS)lParam)->flags & SWP_SHOWWINDOW && !pThis->m_fShown)
+		{
+			pThis->m_fShown = true;
+			SetForegroundWindow(hWnd);
+			if (GetForegroundWindow() != hWnd)
+			{
+				SwitchToThisWindow(hWnd, TRUE);
+				Sleep(2);
+				SetForegroundWindow(hWnd);
+			}
+			SetActiveWindow(hWnd);
+		}
+	}
 
 	CImpDialog *pThis = (CImpDialog *)GetWindowLongPtrW(hWnd, GWLP_USERDATA);
 	if (pThis)

@@ -11,6 +11,7 @@ protected:
 	HWND m_hWnd;
 	HINSTANCE m_hInst;
 	UINT m_uDlgId;
+	bool m_fShown;
 
 	virtual INT_PTR CALLBACK v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) = 0;
 

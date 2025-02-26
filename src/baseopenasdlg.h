@@ -20,7 +20,6 @@ private:
 	UINT   m_uBrowseTitleId;
 	IMMERSIVE_OPENWITH_FLAGS m_flags;
 	bool   m_fPreregistered;
-	bool   m_fShown;
 
 	INT_PTR CALLBACK v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	int _FindItemIndex(LPCWSTR lpszPath);
