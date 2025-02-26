@@ -1,6 +1,7 @@
 !include MUI2.nsh
 !include LogicLib.nsh
 !include x64.nsh
+!include WinVer.nsh
 
 # The install path is hardcoded.
 # We need both a x64 and x86 OpenWith.exe and putting both
@@ -10,6 +11,7 @@
 Name "OpenWithEx"
 Outfile "build\OpenWithEx-setup-x64.exe"
 RequestExecutionLevel admin
+ManifestSupportedOS all
 
 !define MUI_ICON "installer.ico"
 !define MUI_UNICON "installer.ico"
@@ -36,16 +38,24 @@ RequestExecutionLevel admin
 
 !insertmacro MUI_LANGUAGE "English"
 
-Section "OpenWithEx" OpenWithEx
-    # Required
-    SectionIn RO
-
+Function .onInit
     # NSIS produces an x86-32 installer. Deny installation if
     # we're not on a x86-64 system running WOW64.
     ${IfNot} ${RunningX64}
         MessageBox MB_OK|MB_ICONSTOP "OpenWithEx does not support 32-bit systems."
         Quit
     ${EndIf}
+    
+    # Need at least Windows 8.
+    ${IfNot} ${AtLeastWin8}
+        MessageBox MB_OK|MB_ICONSTOP "OpenWithEx requires Windows 8 or greater."
+        Quit
+    ${EndIf}
+FunctionEnd
+
+Section "OpenWithEx" OpenWithEx
+    # Required
+    SectionIn RO
 
     # Make sure install directories are clean
     RMDir /r "$PROGRAMFILES64\OpenWithEx"
