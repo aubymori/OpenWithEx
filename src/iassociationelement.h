@@ -21,10 +21,10 @@ MIDL_INTERFACE("D8F6AD5B-B44F-4BCC-88FD-EB3473DB7502")
 IAssociationElement : IUnknown
 {
 public:
-	virtual HRESULT QueryString(ASSOCQUERY flags, PCWSTR lpValueName, PWSTR *ppszOut) = 0;
-	virtual HRESULT QueryDword(ASSOCQUERY flags, PCWSTR lpValueName, DWORD *pdwOut) = 0;
-	virtual HRESULT QueryExists(ASSOCQUERY flags, PCWSTR lpValueName) = 0;
-	virtual HRESULT QueryDirect(ASSOCQUERY flags, PCWSTR lpValueName, FLAGGED_BYTE_BLOB **) = 0;
-	virtual HRESULT QueryObject(ASSOCQUERY flags, PCWSTR lpValueName, REFIID riid, void **ppvObject) = 0;
-	virtual HRESULT QueryGuid(ASSOCQUERY flags, PCWSTR lpValueName, GUID *pGuidOut) = 0;
+	STDMETHOD(QueryString)(ASSOCQUERY flags, PCWSTR lpValueName, PWSTR *ppszOut) PURE;
+	STDMETHOD(QueryDword)(ASSOCQUERY flags, PCWSTR lpValueName, DWORD *pdwOut) PURE;
+	STDMETHOD(QueryExists)(ASSOCQUERY flags, PCWSTR lpValueName) PURE;
+	STDMETHOD(QueryDirect)(ASSOCQUERY flags, PCWSTR lpValueName, FLAGGED_BYTE_BLOB **) PURE;
+	STDMETHOD(QueryObject)(ASSOCQUERY flags, PCWSTR lpValueName, REFIID riid, void **ppvObject) PURE;
+	STDMETHOD(QueryGuid)(ASSOCQUERY flags, PCWSTR lpValueName, GUID *pGuidOut) PURE;
 };

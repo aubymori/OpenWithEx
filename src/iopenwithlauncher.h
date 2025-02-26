@@ -7,5 +7,5 @@ MIDL_INTERFACE("6A283FE2-ECFA-4599-91C4-E80957137B26")
 IOpenWithLauncher : public IUnknown
 {
 public:
-	virtual HRESULT Launch(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags) = 0;
+	STDMETHOD(Launch)(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags) PURE;
 };

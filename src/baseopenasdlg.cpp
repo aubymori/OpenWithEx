@@ -437,7 +437,7 @@ void CBaseOpenAsDlg::_OnOk()
 					// If our association handler already supports ProgIDs, then we'll
 					// just retrieve that ProgID.
 					pAssocInfo->GetInternalProgID(
-						ASSOC_PROGID_FORMAT::APF_DEFAULT,
+						APF_DEFAULT,
 						&lpszProgId
 					);
 				}
@@ -447,7 +447,7 @@ void CBaseOpenAsDlg::_OnOk()
 					// to tell the system to make one. The following is what TWinUI does,
 					// although I'm not sure the significance of APF_APPLICATION here.
 					pAssocInfo->GetInternalProgID(
-						ASSOC_PROGID_FORMAT::APF_APPLICATION,
+						APF_APPLICATION,
 						&lpszProgId
 					);
 

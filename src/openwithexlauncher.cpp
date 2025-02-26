@@ -52,7 +52,7 @@ void COpenWithExLauncher::Log(const wchar_t *szMethodName, const wchar_t *format
         fFailedToFind = false;                             \
 	}
 
-HRESULT COpenWithExLauncher::QueryInterface(REFIID riid, LPVOID *ppvObj)
+STDMETHODIMP COpenWithExLauncher::QueryInterface(REFIID riid, LPVOID *ppvObj)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::QueryInterface");
 	HRESULT hr = E_NOINTERFACE;
@@ -113,7 +113,7 @@ HRESULT COpenWithExLauncher::QueryInterface(REFIID riid, LPVOID *ppvObj)
 }
 
 
-ULONG COpenWithExLauncher::AddRef()
+STDMETHODIMP_(ULONG) COpenWithExLauncher::AddRef()
 {
 	DebugSetMethodName(L"COpenWithExLauncher::AddRef");
 
@@ -124,7 +124,7 @@ ULONG COpenWithExLauncher::AddRef()
 	return rv;
 }
 
-ULONG COpenWithExLauncher::Release()
+STDMETHODIMP_(ULONG) COpenWithExLauncher::Release()
 {
 	DebugSetMethodName(L"COpenWithExLauncher::Release");
 
@@ -146,7 +146,7 @@ ULONG COpenWithExLauncher::Release()
 #pragma endregion // "IUnknown"
 
 #pragma region "IExecuteCommandApplicationHostEnvironment"
-HRESULT COpenWithExLauncher::GetValue(AHE_TYPE *pahe)
+STDMETHODIMP COpenWithExLauncher::GetValue(AHE_TYPE *pahe)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::GetValue");
 
@@ -170,7 +170,7 @@ HRESULT COpenWithExLauncher::GetValue(AHE_TYPE *pahe)
 #pragma endregion // "IExecuteCommandApplicationHostEnvironment"
 
 #pragma region "IServiceProvider"
-HRESULT COpenWithExLauncher::QueryService(REFGUID guidService, REFIID riid, void **ppvObject)
+STDMETHODIMP COpenWithExLauncher::QueryService(REFGUID guidService, REFIID riid, void **ppvObject)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::QueryService");
 
@@ -193,7 +193,7 @@ HRESULT COpenWithExLauncher::QueryService(REFGUID guidService, REFIID riid, void
 #pragma endregion // "IServiceProvider"
 
 #pragma region "IObjectWithSite"
-HRESULT COpenWithExLauncher::GetSite(REFIID riid, void **ppvObject)
+STDMETHODIMP COpenWithExLauncher::GetSite(REFIID riid, void **ppvObject)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::GetSite");
 
@@ -209,7 +209,7 @@ HRESULT COpenWithExLauncher::GetSite(REFIID riid, void **ppvObject)
 	}
 }
 
-HRESULT COpenWithExLauncher::SetSite(IUnknown *pUnkSite)
+STDMETHODIMP COpenWithExLauncher::SetSite(IUnknown *pUnkSite)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::SetSite");
 
@@ -221,7 +221,7 @@ HRESULT COpenWithExLauncher::SetSite(IUnknown *pUnkSite)
 #pragma endregion // "IObjectWithSite"
 
 #pragma region "IObjectWithAssociationElement"
-HRESULT COpenWithExLauncher::SetAssocElement(IAssociationElement *pae)
+STDMETHODIMP COpenWithExLauncher::SetAssocElement(IAssociationElement *pae)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::SetAssocElement");
 
@@ -231,7 +231,7 @@ HRESULT COpenWithExLauncher::SetAssocElement(IAssociationElement *pae)
 	return S_OK;
 }
 
-HRESULT COpenWithExLauncher::GetAssocElement(REFIID riid, void **ppv)
+STDMETHODIMP COpenWithExLauncher::GetAssocElement(REFIID riid, void **ppv)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::GetAssocElement");
 
@@ -248,7 +248,7 @@ HRESULT COpenWithExLauncher::GetAssocElement(REFIID riid, void **ppv)
 #pragma endregion // "IObjectWithAssociationElement"
 
 #pragma region "IObjectWithSelection"
-HRESULT COpenWithExLauncher::GetSelection(REFIID riid, void **ppv)
+STDMETHODIMP COpenWithExLauncher::GetSelection(REFIID riid, void **ppv)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::GetSelection");
 
@@ -263,7 +263,7 @@ HRESULT COpenWithExLauncher::GetSelection(REFIID riid, void **ppv)
 	}
 }
 
-HRESULT COpenWithExLauncher::SetSelection(IShellItemArray *psia)
+STDMETHODIMP COpenWithExLauncher::SetSelection(IShellItemArray *psia)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::SetSelection");
 
@@ -275,7 +275,7 @@ HRESULT COpenWithExLauncher::SetSelection(IShellItemArray *psia)
 #pragma endregion // "IObjectWithSelection"
 
 #pragma region "IInitializeCommand"
-HRESULT COpenWithExLauncher::Initialize(LPCWSTR pszCommandName, IPropertyBag *ppb)
+STDMETHODIMP COpenWithExLauncher::Initialize(LPCWSTR pszCommandName, IPropertyBag *ppb)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::Initialize");
 
@@ -286,7 +286,7 @@ HRESULT COpenWithExLauncher::Initialize(LPCWSTR pszCommandName, IPropertyBag *pp
 #pragma endregion // "IInitializeCommand"
 
 #pragma region "IExecuteCommand"
-HRESULT COpenWithExLauncher::SetKeyState(DWORD grfKeyState)
+STDMETHODIMP COpenWithExLauncher::SetKeyState(DWORD grfKeyState)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::SetKeyState");
 
@@ -297,7 +297,7 @@ HRESULT COpenWithExLauncher::SetKeyState(DWORD grfKeyState)
 	return S_OK;
 }
 
-HRESULT COpenWithExLauncher::SetParameters(__RPC__in_string LPCWSTR pszParameters)
+STDMETHODIMP COpenWithExLauncher::SetParameters(__RPC__in_string LPCWSTR pszParameters)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::SetParameters");
 
@@ -308,7 +308,7 @@ HRESULT COpenWithExLauncher::SetParameters(__RPC__in_string LPCWSTR pszParameter
 	return S_OK;
 }
 
-HRESULT COpenWithExLauncher::SetPosition(POINT pt)
+STDMETHODIMP COpenWithExLauncher::SetPosition(POINT pt)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::SetPosition");
 
@@ -319,7 +319,7 @@ HRESULT COpenWithExLauncher::SetPosition(POINT pt)
 	return S_OK;
 }
 
-HRESULT COpenWithExLauncher::SetShowWindow(int nShow)
+STDMETHODIMP COpenWithExLauncher::SetShowWindow(int nShow)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::SetShowWindow");
 
@@ -330,7 +330,7 @@ HRESULT COpenWithExLauncher::SetShowWindow(int nShow)
 	return S_OK;
 }
 
-HRESULT COpenWithExLauncher::SetNoShowUI(BOOL fNoShowUI)
+STDMETHODIMP COpenWithExLauncher::SetNoShowUI(BOOL fNoShowUI)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::SetNoShowUI");
 
@@ -341,7 +341,7 @@ HRESULT COpenWithExLauncher::SetNoShowUI(BOOL fNoShowUI)
 	return S_OK;
 }
 
-HRESULT COpenWithExLauncher::SetDirectory(__RPC__in_string LPCWSTR pszDirectory)
+STDMETHODIMP COpenWithExLauncher::SetDirectory(__RPC__in_string LPCWSTR pszDirectory)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::SetDirectory");
 
@@ -352,7 +352,7 @@ HRESULT COpenWithExLauncher::SetDirectory(__RPC__in_string LPCWSTR pszDirectory)
 	return S_OK;
 }
 
-HRESULT COpenWithExLauncher::Execute()
+STDMETHODIMP COpenWithExLauncher::Execute()
 {
 	DebugSetMethodName(L"COpenWithExLauncher::Execute");
 
@@ -418,7 +418,7 @@ HRESULT COpenWithExLauncher::Execute()
 #pragma endregion
 
 #pragma region "IOpenWithLauncher"
-HRESULT COpenWithExLauncher::Launch(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags)
+STDMETHODIMP COpenWithExLauncher::Launch(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags)
 {
 	debuglog(
 		L"[COpenWithExLauncher] IOpenWithLauncher::Launch info:\n"
@@ -432,7 +432,7 @@ HRESULT COpenWithExLauncher::Launch(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE
 #pragma endregion // "IOpenWithLauncher"
 
 #pragma region "IClassFactory"
-HRESULT COpenWithExLauncher::CreateInstance(IUnknown *pUnkOuter, REFIID riid, void **ppvObject)
+STDMETHODIMP COpenWithExLauncher::CreateInstance(IUnknown *pUnkOuter, REFIID riid, void **ppvObject)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::CreateInstance");
 
@@ -458,7 +458,7 @@ HRESULT COpenWithExLauncher::CreateInstance(IUnknown *pUnkOuter, REFIID riid, vo
 	return S_OK;
 }
 
-HRESULT COpenWithExLauncher::LockServer(BOOL fLock)
+STDMETHODIMP COpenWithExLauncher::LockServer(BOOL fLock)
 {
 	DebugSetMethodName(L"COpenWithExLauncher::LockServer");
 

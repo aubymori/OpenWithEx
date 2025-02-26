@@ -9,6 +9,6 @@ MIDL_INTERFACE("E157C3A1-A532-4DE2-9480-1452B7426EEE")
 IObjectWithAssociationElement : IUnknown
 {
 public:
-	virtual HRESULT SetAssocElement(IAssociationElement *pae) = 0;
-	virtual HRESULT GetAssocElement(REFIID riid, void **ppv) = 0;
+	STDMETHOD(SetAssocElement)(IAssociationElement *pae) PURE;
+	STDMETHOD(GetAssocElement)(REFIID riid, void **ppv) PURE;
 };

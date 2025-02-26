@@ -21,29 +21,11 @@
 /**
  * Format for IAssocHandlerInfo::GetInternalProgID.
  */
-enum class ASSOC_PROGID_FORMAT : int
+enum ASSOC_PROGID_FORMAT
 {
 	APF_DEFAULT = 0,
 	APF_APPLICATION = 1,
 };
-
-///**
-// * These are internal flags returned by IAssocHandlerInfo::GetFlags.
-// * 
-// * Names are taken from:
-// * https://github.com/marlersoft/cwin32/blob/c0dbf4dbe4867bd197ea499f4770d4c10893448e/include/ui/shell.h#L3506-L3515
-// */
-//enum class AHTYPE : int
-//{
-//	UNDEFINED = 0x0,
-//	USER_APPLICATION = 0x8,
-//	ANY_APPLICATION = 0x10,
-//	MACHINE_DEFAULT = 0x20,
-//	PROGID = 0x40,
-//	APPLICATION = 0x80,
-//	CLASS_APPLICATION = 0x100,
-//	ANY_PROGID = 0x200,
-//};
 
 MIDL_INTERFACE("D5C0CDAC-7A15-4F0A-87BA-2E7AAF19E0EC")
 IAssocHandlerInfo : public IUnknown
@@ -53,7 +35,7 @@ IAssocHandlerInfo : public IUnknown
 	 * 
 	 * This is used to highlight newly-installed applications in the GUI.
 	 */
-	virtual bool IsRecentlyInstalled() = 0;
+	STDMETHOD_(bool, IsRecentlyInstalled)() PURE;
 
 	/**
 	 * Get the internal ProgID of the handler.
@@ -62,14 +44,14 @@ IAssocHandlerInfo : public IUnknown
 	 * a generated ProgID from the application path if no ProgID exists for the
 	 * handler.
 	 */
-	virtual HRESULT GetInternalProgID(ASSOC_PROGID_FORMAT fmt, LPWSTR *ppszProgId) = 0;
+	STDMETHOD(GetInternalProgID)(ASSOC_PROGID_FORMAT fmt, LPWSTR *ppszProgId) PURE;
 
 	/**
 	 * Gets the type of the association handler.
 	 * 
 	 * @see {@link AHTYPE}
 	 */
-	virtual HRESULT GetHandlerType(AHTYPE *pAssociationTypeOut) = 0;
+	STDMETHOD(GetHandlerType)(AHTYPE *pAssociationTypeOut) PURE;
 };
 
 MIDL_INTERFACE("E1B15A0F-2139-44F2-8C6C-3D2CA890F9D9")
@@ -90,7 +72,7 @@ IAssocHandlerWithCompanyName : public IUnknown
 	 * The above usage is the only usage of this function by the entire OS, so
 	 * assumedly TWinUI gets the company name in a different way.
 	 */
-	virtual HRESULT GetCompany(LPWSTR *ppszCompanyName) = 0;
+	STDMETHOD(GetCompany)(LPWSTR *ppszCompanyName) PURE;
 };
 
 enum ASSOCHANDLER_PROMPTUPDATE_BEHAVIOR
@@ -108,7 +90,7 @@ IAssocHandlerPromptCount : public IUnknown
 	 * 
 	 * This is new behaviour as of Windows 10.
 	 */
-	virtual HRESULT UpdatePromptCount(ASSOCHANDLER_PROMPTUPDATE_BEHAVIOR) = 0;
+	STDMETHOD(UpdatePromptCount)(ASSOCHANDLER_PROMPTUPDATE_BEHAVIOR) PURE;
 };
 
 MIDL_INTERFACE("571A5DB3-3B08-441F-B796-68E8164259BB")
@@ -117,7 +99,7 @@ IAssocHandlerMakeDefault : public IUnknown
 	/**
 	 * This method was removed at some point.
 	 */
-	virtual HRESULT placeholder0(void *) = 0;
+	STDMETHOD(placeholder0)(void *) PURE;
 	
 	/*
 	 * Tries to register the application association.
@@ -152,5 +134,5 @@ IAssocHandlerMakeDefault : public IUnknown
 	 * Obviously, it is not used when some sort of registration already exists,
 	 * such as a ProgID.
 	 */
-	virtual HRESULT TryRegisterApplicationAssoc() = 0;
+	STDMETHOD(TryRegisterApplicationAssoc)() PURE;
 };

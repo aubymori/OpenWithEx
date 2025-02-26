@@ -7,5 +7,5 @@ MIDL_INTERFACE("9D923EDC-B7A9-4F77-9933-284E7E2B2536")
 IObjectWithOpenWithFlags : IUnknown
 {
 public:
-	virtual HRESULT get_Flags(IMMERSIVE_OPENWITH_FLAGS *out) = 0;
+	STDMETHOD(get_Flags)(IMMERSIVE_OPENWITH_FLAGS *out) PURE;
 };
