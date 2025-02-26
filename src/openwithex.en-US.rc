@@ -4,7 +4,7 @@ STRINGTABLE
 {
 	IDS_ERR_EMBEDDING  "Operation not supported"
 	IDS_ERR_NOPATH     "No path specified"
-	IDS_ERR_UNDOC      "A required undocument function could not be found."
+	IDS_ERR_UNDOC      "A required undocumented function could not be found."
 	IDS_RECOMMENDED    "Recommended Programs"
 	IDS_OTHER          "Other Programs"
 	IDS_RECOMMENDED_XP "Recommended Programs:"
