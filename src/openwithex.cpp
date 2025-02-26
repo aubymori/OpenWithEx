@@ -1,6 +1,7 @@
 #include "openwithex.h"
 #include "cantopendlg.h"
-#include "openasdlg.h"
+#include "vistaopenasdlg.h"
+#include "xpopenasdlg.h"
 #include "noopendlg.h"
 #include "openwithexlauncher.h"
 #include "assocuserchoice.h"
@@ -11,8 +12,9 @@
 #include "wil/resource.h"
 #include "wil/registry.h"
 
-HMODULE g_hInst     = nullptr;
-HMODULE g_hShell32  = nullptr;
+HMODULE         g_hInst     = nullptr;
+HMODULE         g_hShell32  = nullptr;
+OPENWITHEXSTYLE g_style     = OWXS_VISTA;
 
 SHCreateAssocHandler_t SHCreateAssocHandler = nullptr;
 IsBlockedFromOpenWithBrowse_t IsBlockedFromOpenWithBrowse = nullptr;
@@ -89,8 +91,18 @@ void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FL
 		}
 	}
 
-	COpenAsDlg oaDialog(lpszPath, flags, fUri, fPreregistered);
-	oaDialog.ShowDialog(hWndParent);
+	CBaseOpenAsDlg *pDialog = nullptr;
+	switch (g_style)
+	{
+		case OWXS_VISTA:
+			pDialog = new CVistaOpenAsDlg(lpszPath, flags, fUri, fPreregistered);
+			break;
+		case OWXS_XP:
+			pDialog = new CXPOpenAsDlg(lpszPath, flags, fUri, fPreregistered);
+			break;
+	}
+	pDialog->ShowDialog(hWndParent);
+	delete pDialog;
 }
 
 int WINAPI wWinMain(
@@ -112,6 +124,18 @@ int WINAPI wWinMain(
 	g_hInst = hInstance;
 
 	(void)CoInitialize(nullptr);
+
+	/* Read user style option */
+	wil::unique_hkey hk;
+	RegOpenKeyExW(HKEY_CURRENT_USER, L"SOFTWARE\\OpenWithEx", NULL, KEY_READ, &hk);
+	if (hk.get())
+	{
+		DWORD dwValue = 0;
+		DWORD dwSize = sizeof(DWORD);
+		RegQueryValueExW(hk.get(), L"Style", nullptr, nullptr, (LPBYTE)&dwValue, &dwSize);
+		if (dwValue < OWXS_LAST)
+			g_style = (OPENWITHEXSTYLE)dwValue;
+	}
 
 	/* Load undocumented shell32 functions */
 	g_hShell32 = GetModuleHandleW(L"shell32.dll");

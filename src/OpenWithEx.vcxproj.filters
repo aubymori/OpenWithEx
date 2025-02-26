@@ -30,7 +30,7 @@
     <ClCompile Include="cantopendlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="openasdlg.cpp">
+    <ClCompile Include="baseopenasdlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="util.cpp">
@@ -54,6 +54,12 @@
     <ClCompile Include="openwithexlauncher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="vistaopenasdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xpopenasdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="openwithex.rc">
@@ -73,7 +79,7 @@
     <ClInclude Include="cantopendlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="openasdlg.h">
+    <ClInclude Include="baseopenasdlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="util.h">
@@ -206,6 +212,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="iobjectwithopenwithflags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vistaopenasdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xpopenasdlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

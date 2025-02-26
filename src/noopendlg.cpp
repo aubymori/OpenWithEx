@@ -96,7 +96,7 @@ INT_PTR CALLBACK CNoOpenDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 }
 
 CNoOpenDlg::CNoOpenDlg(LPCWSTR lpszPath)
-	: CImpDialog(g_hInst, IDD_NOOPEN)
+	: CImpDialog(g_hInst, (g_style == OWXS_VISTA) ? IDD_NOOPEN : IDD_NOOPEN_XP)
 {
 	wcscpy_s(m_szPath, lpszPath);
 	m_pszExtension = PathFindExtensionW(m_szPath);

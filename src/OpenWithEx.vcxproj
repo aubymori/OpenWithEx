@@ -250,13 +250,15 @@ link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOut
     <ClCompile Include="cantopendlg.cpp" />
     <ClCompile Include="impdialog.cpp" />
     <ClCompile Include="noopendlg.cpp" />
-    <ClCompile Include="openasdlg.cpp" />
+    <ClCompile Include="baseopenasdlg.cpp" />
     <ClCompile Include="openwithex.cpp" />
     <ClCompile Include="openwithexlauncher.cpp" />
     <ClCompile Include="test\test_userchoice.cpp" />
     <ClCompile Include="versionhelper.h" />
     <ClCompile Include="shellprotectedreglock.cpp" />
     <ClCompile Include="util.cpp" />
+    <ClCompile Include="vistaopenasdlg.cpp" />
+    <ClCompile Include="xpopenasdlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="openwithex.en-US.rc">
@@ -276,13 +278,14 @@ link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOut
     <ClInclude Include="iobjectwithassociationelement.h" />
     <ClInclude Include="iobjectwithopenwithflags.h" />
     <ClInclude Include="noopendlg.h" />
-    <ClInclude Include="openasdlg.h" />
+    <ClInclude Include="baseopenasdlg.h" />
     <ClInclude Include="openwithex.h" />
     <ClInclude Include="iopenwithlauncher.h" />
     <ClInclude Include="openwithexlauncher.h" />
     <ClInclude Include="shellprotectedreglock.h" />
     <ClInclude Include="test\test_userchoice.h" />
     <ClInclude Include="util.h" />
+    <ClInclude Include="vistaopenasdlg.h" />
     <ClInclude Include="wil\com.h" />
     <ClInclude Include="wil\common.h" />
     <ClInclude Include="wil\com_apartment_variable.h" />
@@ -316,6 +319,7 @@ link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOut
     <ClInclude Include="wil\wistd_memory.h" />
     <ClInclude Include="wil\wistd_type_traits.h" />
     <ClInclude Include="wil\wrl.h" />
+    <ClInclude Include="xpopenasdlg.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="muiconfig.xml" />
