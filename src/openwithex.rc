@@ -4,6 +4,23 @@
    and as such, when shown in the taskbar, had its icon. */
 IDI_OPENWITH  ICON  "res/OpenWithEx.ico"
 
+#include <ntverp.h>
+#define VER_FILETYPE                    VFT_APP
+#define VER_FILESUBTYPE                 VFT_UNKNOWN
+#undef  VER_COMPANYNAME_STR
+#define VER_COMPANYNAME_STR             "aubymori"
+#undef  VER_PRODUCTNAME_STR
+#define VER_PRODUCTNAME_STR             "OpenWithEx"
+#define VER_FILEDESCRIPTION_STR         "OpenWithEx"
+#define VER_INTERNALNAME_STR            "OpenWithEx"
+#define VER_LEGALCOPYRIGHT_YEARS        "2025"
+#define VER_ORIGINALFILENAME_STR        "OpenWithEx.exe"
+#undef  VER_PRODUCTVERSION
+#define VER_PRODUCTVERSION              VER_MAJOR,VER_MINOR,VER_REVISION,0
+#undef  VER_PRODUCTVERSION_STR
+#define VER_PRODUCTVERSION_STR          VER_STRING
+#include <common.ver>
+
 /** 
   * !!! DON'T INCLUDE OTHER LOCALES HERE !!!
   * For whatever reason, if you compile an RC file with resources

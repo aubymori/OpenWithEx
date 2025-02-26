@@ -5,8 +5,10 @@
 #include <shobjidl.h>
 #include "util.h"
 
-/* Uncomment to build with XP-style dialogs */
-//#define XP
+#define VER_MAJOR              1
+#define VER_MINOR              0
+#define VER_REVISION           0
+#define VER_STRING       "1.0.0"
 
 extern HMODULE g_hAppInstance;
 extern HMODULE g_hInst;
