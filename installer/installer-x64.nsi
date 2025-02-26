@@ -15,6 +15,9 @@ RequestExecutionLevel admin
 !define MUI_UNICON "installer.ico"
 !define MUI_WELCOMEFINISHPAGE_BITMAP "welcome.bmp"
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP "welcome.bmp"
+!define MUI_HEADERIMAGE
+!define MUI_HEADERIMAGE_BITMAP "header.bmp"
+!define MUI_UNHEADERIMAGE_BITMAP "header.bmp"
 !define MUI_ABORTWARNING
 !define MUI_UNABORTWARNING
 !define MUI_FINISHPAGE_NOAUTOCLOSE
