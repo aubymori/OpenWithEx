@@ -165,6 +165,22 @@ INT_PTR CALLBACK CBaseOpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, 
 
 			return TRUE;
 		}
+		// For some reason, initializing through the server doesn't activate the window.
+		// Let's activate it manually when it's shown.
+		case WM_WINDOWPOSCHANGED:
+			if (((LPWINDOWPOS)lParam)->flags & SWP_SHOWWINDOW && !m_fShown)
+			{
+				m_fShown = true;
+				SetForegroundWindow(hWnd);
+				if (GetForegroundWindow() != hWnd)
+				{
+					SwitchToThisWindow(hWnd, TRUE);
+					Sleep(2);
+					SetForegroundWindow(hWnd);
+				}
+				SetActiveWindow(hWnd);
+			}
+			return TRUE;
 		case WM_CLOSE:
 			EndDialog(hWnd, IDCANCEL);
 			return TRUE;
