@@ -243,11 +243,17 @@ int CBaseOpenAsDlg::_FindItemIndex(LPCWSTR lpszPath)
 void CBaseOpenAsDlg::_GetHandlers()
 {
 	wil::com_ptr<IEnumAssocHandlers> pEnumHandler = nullptr;
-	SHAssocEnumHandlers(
-		m_szExtOrProtocol,
-		ASSOC_FILTER_NONE,
-		&pEnumHandler
-	);
+	if (m_fUri)
+		SHAssocEnumHandlersForProtocolByApplication(
+			m_szExtOrProtocol,
+			IID_PPV_ARGS(&pEnumHandler)
+		);
+	else
+		SHAssocEnumHandlers(
+			m_szExtOrProtocol,
+			ASSOC_FILTER_NONE,
+			&pEnumHandler
+		);
 
 	wil::com_ptr<IAssocHandler> pAssoc = nullptr;
 	ULONG pceltFetched = 0;
@@ -547,23 +553,29 @@ void CBaseOpenAsDlg::_OnOk()
 		if (!(m_flags & IMMERSIVE_OPENWITH_DONOT_EXEC))
 		{
 			// Start the program with the file:
-			wil::com_ptr<IShellItem2> pShellItem = nullptr;
+			wil::com_ptr<IShellItem> pShellItem = nullptr;
 			HRESULT hr = SHCreateItemFromParsingName(m_szPath, nullptr, IID_PPV_ARGS(&pShellItem));
 
 			if (SUCCEEDED(hr) && pShellItem)
 			{
-				// When invoking, we must clear the recently-installed list, or we will get into a
-				// restart loop as the operating system will invoke the open with UI when a new
-				// application is installed and the recently-installed list is marked. This includes
-				// programmatic use of IAssocHandler::Invoke. TWinUI also does this.
-				_ClearRecentlyInstalled();
+				wil::com_ptr<IShellItemArray> pShellItemArray = nullptr;
+				hr = SHCreateShellItemArrayFromShellItem(pShellItem.get(), IID_PPV_ARGS(&pShellItemArray));
 
-				wil::com_ptr<IDataObject> pInvocationObj = nullptr;
-				hr = pShellItem->BindToHandler(nullptr, BHID_DataObject, IID_PPV_ARGS(&pInvocationObj));
-
-				if (SUCCEEDED(hr))
+				if (SUCCEEDED(hr) && pShellItemArray)
 				{
-					pSelected->Invoke(pInvocationObj.get());
+					// When invoking, we must clear the recently-installed list, or we will get into a
+					// restart loop as the operating system will invoke the open with UI when a new
+					// application is installed and the recently-installed list is marked. This includes
+					// programmatic use of IAssocHandler::Invoke. TWinUI also does this.
+					_ClearRecentlyInstalled();
+
+					wil::com_ptr<IDataObject> pInvocationObj = nullptr;
+					hr = pShellItemArray->BindToHandler(nullptr, BHID_DataObject, IID_PPV_ARGS(&pInvocationObj));
+
+					if (SUCCEEDED(hr))
+					{
+						pSelected->Invoke(pInvocationObj.get());
+					}
 				}
 			}
 		}

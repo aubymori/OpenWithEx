@@ -4,7 +4,7 @@
 #include <shlobj.h>
 #include <commctrl.h>
 
-class CXPOpenAsDlg : public CBaseOpenAsDlg
+class CClassicOpenAsDlg : public CBaseOpenAsDlg
 {
 private:
 	std::vector<HTREEITEM> m_treeItems;
@@ -18,5 +18,5 @@ private:
 	void _AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool fForceSelect);
 
 public:
-	CXPOpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool fUri, bool fPreregistered);
+	CClassicOpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool fUri, bool fPreregistered);
 };

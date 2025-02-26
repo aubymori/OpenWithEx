@@ -1,6 +1,6 @@
-#include "xpopenasdlg.h"
+#include "classicopenasdlg.h"
 
-void CXPOpenAsDlg::_InitProgList()
+void CClassicOpenAsDlg::_InitProgList()
 {
 	HIMAGELIST himl = NULL;
 	Shell_GetImageLists(nullptr, &himl);
@@ -20,7 +20,7 @@ void CXPOpenAsDlg::_InitProgList()
 	);
 }
 
-wil::com_ptr<IAssocHandler> CXPOpenAsDlg::_GetSelectedItem()
+wil::com_ptr<IAssocHandler> CClassicOpenAsDlg::_GetSelectedItem()
 {
 	HTREEITEM hSelected = (HTREEITEM)SendDlgItemMessageW(
 		m_hWnd, IDD_OPENWITH_PROGLIST,
@@ -43,7 +43,7 @@ wil::com_ptr<IAssocHandler> CXPOpenAsDlg::_GetSelectedItem()
 	return (IAssocHandler *)tvi.lParam;
 }
 
-void CXPOpenAsDlg::_SelectItemByIndex(int index)
+void CClassicOpenAsDlg::_SelectItemByIndex(int index)
 {
 	HTREEITEM hItem = m_treeItems.at(index);
 	if (hItem)
@@ -57,7 +57,7 @@ void CXPOpenAsDlg::_SelectItemByIndex(int index)
 	}
 }
 
-void CXPOpenAsDlg::_SetupCategories()
+void CClassicOpenAsDlg::_SetupCategories()
 {
 	TVITEMW recommended = { 0 };
 	recommended.mask = TVIF_IMAGE | TVIF_SELECTEDIMAGE | TVIF_TEXT | TVIF_STATE;
@@ -95,7 +95,7 @@ void CXPOpenAsDlg::_SetupCategories()
 	);
 }
 
-void CXPOpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool fForceSelect)
+void CClassicOpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool fForceSelect)
 {
 	TVITEMW tvi = { 0 };
 	wil::unique_cotaskmem_string pszDisplayName;
@@ -135,7 +135,7 @@ void CXPOpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool f
 	));
 }
 
-CXPOpenAsDlg::CXPOpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool fUri, bool fPreregistered)
+CClassicOpenAsDlg::CClassicOpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool fUri, bool fPreregistered)
 	: CBaseOpenAsDlg(lpszPath, flags, fUri, fPreregistered, IDD_OPENWITH_XP, IDD_OPENWITH_WITHDESC_XP, IDD_OPENWITH_PROTOCOL_XP, IDS_BROWSETITLE_XP)
 {
 

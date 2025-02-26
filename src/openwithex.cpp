@@ -1,7 +1,7 @@
 #include "openwithex.h"
 #include "cantopendlg.h"
 #include "vistaopenasdlg.h"
-#include "xpopenasdlg.h"
+#include "classicopenasdlg.h"
 #include "noopendlg.h"
 #include "openwithexlauncher.h"
 #include "assocuserchoice.h"
@@ -98,7 +98,7 @@ void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FL
 			pDialog = new CVistaOpenAsDlg(lpszPath, flags, fUri, fPreregistered);
 			break;
 		case OWXS_XP:
-			pDialog = new CXPOpenAsDlg(lpszPath, flags, fUri, fPreregistered);
+			pDialog = new CClassicOpenAsDlg(lpszPath, flags, fUri, fPreregistered);
 			break;
 	}
 	pDialog->ShowDialog(hWndParent);
@@ -137,7 +137,7 @@ int WINAPI wWinMain(
 			g_style = (OPENWITHEXSTYLE)dwValue;
 	}
 
-	/* Load undocumented shell32 functions */
+	/* Load undocumented functions */
 	g_hShell32 = GetModuleHandleW(L"shell32.dll");
 	SHCreateAssocHandler = (SHCreateAssocHandler_t)GetProcAddress(
 		g_hShell32,
@@ -151,7 +151,7 @@ int WINAPI wWinMain(
 	{
 		LocalizedMessageBox(
 			NULL,
-			IDS_ERR_SHELL32,
+			IDS_ERR_UNDOC,
 			MB_ICONERROR
 		);
 		return -1;

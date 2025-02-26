@@ -4,7 +4,7 @@ STRINGTABLE
 {
 	IDS_ERR_EMBEDDING  "Operation not supported"
 	IDS_ERR_NOPATH     "No path specified"
-	IDS_ERR_SHELL32    "A required function could not be found in the dynamic link library SHELL32.dll."
+	IDS_ERR_UNDOC      "A required undocument function could not be found."
 	IDS_SEARCH_FORMAT  "http://go.microsoft.com/fwlink/?LinkId=57426&Ext=%s"
 	IDS_RECOMMENDED    "Recommended Programs"
 	IDS_OTHER          "Other Programs"

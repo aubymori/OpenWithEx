@@ -57,7 +57,7 @@
     <ClCompile Include="vistaopenasdlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="xpopenasdlg.cpp">
+    <ClCompile Include="classicopenasdlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -217,7 +217,7 @@
     <ClInclude Include="vistaopenasdlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="xpopenasdlg.h">
+    <ClInclude Include="classicopenasdlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

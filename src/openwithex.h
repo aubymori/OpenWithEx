@@ -90,7 +90,7 @@ inline void debuglog(const wchar_t *format, ...)
 /* Strings */
 #define IDS_ERR_EMBEDDING         1000
 #define IDS_ERR_NOPATH            1001
-#define IDS_ERR_SHELL32           1002
+#define IDS_ERR_UNDOC             1002
 #define IDS_SEARCH_FORMAT         1003
 #define IDS_RECOMMENDED           1004
 #define IDS_OTHER                 1005

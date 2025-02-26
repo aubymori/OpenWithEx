@@ -258,7 +258,7 @@ link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOut
     <ClCompile Include="shellprotectedreglock.cpp" />
     <ClCompile Include="util.cpp" />
     <ClCompile Include="vistaopenasdlg.cpp" />
-    <ClCompile Include="xpopenasdlg.cpp" />
+    <ClCompile Include="classicopenasdlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="openwithex.en-US.rc">
@@ -319,7 +319,7 @@ link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOut
     <ClInclude Include="wil\wistd_memory.h" />
     <ClInclude Include="wil\wistd_type_traits.h" />
     <ClInclude Include="wil\wrl.h" />
-    <ClInclude Include="xpopenasdlg.h" />
+    <ClInclude Include="classicopenasdlg.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="muiconfig.xml" />
