@@ -50,7 +50,7 @@ void ShowOpenWithDialog(HWND hWndParent, LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FL
 		fPreregistered = AssociationExists(pszExtension, fUri);
 
 		/* Check if the file is a system file and open the no-open dialog if it is. */
-		if (pszExtension && *pszExtension)
+		if (g_style != OWXS_NT4 && pszExtension && *pszExtension)
 		{	
 			LSTATUS ls = RegQueryValueExW(
 				hk.get(),
