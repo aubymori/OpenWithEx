@@ -1,3 +1,6 @@
 .vs/**
 build/**
 installer/build/**
+
+# Configurator
+x64/**
