@@ -38,6 +38,15 @@ ManifestSupportedOS all
 
 !insertmacro MUI_LANGUAGE "English"
 
+# "OpenWithEx does not support 32-bit systems."
+# JP: "OpenWithEx は32ビットシステムをサポートされていません。"
+
+# "OpenWithEx requires Windows 8 or greater."
+# JP: "OpenWithEx は Windows 8 以降が必要です。"
+
+# "$SMPROGRAMS\OpenWithEx\Configure OpenWithEx.lnk"
+# JP: "$SMPROGRAMS\OpenWithEx\OpenWithEx の設定を変更する.lnk"
+
 Function .onInit
     # NSIS produces an x86-32 installer. Deny installation if
     # we're not on a x86-64 system running WOW64.
@@ -109,6 +118,7 @@ SectionEnd
 !macro InstallLang lang
     SetOutPath "$PROGRAMFILES64\OpenWithEx\${lang}"
     File "..\build\Release-x64\${lang}\OpenWith.exe.mui"
+	File "..\build\Release-x64\config\${lang}\OpenWithExConfig.exe.mui"
     SetOutPath "$PROGRAMFILES32\OpenWithEx\${lang}"
     File "..\build\Release-Win32\${lang}\OpenWith.exe.mui"
 !macroend
@@ -117,6 +127,9 @@ SectionGroup "Languages"
     Section "English (United States)"
         SectionIn RO
         !insertmacro InstallLang "en-US"
+    SectionEnd
+	Section "日本語 [Japanese]"
+        !insertmacro InstallLang "ja-JP"
     SectionEnd
 SectionGroupEnd
 

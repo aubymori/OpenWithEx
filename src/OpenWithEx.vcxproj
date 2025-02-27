@@ -117,16 +117,14 @@
       <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
 link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithex.en-US.res
 
-:: Example for other languages
-:: Uncomment when adding another language
 :: Final `del` line should not be copied with each new language
 
-:: rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ja-JP.res" openwithex.ja-JP.rc
-:: if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
-:: link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ja-JP.res"
-:: muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
+rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ja-JP.res" openwithex.ja-JP.rc
+if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
+link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ja-JP.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
 
-:: del "$(IntermediateOutputPath)temp.res"</Command>
+del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -156,16 +154,14 @@ link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOut
       <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
 link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithex.en-US.res
 
-:: Example for other languages
-:: Uncomment when adding another language
 :: Final `del` line should not be copied with each new language
 
-:: rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ja-JP.res" openwithex.ja-JP.rc
-:: if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
-:: link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ja-JP.res"
-:: muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
+rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ja-JP.res" openwithex.ja-JP.rc
+if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
+link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ja-JP.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
 
-:: del "$(IntermediateOutputPath)temp.res"</Command>
+del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -193,16 +189,14 @@ link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOut
       <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
 link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithex.en-US.res
 
-:: Example for other languages
-:: Uncomment when adding another language
 :: Final `del` line should not be copied with each new language
 
-:: rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ja-JP.res" openwithex.ja-JP.rc
-:: if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
-:: link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ja-JP.res"
-:: muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
+rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ja-JP.res" openwithex.ja-JP.rc
+if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
+link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ja-JP.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
 
-:: del "$(IntermediateOutputPath)temp.res"</Command>
+del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -233,16 +227,14 @@ link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOut
       <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
 link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithex.en-US.res
 
-:: Example for other languages
-:: Uncomment when adding another language
 :: Final `del` line should not be copied with each new language
 
-:: rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ja-JP.res" openwithex.ja-JP.rc
-:: if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
-:: link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ja-JP.res"
-:: muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
+rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ja-JP.res" openwithex.ja-JP.rc
+if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
+link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ja-JP.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
 
-:: del "$(IntermediateOutputPath)temp.res"</Command>
+del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
