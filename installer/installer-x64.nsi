@@ -48,6 +48,7 @@ ManifestSupportedOS all
 
 !insertmacro LANG_LOAD "English"
 !insertmacro LANG_LOAD "Japanese"
+!insertmacro LANG_LOAD "Turkish"
 
 Function .onInit
     # NSIS produces an x86-32 installer. Deny installation if
@@ -133,6 +134,10 @@ SectionGroup "$(STRING_LANGS)"
 
 	Section "$(STRING_JA_JP)"
         !insertmacro InstallLang "ja-JP"
+    SectionEnd
+
+    Section "$(STRING_TR_TR)"
+        !insertmacro InstallLang "tr-TR"
     SectionEnd
 SectionGroupEnd
 

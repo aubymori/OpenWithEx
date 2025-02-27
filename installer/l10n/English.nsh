@@ -6,3 +6,4 @@
 !insertmacro LANG_STRING STRING_LANGS "Languages"
 !insertmacro LANG_STRING STRING_EN_US "English (United States)"
 !insertmacro LANG_STRING STRING_JA_JP "Japanese"
+!insertmacro LANG_STRING STRING_TR_TR "Turkish"

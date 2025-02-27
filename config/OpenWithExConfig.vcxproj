@@ -107,12 +107,15 @@
       <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
 link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithexconfig.en-US.res
 
-:: Final `del` line should not be copied with each new language
-
 rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ja-JP.res" openwithexconfig.ja-JP.rc
 if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
 link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ja-JP.res"
 muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
+
+rc /D "_UNICODE" /D "UNICODE" /l 0x041F /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.tr-TR.res" openwithexconfig.tr-TR.rc
+if not exist "$(OutDir)tr-TR" md "$(OutDir)tr-TR"
+link /dll /noentry /out:"$(OutDir)tr-TR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.tr-TR.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)tr-TR\$(TargetFileName).mui"
 
 del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
@@ -142,12 +145,15 @@ del "$(IntermediateOutputPath)temp.res"</Command>
       <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
 link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithexconfig.en-US.res
 
-:: Final `del` line should not be copied with each new language
-
 rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ja-JP.res" openwithexconfig.ja-JP.rc
 if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
 link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ja-JP.res"
 muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
+
+rc /D "_UNICODE" /D "UNICODE" /l 0x041F /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.tr-TR.res" openwithexconfig.tr-TR.rc
+if not exist "$(OutDir)tr-TR" md "$(OutDir)tr-TR"
+link /dll /noentry /out:"$(OutDir)tr-TR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.tr-TR.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)tr-TR\$(TargetFileName).mui"
 
 del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
@@ -173,12 +179,15 @@ del "$(IntermediateOutputPath)temp.res"</Command>
       <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
 link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithexconfig.en-US.res
 
-:: Final `del` line should not be copied with each new language
-
 rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ja-JP.res" openwithexconfig.ja-JP.rc
 if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
 link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ja-JP.res"
 muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
+
+rc /D "_UNICODE" /D "UNICODE" /l 0x041F /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.tr-TR.res" openwithexconfig.tr-TR.rc
+if not exist "$(OutDir)tr-TR" md "$(OutDir)tr-TR"
+link /dll /noentry /out:"$(OutDir)tr-TR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.tr-TR.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)tr-TR\$(TargetFileName).mui"
 
 del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
@@ -208,12 +217,15 @@ del "$(IntermediateOutputPath)temp.res"</Command>
       <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
 link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithexconfig.en-US.res
 
-:: Final `del` line should not be copied with each new language
-
 rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ja-JP.res" openwithexconfig.ja-JP.rc
 if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
 link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ja-JP.res"
 muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
+
+rc /D "_UNICODE" /D "UNICODE" /l 0x041F /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.tr-TR.res" openwithexconfig.tr-TR.rc
+if not exist "$(OutDir)tr-TR" md "$(OutDir)tr-TR"
+link /dll /noentry /out:"$(OutDir)tr-TR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.tr-TR.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)tr-TR\$(TargetFileName).mui"
 
 del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
