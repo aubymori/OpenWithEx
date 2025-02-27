@@ -1,10 +1,7 @@
 <localization>
     <resources>
         <win32Resources fileType="Application">
-            <neutralResources>
-				<!-- RT_VERSION -->
-				<resourceType typeNameId="#16"/>
-            </neutralResources>
+            <neutralResources></neutralResources>
             <localizedResources>
 			    <!-- RT_DIALOG -->
                 <resourceType typeNameId="#5"/>
