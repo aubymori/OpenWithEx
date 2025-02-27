@@ -100,7 +100,7 @@ Section "OpenWithEx" OpenWithEx
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenWithEx" \
                  "Publisher" "aubymori"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenWithEx" \
-                 "DisplayVersion" "1.0.1"
+                 "DisplayVersion" "1.1.0"
     WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenWithEx" \
                  "NoModify" 1
     WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenWithEx" \
