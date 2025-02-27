@@ -2,6 +2,9 @@
 OpenWithEx is an application meant to replicate the classic Open With dialog with styles
 ranging from Windows 95 to Windows 7.
 
+## Translation
+See [TRANSLATION.md](TRANSLATION.md).
+
 ## Compilation
 
 ### Building the application
