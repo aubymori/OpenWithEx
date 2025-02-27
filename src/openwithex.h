@@ -10,7 +10,6 @@
 #define VER_REVISION           1
 #define VER_STRING       "1.0.1"
 
-extern HMODULE g_hAppInstance;
 extern HMODULE g_hInst;
 extern HMODULE g_hShell32;
 extern enum OPENWITHEXSTYLE
