@@ -8,8 +8,6 @@
             <localizedResources>
 			    <!-- RT_DIALOG -->
                 <resourceType typeNameId="#5"/>
-			    <!-- RT_STRING -->
-			    <resourceType typeNameId="#6"/>
 				<!-- RT_VERSION -->
 				<resourceType typeNameId="#16"/>
             </localizedResources>

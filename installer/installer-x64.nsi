@@ -36,28 +36,30 @@ ManifestSupportedOS all
 !insertmacro MUI_UNPAGE_INSTFILES
 !insertmacro MUI_UNPAGE_FINISH
 
-!insertmacro MUI_LANGUAGE "English"
+!macro LANG_LOAD LANGLOAD
+    !insertmacro MUI_LANGUAGE "${LANGLOAD}"
+    !include "l10n\${LANGLOAD}.nsh"
+    !undef LANG
+!macroend
+ 
+!macro LANG_STRING NAME VALUE
+    LangString "${NAME}" "${LANG_${LANG}}" "${VALUE}"
+!macroend
 
-# "OpenWithEx does not support 32-bit systems."
-# JP: "OpenWithEx は32ビットシステムをサポートされていません。"
-
-# "OpenWithEx requires Windows 8 or greater."
-# JP: "OpenWithEx は Windows 8 以降が必要です。"
-
-# "$SMPROGRAMS\OpenWithEx\Configure OpenWithEx.lnk"
-# JP: "$SMPROGRAMS\OpenWithEx\OpenWithEx の設定を変更する.lnk"
+!insertmacro LANG_LOAD "English"
+!insertmacro LANG_LOAD "Japanese"
 
 Function .onInit
     # NSIS produces an x86-32 installer. Deny installation if
     # we're not on a x86-64 system running WOW64.
     ${IfNot} ${RunningX64}
-        MessageBox MB_OK|MB_ICONSTOP "OpenWithEx does not support 32-bit systems."
+        MessageBox MB_OK|MB_ICONSTOP "$(STRING_NOT_X64)"
         Quit
     ${EndIf}
     
     # Need at least Windows 8.
     ${IfNot} ${AtLeastWin8}
-        MessageBox MB_OK|MB_ICONSTOP "OpenWithEx requires Windows 8 or greater."
+        MessageBox MB_OK|MB_ICONSTOP "$(STRING_NOT_WIN8)"
         Quit
     ${EndIf}
 FunctionEnd
@@ -83,7 +85,7 @@ Section "OpenWithEx" OpenWithEx
     # Create configurator shortcut
     SetShellVarContext all
     CreateDirectory "$SMPROGRAMS\OpenWithEx"
-    CreateShortCut "$SMPROGRAMS\OpenWithEx\Configure OpenWithEx.lnk" \
+    CreateShortCut "$SMPROGRAMS\OpenWithEx\$(STRING_CONFIG_SHORTCUT).lnk" \
         "$PROGRAMFILES64\OpenWithEx\OpenWithExConfig.exe"
     
     # Create Uninstall entry
@@ -123,12 +125,13 @@ SectionEnd
     File "..\build\Release-Win32\${lang}\OpenWith.exe.mui"
 !macroend
 
-SectionGroup "Languages"
-    Section "English (United States)"
+SectionGroup "$(STRING_LANGS)"
+    Section "$(STRING_EN_US)"
         SectionIn RO
         !insertmacro InstallLang "en-US"
     SectionEnd
-	Section "日本語 [Japanese]"
+
+	Section "$(STRING_JA_JP)"
         !insertmacro InstallLang "ja-JP"
     SectionEnd
 SectionGroupEnd

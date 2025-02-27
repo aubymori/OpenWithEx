@@ -4,18 +4,6 @@
 
 IDI_OPENWITHEXCONFIG  ICON  "res\\OpenWithExConfig.ico"
 
-IDD_OPENWITHEXCONFIG DIALOGEX 0, 0, 197, 93
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "OpenWithEx Configuration"
-FONT 8, "MS Shell Dlg"
-{
-	LTEXT "Style:", -1, 7, 7, 183, 8
-	COMBOBOX IDD_STYLEBOX, 7, 18, 183, 18, CBS_DROPDOWNLIST
-	DEFPUSHBUTTON "OK", IDOK, 32, 70, 50, 14
-	PUSHBUTTON "Cancel", IDCANCEL, 86, 70, 50, 14
-	PUSHBUTTON "&Apply", IDD_APPLY, 140, 70, 50, 14
-}
-
 #include <ntverp.h>
 #define VER_FILETYPE                    VFT_APP
 #define VER_FILESUBTYPE                 VFT_UNKNOWN
@@ -32,3 +20,14 @@ FONT 8, "MS Shell Dlg"
 #undef  VER_PRODUCTVERSION_STR
 #define VER_PRODUCTVERSION_STR          VER_STRING
 #include <common.ver>
+
+/**
+  * !!! DON'T INCLUDE OTHER LOCALES HERE !!!
+  * For whatever reason, if you compile an RC file with resources
+  * for more than one language, the RC compiler refuses to output
+  * an MUI file and instead outputs everything in one language
+  * neutral file. The en-US locale is built along with the main
+  * project just to get an MUI checksum to copy to all the other
+  * MUI files.
+  */
+#include "openwithexconfig.en-US.rc"
