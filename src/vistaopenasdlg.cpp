@@ -1,5 +1,56 @@
 #include "vistaopenasdlg.h"
 
+void CVistaOpenAsDlg::_BrowseForProgram()
+{
+	wil::com_ptr<IShellItem> psi = nullptr;
+	WCHAR szPath[MAX_PATH] = { 0 };
+	ExpandEnvironmentStringsW(L"%ProgramFiles%", szPath, MAX_PATH);
+	SHCreateItemFromParsingName(szPath, nullptr, IID_PPV_ARGS(&psi));
+
+	wil::com_ptr_nothrow<IFileOpenDialog> pdlg = nullptr;
+	CoCreateInstance(
+		CLSID_FileOpenDialog,
+		NULL,
+		CLSCTX_INPROC_SERVER,
+		IID_PPV_ARGS(&pdlg)
+	);
+
+	if (!pdlg)
+		return;
+
+	pdlg->SetFolder(psi.get());
+
+	WCHAR szPrograms[MAX_PATH] = { 0 };
+	WCHAR szAllFiles[MAX_PATH] = { 0 };
+	LoadStringW(g_hInst, IDS_PROGRAMS, szPrograms, MAX_PATH);
+	LoadStringW(g_hInst, IDS_ALLFILES, szAllFiles, MAX_PATH);
+
+	COMDLG_FILTERSPEC filters[] = {
+		{ szPrograms, L"*.exe;*.pif;*.com;*.bat;*.cmd" },
+		{ szAllFiles, L"*.*" }
+	};
+
+	pdlg->SetFileTypes(ARRAYSIZE(filters), filters);
+
+	WCHAR szTitle[MAX_PATH] = { 0 };
+	LoadStringW(g_hInst, IDS_BROWSETITLE, szTitle, MAX_PATH);
+	pdlg->SetTitle(szTitle);
+	pdlg->Show(m_hWnd);
+
+	wil::com_ptr_nothrow<IShellItem> pResult = nullptr;
+	pdlg->GetResult(&pResult);
+
+	if (pResult)
+	{
+		wil::unique_cotaskmem_string pszPath;
+		pResult->GetDisplayName(SIGDN_FILESYSPATH, &pszPath);
+		if (pszPath.get())
+		{
+			_SelectOrAddItem(pszPath.get());
+		}
+	}
+}
+
 void CVistaOpenAsDlg::_InitProgList()
 {
 	/* Theme list view */
@@ -276,7 +327,7 @@ void CVistaOpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, boo
 }
 
 CVistaOpenAsDlg::CVistaOpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool fUri, bool fPreregistered)
-	: CBaseOpenAsDlg(lpszPath, flags, fUri, fPreregistered, IDD_OPENWITH, IDD_OPENWITH_WITHDESC, IDD_OPENWITH_PROTOCOL, IDS_BROWSETITLE)
+	: CBaseOpenAsDlg(lpszPath, flags, fUri, fPreregistered, IDD_OPENWITH, IDD_OPENWITH_WITHDESC, IDD_OPENWITH_PROTOCOL)
 {
 
 }

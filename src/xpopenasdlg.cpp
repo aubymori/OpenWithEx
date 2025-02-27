@@ -136,7 +136,7 @@ void CXPOpenAsDlg::_AddItem(wil::com_ptr<IAssocHandler> pItem, int index, bool f
 }
 
 CXPOpenAsDlg::CXPOpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool fUri, bool fPreregistered)
-	: CBaseOpenAsDlg(lpszPath, flags, fUri, fPreregistered, IDD_OPENWITH_XP, IDD_OPENWITH_WITHDESC_XP, IDD_OPENWITH_PROTOCOL_XP, IDS_BROWSETITLE_XP)
+	: CBaseOpenAsDlg(lpszPath, flags, fUri, fPreregistered, IDD_OPENWITH_XP, IDD_OPENWITH_WITHDESC_XP, IDD_OPENWITH_PROTOCOL_XP)
 {
 
 }

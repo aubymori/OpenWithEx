@@ -219,6 +219,36 @@ INT_PTR CALLBACK CBaseOpenAsDlg::v_DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, 
 	return FALSE;
 }
 
+void CBaseOpenAsDlg::_SelectOrAddItem(LPCWSTR lpszPath)
+{
+	if (lpszPath)
+	{
+		LPCWSTR lpszFileName = PathFindFileNameW(lpszPath);
+		if (IsBlockedFromOpenWithBrowse(lpszFileName))
+		{
+			ShellMessageBoxW(g_hShell32, m_hWnd, MAKEINTRESOURCEW(0x7503), MAKEINTRESOURCEW(0x7502), MB_ICONERROR);
+			return;
+		}
+
+		int index = _FindItemIndex(lpszPath);
+		if (index != -1)
+		{
+			_SelectItemByIndex(index);
+		}
+		else
+		{
+			wil::com_ptr<IAssocHandler> pHandler = nullptr;
+			SHCreateAssocHandler(AHTYPE_USER_APPLICATION, m_szExtOrProtocol, lpszPath, &pHandler);
+			if (pHandler)
+			{
+				m_handlers.push_back(pHandler);
+				_AddItem(pHandler, m_handlers.size() - 1, true);
+				_SelectItemByIndex(m_handlers.size() - 1);
+			}
+		}
+	}
+}
+
 int CBaseOpenAsDlg::_FindItemIndex(LPCWSTR lpszPath)
 {
 	wil::com_ptr<IAssocHandler> pResult = nullptr;
@@ -267,76 +297,45 @@ void CBaseOpenAsDlg::_GetHandlers()
 	}
 }
 
+// This is the implementation which is shared across CXPOpenAsDlg and
+// CClassicOpenAsDlg
 void CBaseOpenAsDlg::_BrowseForProgram()
 {
-	wil::com_ptr<IShellItem> psi = nullptr;
-	WCHAR szPath[MAX_PATH] = { 0 };
-	ExpandEnvironmentStringsW(L"%ProgramFiles%", szPath, MAX_PATH);
-	SHCreateItemFromParsingName(szPath, nullptr, IID_PPV_ARGS(&psi));
+	WCHAR szFile[MAX_PATH] = { 0 };
 
-	wil::com_ptr_nothrow<IFileOpenDialog> pdlg = nullptr;
-	CoCreateInstance(
-		CLSID_FileOpenDialog,
-		NULL,
-		CLSCTX_INPROC_SERVER,
-		IID_PPV_ARGS(&pdlg)
-	);
+	// Set up filter string
+	WCHAR szFilter[MAX_PATH];
+	WCHAR szPrograms[128];
+	WCHAR szAllFiles[128];
+	LoadStringW(g_hInst, IDS_PROGRAMS, szPrograms, 128);
+	LoadStringW(g_hInst, IDS_ALLFILES, szAllFiles, 128);
+	LPCWSTR pszFormat = L"%s#*.exe;*.pif;*.com;*.bat;*.cmd#%s#*.*##";
+	if (g_style == OWXS_NT4) // NT4 has a (*.*) on all files that seems to be unchanged between locales
+		pszFormat = L"%s#*.exe;*.pif;*.com;*.bat;*.cmd#%s (*.*)#*.*##";
+	swprintf_s(szFilter, pszFormat, szPrograms, szAllFiles);
 	
-	if (!pdlg)
-		return;
-
-	pdlg->SetFolder(psi.get());
-
-	WCHAR szPrograms[MAX_PATH] = { 0 };
-	WCHAR szAllFiles[MAX_PATH] = { 0 };
-	LoadStringW(g_hInst, IDS_PROGRAMS, szPrograms, MAX_PATH);
-	LoadStringW(g_hInst, IDS_ALLFILES, szAllFiles, MAX_PATH);
-
-	COMDLG_FILTERSPEC filters[] = {
-		{ szPrograms, L"*.exe;*.pif;*.com;*.bat;*.cmd" },
-		{ szAllFiles, L"*.*" }
-	};
-
-	pdlg->SetFileTypes(ARRAYSIZE(filters), filters);
-
-	WCHAR szTitle[MAX_PATH] = { 0 };
-	LoadStringW(g_hInst, m_uBrowseTitleId, szTitle, MAX_PATH);
-	pdlg->SetTitle(szTitle);
-	pdlg->Show(m_hWnd);
-
-	wil::com_ptr_nothrow<IShellItem> pResult = nullptr;
-	pdlg->GetResult(&pResult);
-
-	if (pResult)
+	// Replace # with null bytes so GetOpenFileNameW accepts it
+	int length = wcslen(szFilter);
+	for (int i = 0; i < length; i++)
 	{
-		wil::unique_cotaskmem_string lpszPath = nullptr;
-		pResult->GetDisplayName(SIGDN_FILESYSPATH, &lpszPath);
-		if (lpszPath)
-		{
-			LPCWSTR lpszFileName = PathFindFileNameW(lpszPath.get());
-			if (IsBlockedFromOpenWithBrowse(lpszFileName))
-			{
-				ShellMessageBoxW(g_hShell32, m_hWnd, MAKEINTRESOURCEW(0x7503), MAKEINTRESOURCEW(0x7502), MB_ICONERROR);
-				return;
-			}
+		if (szFilter[i] == L'#')
+			szFilter[i] = L'\0';
+	}
 
-			int index = _FindItemIndex(lpszPath.get());
-			if (index != -1)
-			{
-				_SelectItemByIndex(index);
-			}
-			else
-			{
-				wil::com_ptr<IAssocHandler> pHandler = nullptr;
-				SHCreateAssocHandler(AHTYPE_USER_APPLICATION, m_szExtOrProtocol, lpszPath.get(), &pHandler);
-				if (pHandler)
-				{
-					m_handlers.push_back(pHandler);
-					_AddItem(pHandler, m_handlers.size() - 1, true);
-					_SelectItemByIndex(m_handlers.size() - 1);
-				}
-			}
-		}
+	WCHAR szTitle[256];
+	LoadStringW(g_hInst, IDS_BROWSETITLE_XP, szTitle, 256);
+
+	OPENFILENAMEW ofn = { sizeof(OPENFILENAMEW) };
+	ofn.hwndOwner = m_hWnd;
+	ofn.lpstrFilter = szFilter;
+	ofn.lpstrFile = szFile;
+	ofn.nMaxFile = MAX_PATH;
+	ofn.lpstrTitle = szTitle;
+	ofn.lpstrDefExt = L"exe";
+	ofn.Flags = OFN_EXPLORER | OFN_ENABLESIZING | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY | OFN_PATHMUSTEXIST;
+	if (GetOpenFileNameW(&ofn) && *szFile)
+	{
+		_SelectOrAddItem(szFile);
 	}
 }
 
@@ -582,9 +581,8 @@ void CBaseOpenAsDlg::_OnOk()
 	}
 }
 
-CBaseOpenAsDlg::CBaseOpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool fUri, bool fPreregistered, UINT uDlgId, UINT uDlgWithDescId, UINT uDlgProtocolId, UINT uBrowseTitleId)
+CBaseOpenAsDlg::CBaseOpenAsDlg(LPCWSTR lpszPath, IMMERSIVE_OPENWITH_FLAGS flags, bool fUri, bool fPreregistered, UINT uDlgId, UINT uDlgWithDescId, UINT uDlgProtocolId)
 	: CImpDialog(g_hInst, uDlgWithDescId)
-	, m_uBrowseTitleId(uBrowseTitleId)
 	, m_szExtOrProtocol{ 0 }
 	, m_flags(flags)
 	, m_fUri(fUri)

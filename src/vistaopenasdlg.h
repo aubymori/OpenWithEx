@@ -11,6 +11,7 @@
 class CVistaOpenAsDlg : public CBaseOpenAsDlg
 {
 private:
+	void _BrowseForProgram();
 	void _InitProgList();
 	wil::com_ptr<IAssocHandler> _GetSelectedItem();
 	void _SelectItemByIndex(int index);
