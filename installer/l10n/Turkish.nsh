@@ -6,4 +6,5 @@
 !insertmacro LANG_STRING STRING_LANGS "Diller"
 !insertmacro LANG_STRING STRING_EN_US "İngilizce (ABD)"
 !insertmacro LANG_STRING STRING_JA_JP "Japonca"
+!insertmacro LANG_STRING STRING_PT_BR "Portekizce (Brezilya)"
 !insertmacro LANG_STRING STRING_TR_TR "Türkçe"
