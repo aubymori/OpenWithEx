@@ -1,4 +1,4 @@
-!include MUI2.nsh
+﻿!include MUI2.nsh
 !include LogicLib.nsh
 !include x64.nsh
 !include WinVer.nsh
@@ -8,6 +8,7 @@
 # in Program Files won't work. Having two directory choices
 # would also be a mess.
 
+Unicode true
 Name "OpenWithEx"
 Outfile "build\OpenWithEx-setup-x64.exe"
 RequestExecutionLevel admin
@@ -128,20 +129,20 @@ SectionEnd
 !macroend
 
 SectionGroup "$(STRING_LANGS)"
-    Section "$(STRING_EN_US)"
+    Section "English (United States)"
         SectionIn RO
         !insertmacro InstallLang "en-US"
     SectionEnd
 
-	Section "$(STRING_JA_JP)"
+	Section "日本語"
         !insertmacro InstallLang "ja-JP"
     SectionEnd
 
-    Section "$(STRING_PT_BR)"
+    Section "Português (Brasil)"
         !insertmacro InstallLang "pt-BR"
     SectionEnd
 
-    Section "$(STRING_TR_TR)"
+    Section "Türkçe"
         !insertmacro InstallLang "tr-TR"
     SectionEnd
 SectionGroupEnd
