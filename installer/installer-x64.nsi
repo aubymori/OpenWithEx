@@ -48,6 +48,7 @@ ManifestSupportedOS all
 
 !insertmacro LANG_LOAD "English"
 !insertmacro LANG_LOAD "Japanese"
+!insertmacro LANG_LOAD "Portuguese"
 !insertmacro LANG_LOAD "Turkish"
 
 Function .onInit
@@ -134,6 +135,10 @@ SectionGroup "$(STRING_LANGS)"
 
 	Section "$(STRING_JA_JP)"
         !insertmacro InstallLang "ja-JP"
+    SectionEnd
+
+    Section "$(STRING_PT_BR)"
+        !insertmacro InstallLang "pt-BR"
     SectionEnd
 
     Section "$(STRING_TR_TR)"

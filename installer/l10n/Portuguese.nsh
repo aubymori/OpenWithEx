@@ -1,0 +1,10 @@
+!define LANG "Portuguese"
+!insertmacro LANG_STRING STRING_NOT_X64 "OpenWithEx não suporta sistemas de 32 bits."
+!insertmacro LANG_STRING STRING_NOT_WIN8 "OpenWithEx requer o Windows 8 ou superior."
+!insertmacro LANG_STRING STRING_CONFIG_SHORTCUT "Configurar OpenWithEx"
+
+!insertmacro LANG_STRING STRING_LANGS "Idiomas"
+!insertmacro LANG_STRING STRING_EN_US "Inglês (Estados Unidos)"
+!insertmacro LANG_STRING STRING_JA_JP "Japonês"
+!insertmacro LANG_STRING STRING_PT_BR "Português (Brasil)"
+!insertmacro LANG_STRING STRING_TR_TR "Turco"

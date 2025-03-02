@@ -6,4 +6,5 @@
 !insertmacro LANG_STRING STRING_LANGS "言語"
 !insertmacro LANG_STRING STRING_EN_US "英語（アメリカ）"
 !insertmacro LANG_STRING STRING_JA_JP "日本語"
+!insertmacro LANG_STRING STRING_PT_BR "ポルトガル語 (ブラジル)"
 !insertmacro LANG_STRING STRING_TR_TR "トルコ語"
