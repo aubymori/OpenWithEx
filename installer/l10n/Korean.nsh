@@ -2,4 +2,4 @@
 !insertmacro LANG_STRING STRING_NOT_X64 "OpenWithEx는 32비트 시스템을 지원하지 않습니다."
 !insertmacro LANG_STRING STRING_NOT_WIN8 "OpenWithEx에는 Windows 8 이상이 필요합니다."
 !insertmacro LANG_STRING STRING_CONFIG_SHORTCUT "OpenWithEx 구성"
-!insertmacro LANG_STRING STRING_LANGS "언어들"
+!insertmacro LANG_STRING STRING_LANGS "언어"
