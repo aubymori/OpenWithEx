@@ -2,34 +2,34 @@ LANGUAGE LANG_POLISH, 0x1
 
 STRINGTABLE
 {
-	IDS_ERR_EMBEDDING  "Operacja nie jest obs≥ugiwana"                              // Custom string.
-	IDS_ERR_NOPATH     "Nie okreúlono úcieøki"                                    // Custom string.
-	IDS_ERR_UNDOC      "Nie znaleziono wymaganej funkcji w bibliotece dynamicznego ≥πcza SHELL32.dll." // Custom string.
+	IDS_ERR_EMBEDDING  "Operacja nie jest obs≈Çugiwana"                              // Custom string.
+	IDS_ERR_NOPATH     "Nie okre≈õlono ≈õcie≈ºki"                                    // Custom string.
+	IDS_ERR_UNDOC      "Nie znaleziono wymaganej funkcji w bibliotece dynamicznego ≈ÇƒÖcza SHELL32.dll." // Custom string.
 	IDS_RECOMMENDED    "Zalecane programy" // shell32 7600 resource #29952
 	IDS_OTHER          "Inne programy"       // shell32 7600 resource #29953
 	IDS_RECOMMENDED_XP "Zalecane programy:" // shell32 2600/3790 resource #29952
 	IDS_OTHER_XP       "Inne programy:"       // shell32 2600/3790 resource #29953
 	IDS_PROGRAMS       "Inne programy"  // Broken up from shell32 7600 resource #9014
 	IDS_ALLFILES       "Wszystkie pliki" // Broken up from shell32 7600 resource #9014
-	IDS_BROWSETITLE    "Otwieranie za pomocπ." // shell32 7600 resource #9016
-	IDS_BROWSETITLE_XP "Otwieranie za pomocπ" // shell32 2600/3790 resource #9016
+	IDS_BROWSETITLE    "Otwieranie za pomocƒÖ." // shell32 7600 resource #9016
+	IDS_BROWSETITLE_XP "Otwieranie za pomocƒÖ" // shell32 2600/3790 resource #9016
 }
 
 // shell32 7600 resource #1063
 IDD_OPENWITH DIALOGEX 0, 0, 375, 271
 STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Otwieranie za pomocπ"
+CAPTION "Otwieranie za pomocƒÖ"
 LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
    CONTROL 134, 12297, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20 
-   CONTROL "Wybierz program, kt\xF3rego chcesz uøyÊ do otwarcia tego pliku:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8 
+   CONTROL "Wybierz program, kt\xF3rego chcesz u≈ºyƒá do otwarcia tego pliku:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8 
    CONTROL "Plik:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 20, 8 
    CONTROL "", 13582, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 60, 23, 208, 8 
    CONTROL "", 13829, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170 
-   CONTROL "&Zawsze uøywaj wybranego programu do otwierania tego typu plik\xF3w", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 211, 262, 10 
-   CONTROL "Prz&eglπdaj...", 13581, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 211, 50, 14 
-   CONTROL "Jeúli potrzebnego programu nie ma na liúcie ani na tym komputerze, moøesz <A ID=\"Browse\">poszukaÊ odpowiedniego programu w sieci Web</A>.", 13585, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 230, 359, 16 
+   CONTROL "&Zawsze u≈ºywaj wybranego programu do otwierania tego typu plik\xF3w", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 211, 262, 10 
+   CONTROL "Prz&eglƒÖdaj...", 13581, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 211, 50, 14 
+   CONTROL "Je≈õli potrzebnego programu nie ma na li≈õcie ani na tym komputerze, mo≈ºesz <A ID=\"Browse\">poszukaƒá odpowiedniego programu w sieci Web</A>.", 13585, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 230, 359, 16 
    CONTROL "OK", 1, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 264, 251, 50, 14 
    CONTROL "Anuluj", 2, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 251, 50, 14 
 }
@@ -37,20 +37,20 @@ FONT 8, "MS Shell Dlg"
 // shell32 7600 resource #1070
 IDD_OPENWITH_WITHDESC DIALOGEX 0, 0, 375, 271
 STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Otwieranie za pomocπ"
+CAPTION "Otwieranie za pomocƒÖ"
 LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
    CONTROL 134, 12297, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 20, 20 
-   CONTROL "Wybierz program, kt\xF3rego chcesz uøyÊ do otwarcia tego pliku:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8 
+   CONTROL "Wybierz program, kt\xF3rego chcesz u≈ºyƒá do otwarcia tego pliku:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8 
    CONTROL "Plik:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 20, 8 
    CONTROL "", 13582, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 60, 23, 208, 8 
    CONTROL "", 13829, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144 
-   CONTROL "&Wpisz opis, kt\xF3rego chcesz uøywaÊ dla tego typu plik\xF3w:", 13576, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 6, 182, 361, 8 
+   CONTROL "&Wpisz opis, kt\xF3rego chcesz u≈ºywaƒá dla tego typu plik\xF3w:", 13576, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 6, 182, 361, 8 
    CONTROL "", 13574, EDIT, ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 6, 193, 346, 14 
-   CONTROL "&Zawsze uøywaj wybranego programu do otwierania tego typu plik\xF3w", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 211, 234, 10 
-   CONTROL "Prz&eglπdaj...", 13581, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 211, 50, 14 
-   CONTROL "Jeúli potrzebnego programu nie ma na liúcie ani na tym komputerze, moøesz <A ID=\"Browse\">poszukaÊ odpowiedniego programu w sieci Web</A>.", 13585, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 230, 359, 16 
+   CONTROL "&Zawsze u≈ºywaj wybranego programu do otwierania tego typu plik\xF3w", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 211, 234, 10 
+   CONTROL "Prz&eglƒÖdaj...", 13581, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 211, 50, 14 
+   CONTROL "Je≈õli potrzebnego programu nie ma na li≈õcie ani na tym komputerze, mo≈ºesz <A ID=\"Browse\">poszukaƒá odpowiedniego programu w sieci Web</A>.", 13585, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 230, 359, 16 
    CONTROL "OK", 1, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 264, 251, 50, 14 
    CONTROL "Anuluj", 2, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 251, 50, 14 
 }
@@ -58,16 +58,16 @@ FONT 8, "MS Shell Dlg"
 // shell32 7600 resource #1072
 IDD_OPENWITH_PROTOCOL DIALOGEX 0, 0, 375, 220
 STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Otwieranie za pomocπ"
+CAPTION "Otwieranie za pomocƒÖ"
 LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
    CONTROL 134, 12297, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20 
-   CONTROL "Wybierz program, kt\xF3rego chcesz uøyÊ do otwarcia tego protoko≥u:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 220, 8 
-   CONTROL "Protok\xF3≥:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 30, 8 
+   CONTROL "Wybierz program, kt\xF3rego chcesz u≈ºyƒá do otwarcia tego protoko≈Çu:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 220, 8 
+   CONTROL "Protok\xF3≈Ç:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 30, 8 
    CONTROL "", 13582, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 70, 23, 208, 8 
    CONTROL "", 13829, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144 
-   CONTROL "&Zawsze korzystaj z wybranego programu do obs≥ugi tego protoko≥u", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 185, 234, 10 
+   CONTROL "&Zawsze korzystaj z wybranego programu do obs≈Çugi tego protoko≈Çu", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 185, 234, 10 
    CONTROL "OK", 1, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 264, 200, 50, 14 
    CONTROL "Anuluj", 2, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 200, 50, 14 
 }
@@ -75,19 +75,19 @@ FONT 8, "MS Shell Dlg"
 // shell32 2600/3790 resource #1063
 IDD_OPENWITH_XP DIALOGEX 0, 0, 260, 271
 STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Otwieranie za pomocπ"
+CAPTION "Otwieranie za pomocƒÖ"
 LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
 	CONTROL 0, IDD_OPENWITH_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
-	CONTROL "Wybierz program, kt\xF3rego chcesz uøyÊ do otwarcia tego pliku:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8
+	CONTROL "Wybierz program, kt\xF3rego chcesz u≈ºyƒá do otwarcia tego pliku:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8
 	CONTROL "Plik:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 20, 8
 	CONTROL "", IDD_OPENWITH_FILE, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 60, 23, 208, 8
 	CONTROL "&Programy", -1, BUTTON, BS_GROUPBOX | WS_CHILD | WS_VISIBLE, 6, 36, 245, 181
 	CONTROL "", IDD_OPENWITH_PROGLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 49, 225, 129, TVS_EX_DIMMEDCHECKBOXES
-	CONTROL "&Zawsze uøywaj wybranego programu do otwierania tego typu plik\xF3w", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 183, 202, 10
-	CONTROL "Prz&eglπdaj...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 196, 50, 14
-	CONTROL "Jeúli potrzebnego programu nie ma na liúcie ani na tym komputerze, moøesz <A ID=\"Browse\">poszukaÊ odpowiedniego programu w sieci Web</A>.", IDD_OPENWITH_LINK, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 222, 242, 16
+	CONTROL "&Zawsze u≈ºywaj wybranego programu do otwierania tego typu plik\xF3w", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 183, 202, 10
+	CONTROL "Prz&eglƒÖdaj...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 196, 50, 14
+	CONTROL "Je≈õli potrzebnego programu nie ma na licie ani na tym komputerze, mo≈ºesz <A ID=\"Browse\">poszukaƒá odpowiedniego programu w sieci Web</A>.", IDD_OPENWITH_LINK, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 222, 242, 16
 	CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 251, 50, 14
 	CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 251, 50, 14
 }
@@ -95,21 +95,21 @@ FONT 8, "MS Shell Dlg"
 // shell32 2600/3790 resource #1070
 IDD_OPENWITH_WITHDESC_XP DIALOGEX 0, 0, 260, 271
 STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Otwieranie za pomocπ"
+CAPTION "Otwieranie za pomocƒÖ"
 LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
 	CONTROL 0, IDD_OPENWITH_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
-	CONTROL "Wybierz program, kt\xF3rego chcesz uøyÊ do otwarcia tego pliku:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8
+	CONTROL "Wybierz program, kt\xF3rego chcesz u≈ºyƒá do otwarcia tego pliku:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8
 	CONTROL "Plik:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 20, 8
 	CONTROL "", IDD_OPENWITH_FILE, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 60, 23, 208, 8
 	CONTROL "&Programy", -1, BUTTON, BS_GROUPBOX | WS_CHILD | WS_VISIBLE, 6, 36, 245, 181
 	CONTROL "", IDD_OPENWITH_PROGLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 49, 225, 99, TVS_EX_DIMMEDCHECKBOXES
-	CONTROL "&Wpisz opis, kt\xF3rego chcesz uøywaÊ dla tego typu plik\xF3w:", 13576, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 18, 152, 195, 8
+	CONTROL "&Wpisz opis, kt\xF3rego chcesz u≈ºywaƒá dla tego typu plik\xF3w:", 13576, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 18, 152, 195, 8
 	CONTROL "", IDD_OPENWITH_DESC, EDIT, ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 18, 163, 205, 14
-	CONTROL "&Zawsze uøywaj wybranego programu do otwierania tego typu plik\xF3w", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 183, 202, 10
-	CONTROL "Prz&eglπdaj...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 196, 50, 14
-	CONTROL "Jeúli potrzebnego programu nie ma na liúcie ani na tym komputerze, moøesz <A ID=\"Browse\">poszukaÊ odpowiedniego programu w sieci Web</A>.", IDD_OPENWITH_LINK, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 222, 242, 16
+	CONTROL "&Zawsze u≈ºywaj wybranego programu do otwierania tego typu plik\xF3w", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 183, 202, 10
+	CONTROL "Prz&eglƒÖdaj...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 196, 50, 14
+	CONTROL "Je≈õli potrzebnego programu nie ma na li≈õcie ani na tym komputerze, mo≈ºesz <A ID=\"Browse\">poszukaƒá odpowiedniego programu w sieci Web</A>.", IDD_OPENWITH_LINK, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 222, 242, 16
 	CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 251, 50, 14
 	CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 251, 50, 14
 }
@@ -117,17 +117,17 @@ FONT 8, "MS Shell Dlg"
 // Custom; XP did not support protocols.
 IDD_OPENWITH_PROTOCOL_XP DIALOGEX 0, 0, 260, 226
 STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Otwieranie za pomocπ"
+CAPTION "Otwieranie za pomocƒÖ"
 LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
 	CONTROL 0, IDD_OPENWITH_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20 
-	CONTROL "Wybierz program, kt\xF3rego chcesz uøyÊ do otwarcia tego protoko≥u:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8 
-	CONTROL "ProtokÛ≥:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 30, 8 
+	CONTROL "Wybierz program, kt\xF3rego chcesz u≈ºyƒá do otwarcia tego protoko≈Çu:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8 
+	CONTROL "Protok√≥≈Ç:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 30, 8 
 	CONTROL "", IDD_OPENWITH_FILE, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 70, 23, 208, 8 
 	CONTROL "&Programy", -1, BUTTON, BS_GROUPBOX | WS_CHILD | WS_VISIBLE, 6, 36, 245, 164 
 	CONTROL "", IDD_OPENWITH_PROGLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 49, 225, 129 , TVS_EX_DIMMEDCHECKBOXES
-	CONTROL "&Zawsze korzystaj z wybranego programu do obs≥ugi tego protoko≥u", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 183, 202, 10 
+	CONTROL "&Zawsze korzystaj z wybranego programu do obs≈Çugi tego protoko≈Çu", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 183, 202, 10 
 	CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 206, 50, 14 
 	CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 206, 50, 14 
 }
@@ -136,15 +136,15 @@ FONT 8, "MS Shell Dlg"
 // shell32 2195 resource #1063
 IDD_OPENWITH_2K DIALOGEX 0, 0, 251, 174
 STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Otwieranie za pomocπ"
+CAPTION "Otwieranie za pomocƒÖ"
 LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
    CONTROL 134, 12297, STATIC, SS_ICON | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20 
-   CONTROL "Kliknij program, kt\xF3rego chcesz uøywaÊ do otwierania Ñ%sî.\nJeúli øπdanego programu nie ma na liúcie, kliknij przycisk Inne.", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 205, 27 
-   CONTROL "&Wybierz program, kt\xF3rego chcesz uøywaÊ:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 39, 205, 8 
+   CONTROL "Kliknij program, kt\xF3rego chcesz u≈ºywaƒá do otwierania ‚Äû%s‚Äù.\nJe≈õli ≈ºƒÖdanego programu nie ma na li≈õcie, kliknij przycisk Inne.", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 205, 27 
+   CONTROL "&Wybierz program, kt\xF3rego chcesz u≈ºywaƒá:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 39, 205, 8 
    CONTROL "", 13829, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 36, 50, 205, 80 
-   CONTROL "&Zawsze uøywaj tego programu do otwierania tych plik\xF3w", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 36, 136, 205, 10 
+   CONTROL "&Zawsze u≈ºywaj tego programu do otwierania tych plik\xF3w", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 36, 136, 205, 10 
    CONTROL "OK", 1, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 84, 154, 50, 14 
    CONTROL "Anuluj", 2, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 138, 154, 50, 14 
    CONTROL "&Inne...", 13575, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 192, 154, 50, 14 
@@ -153,17 +153,17 @@ FONT 8, "MS Shell Dlg"
 // shell32 2195 resource #1070
 IDD_OPENWITH_WITHDESC_2K DIALOGEX 0, 0, 238, 210
 STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Otwieranie za pomocπ..."
+CAPTION "Otwieranie za pomocƒÖ..."
 LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
    CONTROL 134, 12297, STATIC, SS_ICON | WS_CHILD | WS_VISIBLE, 7, 7, 20, 20 
-   CONTROL "Kliknij program, kt\xF3rego chcesz uøywaÊ do otwierania pliku Ñ%sî.\nJeúli øπdanego programu nie ma na liúcie, kliknij przycisk Inne.", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 7, 195, 32 
+   CONTROL "Kliknij program, kt\xF3rego chcesz u≈ºywaƒá do otwierania pliku ‚Äû%s‚Äù.\nJe≈õli ≈ºƒÖdanego programu nie ma na li≈õcie, kliknij przycisk Inne.", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 7, 195, 32 
    CONTROL "&Opis dla plik\xF3w typu:", 13576, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 41, 195, 8 
    CONTROL "", 13574, EDIT, ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 52, 195, 14 
-   CONTROL "&Wybierz program, kt\xF3rego chcesz uøywaÊ:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 70, 195, 8 
+   CONTROL "&Wybierz program, kt\xF3rego chcesz u≈ºywaƒá:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 70, 195, 8 
    CONTROL "", 13829, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 36, 81, 195, 80 
-   CONTROL "&Zawsze uøywaj tego programu do otwierania tych plik\xF3w", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 35, 166, 195, 10 
+   CONTROL "&Zawsze u≈ºywaj tego programu do otwierania tych plik\xF3w", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 35, 166, 195, 10 
    CONTROL "OK", 1, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 73, 188, 50, 14 
    CONTROL "Anuluj", 2, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 127, 188, 50, 14 
    CONTROL "&Inne...", 13575, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 181, 188, 50, 14 
@@ -177,10 +177,10 @@ LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
 	CONTROL 0, IDD_OPENWITH_ICON, STATIC, SS_ICON | WS_CHILD | WS_VISIBLE, 7, 7, 25, 20
-	CONTROL "Kliknij program, kt\xF3rego chcesz uøywaÊ do otwierania pliku '%s'.", IDD_OPENWITH_TEXT, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 172, 27
-	CONTROL "&Wybierz program, kt\xF3rego chcesz uøywaÊ:, -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 39, 172, 8
+	CONTROL "Kliknij program, kt\xF3rego chcesz u≈ºywaƒá do otwierania pliku '%s'.", IDD_OPENWITH_TEXT, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 172, 27
+	CONTROL "&Wybierz program, kt\xF3rego chcesz u≈ºywaƒá:, -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 39, 172, 8
 	CONTROL "", IDD_OPENWITH_PROGLIST, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 50, 172, 80
-	CONTROL "&Zawsze uøywaj tego programu do otwierania tego protoko≥u", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 36, 136, 165, 10
+	CONTROL "&Zawsze u≈ºywaj tego programu do otwierania tego protoko≈Çu", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 36, 136, 165, 10
 	CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 104, 154, 50, 14
 	CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 158, 154, 50, 14
 }
@@ -192,10 +192,10 @@ CAPTION "Otw\xF3rz z"
 LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
-   CONTROL "&Wybierz program, kt\xF3rego chcesz uøywaÊ:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 7, 46, 169, 8 
+   CONTROL "&Wybierz program, kt\xF3rego chcesz u≈ºywaƒá:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 7, 46, 169, 8 
    CONTROL "", 13829, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 56, 202, 78 
-   CONTROL "Kliknij program, kt\xF3rego chcesz uøywaÊ do otwarcia pliku '%s'.\nJeúli potrzebny program nie wystÍpuje na liúcie, kliknij przycisk Inne.", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 7, 7, 202, 32 
-   CONTROL "D&o otwierania tego typu pliku zawsze uøywaj tego programu", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 141, 205, 10 
+   CONTROL "Kliknij program, kt\xF3rego chcesz u≈ºywaƒá do otwarcia pliku '%s'.\nJe≈õli potrzebny program nie wystƒôpuje na li≈õcie, kliknij przycisk Inne.", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 7, 7, 202, 32 
+   CONTROL "D&o otwierania tego typu pliku zawsze u≈ºywaj tego programu", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 141, 205, 10 
    CONTROL "OK", 1, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_TABSTOP, 47, 157, 50, 14 
    CONTROL "Anuluj", 2, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 101, 157, 50, 14 
    CONTROL "&Inne...", 13575, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 155, 157, 50, 14 
@@ -208,12 +208,12 @@ CAPTION "Otw\xF3rz z"
 LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
-   CONTROL "Kliknij program, kt\xF3rego chcesz uøywaÊ do otwierania pliku '%s'.\nJeúli potrzebny program nie wystÍpuje na liúcie, kliknij przycisk Inne.", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 7, 7, 198, 32 
+   CONTROL "Kliknij program, kt\xF3rego chcesz u≈ºywaƒá do otwierania pliku '%s'.\nJe≈õli potrzebny program nie wystƒôpuje na li≈õcie, kliknij przycisk Inne.", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 7, 7, 198, 32 
    CONTROL "&Opis plik\xF3w typu '%s':", 13576, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 7, 43, 197, 8 
    CONTROL "", 13574, EDIT, ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 7, 56, 197, 14 
-   CONTROL "&Wybierz program, kt\xF3rego chcesz uøywaÊ:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 7, 77, 197, 8 
+   CONTROL "&Wybierz program, kt\xF3rego chcesz u≈ºywaƒá:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 7, 77, 197, 8 
    CONTROL "", 13829, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 87, 197, 78 
-   CONTROL "&Zawsze uøywaj tego programu do otwierania pliku tego typu", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 172, 203, 10 
+   CONTROL "&Zawsze u≈ºywaj tego programu do otwierania pliku tego typu", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 172, 203, 10 
    CONTROL "OK", 1, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_TABSTOP, 47, 190, 50, 14 
    CONTROL "Anuluj", 2, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 101, 190, 49, 14 
    CONTROL "&Inne...", 13575, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 155, 190, 50, 14 
@@ -226,10 +226,10 @@ CAPTION "Otw\xF3rz z"
 LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
-	CONTROL "&Wybierz program, kt\xF3rego chcesz uøywaÊ:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 7, 36, 169, 8
+	CONTROL "&Wybierz program, kt\xF3rego chcesz u≈ºywaƒá:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 7, 36, 169, 8
 	CONTROL "", IDD_OPENWITH_PROGLIST, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 7, 46, 197, 78
-	CONTROL "Kliknij program, kt\xF3rego chcesz uøywaÊ do otwarcia pliku '%s'.", IDD_OPENWITH_TEXT, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 7, 7, 198, 24
-	CONTROL "Do otwierania tego protoko≥u zawsze uøywaj tego programul", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 131, 198, 10
+	CONTROL "Kliknij program, kt\xF3rego chcesz u≈ºywaƒá do otwarcia pliku '%s'.", IDD_OPENWITH_TEXT, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 7, 7, 198, 24
+	CONTROL "Do otwierania tego protoko≈Çu zawsze u≈ºywaj tego programu", IDD_OPENWITH_ASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 131, 198, 10
 	CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_TABSTOP, 101, 157, 50, 14
 	CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 155, 157, 50, 14
 }
@@ -237,16 +237,16 @@ FONT 8, "MS Shell Dlg"
 // shell32 7600 resource #1091
 IDD_CANTOPEN DIALOGEX 0, 0, 279, 146
 STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Otwieranie za pomocπ"
+CAPTION "Otwieranie za pomocƒÖ"
 LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
    CONTROL 134, 12297, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20 
-   CONTROL "Wybierz program, kt\xF3rego chcesz uøyÊ do otwarcia tego protoko≥u:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 220, 8 
-   CONTROL "Protok\xF3≥:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 30, 8 
+   CONTROL "Wybierz program, kt\xF3rego chcesz u≈ºyƒá do otwarcia tego protoko≈Çu:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 220, 8 
+   CONTROL "Protok\xF3≈Ç:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 30, 8 
    CONTROL "", 13582, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 70, 23, 208, 8 
    CONTROL "", 13829, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144 
-   CONTROL "&Zawsze korzystaj z wybranego programu do obs≥ugi tego protoko≥u", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 185, 234, 10 
+   CONTROL "&Zawsze korzystaj z wybranego programu do obs≈Çugi tego protoko≈Çu", 13577, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 185, 234, 10 
    CONTROL "OK", 1, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 264, 200, 50, 14 
    CONTROL "Anuluj", 2, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 200, 50, 14 
 }
@@ -259,13 +259,13 @@ LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
    CONTROL 134, 12297, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20 
-   CONTROL "System Windows nie moøe otworzyÊ tego pliku:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8 
+   CONTROL "System Windows nie mo≈ºe otworzyƒá tego pliku:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8 
    CONTROL "Plik:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 20, 8 
    CONTROL "", 13582, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 60, 23, 208, 8 
-   CONTROL "Aby otworzyÊ ten plik, system Windows musi wiedzieÊ, w kt\xF3rym programie zosta≥ on utworzony. System Windows moøe przejúÊ do trybu online, aby wyszukaÊ program automatycznie, lub pozwoliÊ Ci wybraÊ go z listy program\xF3w znajdujπcych siÍ na komputerze.", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 39, 257, 33 
-   CONTROL "Co chcesz zrobiÊ?", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 77, 139, 8 
-   CONTROL "&UøyÊ us≥ugi sieci Web do znalezienia odpowiedniego programu", 13578, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 9, 91, 215, 10 
-   CONTROL "&WybraÊ program z listy", 13579, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 9, 104, 194, 10 
+   CONTROL "Aby otworzyƒá ten plik, system Windows musi wiedzieƒá, w kt\xF3rym programie zosta≈Ç on utworzony. System Windows mo≈ºe przej≈õƒá do trybu online, aby wyszukaƒá program automatycznie, lub pozwoliƒá Ci wybraƒá go z listy program\xF3w znajdujƒÖcych siƒô na komputerze.", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 39, 257, 33 
+   CONTROL "Co chcesz zrobiƒá?", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 77, 139, 8 
+   CONTROL "&U≈ºyƒá us≈Çugi sieci Web do znalezienia odpowiedniego programu", 13578, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 9, 91, 215, 10 
+   CONTROL "&Wybraƒá program z listy", 13579, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 9, 104, 194, 10 
    CONTROL "OK", 1, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 156, 121, 50, 14 
    CONTROL "Anuluj", 2, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 211, 121, 50, 14 
 }
@@ -278,10 +278,10 @@ LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
    CONTROL "", 12297, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20 
-   CONTROL "Pr\xF3bujesz otworzyÊ plik typu Ñ%sî (%s)", 12292, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 7, 225, 19 
-   CONTROL "Pliki te uøywane sπ przez system operacyjny i przez r\xF3øne programy. Edytowanie ich lub modyfikowanie moøe spowodowaÊ uszkodzenie systemu.", 12293, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 30, 228, 24 
-   CONTROL "Jeúli w dalszym ciπgu chcesz otworzyÊ ten plik, kliknij przycisk Otw\xF3rz za pomocπ. W przeciwnym razie kliknij przycisk Anuluj.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 59, 216, 19 
-   CONTROL "&Otw\xF3rz za pomocπ...", 13169, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 129, 81, 81, 14 
+   CONTROL "Pr\xF3bujesz otworzyƒá plik typu ‚Äû%s‚Äù (%s)", 12292, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 7, 225, 19 
+   CONTROL "Pliki te u≈ºywane sƒÖ przez system operacyjny i przez r\xF3≈ºne programy. Edytowanie ich lub modyfikowanie mo≈ºe spowodowaƒá uszkodzenie systemu.", 12293, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 30, 228, 24 
+   CONTROL "Je≈õli w dalszym ciƒÖgu chcesz otworzyƒá ten plik, kliknij przycisk Otw\xF3rz za pomocƒÖ. W przeciwnym razie kliknij przycisk Anuluj.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 59, 216, 19 
+   CONTROL "&Otw\xF3rz za pomocƒÖ...", 13169, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 129, 81, 81, 14 
    CONTROL "Anuluj", 2, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 214, 81, 53, 14 
 }
 
@@ -293,9 +293,9 @@ LANGUAGE LANG_POLISH, 0x1
 FONT 8, "MS Shell Dlg"
 {
    CONTROL "", 12297, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20 
-   CONTROL "Pr\xF3bujesz otworzyÊ plik typu Ñ%sî (%s)", 12292, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 7, 225, 19 
-   CONTROL "Pliki te uøywane sπ przez system operacyjny i przez r\xF3øne programy. Edytowanie ich lub modyfikowanie moøe spowodowaÊ uszkodzenie systemu.", 12293, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 30, 228, 24 
-   CONTROL "Jeúli w dalszym ciπgu chcesz otworzyÊ ten plik, kliknij przycisk Otw\xF3rz za pomocπ; w przeciwnym razie kliknij przycisk Anuluj.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 59, 216, 19 
-   CONTROL "&Otw\xF3rz za pomocπ...", 13169, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 129, 81, 81, 14 
+   CONTROL "Pr\xF3bujesz otworzyƒá plik typu ‚Äû%s‚Äù (%s)", 12292, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 7, 225, 19 
+   CONTROL "Pliki te u≈ºywane sƒÖ przez system operacyjny i przez r\xF3≈ºne programy. Edytowanie ich lub modyfikowanie mo≈ºe spowodowaƒá uszkodzenie systemu.", 12293, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 30, 228, 24 
+   CONTROL "Je≈õli w dalszym ciƒÖgu chcesz otworzyƒá ten plik, kliknij przycisk Otw\xF3rz za pomocƒÖ; w przeciwnym razie kliknij przycisk Anuluj.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 59, 216, 19 
+   CONTROL "&Otw\xF3rz za pomocƒÖ...", 13169, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 129, 81, 81, 14 
    CONTROL "Anuluj", 2, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 214, 81, 53, 14 
 }
