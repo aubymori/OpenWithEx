@@ -1,5 +1,9 @@
+﻿#pragma code_page(65001) // enable UTF-8
+
 #include <windows.h>
 #include "resource.h"
+
+LANGUAGE LANG_POLISH, 0x1
 
 IDD_OPENWITHEXCONFIG DIALOGEX 0, 0, 197, 93
 STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
