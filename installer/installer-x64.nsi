@@ -49,6 +49,7 @@ ManifestSupportedOS all
 
 !insertmacro LANG_LOAD "English"
 !insertmacro LANG_LOAD "Japanese"
+!insertmacro LANG_LOAD "Polish"
 !insertmacro LANG_LOAD "Korean"
 !insertmacro LANG_LOAD "Portuguese"
 !insertmacro LANG_LOAD "Turkish"
@@ -137,6 +138,10 @@ SectionGroup "$(STRING_LANGS)"
 
 	Section "日本語"
         !insertmacro InstallLang "ja-JP"
+    SectionEnd
+
+    Section "Polish"
+        !insertmacro InstallLang "pl-PL"
     SectionEnd
 
     Section "Português (Brasil)"
