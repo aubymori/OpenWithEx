@@ -134,10 +134,12 @@ SectionGroup "$(STRING_LANGS)"
         SectionIn RO
         !insertmacro InstallLang "en-US"
     SectionEnd
+
 	Section "日本語"
         !insertmacro InstallLang "ja-JP"
     SectionEnd
-	Section "Polski"
+
+    Section "Polski"
         !insertmacro InstallLang "pl-PL"
     SectionEnd
 
