@@ -50,6 +50,7 @@ ManifestSupportedOS all
 !insertmacro LANG_LOAD "English"
 !insertmacro LANG_LOAD "Japanese"
 !insertmacro LANG_LOAD "Polish"
+!insertmacro LANG_LOAD "Korean"
 !insertmacro LANG_LOAD "Portuguese"
 !insertmacro LANG_LOAD "Turkish"
 
@@ -149,6 +150,10 @@ SectionGroup "$(STRING_LANGS)"
 
     Section "Türkçe"
         !insertmacro InstallLang "tr-TR"
+    SectionEnd
+
+    Section "한국어"
+	!insertmacro InstallLang "ko-KR"
     SectionEnd
 SectionGroupEnd
 
