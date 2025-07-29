@@ -403,8 +403,9 @@ void CBaseOpenAsDlg::_OnOk()
 
 			bool fCancelAssoc = false;
 
-			AHTYPE ahType;
-			pAssocInfo->GetHandlerType(&ahType);
+			AHTYPE ahType = AHTYPE_APPLICATION; // FIX(isabella): Avoid uninitialised memory.
+			if (pAssocInfo)
+				pAssocInfo->GetHandlerType(&ahType);
 
 			/*
 			 * KNOWING THE PROGID IS IMPORTANT!
@@ -424,30 +425,32 @@ void CBaseOpenAsDlg::_OnOk()
 			 */
 
 			 // Get the ProgID of the element:
-			wil::unique_cotaskmem_string lpszProgId = nullptr;
+			wil::unique_cotaskmem_string spszProgId = nullptr;
 
 			if (pAssocInfo)
 			{
 				// If we could get the IAssocHandlerInfo interface, then we'll call
 				// GetInternalProgID. This automatically handles generated ProgIDs
 				// like "Applications\notepad++.exe".
-				if (!(ahType & AHTYPE_ANY_PROGID | AHTYPE_PROGID | AHTYPE_MACHINEDEFAULT))
+				if (ahType & (AHTYPE_ANY_PROGID | AHTYPE_PROGID | AHTYPE_MACHINEDEFAULT))
 				{
 					// If our association handler already supports ProgIDs, then we'll
 					// just retrieve that ProgID.
 					pAssocInfo->GetInternalProgID(
 						APF_DEFAULT,
-						&lpszProgId
+						&spszProgId
 					);
 				}
 				else
 				{
 					// If we don't already have a ProgID on our object, then we'll have
-					// to tell the system to make one. The following is what TWinUI does,
-					// although I'm not sure the significance of APF_APPLICATION here.
+					// to tell the system to make one. The following is what TWinUI does.
+					// APF_APPLICATION is simply used by Shell32 to tell it to add an
+					// "Applications\" prefix; if it is not specified, then
+					// GetInternalProgID() just calls into the public GetProgID() method.
 					pAssocInfo->GetInternalProgID(
 						APF_APPLICATION,
-						&lpszProgId
+						&spszProgId
 					);
 
 					wil::com_ptr<IAssocHandlerMakeDefault> pMakeDefault = nullptr;
@@ -462,10 +465,10 @@ void CBaseOpenAsDlg::_OnOk()
 				// If we couldn't, then we'll fall back to the IObjectWithProgID
 				// method. This does not handle the above case, so it's inherently
 				// limited.
-				pProgIdObj->GetProgID(&lpszProgId);
+				pProgIdObj->GetProgID(&spszProgId);
 			}
 
-			if (!lpszProgId)
+			if (!spszProgId)
 			{
 				// If we couldn't get any ProgID at all, then we cancel the registration.
 				OutputDebugStringW(L"Application doesn't have a ProgID; exiting.");
@@ -475,13 +478,13 @@ void CBaseOpenAsDlg::_OnOk()
 			if (!fCancelAssoc)
 			{
 				OutputDebugStringW(L"\nProgID: ");
-				OutputDebugStringW(lpszProgId.get());
+				OutputDebugStringW(spszProgId.get());
 				OutputDebugStringW(L"\n");
 
 				SetUserChoiceAndHashResult userChoiceResult =
 					SetUserChoiceAndHash(
 						(LPCWSTR)&m_szExtOrProtocol,
-						lpszProgId.get()
+						spszProgId.get()
 					);
 			}
 		}
