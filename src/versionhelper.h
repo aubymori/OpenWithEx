@@ -62,7 +62,6 @@ public:
 	inline static const bool IsWindows8OrGreater()
 	{
 		return GetVersionInfo()->dwMajorVersion >= 6 &&
-			   GetVersionInfo()->dwMinorVersion >= 2 &&
 			   GetVersionInfo()->dwBuildNumber >= 9200;
 	}
 
