@@ -136,8 +136,28 @@ HRESULT SetDefaultAssociationForAfter1703(LPCWSTR szExtOrProtocol, IAssocHandler
  */
 HRESULT SetDefaultAssociationForPre1703(LPCWSTR szExtOrProtocol, IAssocHandler *pAssocHandler)
 {
-	wil::com_ptr<IAssocHandlerMakeDefault_Win8> pMakeDefault = nullptr;
-	if (SUCCEEDED(pAssocHandler->QueryInterface(IID_PPV_ARGS(&pMakeDefault))))
+	// The Win10 1511 version is the latest version.
+	// It has the same exact interface definition as the other pre-1703 versions,
+	// but has a different IID.
+	wil::com_ptr<IAssocHandlerMakeDefault_Win10_1511> pMakeDefault = nullptr;
+
+	// The IID can differ, so we'll try multiple different ones in order from latest
+	// to oldest:
+	HRESULT hr = pAssocHandler->QueryInterface(
+		__uuidof(IAssocHandlerMakeDefault_Win10_1511),
+		(void **)&pMakeDefault
+	);
+
+	if (hr == E_NOINTERFACE)
+	{
+		// Try the older Windows 8.0 through release build of Windows 10 IID.
+		hr = pAssocHandler->QueryInterface(
+			__uuidof(IAssocHandlerMakeDefault_Win8),
+			(void **)&pMakeDefault
+		);
+	}
+
+	if (SUCCEEDED(hr))
 	{
 		// Immersive UI sends nullptr in Windows 8.1 TWinUI too. Furthermore, that
 		// argument does not seem to be used for anything in the Windows 8.0
@@ -145,7 +165,7 @@ HRESULT SetDefaultAssociationForPre1703(LPCWSTR szExtOrProtocol, IAssocHandler *
 		return pMakeDefault->MakeDefaultPriv(nullptr);
 	}
 
-	return E_FAIL;
+	return hr;
 }
 
 /**

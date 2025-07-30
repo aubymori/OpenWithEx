@@ -93,6 +93,7 @@ IAssocHandlerPromptCount : public IUnknown
 	STDMETHOD(UpdatePromptCount)(ASSOCHANDLER_PROMPTUPDATE_BEHAVIOR) PURE;
 };
 
+// IID used from Windows 8.0 through Windows 10 build 10240.
 MIDL_INTERFACE("F04004DD-2583-40BA-ADED-4ACF5A04000C")
 IAssocHandlerMakeDefault_Win8 : public IUnknown
 {
@@ -109,6 +110,10 @@ IAssocHandlerMakeDefault_Win8 : public IUnknown
 	 */
 	STDMETHOD(MakeDefaultPriv)(LPCWSTR szUseless) PURE;
 };
+
+// IID used from Windows 10 version 1511 through 1607.
+MIDL_INTERFACE("6BF5F7F5-698A-401D-801A-B252D7CC3222")
+IAssocHandlerMakeDefault_Win10_1511 : public IAssocHandlerMakeDefault_Win8 {};
 
 MIDL_INTERFACE("571A5DB3-3B08-441F-B796-68E8164259BB")
 IAssocHandlerMakeDefault : public IUnknown
