@@ -59,6 +59,13 @@ public:
 	}
 
 	// Specific version helpers.
+	inline static const bool IsWindows8OrGreater()
+	{
+		return GetVersionInfo()->dwMajorVersion >= 6 &&
+			   GetVersionInfo()->dwMinorVersion >= 2 &&
+			   GetVersionInfo()->dwBuildNumber >= 9200;
+	}
+
 	inline static const bool IsWindows10OrGreater()
 	{
 		return GetVersionInfo()->dwMajorVersion >= 10 &&

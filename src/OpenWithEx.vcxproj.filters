@@ -63,6 +63,9 @@
     <ClCompile Include="classicopenasdlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SetDefaultAssociation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="openwithex.rc">
@@ -224,6 +227,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="classicopenasdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetDefaultAssociation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

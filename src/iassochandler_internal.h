@@ -93,13 +93,30 @@ IAssocHandlerPromptCount : public IUnknown
 	STDMETHOD(UpdatePromptCount)(ASSOCHANDLER_PROMPTUPDATE_BEHAVIOR) PURE;
 };
 
+MIDL_INTERFACE("F04004DD-2583-40BA-ADED-4ACF5A04000C")
+IAssocHandlerMakeDefault_Win8 : public IUnknown
+{
+	/**
+	 * Private interface to make an association handler the default one
+	 * in Windows 8 and early versions of Windows 10.
+	 *
+	 * This was later removed and replaced with a stub.
+	 *
+	 * @param szUseless  This was probably equivalent to the szDescription
+	 *                   argument in the public IAssocHandler::MakeDefault
+	 *                   definition, but it's not read at all by the
+	 *                   implementation of this function in Shell32.
+	 */
+	STDMETHOD(MakeDefaultPriv)(LPCWSTR szUseless) PURE;
+};
+
 MIDL_INTERFACE("571A5DB3-3B08-441F-B796-68E8164259BB")
 IAssocHandlerMakeDefault : public IUnknown
 {
-	/**
-	 * This method was removed at some point.
+	/*
+	 * This is a stub that will always return E_NOTIMPL after 1703.
 	 */
-	STDMETHOD(placeholder0)(void *) PURE;
+	STDMETHOD(MakeDefaultPriv)(LPCWSTR szUseless) PURE;
 	
 	/*
 	 * Tries to register the application association.

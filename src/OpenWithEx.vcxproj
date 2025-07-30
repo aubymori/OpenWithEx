@@ -322,6 +322,7 @@ del "$(IntermediateOutputPath)temp.res"</Command>
     <ClCompile Include="baseopenasdlg.cpp" />
     <ClCompile Include="openwithex.cpp" />
     <ClCompile Include="openwithexlauncher.cpp" />
+    <ClCompile Include="SetDefaultAssociation.cpp" />
     <ClCompile Include="test\test_userchoice.cpp" />
     <ClCompile Include="versionhelper.h" />
     <ClCompile Include="shellprotectedreglock.cpp" />
@@ -352,6 +353,7 @@ del "$(IntermediateOutputPath)temp.res"</Command>
     <ClInclude Include="openwithex.h" />
     <ClInclude Include="iopenwithlauncher.h" />
     <ClInclude Include="openwithexlauncher.h" />
+    <ClInclude Include="SetDefaultAssociation.h" />
     <ClInclude Include="shellprotectedreglock.h" />
     <ClInclude Include="test\test_userchoice.h" />
     <ClInclude Include="util.h" />
