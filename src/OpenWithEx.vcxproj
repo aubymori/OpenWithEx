@@ -25,7 +25,7 @@
     <_DefToLib Include="defs\Win64\*.def" />
   </ItemGroup>
   <Target Name="_GenerateDefLib" BeforeTargets="Link" Inputs="@(_DefToLib)" Outputs="@(_DefToLib->'$(IntDir)%(Filename).lib')">
-    <Exec Command="lib /nologo /def:&quot;%(_DefToLib.Identity)&quot; /machine:$(PlatformTargetAsMSBuildArchitecture) /out:&quot;$(IntDir)%(Filename).lib&quot;" />
+    <Exec Command="lib /nologo /def:&quot;%(_DefToLib.Identity)&quot; /machine:$(PlatformShortName) /out:&quot;$(IntDir)%(Filename).lib&quot;" />
   </Target>
   <PropertyGroup>
     <_GeneratedLibs>@(_DefToLib->'%(Filename).lib')</_GeneratedLibs>
