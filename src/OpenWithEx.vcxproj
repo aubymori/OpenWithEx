@@ -108,7 +108,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MinimumRequiredVersion>6.0</MinimumRequiredVersion>
-      <AdditionalDependencies>shell32.lib;$(OutDir)shell32p.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;crypt32.lib;bcrypt.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shell32.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;crypt32.lib;bcrypt.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalManifestDependencies>"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'";%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
     </Link>
     <ResourceCompile>
@@ -145,9 +145,6 @@ muirct -c "$(TargetPath)" -e "$(OutDir)ko-KR\$(TargetFileName).mui"
 
 del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>lib /def:shell32p.def /machine:$(PlatformTargetAsMSBuildArchitecture) /out:"$(OutDir)shell32p.lib"</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -167,7 +164,7 @@ del "$(IntermediateOutputPath)temp.res"</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MinimumRequiredVersion>6.0</MinimumRequiredVersion>
-      <AdditionalDependencies>shell32.lib;$(OutDir)shell32p.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;crypt32.lib;bcrypt.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shell32.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;crypt32.lib;bcrypt.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalManifestDependencies>"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'";%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
     </Link>
     <ResourceCompile>
@@ -204,9 +201,6 @@ muirct -c "$(TargetPath)" -e "$(OutDir)ko-KR\$(TargetFileName).mui"
 
 del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>lib /def:shell32p.def /machine:$(PlatformTargetAsMSBuildArchitecture) /out:"$(OutDir)shell32p.lib"</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -224,7 +218,7 @@ del "$(IntermediateOutputPath)temp.res"</Command>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MinimumRequiredVersion>6.0</MinimumRequiredVersion>
-      <AdditionalDependencies>shell32.lib;$(OutDir)shell32p.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;crypt32.lib;bcrypt.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shell32.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;crypt32.lib;bcrypt.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalManifestDependencies>"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'";%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
     </Link>
     <ResourceCompile>
@@ -261,9 +255,6 @@ muirct -c "$(TargetPath)" -e "$(OutDir)ko-KR\$(TargetFileName).mui"
 
 del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>lib /def:shell32p.def /machine:$(PlatformTargetAsMSBuildArchitecture) /out:"$(OutDir)shell32p.lib"</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -284,7 +275,7 @@ del "$(IntermediateOutputPath)temp.res"</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <MinimumRequiredVersion>6.0</MinimumRequiredVersion>
-      <AdditionalDependencies>shell32.lib;$(OutDir)shell32p.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;crypt32.lib;bcrypt.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shell32.lib;shlwapi.lib;comctl32.lib;uxtheme.lib;crypt32.lib;bcrypt.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalManifestDependencies>"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'";%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
     </Link>
     <ResourceCompile>
@@ -321,9 +312,6 @@ muirct -c "$(TargetPath)" -e "$(OutDir)ko-KR\$(TargetFileName).mui"
 
 del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>lib /def:shell32p.def /machine:$(PlatformTargetAsMSBuildArchitecture) /out:"$(OutDir)shell32p.lib"</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="assocuserchoice.cpp" />
@@ -407,9 +395,6 @@ del "$(IntermediateOutputPath)temp.res"</Command>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="muiconfig.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="shell32p.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

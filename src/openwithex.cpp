@@ -17,6 +17,9 @@ HMODULE         g_hInst     = nullptr;
 HMODULE         g_hShell32  = nullptr;
 OPENWITHEXSTYLE g_style     = OWXS_VISTA;
 
+SHCreateAssocHandler_t SHCreateAssocHandler = nullptr;
+IsBlockedFromOpenWithBrowse_t IsBlockedFromOpenWithBrowse = nullptr;
+
 WCHAR szPath[MAX_PATH] = { 0 };
 
 void OpenDownloadURL(LPCWSTR pszExtension)
@@ -138,7 +141,25 @@ int WINAPI wWinMain(
 			g_style = (OPENWITHEXSTYLE)dwValue;
 	}
 
+	/* Load undocumented functions */
 	g_hShell32 = GetModuleHandleW(L"shell32.dll");
+	SHCreateAssocHandler = (SHCreateAssocHandler_t)GetProcAddress(
+		g_hShell32,
+		(LPCSTR)765 // Ordinal number
+	);
+	IsBlockedFromOpenWithBrowse = (IsBlockedFromOpenWithBrowse_t)GetProcAddress(
+		g_hShell32,
+		(LPCSTR)779
+	);
+	if (!SHCreateAssocHandler || !IsBlockedFromOpenWithBrowse)
+	{
+		LocalizedMessageBox(
+			NULL,
+			IDS_ERR_UNDOC,
+			MB_ICONERROR
+		);
+		return -1;
+	}
 
 	/**
 	  * HACKHACK: Windows loves to pass the full executable path as the first
