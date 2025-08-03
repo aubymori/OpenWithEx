@@ -236,4 +236,9 @@
   <ItemGroup>
     <Xml Include="muiconfig.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="shell32p.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
