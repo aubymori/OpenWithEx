@@ -18,6 +18,24 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup Condition="'$(Platform)'=='Win32'">
+    <_DefToLib Include="defs\Win32\*.def" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Platform)'!='Win32'">
+    <_DefToLib Include="defs\Win64\*.def" />
+  </ItemGroup>
+  <Target Name="_GenerateDefLib" BeforeTargets="Link" Inputs="@(_DefToLib)" Outputs="@(_DefToLib->'$(IntDir)%(Filename).lib')">
+    <Exec Command="lib /nologo /def:&quot;%(_DefToLib.Identity)&quot; /machine:$(PlatformTargetAsMSBuildArchitecture) /out:&quot;$(IntDir)%(Filename).lib&quot;" />
+  </Target>
+  <PropertyGroup>
+    <_GeneratedLibs>@(_DefToLib->'%(Filename).lib')</_GeneratedLibs>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalLibraryDirectories>$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(_GeneratedLibs);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -395,6 +413,10 @@ del "$(IntermediateOutputPath)temp.res"</Command>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="muiconfig.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defs\Win32\shell32p.def" />
+    <None Include="defs\Win64\shell32p.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

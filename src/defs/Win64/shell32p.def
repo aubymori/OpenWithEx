@@ -1,0 +1,4 @@
+LIBRARY SHELL32
+EXPORTS
+	SHCreateAssocHandler         @765 NONAME
+	IsBlockedFromOpenWithBrowse  @779 NONAME

@@ -236,4 +236,12 @@
   <ItemGroup>
     <Xml Include="muiconfig.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="defs\Win32\shell32p.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="defs\Win64\shell32p.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
