@@ -5,6 +5,9 @@
 
 HKEY g_hKey = NULL;
 
+#define WIDE_(str) L ## str
+#define WIDE(str) WIDE_(str)
+
 INT_PTR CALLBACK ConfigDlgProc(
 	HWND   hWnd,
 	UINT   uMsg,
@@ -23,6 +26,12 @@ INT_PTR CALLBACK ConfigDlgProc(
 			ComboBox_AddString(hwndCombo, L"Windows XP");
 			ComboBox_AddString(hwndCombo, L"Windows 2000");
 			ComboBox_AddString(hwndCombo, L"Windows 95/98/NT 4.0");
+
+			WCHAR szFormat[256], szBuffer[256];
+			GetDlgItemTextW(hWnd, IDD_VERSION, szFormat, ARRAYSIZE(szFormat));
+			swprintf_s(szBuffer, szFormat, WIDE(VER_STRING));
+			SetDlgItemTextW(hWnd, IDD_VERSION, szBuffer);
+			EnableWindow(GetDlgItem(hWnd, IDD_VERSION), FALSE);
 
 			DWORD dwStyle = 0;
 			DWORD dwSize = sizeof(DWORD);

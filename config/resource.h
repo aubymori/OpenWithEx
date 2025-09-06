@@ -5,3 +5,4 @@
 #define IDD_OPENWITHEXCONFIG    200
 #define IDD_STYLEBOX            201
 #define IDD_APPLY               202
+#define IDD_VERSION             203
