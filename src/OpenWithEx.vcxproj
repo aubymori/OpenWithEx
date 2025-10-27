@@ -151,6 +151,11 @@ if not exist "$(OutDir)pt-BR" md "$(OutDir)pt-BR"
 link /dll /noentry /out:"$(OutDir)pt-BR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.pt-BR.res"
 muirct -c "$(TargetPath)" -e "$(OutDir)pt-BR\$(TargetFileName).mui"
 
+rc /D "_UNICODE" /D "UNICODE" /l 0x0419 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ru-RU.res" openwithex.ru-RU.rc
+if not exist "$(OutDir)ru-RU" md "$(OutDir)ru-RU"
+link /dll /noentry /out:"$(OutDir)ru-RU\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ru-RU.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)ru-RU\$(TargetFileName).mui"
+
 rc /D "_UNICODE" /D "UNICODE" /l 0x0c0a /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.es-ES.res" openwithex.es-ES.rc
 if not exist "$(OutDir)es-ES" md "$(OutDir)es-ES"
 link /dll /noentry /out:"$(OutDir)es-ES\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.es-ES.res"
@@ -212,6 +217,11 @@ if not exist "$(OutDir)pt-BR" md "$(OutDir)pt-BR"
 link /dll /noentry /out:"$(OutDir)pt-BR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.pt-BR.res"
 muirct -c "$(TargetPath)" -e "$(OutDir)pt-BR\$(TargetFileName).mui"
 
+rc /D "_UNICODE" /D "UNICODE" /l 0x0419 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ru-RU.res" openwithex.ru-RU.rc
+if not exist "$(OutDir)ru-RU" md "$(OutDir)ru-RU"
+link /dll /noentry /out:"$(OutDir)ru-RU\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ru-RU.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)ru-RU\$(TargetFileName).mui"
+
 rc /D "_UNICODE" /D "UNICODE" /l 0x0c0a /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.es-ES.res" openwithex.es-ES.rc
 if not exist "$(OutDir)es-ES" md "$(OutDir)es-ES"
 link /dll /noentry /out:"$(OutDir)es-ES\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.es-ES.res"
@@ -270,6 +280,11 @@ rc /D "_UNICODE" /D "UNICODE" /l 0x0416 /q "muiconfig.xml" /g 0x0409 /nologo /fo
 if not exist "$(OutDir)pt-BR" md "$(OutDir)pt-BR"
 link /dll /noentry /out:"$(OutDir)pt-BR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.pt-BR.res"
 muirct -c "$(TargetPath)" -e "$(OutDir)pt-BR\$(TargetFileName).mui"
+
+rc /D "_UNICODE" /D "UNICODE" /l 0x0419 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ru-RU.res" openwithex.ru-RU.rc
+if not exist "$(OutDir)ru-RU" md "$(OutDir)ru-RU"
+link /dll /noentry /out:"$(OutDir)ru-RU\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ru-RU.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)ru-RU\$(TargetFileName).mui"
 
 rc /D "_UNICODE" /D "UNICODE" /l 0x0c0a /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.es-ES.res" openwithex.es-ES.rc
 if not exist "$(OutDir)es-ES" md "$(OutDir)es-ES"
@@ -332,6 +347,11 @@ rc /D "_UNICODE" /D "UNICODE" /l 0x0416 /q "muiconfig.xml" /g 0x0409 /nologo /fo
 if not exist "$(OutDir)pt-BR" md "$(OutDir)pt-BR"
 link /dll /noentry /out:"$(OutDir)pt-BR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.pt-BR.res"
 muirct -c "$(TargetPath)" -e "$(OutDir)pt-BR\$(TargetFileName).mui"
+
+rc /D "_UNICODE" /D "UNICODE" /l 0x0419 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.ru-RU.res" openwithex.ru-RU.rc
+if not exist "$(OutDir)ru-RU" md "$(OutDir)ru-RU"
+link /dll /noentry /out:"$(OutDir)ru-RU\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithex.ru-RU.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)ru-RU\$(TargetFileName).mui"
 
 rc /D "_UNICODE" /D "UNICODE" /l 0x0c0a /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithex.es-ES.res" openwithex.es-ES.rc
 if not exist "$(OutDir)es-ES" md "$(OutDir)es-ES"

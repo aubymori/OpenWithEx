@@ -1,0 +1,5 @@
+﻿!define LANG "Russian"
+!insertmacro LANG_STRING STRING_NOT_X64 "OpenWithEx не поддерживает 32-битные системы."
+!insertmacro LANG_STRING STRING_NOT_WIN8 "OpenWithEx требует Windows 8 или выше."
+!insertmacro LANG_STRING STRING_CONFIG_SHORTCUT "Настроить OpenWithEx"
+!insertmacro LANG_STRING STRING_LANGS "Языки"
