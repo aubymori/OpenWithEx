@@ -1,12 +1,12 @@
 #include <windows.h>
 #include <windowsx.h>
+#include <stdio.h>
 #include "openwithex.h"
 #include "resource.h"
 
 HKEY g_hKey = NULL;
 
-#define WIDE_(str) L ## str
-#define WIDE(str) WIDE_(str)
+#define WIDE(str) (L"" str)
 
 INT_PTR CALLBACK ConfigDlgProc(
 	HWND   hWnd,
@@ -45,7 +45,7 @@ INT_PTR CALLBACK ConfigDlgProc(
 			);
 			ComboBox_SetCurSel(
 				hwndCombo,
-				(dwStyle < (DWORD)OWXS_LAST) ? dwStyle : 0
+				(dwStyle < (DWORD)OPENWITHEX_STYLE_COUNT) ? dwStyle : 0
 			);
 
 			return TRUE;

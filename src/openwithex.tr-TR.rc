@@ -1,6 +1,6 @@
 #pragma code_page(65001) // enable UTF-8
 
-#include "openwithex.h"
+#include "resource.h"
 
 LANGUAGE LANG_TURKISH, SUBLANG_TURKISH_TURKEY
 

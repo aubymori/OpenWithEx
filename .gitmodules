@@ -1,0 +1,3 @@
+[submodule "MUIBuild"]
+	path = MUIBuild
+	url = https://github.com/aubymori/MUIBuild

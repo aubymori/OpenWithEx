@@ -1,6 +1,7 @@
-.vs/**
-build/**
-installer/build/**
+.vs/
+build/
+installer/build/
+*.user
 
 # Configurator
-x64/**
+x64/

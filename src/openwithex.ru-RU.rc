@@ -1,4 +1,4 @@
-﻿#include "openwithex.h"
+﻿#include "resource.h"
 
 LANGUAGE LANG_RUSSIAN, 0x1
 

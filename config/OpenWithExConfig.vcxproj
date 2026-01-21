@@ -86,6 +86,21 @@
     <OutDir>$(SolutionDir)build\$(Configuration)-$(Platform)\config\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)-$(Platform)\config\</IntDir>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)MUIBuild\MUIBuild.targets" />
+  <PropertyGroup Label="MUI">
+    <_PrimaryLanguage>en-US</_PrimaryLanguage>
+    <_PrimaryLanguageID>0x0409</_PrimaryLanguageID>
+    <_RCConfig>openwithex_config.rcconfig</_RCConfig>
+  </PropertyGroup>
+  <Target Name="MUI" AfterTargets="Link">
+    <_BuildMUI Language="es-ES" Filenames="openwithex_config.es-ES.rc" />
+    <_BuildMUI Language="ja-JP" Filenames="openwithex_config.ja-JP.rc" />
+    <_BuildMUI Language="ko-KR" Filenames="openwithex_config.ko-KR.rc" />
+    <_BuildMUI Language="pl-PL" Filenames="openwithex_config.pl-PL.rc" />
+    <_BuildMUI Language="pt-BR" Filenames="openwithex_config.pt-BR.rc" />
+    <_BuildMUI Language="ru-RU" Filenames="openwithex_config.ru-RU.rc" />
+    <_BuildMUI Language="tr-TR" Filenames="openwithex_config.tr-TR.rc" />
+  </Target>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -102,49 +117,7 @@
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>/g 0x0409 /q "muiconfig.xml" /fm "$(IntermediateOutputPath)%(Filename).en-US.res" %(AdditionalOptions)</AdditionalOptions>
     </ResourceCompile>
-    <PostBuildEvent>
-      <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
-link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithexconfig.en-US.res
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ja-JP.res" openwithexconfig.ja-JP.rc
-if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
-link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ja-JP.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0415 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.pl-PL.res" openwithexconfig.pl-PL.rc
-if not exist "$(OutDir)pl-PL" md "$(OutDir)pl-PL"
-link /dll /noentry /out:"$(OutDir)pl-PL\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.pl-PL.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)pl-PL\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0416 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.pt-BR.res" openwithexconfig.pt-BR.rc
-if not exist "$(OutDir)pt-BR" md "$(OutDir)pt-BR"
-link /dll /noentry /out:"$(OutDir)pt-BR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.pt-BR.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)pt-BR\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0419 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ru-RU.res" openwithexconfig.ru-RU.rc
-if not exist "$(OutDir)ru-RU" md "$(OutDir)ru-RU"
-link /dll /noentry /out:"$(OutDir)ru-RU\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ru-RU.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)ru-RU\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0c0a /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.es-ES.res" openwithexconfig.es-ES.rc
-if not exist "$(OutDir)es-ES" md "$(OutDir)es-ES"
-link /dll /noentry /out:"$(OutDir)es-ES\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.es-ES.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)es-ES\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x041F /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.tr-TR.res" openwithexconfig.tr-TR.rc
-if not exist "$(OutDir)tr-TR" md "$(OutDir)tr-TR"
-link /dll /noentry /out:"$(OutDir)tr-TR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.tr-TR.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)tr-TR\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0412 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ko-kr.res" openwithexconfig.ko-KR.rc
-if not exist "$(OutDir)ko-KR" md "$(OutDir)ko-KR"
-link /dll /noentry /out:"$(OutDir)ko-KR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ko-KR.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)ko-KR\$(TargetFileName).mui"
-
-del "$(IntermediateOutputPath)temp.res"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -166,49 +139,7 @@ del "$(IntermediateOutputPath)temp.res"</Command>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>/g 0x0409 /q "muiconfig.xml" /fm "$(IntermediateOutputPath)%(Filename).en-US.res" %(AdditionalOptions)</AdditionalOptions>
     </ResourceCompile>
-    <PostBuildEvent>
-      <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
-link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithexconfig.en-US.res
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ja-JP.res" openwithexconfig.ja-JP.rc
-if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
-link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ja-JP.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0415 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.pl-PL.res" openwithexconfig.pl-PL.rc
-if not exist "$(OutDir)pl-PL" md "$(OutDir)pl-PL"
-link /dll /noentry /out:"$(OutDir)pl-PL\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.pl-PL.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)pl-PL\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0416 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.pt-BR.res" openwithexconfig.pt-BR.rc
-if not exist "$(OutDir)pt-BR" md "$(OutDir)pt-BR"
-link /dll /noentry /out:"$(OutDir)pt-BR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.pt-BR.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)pt-BR\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0419 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ru-RU.res" openwithexconfig.ru-RU.rc
-if not exist "$(OutDir)ru-RU" md "$(OutDir)ru-RU"
-link /dll /noentry /out:"$(OutDir)ru-RU\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ru-RU.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)ru-RU\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0c0a /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.es-ES.res" openwithexconfig.es-ES.rc
-if not exist "$(OutDir)es-ES" md "$(OutDir)es-ES"
-link /dll /noentry /out:"$(OutDir)es-ES\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.es-ES.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)es-ES\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x041F /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.tr-TR.res" openwithexconfig.tr-TR.rc
-if not exist "$(OutDir)tr-TR" md "$(OutDir)tr-TR"
-link /dll /noentry /out:"$(OutDir)tr-TR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.tr-TR.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)tr-TR\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0412 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ko-kr.res" openwithexconfig.ko-KR.rc
-if not exist "$(OutDir)ko-KR" md "$(OutDir)ko-KR"
-link /dll /noentry /out:"$(OutDir)ko-KR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ko-KR.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)ko-KR\$(TargetFileName).mui"
-
-del "$(IntermediateOutputPath)temp.res"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -226,49 +157,7 @@ del "$(IntermediateOutputPath)temp.res"</Command>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>/g 0x0409 /q "muiconfig.xml" /fm "$(IntermediateOutputPath)%(Filename).en-US.res" %(AdditionalOptions)</AdditionalOptions>
     </ResourceCompile>
-    <PostBuildEvent>
-      <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
-link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithexconfig.en-US.res
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ja-JP.res" openwithexconfig.ja-JP.rc
-if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
-link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ja-JP.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0415 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.pl-PL.res" openwithexconfig.pl-PL.rc
-if not exist "$(OutDir)pl-PL" md "$(OutDir)pl-PL"
-link /dll /noentry /out:"$(OutDir)pl-PL\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.pl-PL.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)pl-PL\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0416 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.pt-BR.res" openwithexconfig.pt-BR.rc
-if not exist "$(OutDir)pt-BR" md "$(OutDir)pt-BR"
-link /dll /noentry /out:"$(OutDir)pt-BR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.pt-BR.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)pt-BR\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0419 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ru-RU.res" openwithexconfig.ru-RU.rc
-if not exist "$(OutDir)ru-RU" md "$(OutDir)ru-RU"
-link /dll /noentry /out:"$(OutDir)ru-RU\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ru-RU.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)ru-RU\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0c0a /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.es-ES.res" openwithexconfig.es-ES.rc
-if not exist "$(OutDir)es-ES" md "$(OutDir)es-ES"
-link /dll /noentry /out:"$(OutDir)es-ES\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.es-ES.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)es-ES\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x041F /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.tr-TR.res" openwithexconfig.tr-TR.rc
-if not exist "$(OutDir)tr-TR" md "$(OutDir)tr-TR"
-link /dll /noentry /out:"$(OutDir)tr-TR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.tr-TR.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)tr-TR\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0412 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ko-kr.res" openwithexconfig.ko-KR.rc
-if not exist "$(OutDir)ko-KR" md "$(OutDir)ko-KR"
-link /dll /noentry /out:"$(OutDir)ko-KR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ko-KR.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)ko-KR\$(TargetFileName).mui"
-
-del "$(IntermediateOutputPath)temp.res"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -290,61 +179,67 @@ del "$(IntermediateOutputPath)temp.res"</Command>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>/g 0x0409 /q "muiconfig.xml" /fm "$(IntermediateOutputPath)%(Filename).en-US.res" %(AdditionalOptions)</AdditionalOptions>
     </ResourceCompile>
-    <PostBuildEvent>
-      <Command>if not exist "$(OutDir)en-US" md "$(OutDir)en-US"
-link /dll /noentry /out:"$(OutDir)en-US\$(TargetFileName).mui" $(IntermediateOutputPath)openwithexconfig.en-US.res
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0411 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ja-JP.res" openwithexconfig.ja-JP.rc
-if not exist "$(OutDir)ja-JP" md "$(OutDir)ja-JP"
-link /dll /noentry /out:"$(OutDir)ja-JP\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ja-JP.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)ja-JP\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0415 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.pl-PL.res" openwithexconfig.pl-PL.rc
-if not exist "$(OutDir)pl-PL" md "$(OutDir)pl-PL"
-link /dll /noentry /out:"$(OutDir)pl-PL\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.pl-PL.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)pl-PL\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0416 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.pt-BR.res" openwithexconfig.pt-BR.rc
-if not exist "$(OutDir)pt-BR" md "$(OutDir)pt-BR"
-link /dll /noentry /out:"$(OutDir)pt-BR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.pt-BR.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)pt-BR\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0419 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ru-RU.res" openwithexconfig.ru-RU.rc
-if not exist "$(OutDir)ru-RU" md "$(OutDir)ru-RU"
-link /dll /noentry /out:"$(OutDir)ru-RU\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ru-RU.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)ru-RU\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0c0a /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.es-ES.res" openwithexconfig.es-ES.rc
-if not exist "$(OutDir)es-ES" md "$(OutDir)es-ES"
-link /dll /noentry /out:"$(OutDir)es-ES\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.es-ES.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)es-ES\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x041F /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.tr-TR.res" openwithexconfig.tr-TR.rc
-if not exist "$(OutDir)tr-TR" md "$(OutDir)tr-TR"
-link /dll /noentry /out:"$(OutDir)tr-TR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.tr-TR.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)tr-TR\$(TargetFileName).mui"
-
-rc /D "_UNICODE" /D "UNICODE" /l 0x0412 /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.ko-kr.res" openwithexconfig.ko-KR.rc
-if not exist "$(OutDir)ko-KR" md "$(OutDir)ko-KR"
-link /dll /noentry /out:"$(OutDir)ko-KR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ko-KR.res"
-muirct -c "$(TargetPath)" -e "$(OutDir)ko-KR\$(TargetFileName).mui"
-
-del "$(IntermediateOutputPath)temp.res"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="openwithexconfig.cpp" />
+    <ClCompile Include="openwithex_config.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="openwithexconfig.rc" />
+    <ResourceCompile Include="openwithex_config.en-US.rc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ResourceCompile>
+    <ResourceCompile Include="openwithex_config.es-ES.rc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ResourceCompile>
+    <ResourceCompile Include="openwithex_config.ja-JP.rc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ResourceCompile>
+    <ResourceCompile Include="openwithex_config.ko-KR.rc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ResourceCompile>
+    <ResourceCompile Include="openwithex_config.pl-PL.rc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ResourceCompile>
+    <ResourceCompile Include="openwithex_config.pt-BR.rc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ResourceCompile>
+    <ResourceCompile Include="openwithex_config.rc" />
+    <ResourceCompile Include="openwithex_config.ru-RU.rc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ResourceCompile>
+    <ResourceCompile Include="openwithex_config.tr-TR.rc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="muiconfig.xml" />
+    <Xml Include="openwithex_config.rcconfig" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

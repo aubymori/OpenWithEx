@@ -30,4 +30,4 @@ IDI_OPENWITHEXCONFIG  ICON  "res\\OpenWithExConfig.ico"
   * project just to get an MUI checksum to copy to all the other
   * MUI files.
   */
-#include "openwithexconfig.en-US.rc"
+#include "openwithex_config.en-US.rc"

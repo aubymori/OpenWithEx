@@ -5,67 +5,14 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Test Files">
-      <UniqueIdentifier>{e02f0e6c-a2ca-4e13-95f9-f717598dcf5e}</UniqueIdentifier>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="WIL">
-      <UniqueIdentifier>{ea3d24cd-ba46-4de2-9742-98662271d875}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="openwithex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="impdialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cantopendlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="baseopenasdlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="util.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="noopendlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="shellprotectedreglock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="assocuserchoice.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="versionhelper.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="test\test_userchoice.cpp">
-      <Filter>Test Files</Filter>
-    </ClCompile>
-    <ClCompile Include="openwithexlauncher.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="vistaopenasdlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="xpopenasdlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="classicopenasdlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SetDefaultAssociation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="openwithex.rc">
@@ -74,174 +21,47 @@
     <ResourceCompile Include="openwithex.en-US.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+    <ResourceCompile Include="openwithex.es-ES.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="openwithex.ja-JP.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="openwithex.ko-KR.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="openwithex.pl-PL.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="openwithex.pt-BR.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="openwithex.ru-RU.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="openwithex.tr-TR.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="openwithex_priv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="openwithex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="impdialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cantopendlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="baseopenasdlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="util.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="noopendlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="iopenwithlauncher.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="assocuserchoice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="shellprotectedreglock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="test\test_userchoice.h">
-      <Filter>Test Files</Filter>
-    </ClInclude>
-    <ClInclude Include="iassochandler_internal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="openwithexlauncher.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\com.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\com_apartment_variable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\coroutine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\cppwinrt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\cppwinrt_authoring.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\cppwinrt_helpers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\cppwinrt_notifiable_module_lock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\cppwinrt_register_com_server.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\cppwinrt_wrl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\filesystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\nt_result_macros.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\registry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\registry_helpers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\result.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\result_macros.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\result_originate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\rpc_helpers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\safecast.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\stl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\token_helpers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\Tracelogging.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\traceloggingconfig.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\win32_helpers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\win32_result_macros.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\windowing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\winrt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\wistd_config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\wistd_functional.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\wistd_memory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\wistd_type_traits.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wil\wrl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="iobjectwithassociationelement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="iassociationelement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="iobjectwithopenwithflags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vistaopenasdlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="xpopenasdlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="classicopenasdlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SetDefaultAssociation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="muiconfig.xml" />
+    <ClCompile Include="openwithex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="defs\Win32\shell32p.def">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="defs\Win64\shell32p.def">
-      <Filter>Source Files</Filter>
-    </None>
+    <Xml Include="openwithex.rcconfig">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
