@@ -261,15 +261,23 @@
     <Xml Include="openwithex.rcconfig" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dialog.h" />
+    <ClInclude Include="file_sys_bind_data.h" />
+    <ClInclude Include="interfaces.h" />
     <ClInclude Include="openwithex_priv.h" />
     <ClInclude Include="openwithex.h" />
+    <ClInclude Include="openwithex_ui.h" />
     <ClInclude Include="process_and_thread_refhost.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dialog.cpp" />
+    <ClCompile Include="file_sys_bind_data.cpp" />
     <ClCompile Include="openwithex.cpp" />
+    <ClCompile Include="openwithex_ui.cpp" />
     <ClCompile Include="process_and_thread_refhost.cpp" />
+    <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defs\shcorep.def" />

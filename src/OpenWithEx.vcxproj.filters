@@ -62,12 +62,36 @@
     <ClInclude Include="process_and_thread_refhost.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="file_sys_bind_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="openwithex_ui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="openwithex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="process_and_thread_refhost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="file_sys_bind_data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="openwithex_ui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

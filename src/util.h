@@ -9,3 +9,5 @@ void SafeRelease(T **ppT)
     if (pT)
         pT->Release();
 }
+
+STDAPI BindCtx_SetMode(IBindCtx *pbcIn, DWORD grfMode, IBindCtx **ppbcOut);

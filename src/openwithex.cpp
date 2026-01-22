@@ -1,6 +1,8 @@
 #include "openwithex_priv.h"
 #include <stdio.h>
 
+HINSTANCE g_hinst = NULL;
+
 int WINAPI wWinMain(
 	HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,
@@ -8,6 +10,8 @@ int WINAPI wWinMain(
 	int       nShowCmd
 )
 {
+	g_hinst = hInstance;
+
 	// CommandLineToArgvW will set the first argument to the program name if the
 	// string is totally empty. This behavior is stinky so if our cmd line is
 	// empty we don't even bother.
@@ -19,9 +23,32 @@ int WINAPI wWinMain(
 		RETURN_LAST_ERROR_IF_NULL(ppszArgs);
 	}
 
-	for (int i = 0; i < nArgs; i++)
+	// We are running as a local server.
+	if (nArgs == 1 && ppszArgs[0][0] && !_wcsicmp(&ppszArgs[0][1], L"embedding"))
 	{
-		MessageBoxW(NULL, ppszArgs[i], L"hi", MB_ICONINFORMATION);
+		// TODO(aubymori): Implement the COM server.
+	}
+	// User ran with some other arguments... 
+	else
+	{
+		LPWSTR pszFile = nullptr;
+		for (int i = 0; i < nArgs; i++)
+		{
+			if (ppszArgs[i][0] != L'-' && ppszArgs[i][0] != L'/')
+			{
+				pszFile = ppszArgs[i];
+				break;
+			}
+		}
+
+		if (!pszFile)
+			return E_INVALIDARG;
+
+		IMMERSIVE_OPENWITH_FLAGS flags = IMMERSIVE_OPENWITH_DONOT_SETDEFAULT;
+		if (PathIsURLW(pszFile))
+			flags |= IMMERSIVE_OPENWITH_PROTOCOL;
+
+		// TODO(aubymori): Open the dialog.
 	}
 
 	return 0;
