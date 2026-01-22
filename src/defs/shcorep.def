@@ -1,0 +1,7 @@
+LIBRARY SHCORE.dll
+EXPORTS
+	; Official Microsoft documentation will tell you this function resides in
+	; SHLWAPI.dll. That is COMPLETELY false. It doesn't exist in the actual
+	; DLL nor the lib file. It doesn't exist in the public shcore.lib either,
+	; so here we are. :)
+	SetProcessReference ;argsize=4

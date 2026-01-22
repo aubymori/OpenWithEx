@@ -1,3 +1,9 @@
 [submodule "MUIBuild"]
 	path = MUIBuild
 	url = https://github.com/aubymori/MUIBuild
+[submodule "wil"]
+	path = wil
+	url = https://github.com/microsoft/wil
+[submodule "DefToLib"]
+	path = DefToLib
+	url = https://github.com/aubymori/DefToLib
