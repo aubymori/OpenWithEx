@@ -7,5 +7,8 @@ int WINAPI wWinMain(
 	int       nShowCmd
 )
 {
+	int nArgs;
+	LPWSTR *ppszArgs = CommandLineToArgvW(lpCmdLine, &nArgs);
+
 	return 0;
 }
