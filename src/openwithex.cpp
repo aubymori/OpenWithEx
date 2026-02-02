@@ -1,4 +1,5 @@
 #include "openwithex_priv.h"
+#include "openwithex_ui.h"
 #include <stdio.h>
 
 HINSTANCE g_hinst = NULL;
@@ -49,6 +50,9 @@ int WINAPI wWinMain(
 			flags |= IMMERSIVE_OPENWITH_PROTOCOL;
 
 		// TODO(aubymori): Open the dialog.
+		ComPtr<COpenWithExUI> spOpenWithUI;
+		RETURN_IF_FAILED(Make<COpenWithExUI>(&spOpenWithUI));
+		return spOpenWithUI->CreateAndShow(NULL, pszFile, flags);
 	}
 
 	return 0;

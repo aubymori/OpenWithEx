@@ -7,8 +7,11 @@ class COpenWithExUI : public RuntimeClass<
 {
 private:
 	wil::unique_cotaskmem_string _spszTypeID;
+	ComPtr<IUnknown> _spunkSite;
 
 public:
+	HRESULT CreateAndShow(HWND hwndOwner, LPCWSTR pszFileName, IMMERSIVE_OPENWITH_FLAGS flags);
+
 	// IObjectWithSite impl
 	STDMETHODIMP SetSite(IUnknown *punkSite) override;
 	STDMETHODIMP GetSite(REFIID riid, LPVOID *ppvSite) override;
