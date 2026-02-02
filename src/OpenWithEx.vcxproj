@@ -264,6 +264,7 @@
     <ClInclude Include="dialog.h" />
     <ClInclude Include="file_sys_bind_data.h" />
     <ClInclude Include="interfaces.h" />
+    <ClInclude Include="openwithex_launcher.h" />
     <ClInclude Include="openwithex_priv.h" />
     <ClInclude Include="openwithex.h" />
     <ClInclude Include="openwithex_ui.h" />
@@ -275,6 +276,7 @@
     <ClCompile Include="dialog.cpp" />
     <ClCompile Include="file_sys_bind_data.cpp" />
     <ClCompile Include="openwithex.cpp" />
+    <ClCompile Include="openwithex_launcher.cpp" />
     <ClCompile Include="openwithex_ui.cpp" />
     <ClCompile Include="process_and_thread_refhost.cpp" />
     <ClCompile Include="util.cpp" />

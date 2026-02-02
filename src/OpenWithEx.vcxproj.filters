@@ -74,6 +74,9 @@
     <ClInclude Include="interfaces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="openwithex_launcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="openwithex.cpp">
@@ -92,6 +95,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="openwithex_ui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="openwithex_launcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
