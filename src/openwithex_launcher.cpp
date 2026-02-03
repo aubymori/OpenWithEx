@@ -27,40 +27,55 @@ STDMETHODIMP COpenWithExLauncher::Launch(HWND hwndOwner, LPCWSTR pszFile, IMMERS
 
 STDMETHODIMP COpenWithExLauncher::CreateInstance(IUnknown *, REFIID riid, void **ppv)
 {
-    return E_NOTIMPL;
+    return QueryInterface(riid, ppv);
 }
 
 STDMETHODIMP COpenWithExLauncher::LockServer(BOOL)
 {
-    return E_NOTIMPL;
+    return S_OK;
 }
 
 STDMETHODIMP COpenWithExLauncher::GetSite(REFIID riid, void **ppvSite)
 {
-    return E_NOTIMPL;
+    if (_punkSite)
+    {
+        return _punkSite->QueryInterface(riid, ppvSite);
+    }
+    return E_FAIL;
 }
 
 STDMETHODIMP COpenWithExLauncher::SetSite(IUnknown *punkSite)
 {
-    return E_NOTIMPL;
+    IUnknown_Set(&_punkSite, punkSite);
+    return S_OK;
 }
 
 STDMETHODIMP COpenWithExLauncher::SetAssocElement(IAssociationElement *pae)
 {
+    IUnknown_Set((IUnknown **)&_paeAssoc, pae);
     return E_NOTIMPL;
 }
 
 STDMETHODIMP COpenWithExLauncher::GetAssocElement(REFIID riid, void **ppv)
 {
-    return E_NOTIMPL;
+    if (_paeAssoc)
+    {
+        return _paeAssoc->QueryInterface(riid, ppv);
+    }
+    return E_NOINTERFACE;
 }
 
 STDMETHODIMP COpenWithExLauncher::SetSelection(IShellItemArray *psia)
 {
-    return E_NOTIMPL;
+    IUnknown_Set((IUnknown **)&_psiaSelection, psia);
+    return S_OK;
 }
 
 STDMETHODIMP COpenWithExLauncher::GetSelection(REFIID riid, void **ppv)
 {
-    return E_NOTIMPL;
+    if (_psiaSelection)
+    {
+        return _psiaSelection->QueryInterface(riid, ppv);
+    }
+    return E_NOT_SET;
 }

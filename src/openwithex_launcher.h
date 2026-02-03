@@ -36,6 +36,11 @@ private:
 	LPWSTR _pszParameters;
 	LPWSTR _pszDirectory;
 	IAssociationElement *_paeAssoc;
+	/*
+	 * The original COpenWithLauncher has this and never uses it
+	 * except for releasing it in SetAssocElement...
+	 */
+	// IQuerySource *_pqs;
 	IShellItemArray *_psiaSelection;
 	IUnknown *_punkSite;
 	wil::unique_cotaskmem_string _spszCommandName;
