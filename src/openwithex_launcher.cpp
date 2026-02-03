@@ -2,17 +2,22 @@
 
 STDMETHODIMP COpenWithExLauncher::GetValue(AHE_TYPE *pahe)
 {
-    return E_NOTIMPL;
+    *pahe = AHE_IMMERSIVE;
+    return S_OK;
 }
 
-STDMETHODIMP COpenWithExLauncher::Initialize(LPCWSTR pszCommandLine, IPropertyBag *)
+STDMETHODIMP COpenWithExLauncher::Initialize(LPCWSTR pszCommandName, IPropertyBag *)
 {
-    return E_NOTIMPL;
+    return SHStrDupW(pszCommandName, &_spszCommandName);
 }
 
-STDMETHODIMP COpenWithExLauncher::QueryService(REFGUID guidService, REFIID riid, void **ppv)
+STDMETHODIMP COpenWithExLauncher::QueryService(REFGUID serviceId, REFIID riid, void **ppv)
 {
-    return E_NOTIMPL;
+    if (_spSiteProxy)
+    {
+        return _spSiteProxy->QueryService(serviceId, riid, ppv);
+    }
+    return IUnknown_QueryService(_punkSite, serviceId, riid, ppv);
 }
 
 STDMETHODIMP COpenWithExLauncher::Launch(HWND hwndOwner, LPCWSTR pszFile, IMMERSIVE_OPENWITH_FLAGS flags)
