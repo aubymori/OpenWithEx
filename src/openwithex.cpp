@@ -31,7 +31,7 @@ int WINAPI wWinMain(
 	{
 		ComPtr<COpenWithExLauncher> spLauncher;
 		RETURN_IF_FAILED(Make<COpenWithExLauncher>(&spLauncher));
-		
+		spLauncher->RunMessageLoop();
 	}
 	// User ran with some other arguments... 
 	else
