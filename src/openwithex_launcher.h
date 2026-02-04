@@ -47,6 +47,8 @@ private:
 	ComPtr<COpenWithExUI> _spOpenWithUI;
 	ComPtr<IServiceProvider> _spSiteProxy;
 
+	void _DoExecute();
+
 public:
 	// IExecuteCommandApplicationHostEnvironment
 	STDMETHODIMP GetValue(AHE_TYPE *pahe) override;
@@ -75,4 +77,7 @@ public:
 	// IObjectWithSelection
 	STDMETHODIMP SetSelection(IShellItemArray *psia) override;
 	STDMETHODIMP GetSelection(REFIID riid, void **ppv) override;
+
+	// COpenWithExLauncher
+	HRESULT RunMessageLoop();
 };

@@ -10,9 +10,11 @@ private:
 	ComPtr<IUnknown> _spunkSite;
 
 public:
-	HRESULT CreateAndShow(HWND hwndOwner, LPCWSTR pszFileName, IMMERSIVE_OPENWITH_FLAGS flags);
-
-	// IObjectWithSite impl
+	// IObjectWithSite
 	STDMETHODIMP SetSite(IUnknown *punkSite) override;
 	STDMETHODIMP GetSite(REFIID riid, LPVOID *ppvSite) override;
+
+	// COpenWithExUI
+	HRESULT CreateAndShow(HWND hwndOwner, LPCWSTR pszFileName, IMMERSIVE_OPENWITH_FLAGS flags);
+	HRESULT CreateAndShowFromDelegateExecute(IMMERSIVE_OPENWITH_FLAGS flags, LPCWSTR pszCallingAppId);
 };

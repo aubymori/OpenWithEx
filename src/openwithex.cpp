@@ -1,5 +1,6 @@
 #include "openwithex_priv.h"
 #include "process_and_thread_refhost.h"
+#include "openwithex_launcher.h"
 #include "openwithex_ui.h"
 #include <stdio.h>
 
@@ -28,7 +29,9 @@ int WINAPI wWinMain(
 	// We are running as a local server.
 	if (nArgs == 1 && ppszArgs[0][0] && !_wcsicmp(&ppszArgs[0][1], L"embedding"))
 	{
-		// TODO(aubymori): Implement the COM server.
+		ComPtr<COpenWithExLauncher> spLauncher;
+		RETURN_IF_FAILED(Make<COpenWithExLauncher>(&spLauncher));
+		
 	}
 	// User ran with some other arguments... 
 	else

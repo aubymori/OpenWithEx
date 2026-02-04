@@ -1,10 +1,5 @@
 #include "openwithex_ui.h"
 
-HRESULT COpenWithExUI::CreateAndShow(HWND hwndOwner, LPCWSTR pszFileName, IMMERSIVE_OPENWITH_FLAGS flags)
-{
-	return E_NOTIMPL;
-}
-
 STDMETHODIMP COpenWithExUI::GetSite(REFIID riid, LPVOID *ppvSite)
 {
 	*ppvSite = nullptr;
@@ -20,4 +15,14 @@ STDMETHODIMP COpenWithExUI::SetSite(IUnknown *punkSite)
 {
 	IUnknown_Set(&_spunkSite, punkSite);
 	return S_OK;
+}
+
+HRESULT COpenWithExUI::CreateAndShow(HWND hwndOwner, LPCWSTR pszFileName, IMMERSIVE_OPENWITH_FLAGS flags)
+{
+	return E_NOTIMPL;
+}
+
+HRESULT COpenWithExUI::CreateAndShowFromDelegateExecute(IMMERSIVE_OPENWITH_FLAGS flags, LPCWSTR pszCallingAppId)
+{
+	return E_NOTIMPL;
 }

@@ -1,4 +1,12 @@
 #include "openwithex_launcher.h"
+#include <initguid.h>
+
+UINT_PTR g_idleTimerId = (UINT_PTR)-1;
+
+void COpenWithExLauncher::_DoExecute()
+{
+
+}
 
 STDMETHODIMP COpenWithExLauncher::GetValue(AHE_TYPE *pahe)
 {
@@ -78,4 +86,37 @@ STDMETHODIMP COpenWithExLauncher::GetSelection(REFIID riid, void **ppv)
         return _psiaSelection->QueryInterface(riid, ppv);
     }
     return E_NOT_SET;
+}
+
+DEFINE_GUID(CLSID_ExecuteUnknown, 0xE44E9428, 0xBDBC, 0x4987, 0xA0,0x99, 0x40,0xDC,0x8F,0xD2,0x55,0xE7);
+
+HRESULT COpenWithExLauncher::RunMessageLoop()
+{
+    DWORD dwReg;
+    RETURN_IF_FAILED(CoRegisterClassObject(
+        CLSID_ExecuteUnknown,
+        static_cast<IExecuteCommand *>(this),
+        CLSCTX_LOCAL_SERVER,
+        REGCLS_SINGLEUSE,
+        &dwReg));
+
+    g_idleTimerId = SetTimer(NULL, 0, 20000, nullptr);
+
+    MSG msg;
+    while (GetMessageW(&msg, NULL, 0, 0) > 0)
+    {
+        if (msg.message == 0x8001)
+        {
+            _DoExecute();
+        }
+        else if (msg.message == WM_TIMER && !msg.hwnd && msg.wParam == g_idleTimerId)
+        {
+            PostQuitMessage(0);
+        }
+        TranslateMessage(&msg);
+        DispatchMessageW(&msg);
+    }
+
+    CoRevokeClassObject(dwReg);
+    return S_OK;
 }
