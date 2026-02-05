@@ -8,15 +8,15 @@ void COpenWithExLauncher::_DoExecute()
 
 }
 
+STDMETHODIMP COpenWithExLauncher::Initialize(LPCWSTR pszCommandName, IPropertyBag *)
+{
+    return SHStrDupW(pszCommandName, &_spszCommandName);
+}
+
 STDMETHODIMP COpenWithExLauncher::GetValue(AHE_TYPE *pahe)
 {
     *pahe = AHE_IMMERSIVE;
     return S_OK;
-}
-
-STDMETHODIMP COpenWithExLauncher::Initialize(LPCWSTR pszCommandName, IPropertyBag *)
-{
-    return SHStrDupW(pszCommandName, &_spszCommandName);
 }
 
 STDMETHODIMP COpenWithExLauncher::QueryService(REFGUID serviceId, REFIID riid, void **ppv)
@@ -43,6 +43,12 @@ STDMETHODIMP COpenWithExLauncher::LockServer(BOOL)
     return S_OK;
 }
 
+STDMETHODIMP COpenWithExLauncher::SetSite(IUnknown *punkSite)
+{
+    IUnknown_Set(&_punkSite, punkSite);
+    return S_OK;
+}
+
 STDMETHODIMP COpenWithExLauncher::GetSite(REFIID riid, void **ppvSite)
 {
     if (_punkSite)
@@ -52,10 +58,57 @@ STDMETHODIMP COpenWithExLauncher::GetSite(REFIID riid, void **ppvSite)
     return E_FAIL;
 }
 
-STDMETHODIMP COpenWithExLauncher::SetSite(IUnknown *punkSite)
+STDMETHODIMP COpenWithExLauncher::SetKeyState(DWORD grfKeyState)
 {
-    IUnknown_Set(&_punkSite, punkSite);
+    _grfKeyState = grfKeyState;
+    _state |= ECBF_KEYSTATE;
     return S_OK;
+}
+
+STDMETHODIMP COpenWithExLauncher::SetParameters(LPCWSTR pszParameters)
+{
+    if (Str_SetPtrW(&_pszParameters, pszParameters))
+    {
+        _state |= ECBF_PARAMETERS;
+        return S_OK;
+    }
+    return E_OUTOFMEMORY;
+}
+
+STDMETHODIMP COpenWithExLauncher::SetPosition(POINT pt)
+{
+    _ptPosition = pt;
+    _state |= ECBF_POSITION;
+    return S_OK;
+}
+
+STDMETHODIMP COpenWithExLauncher::SetShowWindow(int nShow)
+{
+    _nShow = nShow;
+    _state |= ECBF_SHOWWINDOW;
+    return S_OK;
+}
+
+STDMETHODIMP COpenWithExLauncher::SetNoShowUI(BOOL fNoShowUI)
+{
+    _fNoShowUI = fNoShowUI;
+    _state |= ECBF_NOSHOWUI;
+    return S_OK;
+}
+
+STDMETHODIMP COpenWithExLauncher::SetDirectory(LPCWSTR pszDirectory)
+{
+    if (Str_SetPtrW(&_pszDirectory, pszDirectory))
+    {
+        _state |= ECBF_DIRECTORY;
+        return S_OK;
+    }
+    return E_OUTOFMEMORY;
+}
+
+STDMETHODIMP COpenWithExLauncher::Execute()
+{
+    return E_NOTIMPL;
 }
 
 STDMETHODIMP COpenWithExLauncher::SetAssocElement(IAssociationElement *pae)

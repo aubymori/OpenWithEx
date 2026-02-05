@@ -29,8 +29,9 @@ int WINAPI wWinMain(
 	// We are running as a local server.
 	if (nArgs == 1 && ppszArgs[0][0] && !_wcsicmp(&ppszArgs[0][1], L"embedding"))
 	{
-		ComPtr<COpenWithExLauncher> spLauncher;
-		RETURN_IF_FAILED(Make<COpenWithExLauncher>(&spLauncher));
+		ComPtr<COpenWithExLauncher> spLauncher = Make<COpenWithExLauncher>();
+		if (!spLauncher)
+			return E_OUTOFMEMORY;
 		spLauncher->RunMessageLoop();
 	}
 	// User ran with some other arguments... 
@@ -54,8 +55,9 @@ int WINAPI wWinMain(
 			flags |= IMMERSIVE_OPENWITH_PROTOCOL;
 
 		// TODO(aubymori): Open the dialog.
-		ComPtr<COpenWithExUI> spOpenWithUI;
-		RETURN_IF_FAILED(Make<COpenWithExUI>(&spOpenWithUI));
+		ComPtr<COpenWithExUI> spOpenWithUI = Make<COpenWithExUI>();
+		if (!spOpenWithUI)
+			return E_OUTOFMEMORY;
 		return spOpenWithUI->CreateAndShow(NULL, pszFile, flags);
 	}
 

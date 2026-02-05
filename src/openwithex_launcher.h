@@ -14,6 +14,8 @@ enum EXEC_CMD_BASE_STATE_FLAGS
 	ECBF_NOSHOWUI = 0x100,
 };
 
+DEFINE_ENUM_FLAG_OPERATORS(EXEC_CMD_BASE_STATE_FLAGS);
+
 class COpenWithExLauncher : public RuntimeClass<
 	RuntimeClassFlags<ClassicCom>,
 	IInitializeCommand,
@@ -50,11 +52,11 @@ private:
 	void _DoExecute();
 
 public:
-	// IExecuteCommandApplicationHostEnvironment
-	STDMETHODIMP GetValue(AHE_TYPE *pahe) override;
-
 	// IInitializeCommand
 	STDMETHODIMP Initialize(LPCWSTR pszCommandName, IPropertyBag *) override;
+
+	// IExecuteCommandApplicationHostEnvironment
+	STDMETHODIMP GetValue(AHE_TYPE *pahe) override;
 
 	// IServiceProvider
 	STDMETHODIMP QueryService(REFGUID serviceId, REFIID riid, void **ppv) override;
@@ -67,8 +69,17 @@ public:
 	STDMETHODIMP LockServer(BOOL) override;
 
 	// IObjectWithSite
-	STDMETHODIMP GetSite(REFIID riid, void **ppvSite) override;
 	STDMETHODIMP SetSite(IUnknown *punkSite) override;
+	STDMETHODIMP GetSite(REFIID riid, void **ppvSite) override;
+
+	// IExecuteCommand
+	STDMETHODIMP SetKeyState(DWORD grfKeyState) override;
+	STDMETHODIMP SetParameters(LPCWSTR pszParameters) override;
+	STDMETHODIMP SetPosition(POINT pt) override;
+	STDMETHODIMP SetShowWindow(int nShow) override;
+	STDMETHODIMP SetNoShowUI(BOOL fNoShowUI) override;
+	STDMETHODIMP SetDirectory(LPCWSTR pszDirectory) override;
+	STDMETHODIMP Execute() override;
 
 	// IObjectWithAssociationElement
 	STDMETHODIMP SetAssocElement(IAssociationElement *pae) override;
