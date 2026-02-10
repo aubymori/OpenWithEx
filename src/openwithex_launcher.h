@@ -49,6 +49,9 @@ private:
 	ComPtr<COpenWithExUI> _spOpenWithUI;
 	ComPtr<IServiceProvider> _spSiteProxy;
 
+	HRESULT _InstallHandlerIfNeededAndInvoke();
+	bool _AllowSetDefault();
+	bool _IsOpenWithUndecidedAppUrl();
 	void _DoExecute();
 
 public:

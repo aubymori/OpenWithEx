@@ -30,7 +30,6 @@ typedef enum tagASSOCQUERY
 MIDL_INTERFACE("D8F6AD5B-B44F-4BCC-88FD-EB3473DB7502")
 IAssociationElement : IUnknown
 {
-public:
 	STDMETHOD(QueryString)(ASSOCQUERY flags, PCWSTR lpValueName, PWSTR *ppszOut) PURE;
 	STDMETHOD(QueryDword)(ASSOCQUERY flags, PCWSTR lpValueName, DWORD *pdwOut) PURE;
 	STDMETHOD(QueryExists)(ASSOCQUERY flags, PCWSTR lpValueName) PURE;
@@ -42,7 +41,14 @@ public:
 MIDL_INTERFACE("E157C3A1-A532-4DE2-9480-1452B7426EEE")
 IObjectWithAssociationElement : IUnknown
 {
-public:
 	STDMETHOD(SetAssocElement)(IAssociationElement *pae) PURE;
 	STDMETHOD(GetAssocElement)(REFIID riid, void **ppv) PURE;
+};
+
+DEFINE_GUID(IID_IObjectWithOpenWithFlags, 0x9D923EDC, 0xB7A9, 0x4F77, 0x99,0x33, 0x28,0x4E,0x7E,0x2B,0x25,0x36);
+
+MIDL_INTERFACE("9D923EDC-B7A9-4F77-9933-284E7E2B2536")
+IObjectWithOpenWithFlags : IUnknown
+{
+	STDMETHOD(get_Flags)(IMMERSIVE_OPENWITH_FLAGS *out) PURE;
 };

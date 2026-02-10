@@ -16,5 +16,6 @@ public:
 
 	// COpenWithExUI
 	HRESULT CreateAndShow(HWND hwndOwner, LPCWSTR pszFileName, IMMERSIVE_OPENWITH_FLAGS flags);
-	HRESULT CreateAndShowFromDelegateExecute(IMMERSIVE_OPENWITH_FLAGS flags, LPCWSTR pszCallingAppId);
+	HRESULT CreateAndShowFromDelegateExecute(IMMERSIVE_OPENWITH_FLAGS flags);
+	HRESULT SetPosition(POINT pt);
 };

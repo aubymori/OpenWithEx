@@ -3,9 +3,67 @@
 
 UINT_PTR g_idleTimerId = (UINT_PTR)-1;
 
+HRESULT COpenWithExLauncher::_InstallHandlerIfNeededAndInvoke()
+{
+    return E_NOTIMPL;
+}
+
+bool COpenWithExLauncher::_AllowSetDefault()
+{
+    return false;
+}
+
+bool COpenWithExLauncher::_IsOpenWithUndecidedAppUrl()
+{
+    return false;
+}
+
 void COpenWithExLauncher::_DoExecute()
 {
+    HRESULT hr;
 
+    if (CSTR_EQUAL == CompareStringOrdinal(L"openas", -1, _spszCommandName.get(), -1, TRUE))
+        hr = _InstallHandlerIfNeededAndInvoke();
+    else
+        hr = E_FAIL;
+
+    if (FAILED(hr))
+    {
+        IMMERSIVE_OPENWITH_FLAGS flags;
+        if (CSTR_EQUAL == CompareStringOrdinal(L"OpenWithSetDefaultOn", -1, _spszCommandName.get(), -1, TRUE))
+        {
+            flags = IMMERSIVE_OPENWITH_OVERRIDE;
+        }
+        else
+        {
+            flags = IMMERSIVE_OPENWITH_NONE;
+            ComPtr<IObjectWithOpenWithFlags> flagsProvider;
+            if (SUCCEEDED(IUnknown_QueryService(
+                _punkSite,
+                IID_IObjectWithOpenWithFlags,
+                IID_PPV_ARGS(&flagsProvider)
+            )))
+            {
+                flagsProvider->get_Flags(&flags);
+            }
+        }
+
+        flags |= IMMERSIVE_OPENWITH_OVERRIDE;
+
+        if (_state & ECBF_POSITION)
+        {
+            _spOpenWithUI->SetPosition(_ptPosition);
+            flags |= IMMERSIVE_OPENWITH_USEPOSITION;
+        }
+
+        if (!_AllowSetDefault())
+            flags &= ~IMMERSIVE_OPENWITH_OVERRIDE;
+
+        if (_IsOpenWithUndecidedAppUrl())
+            flags |= IMMERSIVE_OPENWITH_URL;
+
+        _spOpenWithUI->CreateAndShowFromDelegateExecute(flags);
+    }
 }
 
 STDMETHODIMP COpenWithExLauncher::Initialize(LPCWSTR pszCommandName, IPropertyBag *)
@@ -114,7 +172,7 @@ STDMETHODIMP COpenWithExLauncher::Execute()
 STDMETHODIMP COpenWithExLauncher::SetAssocElement(IAssociationElement *pae)
 {
     IUnknown_Set((IUnknown **)&_paeAssoc, pae);
-    return E_NOTIMPL;
+    return S_OK;
 }
 
 STDMETHODIMP COpenWithExLauncher::GetAssocElement(REFIID riid, void **ppv)
