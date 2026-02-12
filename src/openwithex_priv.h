@@ -4,6 +4,7 @@
 
 #include <shlwapi.h>
 #include <shlobj.h>
+#include <propkey.h>
 
 #include <wil/result_macros.h>
 #include <wil/resource.h>

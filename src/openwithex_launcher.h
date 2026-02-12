@@ -5,13 +5,13 @@
 
 enum EXEC_CMD_BASE_STATE_FLAGS
 {
-	ECBF_DEFAULT = 0x0,
-	ECBF_KEYSTATE = 0x2,
+	ECBF_DEFAULT    = 0x0,
+	ECBF_KEYSTATE   = 0x2,
 	ECBF_PARAMETERS = 0x4,
-	ECBF_POSITION = 0x8,
+	ECBF_POSITION   = 0x8,
 	ECBF_SHOWWINDOW = 0x10,
-	ECBF_DIRECTORY = 0x80,
-	ECBF_NOSHOWUI = 0x100,
+	ECBF_DIRECTORY  = 0x80,
+	ECBF_NOSHOWUI   = 0x100,
 };
 
 DEFINE_ENUM_FLAG_OPERATORS(EXEC_CMD_BASE_STATE_FLAGS);
@@ -49,6 +49,9 @@ private:
 	ComPtr<COpenWithExUI> _spOpenWithUI;
 	ComPtr<IServiceProvider> _spSiteProxy;
 
+	HRESULT _GetSelectedItem(REFIID riid, LPVOID *ppv);
+	HRESULT _InstallApplication(IShellItem2 *psi, REFIID riid, void **ppva);
+	HRESULT _InitDelegate(IExecuteCommand *pxc);
 	HRESULT _InstallHandlerIfNeededAndInvoke();
 	bool _AllowSetDefault();
 	bool _IsOpenWithUndecidedAppUrl();

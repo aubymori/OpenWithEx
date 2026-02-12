@@ -1,11 +1,124 @@
 #include "openwithex_launcher.h"
 #include <initguid.h>
+#include <appmgmt.h>
 
 UINT_PTR g_idleTimerId = (UINT_PTR)-1;
 
+HRESULT COpenWithExLauncher::_GetSelectedItem(REFIID riid, LPVOID *ppv)
+{
+    HRESULT hr = DISP_E_BADINDEX;
+    if (_psiaSelection)
+    {
+        IShellItem *psi = nullptr;
+        hr = _psiaSelection->GetItemAt(0, &psi);
+        if (SUCCEEDED(hr))
+        {
+            hr = psi->QueryInterface(riid, ppv);
+            psi->Release();
+        }
+    }
+    return hr;
+}
+
+HRESULT COpenWithExLauncher::_InstallApplication(IShellItem2 *psi, REFIID riid, void **ppva)
+{
+    wil::unique_cotaskmem_string spszExt;
+    HRESULT hr = psi->GetString(PKEY_FileExtension, &spszExt);
+    if (SUCCEEDED(hr))
+    {
+        if (spszExt.get() && spszExt.get()[0])
+        {
+            INSTALLDATA id = {};
+            id.Type = FILEEXT;
+            id.Spec.FileExt = spszExt.get();
+            hr = HRESULT_FROM_WIN32(InstallApplication(&id));
+            if (SUCCEEDED(hr))
+            {
+                ComPtr<IAssociationArray> spaa;
+                hr = psi->BindToHandler(
+                    nullptr, BHID_AssociationArray, IID_PPV_ARGS(&spaa));
+                if (SUCCEEDED(hr))
+                {
+                    hr = spaa->QueryObject(
+                        AQVO_SHELLVERB_EXECUTE, nullptr,
+                        riid, ppva);
+                }
+            }
+        }
+        else
+        {
+            hr = HRESULT_FROM_WIN32(ERROR_NO_ASSOCIATION);
+        }
+    }
+    return hr;
+}
+
+HRESULT COpenWithExLauncher::_InitDelegate(IExecuteCommand *pxc)
+{
+    HRESULT hr = S_OK;
+
+    if (_state & ECBF_SHOWWINDOW)
+    {
+        hr = pxc->SetShowWindow(_nShow);
+    }
+
+    if (SUCCEEDED(hr) && (_state & ECBF_POSITION))
+    {
+        hr = pxc->SetPosition(_ptPosition);
+    }
+
+    if (SUCCEEDED(hr) && (_state & ECBF_KEYSTATE))
+    {
+        hr = pxc->SetKeyState(_grfKeyState);
+    }
+
+    if (SUCCEEDED(hr) && (_state & ECBF_DIRECTORY))
+    {
+        hr = pxc->SetDirectory(_pszDirectory);
+    }
+
+    if (SUCCEEDED(hr) && (_state & ECBF_PARAMETERS))
+    {
+        hr = pxc->SetParameters(_pszParameters);
+    }
+
+    if (SUCCEEDED(hr) && (_state & ECBF_NOSHOWUI))
+    {
+        hr = pxc->SetNoShowUI(_fNoShowUI);
+    }
+
+    if (SUCCEEDED(hr))
+    {
+        IObjectWithSelection *pows = nullptr;
+        if (SUCCEEDED(pxc->QueryInterface(&pows)))
+        {
+            pows->SetSelection(_psiaSelection);
+            pows->Release();
+        }
+    }
+
+    return hr;
+}
+
 HRESULT COpenWithExLauncher::_InstallHandlerIfNeededAndInvoke()
 {
-    return E_NOTIMPL;
+    ComPtr<IShellItem2> spsi;
+    HRESULT hr = _GetSelectedItem(IID_PPV_ARGS(&spsi));
+    if (SUCCEEDED(hr))
+    {
+        ComPtr<IExecuteCommand> spxc;
+        hr = _InstallApplication(spsi.Get(), IID_PPV_ARGS(&spxc));
+        if (SUCCEEDED(hr))
+        {
+            hr = _InitDelegate(spxc.Get());
+            if (SUCCEEDED(hr))
+            {
+                CoAllowSetForegroundWindow(spxc.Get(), nullptr);
+                hr = spxc->Execute();
+            }
+        }
+    }
+    return hr;
 }
 
 bool COpenWithExLauncher::_AllowSetDefault()
