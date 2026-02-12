@@ -175,7 +175,8 @@ void COpenWithExLauncher::_DoExecute()
         if (_IsOpenWithUndecidedAppUrl())
             flags |= IMMERSIVE_OPENWITH_URL;
 
-        _spOpenWithUI->CreateAndShowFromDelegateExecute(flags);
+        _spOpenWithUI->CreateAndShowFromDelegateExecute(
+            static_cast<IExecuteCommand *>(this), flags);
     }
 }
 

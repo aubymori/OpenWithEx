@@ -22,7 +22,7 @@ HRESULT COpenWithExUI::CreateAndShow(HWND hwndOwner, LPCWSTR pszFileName, IMMERS
 	return E_NOTIMPL;
 }
 
-HRESULT COpenWithExUI::CreateAndShowFromDelegateExecute(IMMERSIVE_OPENWITH_FLAGS flags)
+HRESULT COpenWithExUI::CreateAndShowFromDelegateExecute(IExecuteCommand *pxc, IMMERSIVE_OPENWITH_FLAGS flags)
 {
 	return E_NOTIMPL;
 }
