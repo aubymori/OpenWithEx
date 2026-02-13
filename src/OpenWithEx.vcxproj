@@ -243,6 +243,7 @@
     <Xml Include="openwithex.rcconfig" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="caller_identity.h" />
     <ClInclude Include="dialog.h" />
     <ClInclude Include="file_sys_bind_data.h" />
     <ClInclude Include="interfaces.h" />
@@ -252,6 +253,7 @@
     <ClInclude Include="openwithex_ui.h" />
     <ClInclude Include="process_and_thread_refhost.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="rpc_options_helper.h" />
     <ClInclude Include="undoc.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
