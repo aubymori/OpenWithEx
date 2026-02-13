@@ -253,6 +253,8 @@ STDMETHODIMP COpenWithExLauncher::QueryService(REFGUID serviceId, REFIID riid, v
 STDMETHODIMP COpenWithExLauncher::Launch(HWND hwndOwner, LPCWSTR pszFile, IMMERSIVE_OPENWITH_FLAGS flags)
 {
     ComPtr<COpenWithExUI> spOpenWithUI = Make<COpenWithExUI>();
+    if (!spOpenWithUI)
+        return E_OUTOFMEMORY;
     return spOpenWithUI->CreateAndShow(hwndOwner, pszFile, flags);
 }
 

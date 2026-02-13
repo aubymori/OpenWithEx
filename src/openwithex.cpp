@@ -54,7 +54,6 @@ int WINAPI wWinMain(
 		if (PathIsURLW(pszFile))
 			flags |= IMMERSIVE_OPENWITH_PROTOCOL;
 
-		// TODO(aubymori): Open the dialog.
 		ComPtr<COpenWithExUI> spOpenWithUI = Make<COpenWithExUI>();
 		if (!spOpenWithUI)
 			return E_OUTOFMEMORY;
