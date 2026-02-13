@@ -113,11 +113,12 @@ HRESULT COpenWithExLauncher::_InstallHandlerIfNeededAndInvoke()
         if (SUCCEEDED(hr))
         {
             hr = _InitDelegate(spxc.Get());
-            if (SUCCEEDED(hr))
-            {
-                CoAllowSetForegroundWindow(spxc.Get(), nullptr);
-                hr = spxc->Execute();
-            }
+        }
+
+        if (SUCCEEDED(hr))
+        {
+            CoAllowSetForegroundWindow(spxc.Get(), nullptr);
+            hr = spxc->Execute();
         }
     }
     return hr;
@@ -153,7 +154,7 @@ bool COpenWithExLauncher::_AllowSetDefault()
         if (SUCCEEDED(AssocCreateElement(CLSID_AssocProgidElement, IID_PPV_ARGS(&spAssocElem))))
         {
             ComPtr<IPersistString2> spPersistString;
-            if (SUCCEEDED(spAssocElem->QueryInterface(IID_PPV_ARGS(&spPersistString)))
+            if (SUCCEEDED(spAssocElem.As(&spPersistString))
                 && SUCCEEDED(spPersistString->SetString(spsz.get())))
             {
                 return FAILED(spAssocElem->QueryExists(AQN_NAMED_VALUE, L"NoOpenWith"));
