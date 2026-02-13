@@ -53,8 +53,8 @@ private:
 	HRESULT _InstallApplication(IShellItem2 *psi, REFIID riid, void **ppva);
 	HRESULT _InitDelegate(IExecuteCommand *pxc);
 	HRESULT _InstallHandlerIfNeededAndInvoke();
+	HRESULT _GetSelectedItem(REFIID riid, LPVOID *ppv);
 	bool _AllowSetDefault();
-	bool _IsOpenWithUndecidedAppUrl();
 	void _DoExecute();
 
 public:

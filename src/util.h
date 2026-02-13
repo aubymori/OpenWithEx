@@ -11,3 +11,7 @@ void SafeRelease(T **ppT)
 }
 
 STDAPI BindCtx_SetMode(IBindCtx *pbcIn, DWORD grfMode, IBindCtx **ppbcOut);
+
+STDAPI IUnknown_GetSelection(IUnknown *punk, REFIID riid, LPVOID *ppv);
+
+STDAPI IShellItemArray_GetItemAt(IShellItemArray *psia, DWORD dwIndex, REFIID riid, LPVOID *ppv);

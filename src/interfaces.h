@@ -105,3 +105,10 @@ IOpenWithTypeOverride : IUnknown
 {
 	STDMETHOD(GetOpenWithTypeOverride)(LPWSTR *ppsz) PURE;
 };
+
+MIDL_INTERFACE("3C44BA76-DE0E-4049-B6E4-6B31A5262707")
+IPersistString2 : IPersist
+{
+	STDMETHOD(SetString)(LPCWSTR psz) PURE;
+	STDMETHOD(GetString)(LPWSTR *ppsz) PURE;
+};

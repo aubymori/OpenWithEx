@@ -36,3 +36,36 @@ STDAPI BindCtx_SetMode(IBindCtx *pbcIn, DWORD grfMode, IBindCtx **ppbcOut)
 
     return hr;
 }
+
+STDAPI IUnknown_GetSelection(IUnknown *punk, REFIID riid, LPVOID *ppv)
+{
+    HRESULT hr = E_FAIL;
+    *ppv = nullptr;
+
+    if (punk)
+    {
+        IObjectWithSelection *pows = nullptr;
+        hr = punk->QueryInterface(&pows);
+        if (SUCCEEDED(hr))
+        {
+            hr = pows->GetSelection(riid, ppv);
+            pows->Release();
+        }
+    }
+
+    return hr;
+}
+
+STDAPI IShellItemArray_GetItemAt(IShellItemArray *psia, DWORD dwIndex, REFIID riid, LPVOID *ppv)
+{
+    *ppv = nullptr;
+
+    IShellItem *psi = nullptr;
+    HRESULT hr = psia->GetItemAt(0, &psi);
+    if (SUCCEEDED(hr))
+    {
+        hr = psi->QueryInterface(riid, ppv);
+        psi->Release();
+    }
+    return hr;
+}

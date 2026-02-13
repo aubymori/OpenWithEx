@@ -1,5 +1,6 @@
 #include "openwithex_launcher.h"
 #include "undoc.h"
+#include "util.h"
 #include <initguid.h>
 #include <appmgmt.h>
 
@@ -122,26 +123,62 @@ HRESULT COpenWithExLauncher::_InstallHandlerIfNeededAndInvoke()
     return hr;
 }
 
-bool COpenWithExLauncher::_AllowSetDefault()
+HRESULT COpenWithExLauncher::_GetSelectedItem(REFIID riid, LPVOID *ppv)
 {
-    return false;
+    HRESULT hr = DISP_E_BADINDEX;
+    *ppv = nullptr;
+
+    if (_psiaSelection)
+    {
+        IShellItem *psi = nullptr;
+        hr = _psiaSelection->GetItemAt(0, &psi);
+        if (SUCCEEDED(hr))
+        {
+            hr = psi->QueryInterface(riid, ppv);
+            psi->Release();
+        }
+    }
+    return hr;
 }
 
-bool COpenWithExLauncher::_IsOpenWithUndecidedAppUrl()
+bool COpenWithExLauncher::_AllowSetDefault()
 {
-    ComPtr<IShellItem2> spItem;
     ComPtr<IOpenWithTypeOverride> spTypeOverride;
     wil::unique_cotaskmem_string spsz;
 
     if (SUCCEEDED(QueryService(IID_IOpenWithTypeOverride, IID_PPV_ARGS(&spTypeOverride)))
         && SUCCEEDED(spTypeOverride->GetOpenWithTypeOverride(&spsz)))
     {
-        if (SUCCEEDED(AssocCreateElement(CLSID_AssocProgidElement, IID_PPV_ARGS(&spItem))))
+        ComPtr<IAssociationElement> spAssocElem;
+        if (SUCCEEDED(AssocCreateElement(CLSID_AssocProgidElement, IID_PPV_ARGS(&spAssocElem))))
         {
-
+            ComPtr<IPersistString2> spPersistString;
+            if (SUCCEEDED(spAssocElem->QueryInterface(IID_PPV_ARGS(&spPersistString)))
+                && SUCCEEDED(spPersistString->SetString(spsz.get())))
+            {
+                return FAILED(spAssocElem->QueryExists(AQN_NAMED_VALUE, L"NoOpenWith"));
+            }
         }
     }
-    return false;
+    else
+    {
+        ComPtr<IShellItemArray> spItems;
+        if (SUCCEEDED(IUnknown_GetSelection(
+                static_cast<IServiceProvider *>(this), IID_PPV_ARGS(&spItems))))
+        {
+            ComPtr<IShellItem2> spItem;
+            if (SUCCEEDED(IShellItemArray_GetItemAt(spItems.Get(), 0, IID_PPV_ARGS(&spItem))))
+            {
+                ComPtr<IAssociationArray> spAssocArray;
+                if (SUCCEEDED(spItem->BindToHandler(
+                        nullptr, BHID_AssociationArray, IID_PPV_ARGS(&spAssocArray))))
+                {
+                    return FAILED(spAssocArray->QueryExists(AQN_NAMED_VALUE, L"NoOpenWith"));
+                }
+            }
+        }
+    }
+    return true;
 }
 
 void COpenWithExLauncher::_DoExecute()
@@ -185,11 +222,10 @@ void COpenWithExLauncher::_DoExecute()
         if (!_AllowSetDefault())
             flags &= ~IMMERSIVE_OPENWITH_OVERRIDE;
 
-        if (_IsOpenWithUndecidedAppUrl())
-            flags |= IMMERSIVE_OPENWITH_URL;
-
         _spOpenWithUI->CreateAndShowFromDelegateExecute(
             static_cast<IExecuteCommand *>(this), flags);
+        SafeRelease(&_psiaSelection);
+        IUnknown_SetSite(_spOpenWithUI.Get(), nullptr);
     }
 }
 
@@ -215,7 +251,8 @@ STDMETHODIMP COpenWithExLauncher::QueryService(REFGUID serviceId, REFIID riid, v
 
 STDMETHODIMP COpenWithExLauncher::Launch(HWND hwndOwner, LPCWSTR pszFile, IMMERSIVE_OPENWITH_FLAGS flags)
 {
-    return E_NOTIMPL;
+    ComPtr<COpenWithExUI> spOpenWithUI = Make<COpenWithExUI>();
+    return spOpenWithUI->CreateAndShow(hwndOwner, pszFile, flags);
 }
 
 STDMETHODIMP COpenWithExLauncher::CreateInstance(IUnknown *, REFIID riid, void **ppv)
