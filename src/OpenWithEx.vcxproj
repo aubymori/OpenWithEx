@@ -18,24 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup Condition="'$(Platform)'=='Win32'">
-    <_DefToLib Include="defs\Win32\*.def" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(Platform)'!='Win32'">
-    <_DefToLib Include="defs\Win64\*.def" />
-  </ItemGroup>
-  <Target Name="_GenerateDefLib" BeforeTargets="Link" Inputs="@(_DefToLib)" Outputs="@(_DefToLib->'$(IntDir)%(Filename).lib')">
-    <Exec Command="lib /nologo /def:&quot;%(_DefToLib.Identity)&quot; /machine:$(PlatformShortName) /out:&quot;$(IntDir)%(Filename).lib&quot;" />
-  </Target>
-  <PropertyGroup>
-    <_GeneratedLibs>@(_DefToLib->'%(Filename).lib')</_GeneratedLibs>
-  </PropertyGroup>
-  <ItemDefinitionGroup>
-    <Link>
-      <AdditionalLibraryDirectories>$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(_GeneratedLibs);%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-  </ItemDefinitionGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -93,22 +75,22 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)build\$(Configuration)-$(Platform)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)-$(Platform)\</IntDir>
     <TargetName>OpenWith</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)build\$(Configuration)-$(Platform)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)-$(Platform)\</IntDir>
     <TargetName>OpenWith</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)build\$(Configuration)-$(Platform)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)-$(Platform)\</IntDir>
     <TargetName>OpenWith</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)build\$(Configuration)-$(Platform)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)-$(Platform)\</IntDir>
     <TargetName>OpenWith</TargetName>
   </PropertyGroup>
@@ -270,6 +252,7 @@
     <ClInclude Include="openwithex_ui.h" />
     <ClInclude Include="process_and_thread_refhost.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="undoc.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +266,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="defs\shcorep.def" />
+    <None Include="defs\shell32p.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(SolutionDir)DefToLib\DefToLib.targets" Condition="Exists('$(SolutionDir)DefToLib\DefToLib.targets')" />

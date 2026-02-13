@@ -1,0 +1,3 @@
+LIBRARY SHELL32.dll
+EXPORTS
+	AssocCreateElement @764 NONAME ;argsize=12

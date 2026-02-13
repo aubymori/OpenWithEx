@@ -77,6 +77,9 @@
     <ClInclude Include="openwithex_launcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="undoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="openwithex.cpp">
@@ -108,6 +111,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="defs\shcorep.def">
+      <Filter>Module Definition Files</Filter>
+    </None>
+    <None Include="defs\shell32p.def">
       <Filter>Module Definition Files</Filter>
     </None>
   </ItemGroup>

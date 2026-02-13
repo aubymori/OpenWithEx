@@ -1,4 +1,5 @@
 #include "openwithex_launcher.h"
+#include "undoc.h"
 #include <initguid.h>
 #include <appmgmt.h>
 
@@ -128,6 +129,18 @@ bool COpenWithExLauncher::_AllowSetDefault()
 
 bool COpenWithExLauncher::_IsOpenWithUndecidedAppUrl()
 {
+    ComPtr<IShellItem2> spItem;
+    ComPtr<IOpenWithTypeOverride> spTypeOverride;
+    wil::unique_cotaskmem_string spsz;
+
+    if (SUCCEEDED(QueryService(IID_IOpenWithTypeOverride, IID_PPV_ARGS(&spTypeOverride)))
+        && SUCCEEDED(spTypeOverride->GetOpenWithTypeOverride(&spsz)))
+    {
+        if (SUCCEEDED(AssocCreateElement(CLSID_AssocProgidElement, IID_PPV_ARGS(&spItem))))
+        {
+
+        }
+    }
     return false;
 }
 

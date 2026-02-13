@@ -82,12 +82,12 @@ Section "OpenWithEx" OpenWithEx
     # Install x86-64 files
     SetOutPath "$PROGRAMFILES64\OpenWithEx"
     WriteUninstaller "$PROGRAMFILES64\OpenWithEx\uninstall.exe"
-    File "..\build\Release-x64\OpenWith.exe"
-    File "..\build\Release-x64\config\OpenWithExConfig.exe"
+    File "..\bin\Release-x64\OpenWith.exe"
+    File "..\bin\Release-x64\config\OpenWithExConfig.exe"
 
     # Install x86-32 files
     SetOutPath "$PROGRAMFILES32\OpenWithEx"
-    File "..\build\Release-Win32\OpenWith.exe"
+    File "..\bin\Release-Win32\OpenWith.exe"
 
     # Create configurator shortcut
     SetShellVarContext all
@@ -126,10 +126,10 @@ SectionEnd
 
 !macro InstallLang lang
     SetOutPath "$PROGRAMFILES64\OpenWithEx\${lang}"
-    File "..\build\Release-x64\${lang}\OpenWith.exe.mui"
-	File "..\build\Release-x64\config\${lang}\OpenWithExConfig.exe.mui"
+    File "..\bin\Release-x64\${lang}\OpenWith.exe.mui"
+	File "..\bin\Release-x64\config\${lang}\OpenWithExConfig.exe.mui"
     SetOutPath "$PROGRAMFILES32\OpenWithEx\${lang}"
-    File "..\build\Release-Win32\${lang}\OpenWith.exe.mui"
+    File "..\bin\Release-Win32\${lang}\OpenWith.exe.mui"
 !macroend
 
 SectionGroup "$(STRING_LANGS)"

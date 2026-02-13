@@ -1,11 +1,6 @@
 #pragma once
 #include "openwithex_priv.h"
-
-MIDL_INTERFACE("94724f59-eb2c-4efb-ad2b-8538f6496f7d")
-IOpenWithTypeOverride : IUnknown
-{
-    STDMETHOD(GetOpenWithTypeOverride)(LPWSTR *) PURE;
-};
+#include <initguid.h>
 
 MIDL_INTERFACE("6A283FE2-ECFA-4599-91C4-E80957137B26")
 IOpenWithLauncher : public IUnknown
@@ -73,19 +68,19 @@ enum ASSOCQUERY
 MIDL_INTERFACE("D8F6AD5B-B44F-4BCC-88FD-EB3473DB7502")
 IAssociationElement : IUnknown
 {
-	STDMETHOD(QueryString)(ASSOCQUERY flags, PCWSTR lpValueName, PWSTR *ppszOut) PURE;
-	STDMETHOD(QueryDword)(ASSOCQUERY flags, PCWSTR lpValueName, DWORD *pdwOut) PURE;
-	STDMETHOD(QueryExists)(ASSOCQUERY flags, PCWSTR lpValueName) PURE;
-	STDMETHOD(QueryDirect)(ASSOCQUERY flags, PCWSTR lpValueName, FLAGGED_BYTE_BLOB **) PURE;
-	STDMETHOD(QueryObject)(ASSOCQUERY flags, PCWSTR lpValueName, REFIID riid, void **ppvObject) PURE;
-	STDMETHOD(QueryGuid)(ASSOCQUERY flags, PCWSTR lpValueName, GUID *pGuidOut) PURE;
+	STDMETHOD(QueryString)(ASSOCQUERY query, LPCWSTR pszCue, LPWSTR *ppsz) PURE;
+	STDMETHOD(QueryDword)(ASSOCQUERY query, LPCWSTR pszCue, DWORD *pdw) PURE;
+	STDMETHOD(QueryGuid)(ASSOCQUERY query, LPCWSTR pszCue, GUID *pguid) PURE;
+	STDMETHOD(QueryExists)(ASSOCQUERY query, LPCWSTR pszCue) PURE;
+	STDMETHOD(QueryDirect)(ASSOCQUERY query, LPCWSTR pszCue, FLAGGED_BYTE_BLOB **ppblob) PURE;
+	STDMETHOD(QueryObject)(ASSOCQUERY query, LPCWSTR pszCue, REFIID riid, void **ppv) PURE;
 };
 
 MIDL_INTERFACE("C35F777C-5FA8-4293-BD69-4636FF366F22")
 IAssociationArray : IAssociationElement
 {
-	STDMETHOD(InsertAtFront)(REFIID, LPCWSTR) PURE;
-	STDMETHOD(Append)(REFIID, LPCWSTR) PURE;
+	STDMETHOD(InsertAtFront)(REFIID riid, LPCWSTR pszCue) PURE;
+	STDMETHOD(Append)(REFIID riid, LPCWSTR pszCue) PURE;
 };
 
 MIDL_INTERFACE("E157C3A1-A532-4DE2-9480-1452B7426EEE")
@@ -101,4 +96,12 @@ MIDL_INTERFACE("9D923EDC-B7A9-4F77-9933-284E7E2B2536")
 IObjectWithOpenWithFlags : IUnknown
 {
 	STDMETHOD(get_Flags)(IMMERSIVE_OPENWITH_FLAGS *out) PURE;
+};
+
+DEFINE_GUID(IID_IOpenWithTypeOverride, 0x94724F59, 0xEB2C, 0x4EFB, 0xAD,0x2B, 0x85,0x38,0xF6,0x49,0x6F,0x7D);
+
+MIDL_INTERFACE("94724F59-EB2C-4EFB-AD2B-8538F6496F7D")
+IOpenWithTypeOverride : IUnknown
+{
+	STDMETHOD(GetOpenWithTypeOverride)(LPWSTR *ppsz) PURE;
 };
