@@ -1,6 +1,8 @@
 #include "openwithex_launcher.h"
 #include "undoc.h"
 #include "util.h"
+#include "caller_identity.h"
+#include "rpc_options_helper.h"
 #include <initguid.h>
 #include <appmgmt.h>
 
@@ -333,7 +335,44 @@ STDMETHODIMP COpenWithExLauncher::SetDirectory(LPCWSTR pszDirectory)
 
 STDMETHODIMP COpenWithExLauncher::Execute()
 {
-    return E_NOTIMPL;
+    HRESULT hr;
+
+    KillTimer(NULL, g_idleTimerId);
+    if (CSTR_EQUAL == CompareStringOrdinal(
+            L"InvokeDefaultVerbInOtherProcess", -1,
+            _spszCommandName.get(), -1,
+            TRUE))
+    {
+        hr = _psiaSelection ? S_OK : E_INVALIDARG;
+        if (SUCCEEDED(hr))
+        {
+            PROCESS_UICONTEXT processUIContext;
+            hr = CallerIdentity::GetCallingProcessType(&processUIContext);
+            if (SUCCEEDED(hr))
+            {
+                hr = (processUIContext == PROCESS_UICONTEXT_IMMERSIVE_BROKER) ? S_OK : E_FAIL;
+                if (SUCCEEDED(hr))
+                {
+                    ComPtr<IWakeOnRPCCalls> spWakeOnCalls;
+                    if (SUCCEEDED(IUnknown_QueryService(
+                            _punkSite, __uuidof(IWakeOnRPCCalls), IID_PPV_ARGS(&spWakeOnCalls)))
+                        && S_OK == spWakeOnCalls->ShouldWakeOnRPCCalls())
+                    {
+                        // This is misspelled as "spSeriveProvider" in the original OpenWith.exe
+                        ComPtr<IServiceProvider> spServiceProvider;
+                        if (SUCCEEDED(_punkSite->QueryInterface(IID_PPV_ARGS(&spServiceProvider)))
+                            && SUCCEEDED(RpcOptionsHelper::CopyProxy(
+                                    spServiceProvider.Get(), _spSiteProxy.ReleaseAndGetAddressOf())))
+                        {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return hr;
 }
 
 STDMETHODIMP COpenWithExLauncher::SetAssocElement(IAssociationElement *pae)

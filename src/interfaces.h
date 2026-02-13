@@ -112,3 +112,15 @@ IPersistString2 : IPersist
 	STDMETHOD(SetString)(LPCWSTR psz) PURE;
 	STDMETHOD(GetString)(LPWSTR *ppsz) PURE;
 };
+
+MIDL_INTERFACE("68C6A1B9-DE39-42C3-8D28-BF40A5126541")
+ICallingProcessInfo : IUnknown
+{
+	STDMETHOD(OpenCallerProcessHandle)(DWORD dwProcessAccessFlags, HANDLE *phProcess) PURE;
+};
+
+MIDL_INTERFACE("728E9D41-2D68-4714-99BD-FAE3742125D5")
+IWakeOnRPCCalls : IUnknown
+{
+	STDMETHOD(ShouldWakeOnRPCCalls)() PURE;
+};
