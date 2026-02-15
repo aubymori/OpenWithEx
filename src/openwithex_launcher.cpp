@@ -364,10 +364,17 @@ STDMETHODIMP COpenWithExLauncher::Execute()
                             && SUCCEEDED(RpcOptionsHelper::CopyProxy(
                                     spServiceProvider.Get(), _spSiteProxy.ReleaseAndGetAddressOf())))
                         {
-
+                            ComPtr<IRpcOptions> spRpcOptions;
+                            if (SUCCEEDED(RpcOptionsHelper::GetRpcOptions(_spSiteProxy.Get(), &spRpcOptions)))
+                            {
+                                spRpcOptions->Set(_spSiteProxy.Get(), COMBND_RESERVED1, 0);
+                            }
                         }
                     }
                 }
+
+                HWND hwndOwner;
+                IUnknown_GetParentWindow(_punkSite, &hwndOwner);
             }
         }
     }

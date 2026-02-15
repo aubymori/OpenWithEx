@@ -69,3 +69,29 @@ STDAPI IShellItemArray_GetItemAt(IShellItemArray *psia, DWORD dwIndex, REFIID ri
     }
     return hr;
 }
+
+STDAPI IUnknown_GetParentWindow(IUnknown *punkSite, HWND *phwnd)
+{
+    IUnknown *punkRelease = nullptr;
+    IUnknown *punk = punkSite;
+    HRESULT hr;
+
+    do
+    {
+        hr = IUnknown_GetWindow(punkSite, phwnd);
+        if (SUCCEEDED(hr) || FAILED(IUnknown_GetSite(punk, IID_PPV_ARGS(&punk))))
+        {
+            punkSite = punk;
+        }
+        else
+        {
+            SafeRelease(&punkRelease);
+            punkSite = punk;
+            punkRelease = punk;
+        }
+    }
+    while (punkSite && FAILED(hr));
+
+    SafeRelease(&punkRelease);
+    return hr;
+}

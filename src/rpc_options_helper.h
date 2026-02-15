@@ -36,4 +36,31 @@ namespace RpcOptionsHelper
 
 		return hr;
 	}
+
+	HRESULT GetRpcOptions(IUnknown *pInterface, IRpcOptions **ppRpcOptions)
+	{
+		*ppRpcOptions = nullptr;
+		if (!pInterface)
+			return E_NOINTERFACE;
+
+		ComPtr<IRpcOptions> spRpcOptions;
+		HRESULT hr = pInterface->QueryInterface(IID_PPV_ARGS(&spRpcOptions));
+		ULONG_PTR value;
+		if (SUCCEEDED(hr))
+		{
+			hr = spRpcOptions->Query(pInterface, COMBND_SERVER_LOCALITY, &value);
+		}
+
+		if (SUCCEEDED(hr))
+		{
+			hr = (value != 1) ? E_NOINTERFACE : S_OK;
+		}
+
+		if (SUCCEEDED(hr))
+		{
+			*ppRpcOptions = spRpcOptions.Detach();
+		}
+
+		return hr;
+	}
 }
