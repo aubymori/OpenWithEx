@@ -92,5 +92,21 @@ void CExecuteItem::SetWindow(HWND hwnd)
 
 HRESULT CExecuteItem::Execute()
 {
+    IContextMenu *pContextMenu = nullptr;
+    HRESULT hr = _GetContextMenu(&pContextMenu);
+    if (SUCCEEDED(hr))
+    {
+        HMENU hMenu = CreatePopupMenu();
+        hr = (hMenu != NULL) ? S_OK : E_OUTOFMEMORY;
+        if (SUCCEEDED(hr))
+        {
 
+        }
+    }
+
+    if (FAILED(hr))
+    {
+        if (pContextMenu)
+            pContextMenu->Release();
+    }
 }

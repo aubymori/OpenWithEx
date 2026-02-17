@@ -245,6 +245,7 @@
   <ItemGroup>
     <ClInclude Include="caller_identity.h" />
     <ClInclude Include="dialog.h" />
+    <ClInclude Include="execute_item.h" />
     <ClInclude Include="file_sys_bind_data.h" />
     <ClInclude Include="interfaces.h" />
     <ClInclude Include="openwithex_launcher.h" />
@@ -256,9 +257,11 @@
     <ClInclude Include="rpc_options_helper.h" />
     <ClInclude Include="undoc.h" />
     <ClInclude Include="util.h" />
+    <ClInclude Include="wil_priv.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dialog.cpp" />
+    <ClCompile Include="execute_item.cpp" />
     <ClCompile Include="file_sys_bind_data.cpp" />
     <ClCompile Include="openwithex.cpp" />
     <ClCompile Include="openwithex_launcher.cpp" />
