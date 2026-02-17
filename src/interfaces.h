@@ -76,6 +76,23 @@ IAssociationElement : IUnknown
 	STDMETHOD(QueryObject)(ASSOCQUERY query, LPCWSTR pszCue, REFIID riid, void **ppv) PURE;
 };
 
+// IID might have changed; we don't actually query this ever, I just got this
+// from Geoff Chappell.
+MIDL_INTERFACE("DC8F8556-EFBD-4EFA-8B64-BBA84B4ECD7F")
+IAssociationList : IUnknown
+{
+	STDMETHOD(EnumerateElements)(struct IEnumerateAssociationElements **) PURE;
+	STDMETHOD(InsertAtFront)(REFIID riid, LPCWSTR pszCue) PURE;
+	STDMETHOD(Append)(REFIID riid, LPCWSTR pszCue) PURE;
+};
+
+MIDL_INTERFACE("D8820AFB-ADA1-45DB-BD57-CF29047EE2BF")
+IObjectWithAssociationList : IUnknown
+{
+	STDMETHOD(SetList)(IAssociationList *pal) PURE;
+	STDMETHOD(GetList)(IAssociationList **ppal) PURE;
+};
+
 MIDL_INTERFACE("C35F777C-5FA8-4293-BD69-4636FF366F22")
 IAssociationArray : IAssociationElement
 {

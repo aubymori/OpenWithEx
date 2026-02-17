@@ -36,6 +36,13 @@ void SafeRelease(T **ppT)
         pT->Release();
 }
 
+template <typename T>
+HRESULT SetInterface(T **ppT, T *punk)
+{
+    SafeRelease(ppT);
+    return punk ? punk->QueryInterface(IID_PPV_ARGS(ppT)) : E_NOINTERFACE;
+}
+
 STDAPI BindCtx_SetMode(IBindCtx *pbcIn, DWORD grfMode, IBindCtx **ppbcOut);
 
 STDAPI IUnknown_GetSelection(IUnknown *punk, REFIID riid, LPVOID *ppv);
