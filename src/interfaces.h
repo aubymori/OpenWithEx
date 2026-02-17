@@ -141,3 +141,9 @@ IWakeOnRPCCalls : IUnknown
 {
 	STDMETHOD(ShouldWakeOnRPCCalls)() PURE;
 };
+
+MIDL_INTERFACE("649E2263-DC09-466F-9D66-3EB133EE8F81")
+IContextMenuForProgInvoke : IUnknown
+{
+	STDMETHOD(SetInvokeVerbs)(const LPCWSTR *rgVerbs, UINT cVerbs) PURE;
+};
