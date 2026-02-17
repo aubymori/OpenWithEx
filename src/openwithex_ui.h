@@ -6,8 +6,15 @@ class COpenWithExUI : public RuntimeClass<
 	IObjectWithSite>
 {
 private:
-	wil::unique_cotaskmem_string _spszTypeID;
 	ComPtr<IUnknown> _spunkSite;
+	HWND _hwndOwner;
+	ComPtr<IShellItem2> _spItem;
+	ComPtr<IShellItemArray> _spItems;
+	wil::unique_cotaskmem_string _spszTypeID;
+	IMMERSIVE_OPENWITH_FLAGS _openwithflags;
+	POINT _ptPosition;
+
+	HRESULT _CreateAndShow();
 
 public:
 	// IObjectWithSite
