@@ -3,6 +3,7 @@
 #include "util.h"
 #include "caller_identity.h"
 #include "rpc_options_helper.h"
+#include "execute_item.h"
 #include <initguid.h>
 #include <appmgmt.h>
 
@@ -375,8 +376,28 @@ STDMETHODIMP COpenWithExLauncher::Execute()
 
                 HWND hwndOwner;
                 IUnknown_GetParentWindow(_punkSite, &hwndOwner);
+
+                CExecuteItem executeItem(_psiaSelection);
+                executeItem.SetWindow(hwndOwner);
+                executeItem.SetSite(static_cast<IServiceProvider *>(this));
+                executeItem.Execute();
             }
         }
+
+        PostQuitMessage(0);
+    }
+    else
+    {
+        _spOpenWithUI = Make<COpenWithExUI>();
+        if (!_spOpenWithUI)
+            return E_OUTOFMEMORY;
+
+        IUnknown_SetSite(_spOpenWithUI.Get(), static_cast<IServiceProvider *>(this));
+
+        if (PostThreadMessageW(GetCurrentThreadId(), 0x8001, 0, 0))
+            hr = S_OK;
+        else
+            hr = ResultFromKnownLastError();
     }
 
     return hr;
