@@ -49,7 +49,6 @@ private:
 	ComPtr<COpenWithExUI> _spOpenWithUI;
 	ComPtr<IServiceProvider> _spSiteProxy;
 
-	HRESULT _GetSelectedItem(REFIID riid, LPVOID *ppv);
 	HRESULT _InstallApplication(IShellItem2 *psi, REFIID riid, void **ppva);
 	HRESULT _InitDelegate(IExecuteCommand *pxc);
 	HRESULT _InstallHandlerIfNeededAndInvoke();

@@ -95,20 +95,3 @@ STDAPI IUnknown_GetParentWindow(IUnknown *punkSite, HWND *phwnd)
     SafeRelease(&punkRelease);
     return hr;
 }
-
-STDAPI IUnknown_GetSelection(IUnknown *punk, IShellItemArray **ppsiaSelection)
-{
-    HRESULT hr = E_FAIL;
-    *ppsiaSelection = nullptr;
-    if (punk)
-    {
-        IObjectWithSelection *pows;
-        hr = punk->QueryInterface(&pows);
-        if (SUCCEEDED(hr))
-        {
-            hr = pows->GetSelection(IID_PPV_ARGS(ppsiaSelection));
-            pows->Release();
-        }
-    }
-    return hr;
-}

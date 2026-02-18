@@ -2,6 +2,7 @@
 #include "openwithex_priv.h"
 #include "interfaces.h"
 #include "util.h"
+#include <intsafe.h>
 
 enum RUNTIMEBROKER_CALLERIDENTITY_CHECK
 {

@@ -9,22 +9,6 @@
 
 UINT_PTR g_idleTimerId = (UINT_PTR)-1;
 
-HRESULT COpenWithExLauncher::_GetSelectedItem(REFIID riid, LPVOID *ppv)
-{
-    HRESULT hr = DISP_E_BADINDEX;
-    if (_psiaSelection)
-    {
-        IShellItem *psi = nullptr;
-        hr = _psiaSelection->GetItemAt(0, &psi);
-        if (SUCCEEDED(hr))
-        {
-            hr = psi->QueryInterface(riid, ppv);
-            psi->Release();
-        }
-    }
-    return hr;
-}
-
 HRESULT COpenWithExLauncher::_InstallApplication(IShellItem2 *psi, REFIID riid, void **ppva)
 {
     wil::unique_cotaskmem_string spszExt;

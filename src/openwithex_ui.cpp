@@ -50,7 +50,7 @@ HRESULT COpenWithExUI::CreateAndShowFromDelegateExecute(IExecuteCommand *pxc, IM
 {
 	_openwithflags = flags;
 	
-	RETURN_IF_FAILED(IUnknown_GetSelection(pxc, &_spItems));
+	RETURN_IF_FAILED(IUnknown_GetSelection(pxc, IID_PPV_ARGS(&_spItems)));
 	RETURN_IF_FAILED(IShellItemArray_GetItemAt(_spItems.Get(), 0, IID_PPV_ARGS(&_spItem)));
 
 	wil::unique_cotaskmem_string spsz;

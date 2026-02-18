@@ -272,6 +272,7 @@
   <ItemGroup>
     <None Include="defs\shcorep.def" />
     <None Include="defs\shell32p.def" />
+    <None Include="defs\user32p.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(SolutionDir)DefToLib\DefToLib.targets" Condition="Exists('$(SolutionDir)DefToLib\DefToLib.targets')" />

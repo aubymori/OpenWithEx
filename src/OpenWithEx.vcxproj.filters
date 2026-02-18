@@ -131,5 +131,8 @@
     <None Include="defs\shell32p.def">
       <Filter>Module Definition Files</Filter>
     </None>
+    <None Include="defs\user32p.def">
+      <Filter>Module Definition Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

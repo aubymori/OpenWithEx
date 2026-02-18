@@ -50,5 +50,3 @@ STDAPI IUnknown_GetSelection(IUnknown *punk, REFIID riid, LPVOID *ppv);
 STDAPI IShellItemArray_GetItemAt(IShellItemArray *psia, DWORD dwIndex, REFIID riid, LPVOID *ppv);
 
 STDAPI IUnknown_GetParentWindow(IUnknown *punkSite, HWND *phwnd);
-
-STDAPI IUnknown_GetSelection(IUnknown *punk, IShellItemArray **ppsiaSelection);

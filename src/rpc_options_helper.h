@@ -16,7 +16,7 @@ namespace RpcOptionsHelper
 			hr = spProxyCopy.As(&spDelegateCopy);
 		}
 
-		if (SUCCEEDED(hr)
+		if (SUCCEEDED(hr))
 		{
 			hr = CoSetProxyBlanket(
 				spDelegateCopy.Get(),
@@ -25,7 +25,7 @@ namespace RpcOptionsHelper
 				COLE_DEFAULT_PRINCIPAL,
 				RPC_C_AUTHN_LEVEL_DEFAULT,
 				RPC_C_IMP_LEVEL_DEFAULT,
-				RPC_C_NO_CREDENTIALS.
+				RPC_C_NO_CREDENTIALS,
 				EOAC_DEFAULT);
 		}
 
