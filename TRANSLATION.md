@@ -1,8 +1,6 @@
 # Translation
 Rather than translating strings\* and dialogs directly, they should be obtained from their respective Windows versions in that locale.
 
-<small>\*`IDS_ERR_` strings should be translated directly.</small>
-
 Translations should be submitted as RC files, not compiled MUIs.
 
 ## How to extract `shell32.dll` resources from a Windows ISO
