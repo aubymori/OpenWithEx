@@ -263,7 +263,7 @@
     <ClCompile Include="dialog.cpp" />
     <ClCompile Include="execute_item.cpp" />
     <ClCompile Include="file_sys_bind_data.cpp" />
-    <ClCompile Include="openwithex.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="openwithex_launcher.cpp" />
     <ClCompile Include="openwithex_ui.cpp" />
     <ClCompile Include="process_and_thread_refhost.cpp" />
