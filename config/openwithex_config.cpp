@@ -37,7 +37,7 @@ INT_PTR CALLBACK ConfigDlgProc(
 			DWORD dwSize = sizeof(DWORD);
 			RegQueryValueExW(
 				g_hKey,
-				L"Style",
+				REGSTR_VAL_STYLE,
 				nullptr,
 				nullptr,
 				(LPBYTE)&dwStyle,
@@ -67,7 +67,7 @@ INT_PTR CALLBACK ConfigDlgProc(
 					DWORD dwStyle = ComboBox_GetCurSel(GetDlgItem(hWnd, IDD_STYLEBOX));
 					RegSetValueExW(
 						g_hKey,
-						L"Style",
+						REGSTR_VAL_STYLE,
 						NULL,
 						REG_DWORD,
 						(LPBYTE)&dwStyle,
@@ -97,7 +97,7 @@ int WINAPI wWinMain(
 {
 	if (ERROR_SUCCESS != RegCreateKeyExW(
 		HKEY_CURRENT_USER,
-		L"SOFTWARE\\OpenWithEx",
+		REGSTR_PATH_OPENWITHEX,
 		NULL,
 		nullptr,
 		NULL,

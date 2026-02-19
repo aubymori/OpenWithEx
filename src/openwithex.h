@@ -6,6 +6,9 @@
 #define VER_REVISION           0
 #define VER_STRING       "2.0.0"
 
+#define REGSTR_PATH_OPENWITHEX         L"SOFTWARE\\OpenWithEx"
+#define REGSTR_VAL_STYLE               L"Style"
+
 typedef enum _OPENWITHEX_STYLE
 {
 	OPENWITHEX_STYLE_VISTA = 0,
