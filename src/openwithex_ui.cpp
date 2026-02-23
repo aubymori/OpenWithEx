@@ -8,7 +8,10 @@ HRESULT COpenWithExUI::_CreateAndShow()
 	_spItem->GetDisplayName(SIGDN_FILESYSPATH, &spsz);
 
 	WCHAR szMessage[MAX_PATH * 2];
-	swprintf_s(szMessage, L"Item: %s\nType: %s", spsz.get(), _spszTypeID.get());
+	swprintf_s(
+		szMessage, 
+		L"Item: %s\nType: %s\nFlags: 0x%X",
+		spsz.get(), _spszTypeID.get(), _openwithflags);
 
 	MessageBoxW(NULL, szMessage, L"OpenWithEx", MB_ICONINFORMATION);
 	return E_NOTIMPL;
