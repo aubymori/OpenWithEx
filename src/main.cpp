@@ -16,6 +16,8 @@ int WINAPI wWinMain(
 {
 	g_hinst = hInstance;
 
+	CoInitialize(nullptr);
+
 	// Read user's style
 	HKEY hkey;
 	if (ERROR_SUCCESS == RegOpenKeyExW(
@@ -52,6 +54,11 @@ int WINAPI wWinMain(
 	// We are running as a local server.
 	if (nArgs == 1 && ppszArgs[0][0] && !_wcsicmp(&ppszArgs[0][1], L"embedding"))
 	{
+#ifndef NDEBUG
+		while (!IsDebuggerPresent())
+			Sleep(100);
+#endif
+
 		ComPtr<COpenWithExLauncher> spLauncher = Make<COpenWithExLauncher>();
 		if (!spLauncher)
 			return E_OUTOFMEMORY;

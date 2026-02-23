@@ -215,6 +215,7 @@ void COpenWithExLauncher::_DoExecute()
         SafeRelease(&_psiaSelection);
         IUnknown_SetSite(_spOpenWithUI.Get(), nullptr);
     }
+    PostQuitMessage(0);
 }
 
 STDMETHODIMP COpenWithExLauncher::Initialize(LPCWSTR pszCommandName, IPropertyBag *)
@@ -242,7 +243,9 @@ STDMETHODIMP COpenWithExLauncher::Launch(HWND hwndOwner, LPCWSTR pszFile, IMMERS
     ComPtr<COpenWithExUI> spOpenWithUI = Make<COpenWithExUI>();
     if (!spOpenWithUI)
         return E_OUTOFMEMORY;
-    return spOpenWithUI->CreateAndShow(hwndOwner, pszFile, flags);
+    HRESULT hr = spOpenWithUI->CreateAndShow(hwndOwner, pszFile, flags);
+    PostQuitMessage(0);
+    return hr;
 }
 
 STDMETHODIMP COpenWithExLauncher::CreateInstance(IUnknown *, REFIID riid, void **ppv)
@@ -257,7 +260,8 @@ STDMETHODIMP COpenWithExLauncher::LockServer(BOOL)
 
 STDMETHODIMP COpenWithExLauncher::SetSite(IUnknown *punkSite)
 {
-    IUnknown_Set(&_punkSite, punkSite);
+    if (punkSite)
+        IUnknown_Set(&_punkSite, punkSite);
     return S_OK;
 }
 
@@ -429,7 +433,7 @@ HRESULT COpenWithExLauncher::RunMessageLoop()
         REGCLS_SINGLEUSE,
         &dwReg));
 
-    g_idleTimerId = SetTimer(NULL, 0, 20000, nullptr);
+    //g_idleTimerId = SetTimer(NULL, 0, 20000, nullptr);
 
     MSG msg;
     while (GetMessageW(&msg, NULL, 0, 0) > 0)

@@ -4,6 +4,13 @@
 
 HRESULT COpenWithExUI::_CreateAndShow()
 {
+	wil::unique_cotaskmem_string spsz;
+	_spItem->GetDisplayName(SIGDN_FILESYSPATH, &spsz);
+
+	WCHAR szMessage[MAX_PATH * 2];
+	swprintf_s(szMessage, L"Item: %s\nType: %s", spsz.get(), _spszTypeID.get());
+
+	MessageBoxW(NULL, szMessage, L"OpenWithEx", MB_ICONINFORMATION);
 	return E_NOTIMPL;
 }
 
