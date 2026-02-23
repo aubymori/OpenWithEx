@@ -95,3 +95,30 @@ STDAPI IUnknown_GetParentWindow(IUnknown *punkSite, HWND *phwnd)
     SafeRelease(&punkRelease);
     return hr;
 }
+
+STDAPI GetUrlPartFromString(LPWSTR uri, DWORD partId, LPWSTR *ppszUrlPart)
+{
+    *ppszUrlPart = nullptr;
+
+    WCHAR szPart[2048];
+    DWORD cch = ARRAYSIZE(szPart);
+    HRESULT hr = UrlGetPartW(uri, szPart, &cch, partId, 0);
+    if (SUCCEEDED(hr))
+    {
+        hr = SHStrDupW(szPart, ppszUrlPart);
+    }
+    return hr;
+}
+
+STDAPI GetUrlPartFromShellItemName(IShellItem *pShellItem, SIGDN nameForm, URL_PART partId, LPWSTR *ppszUrlPart)
+{
+    *ppszUrlPart = nullptr;
+
+    wil::unique_cotaskmem_string spszUrl;
+    HRESULT hr = pShellItem->GetDisplayName(nameForm, &spszUrl);
+    if (SUCCEEDED(hr))
+    {
+        hr = GetUrlPartFromString(spszUrl.get(), partId, ppszUrlPart);
+    }
+    return hr;
+}

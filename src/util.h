@@ -50,3 +50,7 @@ STDAPI IUnknown_GetSelection(IUnknown *punk, REFIID riid, LPVOID *ppv);
 STDAPI IShellItemArray_GetItemAt(IShellItemArray *psia, DWORD dwIndex, REFIID riid, LPVOID *ppv);
 
 STDAPI IUnknown_GetParentWindow(IUnknown *punkSite, HWND *phwnd);
+
+STDAPI GetUrlPartFromString(LPWSTR uri, DWORD partId, LPWSTR *ppszUrlPart);
+
+STDAPI GetUrlPartFromShellItemName(IShellItem *pShellItem, SIGDN nameForm, URL_PART partId, LPWSTR *ppszUrlPart);
