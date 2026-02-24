@@ -11,8 +11,10 @@ private:
 	ComPtr<IShellItem2> _spItem;
 	ComPtr<IShellItemArray> _spItems;
 	wil::unique_cotaskmem_string _spszTypeID;
+	wil::unique_cotaskmem_string _spszDefaultProgID;
 	IMMERSIVE_OPENWITH_FLAGS _openwithflags;
 	POINT _ptPosition;
+	bool _fEmptyExt;
 
 	HRESULT _CreateAndShow();
 
@@ -22,6 +24,7 @@ public:
 	STDMETHODIMP GetSite(REFIID riid, LPVOID *ppvSite) override;
 
 	// COpenWithExUI
+	COpenWithExUI();
 	HRESULT CreateAndShow(HWND hwndOwner, LPCWSTR pszFileName, IMMERSIVE_OPENWITH_FLAGS flags);
 	HRESULT CreateAndShowFromDelegateExecute(IExecuteCommand *pxc, IMMERSIVE_OPENWITH_FLAGS flags);
 	HRESULT SetPosition(POINT pt);

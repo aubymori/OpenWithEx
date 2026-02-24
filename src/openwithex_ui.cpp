@@ -46,6 +46,42 @@ HRESULT COpenWithExUI::_CreateAndShow()
 		}
 	}
 
+	if (SUCCEEDED(hr) && !(_openwithflags & IMMERSIVE_OPENWITH_URL))
+	{
+		_fEmptyExt = (_spszTypeID.get()[0] == L'\0') 
+			|| (CSTR_EQUAL == CompareStringOrdinal(_spszTypeID.get(), -1, L".", -1, TRUE));
+
+		ComPtr<IApplicationAssociationRegistrationInternal> spIAAR;
+		hr = SHCreateAssociationRegistration(IID_PPV_ARGS(&spIAAR));
+		if (SUCCEEDED(hr) && !_fEmptyExt)
+		{
+			if (_openwithflags & IMMERSIVE_OPENWITH_PROTOCOL)
+			{
+				hr = spIAAR->QueryCurrentDefault(_spszTypeID.get(), AT_URLPROTOCOL, AL_EFFECTIVE, &_spszDefaultProgID);
+			}
+			else
+			{
+				hr = spIAAR->QueryCurrentDefault(_spszTypeID.get(), AT_FILEEXTENSION, AL_EFFECTIVE, &_spszDefaultProgID);
+				if (SUCCEEDED(hr))
+				{
+					ComPtr<IQueryAssociations> spQueryAssoc;
+					if (SUCCEEDED(_spItem->BindToHandler(nullptr, BHID_AssociationArray, IID_PPV_ARGS(&spQueryAssoc))))
+					{
+						WCHAR szNoOpenMsg[MAX_PATH];
+						DWORD cch = ARRAYSIZE(szNoOpenMsg);
+						if (SUCCEEDED(spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_NOOPEN, nullptr, szNoOpenMsg, &cch)))
+						{
+							MessageBoxW(NULL,
+										L"Is NoOpen",
+										L"OpenWithEx",
+										MB_ICONINFORMATION);
+						}
+					}
+				}
+			}
+		}
+	}
+
 	WCHAR szMessage[MAX_PATH * 2];
 	swprintf_s(
 		szMessage, 
@@ -80,6 +116,15 @@ STDMETHODIMP COpenWithExUI::GetSite(REFIID riid, LPVOID *ppvSite)
 		return _spunkSite->QueryInterface(riid, ppvSite);
 	}
 	return E_FAIL;
+}
+
+COpenWithExUI::COpenWithExUI()
+	: _hwndOwner(NULL)
+	, _openwithflags(IMMERSIVE_OPENWITH_NONE)
+	, _ptPosition{ 0, 0 }
+	, _fEmptyExt(false)
+{
+
 }
 
 HRESULT COpenWithExUI::CreateAndShow(HWND hwndOwner, LPCWSTR pszFileName, IMMERSIVE_OPENWITH_FLAGS flags)
