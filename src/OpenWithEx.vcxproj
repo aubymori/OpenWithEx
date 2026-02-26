@@ -250,6 +250,7 @@
     <ClInclude Include="interfaces.h" />
     <ClInclude Include="internet_openas_dlg.h" />
     <ClInclude Include="noopen_dlg.h" />
+    <ClInclude Include="openas_dlg.h" />
     <ClInclude Include="openwithex_launcher.h" />
     <ClInclude Include="openwithex_priv.h" />
     <ClInclude Include="openwithex.h" />
