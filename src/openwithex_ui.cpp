@@ -55,6 +55,7 @@ HRESULT COpenWithExUI::_CreateAndShow()
 		_fEmptyExt = (_spszTypeID.get()[0] == L'\0') 
 			|| (CSTR_EQUAL == CompareStringOrdinal(_spszTypeID.get(), -1, L".", -1, TRUE));
 
+		bool fHasHandler = false;
 		ComPtr<IApplicationAssociationRegistrationInternal> spIAAR;
 		hr = SHCreateAssociationRegistration(IID_PPV_ARGS(&spIAAR));
 		if (SUCCEEDED(hr) && !_fEmptyExt)
@@ -67,6 +68,8 @@ HRESULT COpenWithExUI::_CreateAndShow()
 			{
 				hr = spIAAR->QueryCurrentDefault(_spszTypeID.get(), AT_FILEEXTENSION, AL_EFFECTIVE, &_spszDefaultProgID);
 			}
+
+			fHasHandler = SUCCEEDED(hr);
 
 			if (hr == HRESULT_FROM_WIN32(ERROR_NO_ASSOCIATION))
 				hr = S_OK;
@@ -82,8 +85,7 @@ HRESULT COpenWithExUI::_CreateAndShow()
 			DWORD cchCommand = 0;
 			wil::unique_cotaskmem_string spszFileName;
 
-			bool fHasCommand = SUCCEEDED(_spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_COMMAND, nullptr, szCommand, &cchCommand));
-			if (!fHasCommand)
+			if (!fHasHandler)
 			{
 				if (g_style != OPENWITHEX_STYLE_NT4)
 				{
