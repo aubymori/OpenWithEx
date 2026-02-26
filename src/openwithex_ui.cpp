@@ -74,33 +74,39 @@ HRESULT COpenWithExUI::_CreateAndShow()
 					DWORD cchCommand = 0;
 					wil::unique_cotaskmem_string spszFileName;
 
-					HRESULT hrNoOpen = FAILED(_spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_COMMAND, nullptr, nullptr, &cchCommand))
-						? S_OK
-						: E_FAIL;
-
-					if (SUCCEEDED(hrNoOpen))
+					bool fHasCommand = SUCCEEDED(_spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_COMMAND, nullptr, nullptr, &cchCommand));
+					if (!fHasCommand)
 					{
-						hrNoOpen = _spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_NOOPEN, nullptr, szNoOpenMsg, &cchNoOpenMsg);
-					}
+						if (g_style != OPENWITHEX_STYLE_NT4)
+						{
+							HRESULT hrNoOpen = _spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_NOOPEN, nullptr, szNoOpenMsg, &cchNoOpenMsg);
 
-					if (SUCCEEDED(hrNoOpen))
-					{
-						hrNoOpen = _spItem->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, &spszFileName);
-					}
+							if (SUCCEEDED(hrNoOpen))
+							{
+								hrNoOpen = _spItem->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, &spszFileName);
+							}
 
-					if (SUCCEEDED(hrNoOpen))
-					{
-						hrNoOpen = _spQueryAssoc->GetString(0, ASSOCSTR_FRIENDLYDOCNAME, nullptr, szTypeName, &cchTypeName);
-					}
+							if (SUCCEEDED(hrNoOpen))
+							{
+								hrNoOpen = _spQueryAssoc->GetString(0, ASSOCSTR_FRIENDLYDOCNAME, nullptr, szTypeName, &cchTypeName);
+							}
 
-					if (SUCCEEDED(hrNoOpen))
-					{
-						CNoOpenDlg dlg(this, szNoOpenMsg);
-						INT_PTR result = dlg.ShowDialog(NULL);
-						MessageBoxW(NULL,
-									(result == IDD_OPENWITH) ? L"continue" : L"cancel",
-									L"OpenWithEx",
-									MB_ICONINFORMATION);
+							if (SUCCEEDED(hrNoOpen))
+							{
+								CNoOpenDlg dlg(this, szNoOpenMsg);
+								INT_PTR result = dlg.ShowDialog(NULL);
+								if (result == IDCANCEL)
+								{
+									return hr;
+								}
+							}
+						}
+
+						if (g_style <= OPENWITHEX_STYLE_XP
+							&& !SHRestricted(REST_NOINTERNETOPENWITH))
+						{
+
+						}
 					}
 				}
 			}

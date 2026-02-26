@@ -95,6 +95,9 @@
     <ClInclude Include="noopen_dlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="internet_openas_dlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
