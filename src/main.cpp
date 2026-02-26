@@ -55,8 +55,20 @@ int WINAPI wWinMain(
 	if (nArgs == 1 && ppszArgs[0][0] && !_wcsicmp(&ppszArgs[0][1], L"embedding"))
 	{
 #ifndef NDEBUG
-		while (!IsDebuggerPresent())
-			Sleep(100);
+		if (!IsDebuggerPresent())
+		{
+			if (IDOK == MessageBoxW(
+				NULL,
+				L"Attach your debugger now and then click OK.\n"
+				"If you do not wish to use a debugger, click CANCEL.",
+
+				L"OpenWithEx (DEBUG)",
+				MB_ICONINFORMATION | MB_OKCANCEL
+			))
+			{
+				__debugbreak();
+			}
+		}
 #endif
 
 		ComPtr<COpenWithExLauncher> spLauncher = Make<COpenWithExLauncher>();
