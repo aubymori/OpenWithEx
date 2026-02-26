@@ -3,6 +3,7 @@
 #include "interfaces.h"
 #include "util.h"
 #include "noopen_dlg.h"
+#include "internet_openas_dlg.h"
 
 HRESULT COpenWithExUI::_CreateAndShow()
 {
@@ -65,48 +66,58 @@ HRESULT COpenWithExUI::_CreateAndShow()
 			else
 			{
 				hr = spIAAR->QueryCurrentDefault(_spszTypeID.get(), AT_FILEEXTENSION, AL_EFFECTIVE, &_spszDefaultProgID);
-				if (SUCCEEDED(hr))
+			}
+
+			if (hr == HRESULT_FROM_WIN32(ERROR_NO_ASSOCIATION))
+				hr = S_OK;
+		}
+
+		if (!(_openwithflags & IMMERSIVE_OPENWITH_PROTOCOL) && !_fEmptyExt)
+		{
+			WCHAR szNoOpenMsg[MAX_PATH];
+			DWORD cchNoOpenMsg = ARRAYSIZE(szNoOpenMsg);
+			WCHAR szTypeName[MAX_PATH];
+			DWORD cchTypeName = ARRAYSIZE(szTypeName);
+			WCHAR szCommand[MAX_PATH];
+			DWORD cchCommand = 0;
+			wil::unique_cotaskmem_string spszFileName;
+
+			bool fHasCommand = SUCCEEDED(_spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_COMMAND, nullptr, szCommand, &cchCommand));
+			if (!fHasCommand)
+			{
+				if (g_style != OPENWITHEX_STYLE_NT4)
 				{
-					WCHAR szNoOpenMsg[MAX_PATH];
-					DWORD cchNoOpenMsg = ARRAYSIZE(szNoOpenMsg);
-					WCHAR szTypeName[MAX_PATH];
-					DWORD cchTypeName = ARRAYSIZE(szTypeName);
-					DWORD cchCommand = 0;
-					wil::unique_cotaskmem_string spszFileName;
+					HRESULT hrNoOpen = _spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_NOOPEN, nullptr, szNoOpenMsg, &cchNoOpenMsg);
 
-					bool fHasCommand = SUCCEEDED(_spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_COMMAND, nullptr, nullptr, &cchCommand));
-					if (!fHasCommand)
+					if (SUCCEEDED(hrNoOpen))
 					{
-						if (g_style != OPENWITHEX_STYLE_NT4)
+						hrNoOpen = _spItem->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, &spszFileName);
+					}
+
+					if (SUCCEEDED(hrNoOpen))
+					{
+						hrNoOpen = _spQueryAssoc->GetString(0, ASSOCSTR_FRIENDLYDOCNAME, nullptr, szTypeName, &cchTypeName);
+					}
+
+					if (SUCCEEDED(hrNoOpen))
+					{
+						CNoOpenDlg dlg(this, szNoOpenMsg);
+						INT_PTR result = dlg.ShowDialog(_hwndOwner);
+						if (result == IDCANCEL)
 						{
-							HRESULT hrNoOpen = _spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_NOOPEN, nullptr, szNoOpenMsg, &cchNoOpenMsg);
-
-							if (SUCCEEDED(hrNoOpen))
-							{
-								hrNoOpen = _spItem->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, &spszFileName);
-							}
-
-							if (SUCCEEDED(hrNoOpen))
-							{
-								hrNoOpen = _spQueryAssoc->GetString(0, ASSOCSTR_FRIENDLYDOCNAME, nullptr, szTypeName, &cchTypeName);
-							}
-
-							if (SUCCEEDED(hrNoOpen))
-							{
-								CNoOpenDlg dlg(this, szNoOpenMsg);
-								INT_PTR result = dlg.ShowDialog(NULL);
-								if (result == IDCANCEL)
-								{
-									return hr;
-								}
-							}
+							return hr;
 						}
+					}
+				}
 
-						if (g_style <= OPENWITHEX_STYLE_XP
-							&& !SHRestricted(REST_NOINTERNETOPENWITH))
-						{
-
-						}
+				if (g_style <= OPENWITHEX_STYLE_XP
+					&& !SHRestricted(REST_NOINTERNETOPENWITH))
+				{
+					CInternetOpenAsDlg dlg(this);
+					INT_PTR result = dlg.ShowDialog(_hwndOwner);
+					if (result != IDOK)
+					{
+						return hr;
 					}
 				}
 			}
@@ -204,9 +215,9 @@ HRESULT COpenWithExUI::SetPosition(POINT pt)
 	return S_OK;
 }
 
-HRESULT COpenWithExUI::GetItemName(LPWSTR *ppszOut)
+HRESULT COpenWithExUI::GetItemName(SIGDN sigdnName, LPWSTR *ppszOut)
 {
-	return _spItem->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, ppszOut);
+	return _spItem->GetDisplayName(sigdnName, ppszOut);
 }
 
 HRESULT COpenWithExUI::GetTypeID(LPWSTR *ppszOut)
@@ -217,4 +228,19 @@ HRESULT COpenWithExUI::GetTypeID(LPWSTR *ppszOut)
 HRESULT COpenWithExUI::GetDescription(LPWSTR pszOut, DWORD cchOut)
 {
 	return !_spQueryAssoc ? E_FAIL : _spQueryAssoc->GetString(0, ASSOCSTR_FRIENDLYDOCNAME, nullptr, pszOut, &cchOut);
+}
+
+void COpenWithExUI::OpenDownloadURL(HWND hwnd)
+{
+	WCHAR szUrl[1024];
+	swprintf_s(
+		szUrl,
+		L"http://go.microsoft.com/fwlink/?LinkId=57426&Ext=%s",
+		_spszTypeID.get());
+	ShellExecuteW(
+		hwnd,
+		nullptr,
+		szUrl,
+		nullptr, nullptr,
+		SW_SHOWNORMAL);
 }

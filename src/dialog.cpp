@@ -44,6 +44,46 @@ INT_PTR CALLBACK CDialog::s_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 	return FALSE;
 }
 
+/* Loads a shell32 icon and gives IDD_ICON that icon. */
+void CDialog::SetShellIcon(int iIconID)
+{
+	static HMODULE hmodShell = GetModuleHandleW(L"shell32.dll");
+	static HMODULE hmodUser = GetModuleHandleW(L"user32.dll");
+
+	int cxIcon, cyIcon;
+
+	using GetSystemMetricsForDpi_t = decltype(&GetSystemMetricsForDpi);
+	static GetSystemMetricsForDpi_t pfnGetSystemMetricsForDpi
+		= (GetSystemMetricsForDpi_t)GetProcAddress(hmodUser, "GetSystemMetricsForDpi");
+	if (pfnGetSystemMetricsForDpi)
+	{
+		HDC hdc = GetDC(_hwnd);
+		int dpi = GetDeviceCaps(hdc, LOGPIXELSX);
+		ReleaseDC(_hwnd, hdc);
+
+		cxIcon = pfnGetSystemMetricsForDpi(SM_CXICON, dpi);
+		cyIcon = pfnGetSystemMetricsForDpi(SM_CYICON, dpi);
+	}
+	else
+	{
+		cxIcon = GetSystemMetrics(SM_CXICON);
+		cyIcon = GetSystemMetrics(SM_CYICON);
+	}
+
+	HICON hIcon = (HICON)LoadImageW(
+		hmodShell, MAKEINTRESOURCEW(iIconID), IMAGE_ICON,
+		cxIcon, cyIcon, LR_DEFAULTCOLOR);
+	if (hIcon)
+	{
+		SendDlgItemMessageW(
+			_hwnd,
+			IDD_ICON,
+			STM_SETICON,
+			(WPARAM)hIcon,
+			0);
+	}
+}
+
 CDialog::CDialog(UINT uDlgID)
 	: _uDlgID(uDlgID)
 {

@@ -30,7 +30,8 @@ public:
 	HRESULT CreateAndShowFromDelegateExecute(IExecuteCommand *pxc, IMMERSIVE_OPENWITH_FLAGS flags);
 	HRESULT SetPosition(POINT pt);
 
-	HRESULT GetItemName(LPWSTR *ppszOut);
+	HRESULT GetItemName(SIGDN sigdnName, LPWSTR *ppszOut);
 	HRESULT GetTypeID(LPWSTR *ppszOut);
 	HRESULT GetDescription(LPWSTR pszOut, DWORD cchOut);
+	void OpenDownloadURL(HWND hwnd);
 };

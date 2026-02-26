@@ -13,7 +13,7 @@ INT_PTR CNoOpenDlg::v_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
             wil::unique_cotaskmem_string spszTypeID, spszFileName;
             if (FAILED(_pOpenWithUI->GetDescription(szDescription, ARRAYSIZE(szDescription)))
             || FAILED(_pOpenWithUI->GetTypeID(&spszTypeID))
-            || FAILED(_pOpenWithUI->GetItemName(&spszFileName)))
+            || FAILED(_pOpenWithUI->GetItemName(SIGDN_DESKTOPABSOLUTEPARSING, &spszFileName)))
             {
                 EndDialog(hwnd, IDCANCEL);
                 return TRUE;

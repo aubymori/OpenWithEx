@@ -8,6 +8,7 @@
 #define DLG_OPENAS                         200
 #define DLG_OPENAS_NOTYPE                  201
 #define DLG_OPENAS_PROTOCOL                202
+// Yes, this is actually misspelled as DOWNALOAD by Microsoft.
 #define DLG_OPENAS_DOWNALOAD               203
 #define DLG_NOOPEN                         204
 #define DLG_OPENAS_XP                      205
@@ -33,8 +34,8 @@
 #define IDD_TEXT                           307
 #define IDD_DESCRIPTIONTEXT                308
 
-#define DLG_OPENAS_DOWNALOAD_USEWEB        402
-#define DLG_OPENAS_DOWNALOAD_OPENWITH      403
+#define IDD_WEBAUTOLOOKUP                  402
+#define IDD_OPENWITHLIST                   403
 
 #define IDD_TEXT1                          501
 #define IDD_TEXT2                          502

@@ -265,6 +265,7 @@
     <ClCompile Include="dialog.cpp" />
     <ClCompile Include="execute_item.cpp" />
     <ClCompile Include="file_sys_bind_data.cpp" />
+    <ClCompile Include="internet_openas_dlg.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="noopen_dlg.cpp" />
     <ClCompile Include="openwithex_launcher.cpp" />

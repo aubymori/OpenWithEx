@@ -244,8 +244,8 @@ FONT 8, "MS Shell Dlg"
 	CONTROL "", IDD_FILE_TEXT, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 60, 23, 208, 8
 	CONTROL "To open this file, Windows needs to know what program you want to use to open it. Windows can go online to look it up automatically, or you can manually select from a list of programs that are installed on your computer.", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 39, 257, 24
 	CONTROL "What do you want to do?", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 72, 139, 8
-	CONTROL "Use the &Web service to find the correct program", DLG_OPENAS_DOWNALOAD_USEWEB, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 9, 86, 194, 10
-	CONTROL "&Select a program from a list of installed programs", DLG_OPENAS_DOWNALOAD_OPENWITH, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 9, 99, 194, 10
+	CONTROL "Use the &Web service to find the correct program", IDD_WEBAUTOLOOKUP, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 9, 86, 194, 10
+	CONTROL "&Select a program from a list of installed programs", IDD_OPENWITHLIST, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 9, 99, 194, 10
 	CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 156, 121, 50, 14
 	CONTROL "Cancel", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 211, 121, 50, 14
 }
@@ -263,8 +263,8 @@ FONT 8, "MS Shell Dlg"
 	CONTROL "", IDD_FILE_TEXT, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 60, 23, 208, 8
 	CONTROL "To open this file, Windows needs to know what program created it. Windows can go online to look it up automatically, or you can manually select from a list of programs on your computer.", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 39, 257, 24
 	CONTROL "What do you want to do?", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 72, 139, 8
-	CONTROL "Use the &Web service to find the correct program", DLG_OPENAS_DOWNALOAD_USEWEB, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 9, 86, 194, 10
-	CONTROL "&Select the program from a list", DLG_OPENAS_DOWNALOAD_OPENWITH, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 9, 99, 194, 10
+	CONTROL "Use the &Web service to find the correct program", IDD_WEBAUTOLOOKUP, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 9, 86, 194, 10
+	CONTROL "&Select the program from a list", IDD_OPENWITHLIST, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 9, 99, 194, 10
 	CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 156, 121, 50, 14
 	CONTROL "Cancel", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 211, 121, 50, 14
 }

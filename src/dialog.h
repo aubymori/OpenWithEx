@@ -14,6 +14,8 @@ protected:
 
 	virtual INT_PTR v_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) = 0;
 
+	void SetShellIcon(int iIconID);
+
 	CDialog(UINT uDlgID);
 
 public:
