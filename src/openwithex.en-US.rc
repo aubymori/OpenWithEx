@@ -278,7 +278,7 @@ FONT 8, "MS Shell Dlg"
 {
 	CONTROL "", IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
 	CONTROL "You are attempting to open a file of type '%s' (%s)", IDD_TEXT1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 7, 225, 19
-	CONTROL "These files are used by the operating system and by various programs. Editing or modifying them could damage your system.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 30, 225, 19
+	CONTROL "These files are used by the operating system and by various programs. Editing or modifying them could damage your system.", IDD_TEXT2, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 30, 225, 19
 	CONTROL "If you still want to open the file, click Open with. Otherwise, click Cancel.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 52, 225, 19
 	CONTROL "&Open with...", IDD_OPENWITH, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 157, 74, 53, 14
 	CONTROL "Cancel", IDCANCEL, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 214, 74, 53, 14
@@ -293,7 +293,7 @@ FONT 8, "MS Shell Dlg"
 {
 	CONTROL "", IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
 	CONTROL "You are attempting to open a file of type '%s' (%s)", IDD_TEXT1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 7, 225, 19
-	CONTROL "These files are used by the operating system and by various programs. Editing or modifying them could damage your system.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 30, 225, 19
+	CONTROL "These files are used by the operating system and by various programs. Editing or modifying them could damage your system.", IDD_TEXT2, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 30, 225, 19
 	CONTROL "If you still want to open the file, click Open With, otherwise, click Cancel.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 52, 225, 19
 	CONTROL "&Open With...", IDD_OPENWITH, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 157, 74, 53, 14
 	CONTROL "Cancel", IDCANCEL, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 214, 74, 53, 14

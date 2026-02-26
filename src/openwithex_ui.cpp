@@ -2,6 +2,7 @@
 #include "file_sys_bind_data.h"
 #include "interfaces.h"
 #include "util.h"
+#include "noopen_dlg.h"
 
 HRESULT COpenWithExUI::_CreateAndShow()
 {
@@ -46,6 +47,8 @@ HRESULT COpenWithExUI::_CreateAndShow()
 		}
 	}
 
+	RETURN_IF_FAILED(_spItem->BindToHandler(nullptr, BHID_AssociationArray, IID_PPV_ARGS(&_spQueryAssoc)));
+
 	if (SUCCEEDED(hr) && !(_openwithflags & IMMERSIVE_OPENWITH_URL))
 	{
 		_fEmptyExt = (_spszTypeID.get()[0] == L'\0') 
@@ -64,18 +67,40 @@ HRESULT COpenWithExUI::_CreateAndShow()
 				hr = spIAAR->QueryCurrentDefault(_spszTypeID.get(), AT_FILEEXTENSION, AL_EFFECTIVE, &_spszDefaultProgID);
 				if (SUCCEEDED(hr))
 				{
-					ComPtr<IQueryAssociations> spQueryAssoc;
-					if (SUCCEEDED(_spItem->BindToHandler(nullptr, BHID_AssociationArray, IID_PPV_ARGS(&spQueryAssoc))))
+					WCHAR szNoOpenMsg[MAX_PATH];
+					DWORD cchNoOpenMsg = ARRAYSIZE(szNoOpenMsg);
+					WCHAR szTypeName[MAX_PATH];
+					DWORD cchTypeName = ARRAYSIZE(szTypeName);
+					DWORD cchCommand = 0;
+					wil::unique_cotaskmem_string spszFileName;
+
+					HRESULT hrNoOpen = FAILED(_spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_COMMAND, nullptr, nullptr, &cchCommand))
+						? S_OK
+						: E_FAIL;
+
+					if (SUCCEEDED(hrNoOpen))
 					{
-						WCHAR szNoOpenMsg[MAX_PATH];
-						DWORD cch = ARRAYSIZE(szNoOpenMsg);
-						if (SUCCEEDED(spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_NOOPEN, nullptr, szNoOpenMsg, &cch)))
-						{
-							MessageBoxW(NULL,
-										L"Is NoOpen",
-										L"OpenWithEx",
-										MB_ICONINFORMATION);
-						}
+						hrNoOpen = _spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_NOOPEN, nullptr, szNoOpenMsg, &cchNoOpenMsg);
+					}
+
+					if (SUCCEEDED(hrNoOpen))
+					{
+						hrNoOpen = _spItem->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, &spszFileName);
+					}
+
+					if (SUCCEEDED(hrNoOpen))
+					{
+						hrNoOpen = _spQueryAssoc->GetString(0, ASSOCSTR_FRIENDLYDOCNAME, nullptr, szTypeName, &cchTypeName);
+					}
+
+					if (SUCCEEDED(hrNoOpen))
+					{
+						CNoOpenDlg dlg(this, szNoOpenMsg);
+						INT_PTR result = dlg.ShowDialog(NULL);
+						MessageBoxW(NULL,
+									(result == IDD_OPENWITH) ? L"continue" : L"cancel",
+									L"OpenWithEx",
+									MB_ICONINFORMATION);
 					}
 				}
 			}
@@ -89,7 +114,7 @@ HRESULT COpenWithExUI::_CreateAndShow()
 		spsz.get(), _spszTypeID.get(), _openwithflags);
 
 	MessageBoxW(NULL, szMessage, L"OpenWithEx", MB_ICONINFORMATION);
-	return E_NOTIMPL;
+	return hr;
 }
 
 STDMETHODIMP COpenWithExUI::SetSite(IUnknown *punkSite)
@@ -171,4 +196,19 @@ HRESULT COpenWithExUI::SetPosition(POINT pt)
 {
 	_ptPosition = pt;
 	return S_OK;
+}
+
+HRESULT COpenWithExUI::GetItemName(LPWSTR *ppszOut)
+{
+	return _spItem->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, ppszOut);
+}
+
+HRESULT COpenWithExUI::GetTypeID(LPWSTR *ppszOut)
+{
+	return SHStrDupW(_spszTypeID.get(), ppszOut);
+}
+
+HRESULT COpenWithExUI::GetDescription(LPWSTR pszOut, DWORD cchOut)
+{
+	return !_spQueryAssoc ? E_FAIL : _spQueryAssoc->GetString(0, ASSOCSTR_FRIENDLYDOCNAME, nullptr, pszOut, &cchOut);
 }

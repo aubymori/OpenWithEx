@@ -248,6 +248,7 @@
     <ClInclude Include="execute_item.h" />
     <ClInclude Include="file_sys_bind_data.h" />
     <ClInclude Include="interfaces.h" />
+    <ClInclude Include="noopen_dlg.h" />
     <ClInclude Include="openwithex_launcher.h" />
     <ClInclude Include="openwithex_priv.h" />
     <ClInclude Include="openwithex.h" />
@@ -264,6 +265,7 @@
     <ClCompile Include="execute_item.cpp" />
     <ClCompile Include="file_sys_bind_data.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="noopen_dlg.cpp" />
     <ClCompile Include="openwithex_launcher.cpp" />
     <ClCompile Include="openwithex_ui.cpp" />
     <ClCompile Include="process_and_thread_refhost.cpp" />

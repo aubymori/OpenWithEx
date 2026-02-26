@@ -10,6 +10,7 @@ private:
 	HWND _hwndOwner;
 	ComPtr<IShellItem2> _spItem;
 	ComPtr<IShellItemArray> _spItems;
+	ComPtr<IQueryAssociations> _spQueryAssoc;
 	wil::unique_cotaskmem_string _spszTypeID;
 	wil::unique_cotaskmem_string _spszDefaultProgID;
 	IMMERSIVE_OPENWITH_FLAGS _openwithflags;
@@ -28,4 +29,8 @@ public:
 	HRESULT CreateAndShow(HWND hwndOwner, LPCWSTR pszFileName, IMMERSIVE_OPENWITH_FLAGS flags);
 	HRESULT CreateAndShowFromDelegateExecute(IExecuteCommand *pxc, IMMERSIVE_OPENWITH_FLAGS flags);
 	HRESULT SetPosition(POINT pt);
+
+	HRESULT GetItemName(LPWSTR *ppszOut);
+	HRESULT GetTypeID(LPWSTR *ppszOut);
+	HRESULT GetDescription(LPWSTR pszOut, DWORD cchOut);
 };

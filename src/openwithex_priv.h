@@ -1,6 +1,7 @@
 #pragma once
 
 #include "openwithex.h"
+#include "resource.h"
 
 #include <shlwapi.h>
 #include <shlobj.h>

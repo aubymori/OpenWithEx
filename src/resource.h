@@ -37,7 +37,8 @@
 #define DLG_OPENAS_DOWNALOAD_OPENWITH      403
 
 #define IDD_TEXT1                          501
-#define IDD_OPENWITH                       502
+#define IDD_TEXT2                          502
+#define IDD_OPENWITH                       503
 
 /* Strings */
 #define IDS_OPENWITH_RECOMMENDED          1003

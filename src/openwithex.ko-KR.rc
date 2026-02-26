@@ -282,7 +282,7 @@ FONT 9, "굴림"
 {
 	CONTROL "", IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
 	CONTROL "'%s'(%s) 파일 형식을 열려고 합니다.", IDD_TEXT1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 6, 225, 17
-	CONTROL "이 파일은 운영 체제 또는 다른 프로그램에서 사용하고 있습니다. 파일을 편집하거나 수정하면 시스템에 손상을 줄 수 있습니다.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 28, 225, 17
+	CONTROL "이 파일은 운영 체제 또는 다른 프로그램에서 사용하고 있습니다. 파일을 편집하거나 수정하면 시스템에 손상을 줄 수 있습니다.", IDD_TEXT2, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 28, 225, 17
 	CONTROL "계속 이 파일을 열려면 [연결 프로그램]을 클릭하고 그렇지 않으면 [취소]를 클릭하십시오.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 52, 225, 17
 	CONTROL "연결 프로그램(&O)...", IDD_OPENWITH, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 137, 75, 74, 16
 	CONTROL "취소", IDCANCEL, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 214, 75, 53, 16
@@ -297,7 +297,7 @@ FONT 9, "굴림"
 {
 	CONTROL "", IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
 	CONTROL "%s'(%s) 파일 형식을 열려고 합니다.", IDD_TEXT1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 7, 225, 19
-	CONTROL "이 파일은 운영 체제 또는 다른 프로그램에서 사용하고 있습니다. 파일을 편집하거나 수정하면 시스템에 손상을 줄 수 있습니다.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 28, 225, 19
+	CONTROL "이 파일은 운영 체제 또는 다른 프로그램에서 사용하고 있습니다. 파일을 편집하거나 수정하면 시스템에 손상을 줄 수 있습니다.", IDD_TEXT2, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 28, 225, 19
 	CONTROL "계속 이 파일을 열려면 [연결 프로그램]을 클릭하고 그렇지 않으면 [취소]를 클릭하십시오.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 52, 225, 19
 	CONTROL "연결 프로그램(&O)...", IDD_OPENWITH, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 129, 75, 78, 16
 	CONTROL "취소", IDCANCEL, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 214, 75, 53, 16
