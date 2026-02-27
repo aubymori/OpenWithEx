@@ -9,18 +9,13 @@ enum OPENAS_DLG_TYPE
 	OPENAS_DLG_PROTOCOL,
 };
 
-class COpenAsDlg
+class COpenAsDlg : public CDialog
 {
 protected:
 	COpenWithExUI *_pOpenWithUI;
+	OPENAS_DLG_TYPE _type;
 
-	template <UINT idBaseDlg>
-	COpenAsDlg(COpenWithExUI *pOpenWithUI, OPENAS_DLG_TYPE type)
-		: CDialog(idBaseDlg + type)
-		, _pOpenWithUI(pOpenWithUI)
-	{
-
-	}
+	COpenAsDlg(UINT idBaseDlg, COpenWithExUI *pOpenWithUI, OPENAS_DLG_TYPE type);
 
 	friend class COpenWithExUI;
 };
