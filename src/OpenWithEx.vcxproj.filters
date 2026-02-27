@@ -133,6 +133,9 @@
     <ClCompile Include="internet_openas_dlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="openas_dlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="openwithex.rcconfig">

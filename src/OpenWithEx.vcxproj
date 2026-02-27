@@ -269,6 +269,7 @@
     <ClCompile Include="internet_openas_dlg.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="noopen_dlg.cpp" />
+    <ClCompile Include="openas_dlg.cpp" />
     <ClCompile Include="openwithex_launcher.cpp" />
     <ClCompile Include="openwithex_ui.cpp" />
     <ClCompile Include="process_and_thread_refhost.cpp" />
