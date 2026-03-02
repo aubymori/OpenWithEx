@@ -7,7 +7,7 @@ class CInternetOpenAsDlg : public CDialog
 private:
 	COpenWithExUI *_pOpenWithUI;
 
-	INT_PTR v_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	INT_PTR v_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 
 public:
 	CInternetOpenAsDlg(COpenWithExUI *pOpenWithUI);

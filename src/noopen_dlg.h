@@ -8,7 +8,7 @@ private:
     COpenWithExUI *_pOpenWithUI;
     LPWSTR _pszNoOpenMsg;
 
-    INT_PTR v_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+    INT_PTR v_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 
 public:
     CNoOpenDlg(COpenWithExUI *pOpenWithUI, LPWSTR pszNoOpenMsg);
