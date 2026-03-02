@@ -81,8 +81,6 @@ HRESULT COpenWithExUI::_CreateAndShow()
 			DWORD cchNoOpenMsg = ARRAYSIZE(szNoOpenMsg);
 			WCHAR szTypeName[MAX_PATH];
 			DWORD cchTypeName = ARRAYSIZE(szTypeName);
-			WCHAR szCommand[MAX_PATH];
-			DWORD cchCommand = 0;
 			wil::unique_cotaskmem_string spszFileName;
 
 			if (!fHasHandler)
