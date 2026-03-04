@@ -272,6 +272,7 @@
     <ClInclude Include="rpc_options_helper.h" />
     <ClInclude Include="undoc.h" />
     <ClInclude Include="util.h" />
+    <ClInclude Include="vista_openas_dlg.h" />
     <ClInclude Include="wil_priv.h" />
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +287,7 @@
     <ClCompile Include="openwithex_ui.cpp" />
     <ClCompile Include="process_and_thread_refhost.cpp" />
     <ClCompile Include="util.cpp" />
+    <ClCompile Include="vista_openas_dlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defs\shcorep.def" />

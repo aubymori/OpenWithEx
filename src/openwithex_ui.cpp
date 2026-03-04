@@ -4,6 +4,7 @@
 #include "util.h"
 #include "noopen_dlg.h"
 #include "internet_openas_dlg.h"
+#include "vista_openas_dlg.h"
 
 HRESULT COpenWithExUI::_CreateAndShow()
 {
@@ -49,6 +50,8 @@ HRESULT COpenWithExUI::_CreateAndShow()
 	}
 
 	RETURN_IF_FAILED(_spItem->BindToHandler(nullptr, BHID_AssociationArray, IID_PPV_ARGS(&_spQueryAssoc)));
+
+	OPENAS_DLG_TYPE dlgType = OPENAS_DLG_NOTYPE;
 
 	if (SUCCEEDED(hr) && !(_openwithflags & IMMERSIVE_OPENWITH_URL))
 	{
