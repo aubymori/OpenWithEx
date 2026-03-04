@@ -34,4 +34,6 @@ public:
 	HRESULT GetTypeID(LPWSTR *ppszOut);
 	HRESULT GetDescription(LPWSTR pszOut, DWORD cchOut);
 	void OpenDownloadURL(HWND hwnd);
+
+	bool AllowRegistration();
 };

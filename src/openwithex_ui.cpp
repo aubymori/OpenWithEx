@@ -58,7 +58,7 @@ HRESULT COpenWithExUI::_CreateAndShow()
 		_fEmptyExt = (_spszTypeID.get()[0] == L'\0') 
 			|| (CSTR_EQUAL == CompareStringOrdinal(_spszTypeID.get(), -1, L".", -1, TRUE));
 
-		bool fHasHandler = false;
+		bool fHasCommand = false;
 		ComPtr<IApplicationAssociationRegistrationInternal> spIAAR;
 		hr = SHCreateAssociationRegistration(IID_PPV_ARGS(&spIAAR));
 		if (SUCCEEDED(hr) && !_fEmptyExt)
@@ -72,7 +72,26 @@ HRESULT COpenWithExUI::_CreateAndShow()
 				hr = spIAAR->QueryCurrentDefault(_spszTypeID.get(), AT_FILEEXTENSION, AL_EFFECTIVE, &_spszDefaultProgID);
 			}
 
-			fHasHandler = SUCCEEDED(hr);
+			if (SUCCEEDED(hr))
+			{
+				MessageBoxW(
+					NULL,
+					_spszDefaultProgID.get(),
+					L"Default ProgID:",
+					MB_ICONINFORMATION);
+
+				WCHAR szCmd[MAX_PATH];
+				DWORD cch = ARRAYSIZE(szCmd);
+				if (SUCCEEDED(_spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_COMMAND, nullptr, szCmd, &cch)))
+				{
+					MessageBoxW(
+						NULL,
+						szCmd,
+						L"Command:",
+						MB_ICONINFORMATION);
+					fHasCommand = true;
+				}
+			}
 
 			if (hr == HRESULT_FROM_WIN32(ERROR_NO_ASSOCIATION))
 				hr = S_OK;
@@ -86,7 +105,7 @@ HRESULT COpenWithExUI::_CreateAndShow()
 			DWORD cchTypeName = ARRAYSIZE(szTypeName);
 			wil::unique_cotaskmem_string spszFileName;
 
-			if (!fHasHandler)
+			if (!fHasCommand)
 			{
 				if (g_style != OPENWITHEX_STYLE_NT4)
 				{
@@ -127,13 +146,54 @@ HRESULT COpenWithExUI::_CreateAndShow()
 		}
 	}
 
+	// Empty extensions can't be associated.
+	if (_fEmptyExt)
+	{
+		dlgType = OPENAS_DLG_NORMAL;
+	}
+	else if (_openwithflags & IMMERSIVE_OPENWITH_PROTOCOL)
+	{
+		dlgType = OPENAS_DLG_PROTOCOL;
+	}
+	// The original XP code uses COM here to check if the class key
+	// exists. However, that method will now return the key from
+	// FileExts as a valid "class key". This is problematic because
+	// *every* file extension that ever reaches the Open with UI gets
+	// a key there. Only preregistered types and user types with
+	// handlers get a *true* class key.
+	else
+	{
+		HKEY hkey;
+		if (ERROR_SUCCESS == RegOpenKeyExW(
+			HKEY_CLASSES_ROOT,
+			_spszTypeID.get(),
+			0, KEY_READ, &hkey))
+		{
+			dlgType = OPENAS_DLG_NORMAL;
+			RegCloseKey(hkey);
+		}
+	}
+
+	COpenAsDlg *pDlg = nullptr;
+	switch (g_style)
+	{
+		case OPENWITHEX_STYLE_VISTA:
+			pDlg = new CVistaOpenAsDlg(this, dlgType, _openwithflags);
+			break;
+		default:
+			goto SkipDialog;
+	}
+
+	pDlg->ShowDialog(_hwndOwner);
+	
+SkipDialog:
 	WCHAR szMessage[MAX_PATH * 2];
 	swprintf_s(
 		szMessage, 
 		L"Item: %s\nType: %s\nFlags: 0x%X",
 		spsz.get(), _spszTypeID.get(), _openwithflags);
-
 	MessageBoxW(NULL, szMessage, L"OpenWithEx", MB_ICONINFORMATION);
+
 	return hr;
 }
 
@@ -246,4 +306,16 @@ void COpenWithExUI::OpenDownloadURL(HWND hwnd)
 		szUrl,
 		nullptr, nullptr,
 		SW_SHOWNORMAL);
+}
+
+bool COpenWithExUI::AllowRegistration()
+{
+	if (_fEmptyExt)
+		return false;
+
+	if (!(_openwithflags & IMMERSIVE_OPENWITH_OVERRIDE)
+	|| (_openwithflags & IMMERSIVE_OPENWITH_DONOT_SETDEFAULT))
+		return false;
+
+	return true;
 }
