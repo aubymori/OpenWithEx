@@ -15,10 +15,16 @@ protected:
 	COpenWithExUI *_pOpenWithUI;
 	OPENAS_DLG_TYPE _type;
 
-	INT_PTR v_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
+	virtual INT_PTR v_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 
 	COpenAsDlg(UINT idBaseDlg, COpenWithExUI *pOpenWithUI, OPENAS_DLG_TYPE type);
 	virtual void OnInitDialog();
+
+public:
+	virtual ~COpenAsDlg()
+	{
+
+	}
 
 	friend class COpenWithExUI;
 };
