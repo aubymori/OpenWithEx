@@ -173,3 +173,9 @@ IApplicationAssociationRegistrationInternal : IUnknown
 	STDMETHOD(ResetDefault)(LPCWSTR, LPWSTR *) PURE;
 	STDMETHOD(TryGetHttpRelatedProgIds)(LPCWSTR, LPCWSTR, LPWSTR *, LPWSTR *) PURE;
 };
+
+MIDL_INTERFACE("E1B15A0F-2139-44F2-8C6C-3D2CA890F9D9")
+IAssocHandlerWithCompanyName : public IUnknown
+{
+	STDMETHOD(GetCompany)(LPWSTR *ppszCompanyName) PURE;
+};

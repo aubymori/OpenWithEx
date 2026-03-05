@@ -1,5 +1,8 @@
 #pragma once
 #include "openwithex_priv.h"
+#include <vector>
+
+class COpenAsDlg;
 
 class COpenWithExUI : public RuntimeClass<
 	RuntimeClassFlags<ClassicCom>,
@@ -16,6 +19,8 @@ private:
 	IMMERSIVE_OPENWITH_FLAGS _openwithflags;
 	POINT _ptPosition;
 	bool _fEmptyExt;
+	COpenAsDlg *_pdlg;
+	std::vector<ComPtr<IAssocHandler>> _handlers;
 
 	HRESULT _CreateAndShow();
 
@@ -30,10 +35,12 @@ public:
 	HRESULT CreateAndShowFromDelegateExecute(IExecuteCommand *pxc, IMMERSIVE_OPENWITH_FLAGS flags);
 	HRESULT SetPosition(POINT pt);
 
+	HRESULT GetItem(IShellItem2 **ppItem);
 	HRESULT GetItemName(SIGDN sigdnName, LPWSTR *ppszOut);
 	HRESULT GetTypeID(LPWSTR *ppszOut);
 	HRESULT GetDescription(LPWSTR pszOut, DWORD cchOut);
-	void OpenDownloadURL(HWND hwnd);
-
 	bool AllowRegistration();
+
+	void FillListByEnumHandlers();
+	void OpenDownloadURL(HWND hwnd);
 };

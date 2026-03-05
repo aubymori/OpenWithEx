@@ -1,5 +1,20 @@
 #include "openas_dlg.h"
 
+// static
+int COpenAsDlg::GetAppIconIndex(LPWSTR pszPath, int iIndex)
+{
+	if (iIndex == -1)
+	{
+		return Shell_GetCachedImageIndexW(L"shell32.dll", 2, 0);
+	}
+
+	UINT uIconFlags = 0;
+	if (pszPath[0] == L'@')
+		uIconFlags = GIL_ASYNC | GIL_NOTFILENAME;
+
+	return Shell_GetCachedImageIndexW(pszPath, iIndex, uIconFlags);
+}
+
 INT_PTR COpenAsDlg::v_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
@@ -49,6 +64,9 @@ void COpenAsDlg::OnInitDialog()
 		return;
 	}
 
+	RECT rc;
+	GetClientRect(GetDlgItem(_hwnd, IDD_FILE_TEXT), &rc);
+	PathCompactPathW(NULL, spszFileName.get(), rc.right - 4 * GetSystemMetrics(SM_CXBORDER));
 	SetDlgItemTextW(_hwnd, IDD_FILE_TEXT, spszFileName.get());
 
 	bool fAssocRestricted = SHRestricted(REST_NOFILEASSOCIATE);
@@ -66,4 +84,6 @@ void COpenAsDlg::OnInitDialog()
 	{
 		EnableWindow(GetDlgItem(_hwnd, IDD_MAKEASSOC), FALSE);
 	}
+
+	_pOpenWithUI->FillListByEnumHandlers();
 }

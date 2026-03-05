@@ -1,5 +1,6 @@
 #pragma once
 #include "dialog.h"
+#include "openwithex_priv.h"
 #include "openwithex_ui.h"
 
 enum OPENAS_DLG_TYPE
@@ -17,6 +18,8 @@ protected:
 	IMMERSIVE_OPENWITH_FLAGS _flags;
 	HWND _hwndAppList;
 
+	static int GetAppIconIndex(LPWSTR pszPath, int iIndex);
+
 	virtual INT_PTR v_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 
 	COpenAsDlg(UINT idBaseDlg,
@@ -26,14 +29,12 @@ protected:
 	virtual void OnInitDialog();
 
 public:
-	virtual ~COpenAsDlg()
-	{
-
-	}
+	virtual ~COpenAsDlg() {}
 
 	virtual void AddItem(IAssocHandler *pah) = 0;
 	virtual void SetupCategories() = 0;
 	virtual IAssocHandler *GetSelectedItem() = 0;
+	virtual void SelectItemByIndex(int i) = 0;
 
 	friend class COpenWithExUI;
 };

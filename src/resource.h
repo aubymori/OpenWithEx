@@ -10,18 +10,21 @@
 #define DLG_OPENAS_PROTOCOL                202
 // Yes, this is actually misspelled as DOWNALOAD by Microsoft.
 #define DLG_OPENAS_DOWNALOAD               203
-#define DLG_NOOPEN                         204
-#define DLG_OPENAS_XP                      205
-#define DLG_OPENAS_NOTYPE_XP               206
-#define DLG_OPENAS_PROTOCOL_XP             207
-#define DLG_OPENAS_DOWNALOAD_XP            208
-#define DLG_NOOPEN_XP                      209
-#define DLG_OPENAS_2K                      210
-#define DLG_OPENAS_NOTYPE_2K               211
-#define DLG_OPENAS_PROTOCOL_2K             212
-#define DLG_OPENAS_NT4                     213
-#define DLG_OPENAS_NOTYPE_NT4              214
-#define DLG_OPENAS_PROTOCOL_NT4            215
+#define DLG_OPENAS_VISTA                   204
+#define DLG_OPENAS_NOTYPE_VISTA            205
+#define DLG_OPENAS_PROTOCOL_VISTA          206
+#define DLG_NOOPEN                         207
+#define DLG_NOOPEN_VISTA                   208
+#define DLG_OPENAS_XP                      209
+#define DLG_OPENAS_NOTYPE_XP               210
+#define DLG_OPENAS_PROTOCOL_XP             211
+#define DLG_OPENAS_DOWNALOAD_XP            212
+#define DLG_OPENAS_2K                      213
+#define DLG_OPENAS_NOTYPE_2K               214
+#define DLG_OPENAS_PROTOCOL_2K             215
+#define DLG_OPENAS_NT4                     216
+#define DLG_OPENAS_NOTYPE_NT4              217
+#define DLG_OPENAS_PROTOCOL_NT4            218
 
 /* Controls */
 #define IDD_ICON                           300

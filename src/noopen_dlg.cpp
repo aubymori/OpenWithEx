@@ -62,7 +62,7 @@ INT_PTR CNoOpenDlg::v_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 }
 
 CNoOpenDlg::CNoOpenDlg(COpenWithExUI *pOpenWithUI, LPWSTR pszNoOpenMsg)
-    : CDialog(g_style == OPENWITHEX_STYLE_XP ? DLG_NOOPEN_XP : DLG_NOOPEN)
+    : CDialog((g_style >= OPENWITHEX_STYLE_VISTA) ? DLG_NOOPEN_VISTA : DLG_NOOPEN)
     , _pOpenWithUI(pOpenWithUI)
     , _pszNoOpenMsg(pszNoOpenMsg)
 {

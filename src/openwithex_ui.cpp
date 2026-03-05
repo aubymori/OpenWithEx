@@ -1,6 +1,7 @@
 #include "openwithex_ui.h"
 #include "file_sys_bind_data.h"
 #include "interfaces.h"
+#include "undoc.h"
 #include "util.h"
 #include "noopen_dlg.h"
 #include "internet_openas_dlg.h"
@@ -174,17 +175,18 @@ HRESULT COpenWithExUI::_CreateAndShow()
 		}
 	}
 
-	COpenAsDlg *pDlg = nullptr;
 	switch (g_style)
 	{
+		case OPENWITHEX_STYLE_7:
 		case OPENWITHEX_STYLE_VISTA:
-			pDlg = new CVistaOpenAsDlg(this, dlgType, _openwithflags);
+			_pdlg = new CVistaOpenAsDlg(this, dlgType, _openwithflags);
 			break;
 		default:
 			goto SkipDialog;
 	}
 
-	pDlg->ShowDialog(_hwndOwner);
+	_pdlg->ShowDialog(_hwndOwner);
+	delete _pdlg;
 	
 SkipDialog:
 	WCHAR szMessage[MAX_PATH * 2];
@@ -278,6 +280,11 @@ HRESULT COpenWithExUI::SetPosition(POINT pt)
 	return S_OK;
 }
 
+HRESULT COpenWithExUI::GetItem(IShellItem2 **ppItem)
+{
+	return _spItem.CopyTo(ppItem);
+}
+
 HRESULT COpenWithExUI::GetItemName(SIGDN sigdnName, LPWSTR *ppszOut)
 {
 	return _spItem->GetDisplayName(sigdnName, ppszOut);
@@ -293,6 +300,58 @@ HRESULT COpenWithExUI::GetDescription(LPWSTR pszOut, DWORD cchOut)
 	return !_spQueryAssoc ? E_FAIL : _spQueryAssoc->GetString(0, ASSOCSTR_FRIENDLYDOCNAME, nullptr, pszOut, &cchOut);
 }
 
+bool COpenWithExUI::AllowRegistration()
+{
+	if (_fEmptyExt)
+		return false;
+
+	if (!(_openwithflags & IMMERSIVE_OPENWITH_OVERRIDE)
+		|| (_openwithflags & IMMERSIVE_OPENWITH_DONOT_SETDEFAULT))
+		return false;
+
+	return true;
+}
+
+void COpenWithExUI::FillListByEnumHandlers()
+{
+	_handlers.clear();
+
+	ComPtr<IEnumAssocHandlers> spEnumAssocHandlers;
+	HRESULT hr;
+	if (_openwithflags & (IMMERSIVE_OPENWITH_PROTOCOL | IMMERSIVE_OPENWITH_URL))
+		hr = SHAssocEnumHandlersForProtocolByApplication(
+			_spszTypeID.get(),
+			IID_PPV_ARGS(&spEnumAssocHandlers));
+	// Is this even worth using? Exported by C++ name... ew.
+	//else if (_openwithflags & IMMERSIVE_OPENWITH_URL)
+		//SHEnumAssocHandlersForUrl(
+			//_spszTypeID.get(),
+			//ASSOC_FILTER_NONE,
+			//false,
+			//IID_PPV_ARGS(&spEnumAssocHandlers));
+	else
+		hr = SHAssocEnumHandlers(_spszTypeID.get(), ASSOC_FILTER_NONE, &spEnumAssocHandlers);
+
+	if (SUCCEEDED(hr))
+	{
+		bool fFirst = true;
+		ComPtr<IAssocHandler> spah;
+		while (S_OK == spEnumAssocHandlers->Next(1, &spah, nullptr))
+		{
+			if (fFirst)
+			{
+				if (S_OK == spah->IsRecommended())
+				{
+					_pdlg->SetupCategories();
+				}
+				fFirst = false;
+			}
+
+			_pdlg->AddItem(spah.Get());
+		}
+	}
+}
+
 void COpenWithExUI::OpenDownloadURL(HWND hwnd)
 {
 	WCHAR szUrl[1024];
@@ -306,16 +365,4 @@ void COpenWithExUI::OpenDownloadURL(HWND hwnd)
 		szUrl,
 		nullptr, nullptr,
 		SW_SHOWNORMAL);
-}
-
-bool COpenWithExUI::AllowRegistration()
-{
-	if (_fEmptyExt)
-		return false;
-
-	if (!(_openwithflags & IMMERSIVE_OPENWITH_OVERRIDE)
-	|| (_openwithflags & IMMERSIVE_OPENWITH_DONOT_SETDEFAULT))
-		return false;
-
-	return true;
 }

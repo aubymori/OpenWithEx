@@ -22,7 +22,8 @@ INT_PTR CALLBACK ConfigDlgProc(
 			EnableWindow(GetDlgItem(hWnd, IDD_APPLY), FALSE);
 
 			HWND hwndCombo = GetDlgItem(hWnd, IDD_STYLEBOX);
-			ComboBox_AddString(hwndCombo, L"Windows Vista/7");
+			ComboBox_AddString(hwndCombo, L"Windows 7");
+			ComboBox_AddString(hwndCombo, L"Windows Vista");
 			ComboBox_AddString(hwndCombo, L"Windows XP");
 			ComboBox_AddString(hwndCombo, L"Windows 2000");
 			ComboBox_AddString(hwndCombo, L"Windows 95/98/NT 4.0");
@@ -33,20 +34,9 @@ INT_PTR CALLBACK ConfigDlgProc(
 			SetDlgItemTextW(hWnd, IDD_VERSION, szBuffer);
 			EnableWindow(GetDlgItem(hWnd, IDD_VERSION), FALSE);
 
-			DWORD dwStyle = 0;
-			DWORD dwSize = sizeof(DWORD);
-			RegQueryValueExW(
-				g_hKey,
-				REGSTR_VAL_STYLE,
-				nullptr,
-				nullptr,
-				(LPBYTE)&dwStyle,
-				&dwSize
-			);
-			ComboBox_SetCurSel(
-				hwndCombo,
-				(dwStyle < (DWORD)OPENWITHEX_STYLE_COUNT) ? dwStyle : 0
-			);
+			OPENWITHEX_STYLE style;
+			GetUserStyle(&style);
+			ComboBox_SetCurSel(hwndCombo, style);
 
 			return TRUE;
 		}
@@ -64,15 +54,22 @@ INT_PTR CALLBACK ConfigDlgProc(
 				case IDOK:
 				case IDD_APPLY:
 				{
-					DWORD dwStyle = ComboBox_GetCurSel(GetDlgItem(hWnd, IDD_STYLEBOX));
+					DWORD dw = ComboBox_GetCurSel(GetDlgItem(hWnd, IDD_STYLEBOX));
 					RegSetValueExW(
 						g_hKey,
 						REGSTR_VAL_STYLE,
 						NULL,
 						REG_DWORD,
-						(LPBYTE)&dwStyle,
-						sizeof(DWORD)
-					);
+						(LPBYTE)&dw,
+						sizeof(DWORD));
+					dw = VER_DWORD;
+					RegSetValueExW(
+						g_hKey,
+						REGSTR_VAL_SETTINGSVER,
+						NULL,
+						REG_DWORD,
+						(LPBYTE)&dw,
+						sizeof(DWORD));
 					if (LOWORD(wParam) == IDOK)
 						EndDialog(hWnd, IDOK);
 					EnableWindow(GetDlgItem(hWnd, IDD_APPLY), FALSE);
