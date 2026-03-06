@@ -199,6 +199,11 @@ SkipDialog:
 	return hr;
 }
 
+HRESULT COpenWithExUI::_MakeDefault(IAssocHandler *pah)
+{
+
+}
+
 STDMETHODIMP COpenWithExUI::SetSite(IUnknown *punkSite)
 {
 	if (punkSite)

@@ -23,6 +23,7 @@ private:
 	std::vector<ComPtr<IAssocHandler>> _handlers;
 
 	HRESULT _CreateAndShow();
+	HRESULT _MakeDefault(IAssocHandler *pah);
 
 public:
 	// IObjectWithSite
