@@ -201,7 +201,10 @@ SkipDialog:
 
 HRESULT COpenWithExUI::_MakeDefault(IAssocHandler *pah)
 {
-
+	if (_openwithflags & IMMERSIVE_OPENWITH_URL)
+	{
+		ComPtr<IAppUrlDefaults> appUrlDefaults;
+	}
 }
 
 STDMETHODIMP COpenWithExUI::SetSite(IUnknown *punkSite)
