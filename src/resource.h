@@ -52,4 +52,4 @@
 #define IDS_OPENAS                        1007
 #define IDS_OPENWITH_RECOMMENDED_XP       1008
 #define IDS_OPENWITH_OTHERS_XP            1009
-#define IDS_OPENAS_XP                     1010
+#define IDS_OPENAS_VISTA                  1010

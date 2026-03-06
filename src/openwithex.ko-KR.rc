@@ -6,14 +6,14 @@ LANGUAGE LANG_KOREAN, SUBLANG_KOREAN
 
 STRINGTABLE
 {
-	IDS_OPENWITH_RECOMMENDED     "권장하는 프로그램" // shell32 7600 resource #29952
-	IDS_OPENWITH_OTHERS          "기타 프로그램"       // shell32 7600 resource #29953
+	IDS_OPENWITH_RECOMMENDED     "권장하는 프로그램" // shell32 6000/7600 resource #29952
+	IDS_OPENWITH_OTHERS          "기타 프로그램"       // shell32 6000/7600 resource #29953
 	IDS_OPENWITH_RECOMMENDED_XP  "권장하는 프로그램:" // shell32 2600/3790 resource #29952
 	IDS_OPENWITH_OTHERS_XP       "기타 프로그램:"       // shell32 2600/3790 resource #29953
 	IDS_PROGRAMSFILTER           "프로그램"  // Broken up from shell32 7600 resource #9014
 	IDS_ALLFILESFILTER           "모든 파일" // Broken up from shell32 7600 resource #9014
 	IDS_OPENAS                   "연결 프로그램..." // shell32 7600 resource #9016
-	IDS_OPENAS_XP                "연결 프로그램..." // shell32 2600/3790 resource #9016
+	IDS_OPENAS_VISTA             "연결 프로그램..." // shell32 2600/3790/6000 resource #9016
 }
 
 // shell32 7600 resource #1063

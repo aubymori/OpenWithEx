@@ -6,14 +6,14 @@ LANGUAGE LANG_TURKISH, SUBLANG_TURKISH_TURKEY
 
 STRINGTABLE
 {
-	IDS_OPENWITH_RECOMMENDED     "\xD6nerilen Programlar" // shell32 7600 resource #29952
-	IDS_OPENWITH_OTHERS          "Diğer Programlar"       // shell32 7600 resource #29953
+	IDS_OPENWITH_RECOMMENDED     "\xD6nerilen Programlar" // shell32 6000/7600 resource #29952
+	IDS_OPENWITH_OTHERS          "Diğer Programlar"       // shell32 6000/7600 resource #29953
 	IDS_OPENWITH_RECOMMENDED_XP  "\xD6nerilen Programlar:" // shell32 2600/3790 resource #29952
 	IDS_OPENWITH_OTHERS_XP       "Diğer Programlar:"       // shell32 2600/3790 resource #29953
 	IDS_PROGRAMSFILTER           "Programlar"    // Broken up from shell32 7600 resource #9014
 	IDS_ALLFILESFILTER           "Tüm Dosyalar"  // Broken up from shell32 7600 resource #9014
 	IDS_OPENAS                   "Birlikte aç..." // shell32 7600 resource #9016
-	IDS_OPENAS_XP                "Birlikte Aç..." // shell32 2600/3790 resource #9016
+	IDS_OPENAS_VISTA             "Birlikte Aç..." // shell32 2600/3790/6000 resource #9016
 }
 
 // shell32 7600 resource #1063

@@ -203,6 +203,8 @@ STDMETHODIMP COpenWithExUI::SetSite(IUnknown *punkSite)
 {
 	if (punkSite)
 	{
+		IUnknown_GetParentWindow(punkSite, &_hwndOwner);
+
 		ComPtr<IOpenWithTypeOverride> spTypeOverride;
 		if (SUCCEEDED(punkSite->QueryInterface(IID_PPV_ARGS(&spTypeOverride))))
 		{
@@ -353,6 +355,81 @@ void COpenWithExUI::FillListByEnumHandlers()
 	}
 }
 
+void COpenWithExUI::OpenAsOther()
+{
+	WCHAR szApp[MAX_PATH];
+	WCHAR szPath[MAX_PATH];
+	WCHAR szFilter[MAX_PATH];
+	WCHAR szPrograms[MAX_PATH];
+	WCHAR szAllFiles[MAX_PATH];
+
+	szApp[0] = L'\0';
+
+	LPCWSTR pszFormat = L"%s#*.exe;*.pif;*.com;*.bat;*.cmd#%s#*.*##";
+	if (g_style == OPENWITHEX_STYLE_NT4) // NT4 has a (*.*) on all files that seems to be unchanged between locales
+		pszFormat = L"%s#*.exe;*.pif;*.com;*.bat;*.cmd#%s (*.*)#*.*##";
+
+	LoadStringW(g_hinst, IDS_PROGRAMSFILTER, szPrograms, ARRAYSIZE(szPrograms));
+	LoadStringW(g_hinst, IDS_ALLFILESFILTER, szAllFiles, ARRAYSIZE(szAllFiles));
+
+	swprintf_s(szFilter, pszFormat, szPrograms, szAllFiles);
+
+	// Replace # with null bytes
+	size_t length = wcslen(szFilter);
+	for (size_t i = 0; i < length; i++)
+	{
+		if (szFilter[i] == L'#')
+			szFilter[i] = L'\0';
+	}
+
+	ExpandEnvironmentStringsW(L"%ProgramFiles%", szPath, ARRAYSIZE(szPath));
+	
+	WCHAR szTitle[MAX_PATH];
+	UINT idStr = (g_style >= OPENWITHEX_STYLE_XP) ? IDS_OPENAS_VISTA : IDS_OPENAS;
+	LoadStringW(g_hinst, idStr, szTitle, ARRAYSIZE(szTitle));
+
+	if (GetFileNameFromBrowse(_pdlg->_hwnd, szApp, ARRAYSIZE(szApp), szPath,
+			L"exe", szFilter, szTitle))
+	{
+		LPWSTR pszFileName = PathFindFileNameW(szApp);
+		if (IsBlockedFromOpenWithBrowse(pszFileName))
+		{
+			static HMODULE hmodShell = GetModuleHandleW(L"shell32.dll");
+			ShellMessageBoxW(
+				hmodShell,
+				_pdlg->_hwnd,
+				MAKEINTRESOURCEW(0x7503),
+				MAKEINTRESOURCEW(0x7502),
+				MB_ICONERROR);
+			return;
+		}
+
+		// If the requested EXE already exists as a handler,
+		// select it.
+		int nHandlers = (int)_handlers.size();
+		for (int i = 0; i < nHandlers; i++)
+		{
+			ComPtr<IAssocHandler> &spah = _handlers.at(i);
+			wil::unique_cotaskmem_string spszHandlerPath;
+
+			if (SUCCEEDED(spah->GetName(&spszHandlerPath))
+			&& !_wcsicmp(spszHandlerPath.get(), szApp))
+			{
+				_pdlg->SelectItemByIndex(i);
+				return;
+			}
+		}
+
+		ComPtr<IAssocHandler> spah;
+		if (SUCCEEDED(SHCreateAssocHandler(AHTYPE_USER_APPLICATION, _spszTypeID.get(), szApp, &spah)))
+		{
+			_pdlg->AddItem(spah.Get());
+			_pdlg->SelectItemByIndex((int)_handlers.size());
+			_handlers.push_back(std::move(spah));
+		}
+	}
+}
+
 void COpenWithExUI::OpenDownloadURL(HWND hwnd)
 {
 	WCHAR szUrl[1024];
@@ -366,4 +443,30 @@ void COpenWithExUI::OpenDownloadURL(HWND hwnd)
 		szUrl,
 		nullptr, nullptr,
 		SW_SHOWNORMAL);
+}
+
+void COpenWithExUI::OnOk(bool fMakeAssoc, LPCWSTR pszDescription)
+{
+	for (ComPtr<IAssocHandler> &spAssocHandler : _handlers)
+	{
+		ComPtr<IAssocHandlerPromptCount> spPromptCount;
+		if (SUCCEEDED(spAssocHandler.As(&spPromptCount)))
+		{
+			spPromptCount->UpdatePromptCount(ASSOCHANDLER_PROMPTUPDATE_BEHAVIOR_CLEAR);
+		}
+	}
+
+	ComPtr<IDataObject> dataObj;
+	if (SUCCEEDED(_spItems->BindToHandler(
+		nullptr,
+		BHID_DataObject,
+		IID_PPV_ARGS(&dataObj)
+	)))
+	{
+		IAssocHandler *pah = _pdlg->GetSelectedItem();
+		if (pah)
+		{
+			pah->Invoke(dataObj.Get());
+		}
+	}
 }

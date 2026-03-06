@@ -28,11 +28,44 @@ INT_PTR COpenAsDlg::v_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 		case WM_COMMAND:
 			switch (LOWORD(wParam))
 			{
+				case IDOK:
+					_OnOk();
+					break;
 				case IDCANCEL:
 					EndDialog(hwnd, IDCANCEL);
 					break;
+				case IDD_OPENWITH_BROWSE:
+					_pOpenWithUI->OpenAsOther();
+					break;
 			}
 			return TRUE;
+		case WM_NOTIFY:
+		{
+			switch (((LPNMHDR)lParam)->code)
+			{
+				case TVN_SELCHANGED:
+				case LVN_ITEMCHANGED:
+					EnableWindow(GetDlgItem(hwnd, IDOK), GetSelectedItem() != nullptr);
+					break;
+				case NM_CLICK:
+					if (((LPNMHDR)lParam)->idFrom == IDD_OPENWITH_WEBSITE)
+					{
+						if (!wcscmp(((PNMLINK)lParam)->item.szID, L"Browse"))
+						{
+							_pOpenWithUI->OpenDownloadURL(_hwnd);
+							EndDialog(hwnd, IDCANCEL);
+						}
+					}
+					break;
+				case NM_DBLCLK:
+					if (((LPNMHDR)lParam)->idFrom == IDD_APPLIST)
+					{
+						_OnOk();
+					}
+					break;
+			}
+			return TRUE;
+		}
 		default:
 			return FALSE;
 	}
@@ -67,16 +100,16 @@ void COpenAsDlg::OnInitDialog()
 	PathCompactPathW(NULL, spszFileName.get(), rc.right - 4 * GetSystemMetrics(SM_CXBORDER));
 	SetDlgItemTextW(_hwnd, IDD_FILE_TEXT, spszFileName.get());
 
-	bool fAssocRestricted = SHRestricted(REST_NOFILEASSOCIATE);
+	bool fMakeAssocRestricted = SHRestricted(REST_NOFILEASSOCIATE);
 
-	if (!fAssocRestricted
+	if (!fMakeAssocRestricted
 		&& ((_flags & IMMERSIVE_OPENWITH_DONOT_EXEC)
 		|| _type != OPENAS_DLG_NORMAL))
 	{
 		CheckDlgButton(_hwnd, IDD_MAKEASSOC, BST_CHECKED);
 	}
 
-	if (fAssocRestricted
+	if (fMakeAssocRestricted
 		|| !_pOpenWithUI->AllowRegistration()
 		|| (_flags & IMMERSIVE_OPENWITH_DONOT_EXEC))
 	{
@@ -84,4 +117,20 @@ void COpenAsDlg::OnInitDialog()
 	}
 
 	_pOpenWithUI->FillListByEnumHandlers();
+}
+
+void COpenAsDlg::_OnOk()
+{
+	bool fMakeAssoc = IsDlgButtonChecked(_hwnd, IDD_MAKEASSOC);
+	WCHAR szDescription[64];
+	LPWSTR pszDescription = nullptr;
+
+	if (_type == OPENAS_DLG_NOTYPE && fMakeAssoc)
+	{
+		GetDlgItemTextW(_hwnd, IDD_DESCRIPTION, szDescription, ARRAYSIZE(szDescription));
+		pszDescription = szDescription;
+	}
+
+	_pOpenWithUI->OnOk(fMakeAssoc, pszDescription);
+	EndDialog(_hwnd, IDOK);
 }

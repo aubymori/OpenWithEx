@@ -4,14 +4,14 @@ LANGUAGE LANG_RUSSIAN, 0x1
 
 STRINGTABLE
 {
-	IDS_OPENWITH_RECOMMENDED     "Рекомендуемые программы" // shell32 7600 resource #29952
-	IDS_OPENWITH_OTHERS          "Другие программы"       // shell32 7600 resource #29953
+	IDS_OPENWITH_RECOMMENDED     "Рекомендуемые программы" // shell32 6000/7600 resource #29952
+	IDS_OPENWITH_OTHERS          "Другие программы"       // shell32 6000/7600 resource #29953
 	IDS_OPENWITH_RECOMMENDED_XP  "Рекомендуемые программы:" // shell32 2600/3790 resource #29952
 	IDS_OPENWITH_OTHERS_XP       "Другие программы:"       // shell32 2600/3790 resource #29953
 	IDS_PROGRAMSFILTER           "Программы"  // Broken up from shell32 7600 resource #9014
 	IDS_ALLFILESFILTER           "Все файлы" // Broken up from shell32 7600 resource #9014
 	IDS_OPENAS                   "Открыть с помощью..." // shell32 7600 resource #9016
-	IDS_OPENAS_XP                "Открыть с помощью..." // shell32 2600/3790 resource #9016
+	IDS_OPENAS_VISTA             "Открыть с помощью..." // shell32 2600/3790/6000 resource #9016
 }
 
 // shell32 7600 resource #1063

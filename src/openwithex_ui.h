@@ -42,5 +42,7 @@ public:
 	bool AllowRegistration();
 
 	void FillListByEnumHandlers();
+	void OpenAsOther();
 	void OpenDownloadURL(HWND hwnd);
+	void OnOk(bool fMakeAssoc, LPCWSTR pszDescription);
 };

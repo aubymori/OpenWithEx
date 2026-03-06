@@ -1,3 +1,5 @@
 LIBRARY SHELL32.dll
 EXPORTS
-	AssocCreateElement @764 NONAME ;argsize=12
+	AssocCreateElement             @764 NONAME ;argsize=12
+	SHCreateAssocHandler           @765 NONAME ;argsize=16
+	IsBlockedFromOpenWithBrowse    @779 NONAME ;argsize=4

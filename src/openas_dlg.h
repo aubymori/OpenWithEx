@@ -28,6 +28,9 @@ protected:
 			   IMMERSIVE_OPENWITH_FLAGS flags);
 	virtual void OnInitDialog();
 
+private:
+	void _OnOk();
+
 public:
 	virtual ~COpenAsDlg() {}
 

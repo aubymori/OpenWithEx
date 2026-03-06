@@ -2,14 +2,14 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 STRINGTABLE
 {
-	IDS_OPENWITH_RECOMMENDED     "Recommended Programs" // shell32 7600 resource #29952
-	IDS_OPENWITH_OTHERS          "Other Programs"       // shell32 7600 resource #29953
+	IDS_OPENWITH_RECOMMENDED     "Recommended Programs" // shell32 6000/7600 resource #29952
+	IDS_OPENWITH_OTHERS          "Other Programs"       // shell32 6000/7600 resource #29953
 	IDS_OPENWITH_RECOMMENDED_XP  "Recommended Programs:" // shell32 2600/3790 resource #29952
 	IDS_OPENWITH_OTHERS_XP       "Other Programs:"       // shell32 2600/3790 resource #29953
 	IDS_PROGRAMSFILTER           "Programs"  // Broken up from shell32 7600 resource #9014
 	IDS_ALLFILESFILTER           "All Files" // Broken up from shell32 7600 resource #9014
 	IDS_OPENAS                   "Open with..." // shell32 7600 resource #9016
-	IDS_OPENAS_XP                "Open With..." // shell32 2600/3790 resource #9016
+	IDS_OPENAS_VISTA             "Open With..." // shell32 2600/3790/6000 resource #9016
 }
 
 // shell32 7600 resource #1063

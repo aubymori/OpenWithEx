@@ -6,14 +6,14 @@ LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
 
 STRINGTABLE
 {
-	IDS_OPENWITH_RECOMMENDED     "Zalecane programy" // shell32 7600 resource #29952
-	IDS_OPENWITH_OTHERS          "Inne programy"       // shell32 7600 resource #29953
+	IDS_OPENWITH_RECOMMENDED     "Zalecane programy" // shell32 6000/7600 resource #29952
+	IDS_OPENWITH_OTHERS          "Inne programy"       // shell32 6000/7600 resource #29953
 	IDS_OPENWITH_RECOMMENDED_XP  "Zalecane programy:" // shell32 2600/3790 resource #29952
 	IDS_OPENWITH_OTHERS_XP       "Inne programy:"       // shell32 2600/3790 resource #29953
 	IDS_PROGRAMSFILTER           "Inne programy"  // Broken up from shell32 7600 resource #9014
 	IDS_ALLFILESFILTER           "Wszystkie pliki" // Broken up from shell32 7600 resource #9014
 	IDS_OPENAS                   "Otwieranie za pomocą" // shell32 7600 resource #9016
-	IDS_OPENAS_XP                "Otwieranie za pomocą..." // shell32 2600/3790 resource #9016
+	IDS_OPENAS_VISTA             "Otwieranie za pomocą..." // shell32 2600/3790/6000 resource #9016
 }
 
 // shell32 7600 resource #1063

@@ -6,14 +6,14 @@ LANGUAGE LANG_JAPANESE, SUBLANG_JAPANESE_JAPAN
 
 STRINGTABLE
 {
-	IDS_OPENWITH_RECOMMENDED     "推奨されたプログラム" // shell32 7600 resource #29952
-	IDS_OPENWITH_OTHERS          "ほかのプログラム"       // shell32 7600 resource #29953
+	IDS_OPENWITH_RECOMMENDED     "推奨されたプログラム" // shell32 6000/7600 resource #29952
+	IDS_OPENWITH_OTHERS          "ほかのプログラム"       // shell32 6000/7600 resource #29953
 	IDS_OPENWITH_RECOMMENDED_XP  "推奨されたプログラム:" // shell32 2600/3790 resource #29952
 	IDS_OPENWITH_OTHERS_XP       "ほかのプログラム:"       // shell32 2600/3790 resource #29953
 	IDS_PROGRAMSFILTER           "プログラム"  // Broken up from shell32 7600 resource #9014
 	IDS_ALLFILESFILTER           "すべてのファイル" // Broken up from shell32 7600 resource #9014
 	IDS_OPENAS                   "プログラムから開く..." // shell32 7600 resource #9016
-	IDS_OPENAS_XP                "プログラムから開く..." // shell32 2600/3790 resource #9016
+	IDS_OPENAS_VISTA             "プログラムから開く..." // shell32 2600/3790/6000 resource #9016
 }
 
 // shell32 7600 resource #1063
