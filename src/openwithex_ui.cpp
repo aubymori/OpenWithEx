@@ -348,6 +348,7 @@ void COpenWithExUI::FillListByEnumHandlers()
 			}
 
 			_pdlg->AddItem(spah.Get());
+			_handlers.push_back(std::move(spah));
 		}
 	}
 }
