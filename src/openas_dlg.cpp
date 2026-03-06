@@ -53,8 +53,6 @@ COpenAsDlg::COpenAsDlg(UINT idBaseDlg,
 
 void COpenAsDlg::OnInitDialog()
 {
-	_hwndAppList = GetDlgItem(_hwnd, IDD_APPLIST);
-
 	SetShellIcon(134);
 
 	wil::unique_cotaskmem_string spszFileName;

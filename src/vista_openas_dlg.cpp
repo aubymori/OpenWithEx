@@ -21,14 +21,9 @@ CVistaOpenAsDlg::CVistaOpenAsDlg(COpenWithExUI *pOpenWithUI,
 
 void CVistaOpenAsDlg::OnInitDialog()
 {
-    COpenAsDlg::OnInitDialog();
+    _hwndAppList = GetDlgItem(_hwnd, IDD_APPLIST);
 
     SetWindowTheme(_hwndAppList, L"Explorer", nullptr);
-    ListView_SetView(_hwndAppList, LV_VIEW_TILE);
-
-    HIMAGELIST himl;
-    Shell_GetImageLists(&himl, nullptr);
-    ListView_SetImageList(_hwndAppList, himl, LVSIL_NORMAL);
 
     LVCOLUMNW lvcol = { 0 };
     lvcol.mask = LVCF_SUBITEM;
@@ -37,6 +32,14 @@ void CVistaOpenAsDlg::OnInitDialog()
 
     lvcol.iSubItem = 1;
     ListView_InsertColumn(_hwndAppList, 0, &lvcol);
+
+    ListView_SetView(_hwndAppList, LV_VIEW_TILE);
+
+    HIMAGELIST himl;
+    Shell_GetImageLists(&himl, nullptr);
+    ListView_SetImageList(_hwndAppList, himl, LVSIL_NORMAL);
+
+    COpenAsDlg::OnInitDialog();
 }
 
 void CVistaOpenAsDlg::AddItem(IAssocHandler *pah)
@@ -44,6 +47,7 @@ void CVistaOpenAsDlg::AddItem(IAssocHandler *pah)
     LVITEMW lvi;
     lvi.mask = LVIF_TEXT | LVIF_PARAM | LVIF_IMAGE;
     lvi.iItem = _cItems++;
+    lvi.iSubItem = 0;
     if (_fHasRecommended)
     {
         lvi.mask |= LVIF_GROUPID;
@@ -98,8 +102,8 @@ void CVistaOpenAsDlg::AddItem(IAssocHandler *pah)
         LVTILEINFO lvti = { sizeof(lvti) };
         lvti.iItem = lvi.iItem;
         lvti.cColumns = 1;
-        UINT uCol = 1;
-        lvti.puColumns = &uCol;
+        UINT uCols[] = { 1 };
+        lvti.puColumns = uCols;
         ListView_SetTileInfo(_hwndAppList, &lvti);
         ListView_SetItemText(_hwndAppList, lvi.iItem, 1, spszCompanyName.get());
     }
