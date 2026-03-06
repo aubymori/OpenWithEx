@@ -48,27 +48,9 @@ INT_PTR CALLBACK CDialog::s_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM 
 void CDialog::SetShellIcon(int iIconID)
 {
 	static HMODULE hmodShell = GetModuleHandleW(L"shell32.dll");
-	static HMODULE hmodUser = GetModuleHandleW(L"user32.dll");
 
-	int cxIcon, cyIcon;
-
-	using GetSystemMetricsForDpi_t = decltype(&GetSystemMetricsForDpi);
-	static GetSystemMetricsForDpi_t pfnGetSystemMetricsForDpi
-		= (GetSystemMetricsForDpi_t)GetProcAddress(hmodUser, "GetSystemMetricsForDpi");
-	if (pfnGetSystemMetricsForDpi)
-	{
-		HDC hdc = GetDC(_hwnd);
-		int dpi = GetDeviceCaps(hdc, LOGPIXELSX);
-		ReleaseDC(_hwnd, hdc);
-
-		cxIcon = pfnGetSystemMetricsForDpi(SM_CXICON, dpi);
-		cyIcon = pfnGetSystemMetricsForDpi(SM_CYICON, dpi);
-	}
-	else
-	{
-		cxIcon = GetSystemMetrics(SM_CXICON);
-		cyIcon = GetSystemMetrics(SM_CYICON);
-	}
+	int cxIcon = _GetSystemMetrics(SM_CXICON);
+	int cyIcon = _GetSystemMetrics(SM_CYICON);
 
 	HICON hIcon = (HICON)LoadImageW(
 		hmodShell, MAKEINTRESOURCEW(iIconID), IMAGE_ICON,
@@ -81,6 +63,26 @@ void CDialog::SetShellIcon(int iIconID)
 			STM_SETICON,
 			(WPARAM)hIcon,
 			0);
+	}
+}
+
+int CDialog::_GetSystemMetrics(int nIndex)
+{
+	static HMODULE hmodUser = GetModuleHandleW(L"user32.dll");
+	using GetSystemMetricsForDpi_t = decltype(&GetSystemMetricsForDpi);
+	static GetSystemMetricsForDpi_t pfnGetSystemMetricsForDpi
+		= (GetSystemMetricsForDpi_t)GetProcAddress(hmodUser, "GetSystemMetricsForDpi");
+	if (pfnGetSystemMetricsForDpi)
+	{
+		HDC hdc = GetDC(_hwnd);
+		int dpi = GetDeviceCaps(hdc, LOGPIXELSX);
+		ReleaseDC(_hwnd, hdc);
+
+		return pfnGetSystemMetricsForDpi(nIndex, dpi);
+	}
+	else
+	{
+		return GetSystemMetrics(nIndex);
 	}
 }
 

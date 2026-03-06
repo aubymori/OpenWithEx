@@ -97,12 +97,13 @@ void COpenAsDlg::OnInitDialog()
 
 	RECT rc;
 	GetClientRect(GetDlgItem(_hwnd, IDD_FILE_TEXT), &rc);
-	PathCompactPathW(NULL, spszFileName.get(), rc.right - 4 * GetSystemMetrics(SM_CXBORDER));
+	PathCompactPathW(NULL, spszFileName.get(), rc.right - 4 * _GetSystemMetrics(SM_CXBORDER));
 	SetDlgItemTextW(_hwnd, IDD_FILE_TEXT, spszFileName.get());
 
 	bool fMakeAssocRestricted = SHRestricted(REST_NOFILEASSOCIATE);
 
 	if (!fMakeAssocRestricted
+		&& !(_flags & IMMERSIVE_OPENWITH_DONOT_SETDEFAULT)
 		&& ((_flags & IMMERSIVE_OPENWITH_DONOT_EXEC)
 		|| _type != OPENAS_DLG_NORMAL))
 	{
