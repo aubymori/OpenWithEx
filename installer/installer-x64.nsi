@@ -3,6 +3,8 @@
 !include x64.nsh
 !include WinVer.nsh
 
+!define VERSION "2.0.0"
+
 # The install path is hardcoded.
 # We need both a x64 and x86 OpenWith.exe and putting both
 # in Program Files won't work. Having two directory choices
@@ -10,7 +12,7 @@
 
 Unicode true
 Name "OpenWithEx"
-Outfile "build\OpenWithEx-setup-x64.exe"
+Outfile "build\OpenWithEx-${VERSION}-x64.exe"
 RequestExecutionLevel admin
 ManifestSupportedOS all
 
@@ -106,7 +108,7 @@ Section "OpenWithEx" OpenWithEx
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenWithEx" \
                  "Publisher" "aubymori"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenWithEx" \
-                 "DisplayVersion" "1.2.0"
+                 "DisplayVersion" "${VERSION}"
     WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenWithEx" \
                  "NoModify" 1
     WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenWithEx" \
