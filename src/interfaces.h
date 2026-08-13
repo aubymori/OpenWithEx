@@ -191,3 +191,81 @@ IAssocHandlerPromptCount : IUnknown
 {
 	STDMETHOD(UpdatePromptCount)(ASSOCHANDLER_PROMPTUPDATE_BEHAVIOR) PURE;
 };
+
+enum ASSOC_PROGID_FORMAT_INTERNAL
+{
+	APF_INTERNAL_DEFAULT = 0,
+	APF_INTERNAL_APPLICATION = 1,
+};
+
+MIDL_INTERFACE("D5C0CDAC-7A15-4F0A-87BA-2E7AAF19E0EC")
+IAssocHandlerInfo : IUnknown
+{
+	STDMETHOD(IsRecentlyInstalled)() PURE;
+	STDMETHOD(GetInternalProgID)(ASSOC_PROGID_FORMAT_INTERNAL format, LPWSTR *ppszProgID) PURE;
+	STDMETHOD(GetHandlerType)(AHTYPE *pType) PURE;
+};
+
+MIDL_INTERFACE("571A5DB3-3B08-441F-B796-68E8164259BB")
+IAssocHandlerMakeDefault : IUnknown
+{
+	STDMETHOD(MakeDefaultPriv)(DWORD flags) PURE;
+	STDMETHOD(TryRegisterApplicationAssoc)() PURE;
+};
+
+
+MIDL_INTERFACE("7BD0775A-6B34-4A94-9465-81963C09D4BA")
+IAppUrlDefaults : IUnknown
+{
+	STDMETHOD(GetAppUrlChoice)(LPCWSTR pszProgID, LPCWSTR pszHost, DWORD *pChoice) PURE;
+	STDMETHOD(SetAppUrlChoice)(LPCWSTR pszProgID, LPCWSTR pszHost, BYTE enabled) PURE;
+};
+
+MIDL_INTERFACE("0F4ACCB1-D8F9-4011-BA37-2557925A78CF")
+IServiceHostBrokerProvider : IUnknown
+{
+	STDMETHOD(GetBroker)(REFGUID service, REFIID riid, void **ppv) PURE;
+};
+
+struct IAppUriExtensionInfo : IInspectable
+{
+	virtual HRESULT STDMETHODCALLTYPE get_AppUserModelId(HSTRING *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_ProgId(HSTRING *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_ApplicationDescription(HSTRING *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_ApplicationDisplayName(HSTRING *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_ApplicationIcon(HSTRING *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_PackageFamilyName(HSTRING *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_PublisherDisplayName(HSTRING *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_PackageFullName(HSTRING *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_EffectiveSupportedUsers(DWORD *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_DisplayName(HSTRING *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_Logo(HSTRING *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_DesiredView(DWORD *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_ContractId(HSTRING *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_UriSchemeOrFileExtensionOrHostName(HSTRING *value) = 0;
+};
+
+struct IAppUriExtensionInfoVectorView : IInspectable
+{
+	virtual HRESULT STDMETHODCALLTYPE GetAt(UINT32 index, IAppUriExtensionInfo **value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE get_Size(UINT32 *value) = 0;
+	virtual HRESULT STDMETHODCALLTYPE IndexOf(IAppUriExtensionInfo *value, UINT32 *index, boolean *found) = 0;
+	virtual HRESULT STDMETHODCALLTYPE GetMany(
+		UINT32 startIndex,
+		UINT32 capacity,
+		IAppUriExtensionInfo **value,
+		UINT32 *actual) = 0;
+};
+
+MIDL_INTERFACE("4278CCC0-8710-543A-9036-F37DA6245536")
+IQueryAssociationBrokerStatics : IInspectable
+{
+	STDMETHOD(FindUriAssociations)(HSTRING uri, HSTRING user, IAppUriExtensionInfoVectorView **value) PURE;
+	STDMETHOD(FindFileAssociations)(HSTRING extension, HSTRING user, IAppUriExtensionInfoVectorView **value) PURE;
+	STDMETHOD(FindProgIdAssociation)(HSTRING progID, HSTRING user, IAppUriExtensionInfo **value) PURE;
+	STDMETHOD(FindAppUriAssociations)(
+		HSTRING host,
+		HSTRING user,
+		HSTRING packageFamilyName,
+		IAppUriExtensionInfoVectorView **value) PURE;
+};
