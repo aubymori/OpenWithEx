@@ -57,9 +57,9 @@ void CClassicOpenAsDlg::OnInitDialog()
     swprintf_s(szTemp, szFormat, spszFileName.get());
     SetDlgItemTextW(_hwnd, IDD_TEXT, szTemp);
 
-    GetDlgItemTextW(_hwnd, IDD_TEXT, szFormat, 200);
+    GetDlgItemTextW(_hwnd, IDD_DESCRIPTIONTEXT, szFormat, 200);
     swprintf_s(szTemp, szFormat, spszTypeID.get());
-    SetDlgItemTextW(_hwnd, IDD_TEXT, szTemp);
+    SetDlgItemTextW(_hwnd, IDD_DESCRIPTIONTEXT, szTemp);
 
     COpenAsDlg::OnInitDialog();
 }
