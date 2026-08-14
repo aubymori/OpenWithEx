@@ -87,13 +87,20 @@ int CDialog::_GetSystemMetrics(int nIndex)
 }
 
 CDialog::CDialog(UINT uDlgID)
-	: _uDlgID(uDlgID)
+	: _fShown(false)
+	, _hwnd(NULL)
+	, _uDlgID(uDlgID)
 {
-
+	
 }
 
 INT_PTR CDialog::ShowDialog(HWND hwndParent)
 {
+	if (hwndParent && !IsWindow(hwndParent))
+	{
+		hwndParent = NULL;
+	}
+
 	return DialogBoxParamW(
 		g_hinst,
 		MAKEINTRESOURCEW(_uDlgID),

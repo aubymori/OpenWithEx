@@ -1027,7 +1027,7 @@ HRESULT COpenWithExUI::CreateAndShowFromDelegateExecute(IExecuteCommand *pxc, IM
 	RETURN_IF_FAILED(IShellItemArray_GetItemAt(_spItems.Get(), 0, IID_PPV_ARGS(&_spItem)));
 
 	wil::unique_cotaskmem_string spsz;
-	if ((_openwithflags & IMMERSIVE_OPENWITH_URL)
+	if (!(_openwithflags & IMMERSIVE_OPENWITH_URL)
 		&& SUCCEEDED_LOG(_spItem->GetDisplayName(SIGDN_DESKTOPABSOLUTEPARSING, &spsz)))
 	{
 		if (PathIsURLW(spsz.get()))
