@@ -787,7 +787,6 @@ HRESULT COpenWithExUI::_CreateAndShow()
 		}
 	}
 
-	RETURN_IF_FAILED(_spItem->BindToHandler(nullptr, BHID_AssociationArray, IID_PPV_ARGS(&_spQueryAssoc)));
 
 	OPENAS_DLG_TYPE dlgType = OPENAS_DLG_NOTYPE;
 
@@ -820,7 +819,16 @@ HRESULT COpenWithExUI::_CreateAndShow()
 
 				WCHAR szCmd[MAX_PATH];
 				DWORD cch = ARRAYSIZE(szCmd);
-				if (SUCCEEDED(_spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_COMMAND, nullptr, szCmd, &cch)))
+				if (SUCCEEDED(_spItem->BindToHandler(
+					nullptr,
+					BHID_AssociationArray,
+					IID_PPV_ARGS(&_spQueryAssoc)))
+					&& SUCCEEDED(_spQueryAssoc->GetString(
+						ASSOCF_IGNOREBASECLASS,
+						ASSOCSTR_COMMAND,
+						nullptr,
+						szCmd,
+						&cch)))
 				{
 					MessageBoxW(
 						NULL,
@@ -922,8 +930,12 @@ HRESULT COpenWithExUI::_CreateAndShow()
 			goto SkipDialog;
 	}
 
-	_pdlg->ShowDialog(_hwndOwner);
-	delete _pdlg;
+	{
+		INT_PTR dialogResult = _pdlg->ShowDialog(_hwndOwner);
+		delete _pdlg;
+		_pdlg = nullptr;
+		RETURN_LAST_ERROR_IF(dialogResult == -1);
+	}
 	
 SkipDialog:
 	WCHAR szMessage[MAX_PATH * 2];

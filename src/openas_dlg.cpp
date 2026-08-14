@@ -81,7 +81,7 @@ COpenAsDlg::COpenAsDlg(UINT idBaseDlg,
 	, _flags(flags)
 	, _hwndAppList(NULL)
 {
-
+	
 }
 
 void COpenAsDlg::OnInitDialog()
@@ -89,7 +89,14 @@ void COpenAsDlg::OnInitDialog()
 	SetShellIcon(134);
 
 	wil::unique_cotaskmem_string spszFileName;
-	if (FAILED(_pOpenWithUI->GetItemName(SIGDN_NORMALDISPLAY, &spszFileName)))
+	HRESULT hr = _pOpenWithUI->GetItemName(
+		SIGDN_NORMALDISPLAY,
+		&spszFileName);
+	if (FAILED(hr) && (_flags & IMMERSIVE_OPENWITH_PROTOCOL))
+	{
+		hr = _pOpenWithUI->GetItemName(SIGDN_URL, &spszFileName);
+	}
+	if (FAILED(hr))
 	{
 		EndDialog(_hwnd, IDCANCEL);
 		return;

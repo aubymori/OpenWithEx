@@ -57,7 +57,8 @@ void CVistaOpenAsDlg::AddItem(IAssocHandler *pah)
     }
 
     wil::unique_cotaskmem_string spszItemName;
-    pah->GetUIName(&spszItemName);
+    if (FAILED(pah->GetUIName(&spszItemName)))
+        return;
     lvi.pszText = spszItemName.get();
     lvi.cchTextMax = (int)wcslen(spszItemName.get()) + 1;
     

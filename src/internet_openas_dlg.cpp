@@ -70,7 +70,7 @@ INT_PTR CInternetOpenAsDlg::v_DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARA
 }
 
 CInternetOpenAsDlg::CInternetOpenAsDlg(COpenWithExUI *pOpenWithUI)
-	: CDialog((g_style == OPENWITHEX_STYLE_VISTA) ? DLG_OPENAS_DOWNALOAD : DLG_OPENAS_DOWNALOAD_XP)
+	: CDialog((g_style <= OPENWITHEX_STYLE_VISTA) ? DLG_OPENAS_DOWNALOAD : DLG_OPENAS_DOWNALOAD_XP)
 	, _pOpenWithUI(pOpenWithUI)
 {
 
