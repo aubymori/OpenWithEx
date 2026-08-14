@@ -401,6 +401,127 @@ HRESULT SetUserChoiceAndHash(
 	return E_FAIL;
 }
 
+HRESULT SetNewFileTypeDescription(
+	LPCWSTR pszTypeID,
+	LPCWSTR pszDescription,
+	IAssocHandler *pah)
+{
+	if (!pszDescription || !*pszDescription || !pszTypeID ||
+		pszTypeID[0] != L'.')
+	{
+		return S_FALSE;
+	}
+
+	ComPtr<IAssocHandlerInfo> handlerInfo;
+	RETURN_IF_FAILED(pah->QueryInterface(IID_PPV_ARGS(&handlerInfo)));
+
+	AHTYPE handlerType = AHTYPE_UNDEFINED;
+	RETURN_IF_FAILED(handlerInfo->GetHandlerType(&handlerType));
+
+	wil::unique_cotaskmem_string sourceProgID;
+	RETURN_IF_FAILED(handlerInfo->GetInternalProgID(
+		(handlerType & AHTYPE_PROGID_MASK) != 0
+			? APF_INTERNAL_DEFAULT
+			: APF_INTERNAL_APPLICATION,
+		&sourceProgID));
+
+	WCHAR progID[MAX_PATH];
+	RETURN_IF_FAILED(StringCchPrintfW(
+		progID,
+		ARRAYSIZE(progID),
+		L"%s_auto_file",
+		pszTypeID + 1));
+
+	WCHAR progIDPath[MAX_PATH];
+	RETURN_IF_FAILED(StringCchPrintfW(
+		progIDPath,
+		ARRAYSIZE(progIDPath),
+		L"Software\\Classes\\%s",
+		progID));
+
+	HKEY progIDKey = nullptr;
+	LSTATUS status = RegCreateKeyExW(
+		HKEY_CURRENT_USER,
+		progIDPath,
+		0,
+		nullptr,
+		0,
+		KEY_SET_VALUE | KEY_CREATE_SUB_KEY,
+		nullptr,
+		&progIDKey,
+		nullptr);
+	RETURN_HR_IF(HRESULT_FROM_WIN32(status), status != ERROR_SUCCESS);
+	auto closeProgIDKey = wil::scope_exit([&]
+	{
+		RegCloseKey(progIDKey);
+	});
+
+	const DWORD descriptionSize =
+		static_cast<DWORD>((wcslen(pszDescription) + 1) * sizeof(WCHAR));
+	status = RegSetValueExW(
+		progIDKey,
+		nullptr,
+		0,
+		REG_SZ,
+		reinterpret_cast<const BYTE *>(pszDescription),
+		descriptionSize);
+	RETURN_HR_IF(HRESULT_FROM_WIN32(status), status != ERROR_SUCCESS);
+
+	status = RegSetValueExW(
+		progIDKey,
+		L"FriendlyTypeName",
+		0,
+		REG_SZ,
+		reinterpret_cast<const BYTE *>(pszDescription),
+		descriptionSize);
+	RETURN_HR_IF(HRESULT_FROM_WIN32(status), status != ERROR_SUCCESS);
+	HKEY sourceShellKey = nullptr;
+	WCHAR sourceShellPath[MAX_PATH];
+	RETURN_IF_FAILED(StringCchPrintfW(
+		sourceShellPath,
+		ARRAYSIZE(sourceShellPath),
+		L"%s\\shell",
+		sourceProgID.get()));
+	status = RegOpenKeyExW(
+		HKEY_CLASSES_ROOT,
+		sourceShellPath,
+		0,
+		KEY_READ,
+		&sourceShellKey);
+	RETURN_HR_IF(HRESULT_FROM_WIN32(status), status != ERROR_SUCCESS);
+	auto closeSourceShellKey = wil::scope_exit([&]
+	{
+		RegCloseKey(sourceShellKey);
+	});
+
+	HKEY destinationShellKey = nullptr;
+	status = RegCreateKeyExW(
+		progIDKey,
+		L"shell",
+		0,
+		nullptr,
+		0,
+		KEY_WRITE,
+		nullptr,
+		&destinationShellKey,
+		nullptr);
+	RETURN_HR_IF(HRESULT_FROM_WIN32(status), status != ERROR_SUCCESS);
+	auto closeDestinationShellKey = wil::scope_exit([&]
+	{
+		RegCloseKey(destinationShellKey);
+	});
+
+	status = SHCopyKeyW(
+		sourceShellKey,
+		nullptr,
+		destinationShellKey,
+		0);
+	RETURN_HR_IF(HRESULT_FROM_WIN32(status), status != ERROR_SUCCESS);
+	RETURN_IF_FAILED(SetUserChoiceAndHash(pszTypeID, progID));
+	EnsurePerUserAssociationIdentifier(pszTypeID);
+	return GenerateUserAssocChangeNotification();
+}
+
 HRESULT SetDefaultAssociationForAssocHandler(LPCWSTR pszTypeID, IAssocHandler *pah)
 {
 	ComPtr<IAssocHandlerInfo> handlerInfo;
@@ -1096,7 +1217,17 @@ void COpenWithExUI::OnOk(bool fMakeAssoc, LPCWSTR pszDescription)
 		{
 			if (fMakeAssoc)
 			{
-				_MakeDefault(pah);
+				if (pszDescription && *pszDescription)
+				{
+					SetNewFileTypeDescription(
+						_spszTypeID.get(),
+						pszDescription,
+						pah);
+				}
+				else
+				{
+					_MakeDefault(pah);
+				}
 			}
 			pah->Invoke(dataObj.Get());
 		}
