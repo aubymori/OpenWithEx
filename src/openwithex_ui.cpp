@@ -6,6 +6,8 @@
 #include "noopen_dlg.h"
 #include "internet_openas_dlg.h"
 #include "vista_openas_dlg.h"
+#include "xp_openas_dlg.h"
+#include "classic_openas_dlg.h"
 #include <wrl/wrappers/corewrappers.h>
 #include <bcrypt.h>
 #include <sddl.h>
@@ -811,12 +813,6 @@ HRESULT COpenWithExUI::_CreateAndShow()
 
 			if (SUCCEEDED(hr))
 			{
-				MessageBoxW(
-					NULL,
-					_spszDefaultProgID.get(),
-					L"Default ProgID:",
-					MB_ICONINFORMATION);
-
 				WCHAR szCmd[MAX_PATH];
 				DWORD cch = ARRAYSIZE(szCmd);
 				if (SUCCEEDED(_spItem->BindToHandler(
@@ -830,11 +826,6 @@ HRESULT COpenWithExUI::_CreateAndShow()
 						szCmd,
 						&cch)))
 				{
-					MessageBoxW(
-						NULL,
-						szCmd,
-						L"Command:",
-						MB_ICONINFORMATION);
 					fHasCommand = true;
 				}
 			}
@@ -855,6 +846,11 @@ HRESULT COpenWithExUI::_CreateAndShow()
 			{
 				if (g_style != OPENWITHEX_STYLE_NT4)
 				{
+					if (!_spQueryAssoc.Get())
+					{
+						RETURN_IF_FAILED(_spItem->BindToHandler(nullptr, BHID_AssociationArray, IID_PPV_ARGS(&_spQueryAssoc)));
+					}
+
 					HRESULT hrNoOpen = _spQueryAssoc->GetString(ASSOCF_IGNOREBASECLASS, ASSOCSTR_NOOPEN, nullptr, szNoOpenMsg, &cchNoOpenMsg);
 
 					if (SUCCEEDED(hrNoOpen))
@@ -926,6 +922,13 @@ HRESULT COpenWithExUI::_CreateAndShow()
 		case OPENWITHEX_STYLE_VISTA:
 			_pdlg = new CVistaOpenAsDlg(this, dlgType, _openwithflags);
 			break;
+		case OPENWITHEX_STYLE_XP:
+			_pdlg = new CXPOpenAsDlg(this, dlgType, _openwithflags);
+			break;
+		case OPENWITHEX_STYLE_2000:
+		case OPENWITHEX_STYLE_NT4:
+			_pdlg = new CClassicOpenAsDlg(this, dlgType, _openwithflags);
+			break;
 		default:
 			goto SkipDialog;
 	}
@@ -938,13 +941,6 @@ HRESULT COpenWithExUI::_CreateAndShow()
 	}
 	
 SkipDialog:
-	WCHAR szMessage[MAX_PATH * 2];
-	swprintf_s(
-		szMessage, 
-		L"Item: %s\nType: %s\nFlags: 0x%X",
-		spsz.get(), _spszTypeID.get(), _openwithflags);
-	MessageBoxW(NULL, szMessage, L"OpenWithEx", MB_ICONINFORMATION);
-
 	return hr;
 }
 

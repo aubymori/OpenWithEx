@@ -104,6 +104,12 @@
     <ClInclude Include="vista_openas_dlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="xp_openas_dlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="classic_openas_dlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -140,6 +146,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="vista_openas_dlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xp_openas_dlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="classic_openas_dlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
