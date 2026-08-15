@@ -25,36 +25,36 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="openwithex_config.rc">
+    <ResourceCompile Include="res\openwithex_config.en-US.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.en-US.rc">
+    <ResourceCompile Include="res\openwithex_config.es-ES.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.es-ES.rc">
+    <ResourceCompile Include="res\openwithex_config.ja-JP.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.ja-JP.rc">
+    <ResourceCompile Include="res\openwithex_config.ko-KR.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.ko-KR.rc">
+    <ResourceCompile Include="res\openwithex_config.pl-PL.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.pl-PL.rc">
+    <ResourceCompile Include="res\openwithex_config.pt-BR.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.pt-BR.rc">
+    <ResourceCompile Include="res\openwithex_config.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.ru-RU.rc">
+    <ResourceCompile Include="res\openwithex_config.ru-RU.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.tr-TR.rc">
+    <ResourceCompile Include="res\openwithex_config.tr-TR.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="openwithex_config.rcconfig">
+    <Xml Include="res\openwithex_config.rcconfig">
       <Filter>Resource Files</Filter>
     </Xml>
   </ItemGroup>
