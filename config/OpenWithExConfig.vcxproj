@@ -90,16 +90,16 @@
   <PropertyGroup Label="MUI">
     <_PrimaryLanguage>en-US</_PrimaryLanguage>
     <_PrimaryLanguageID>0x0409</_PrimaryLanguageID>
-    <_RCConfig>openwithex_config.rcconfig</_RCConfig>
+    <_RCConfig>res\openwithex_config.rcconfig</_RCConfig>
   </PropertyGroup>
   <Target Name="MUI" AfterTargets="Link">
-    <_BuildMUI Language="es-ES" Filenames="openwithex_config.es-ES.rc" />
-    <_BuildMUI Language="ja-JP" Filenames="openwithex_config.ja-JP.rc" />
-    <_BuildMUI Language="ko-KR" Filenames="openwithex_config.ko-KR.rc" />
-    <_BuildMUI Language="pl-PL" Filenames="openwithex_config.pl-PL.rc" />
-    <_BuildMUI Language="pt-BR" Filenames="openwithex_config.pt-BR.rc" />
-    <_BuildMUI Language="ru-RU" Filenames="openwithex_config.ru-RU.rc" />
-    <_BuildMUI Language="tr-TR" Filenames="openwithex_config.tr-TR.rc" />
+    <_BuildMUI Language="es-ES" Filenames="res\openwithex_config.es-ES.rc" />
+    <_BuildMUI Language="ja-JP" Filenames="res\openwithex_config.ja-JP.rc" />
+    <_BuildMUI Language="ko-KR" Filenames="res\openwithex_config.ko-KR.rc" />
+    <_BuildMUI Language="pl-PL" Filenames="res\openwithex_config.pl-PL.rc" />
+    <_BuildMUI Language="pt-BR" Filenames="res\openwithex_config.pt-BR.rc" />
+    <_BuildMUI Language="ru-RU" Filenames="res\openwithex_config.ru-RU.rc" />
+    <_BuildMUI Language="tr-TR" Filenames="res\openwithex_config.tr-TR.rc" />
   </Target>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -200,50 +200,50 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="openwithex_config.en-US.rc">
+    <ResourceCompile Include="res\openwithex_config.en-US.rc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.es-ES.rc">
+    <ResourceCompile Include="res\openwithex_config.es-ES.rc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.ja-JP.rc">
+    <ResourceCompile Include="res\openwithex_config.ja-JP.rc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.ko-KR.rc">
+    <ResourceCompile Include="res\openwithex_config.ko-KR.rc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.pl-PL.rc">
+    <ResourceCompile Include="res\openwithex_config.pl-PL.rc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.pt-BR.rc">
+    <ResourceCompile Include="res\openwithex_config.pt-BR.rc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.rc" />
-    <ResourceCompile Include="openwithex_config.ru-RU.rc">
+    <ResourceCompile Include="res\openwithex_config.rc" />
+    <ResourceCompile Include="res\openwithex_config.ru-RU.rc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex_config.tr-TR.rc">
+    <ResourceCompile Include="res\openwithex_config.tr-TR.rc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -251,7 +251,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="openwithex_config.rcconfig" />
+    <Xml Include="res\openwithex_config.rcconfig" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
