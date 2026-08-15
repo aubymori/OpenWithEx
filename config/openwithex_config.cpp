@@ -25,7 +25,7 @@ INT_PTR CALLBACK ConfigDlgProc(
 			ComboBox_AddString(hwndCombo, L"Windows 7");
 			ComboBox_AddString(hwndCombo, L"Windows Vista");
 			ComboBox_AddString(hwndCombo, L"Windows XP");
-			ComboBox_AddString(hwndCombo, L"Windows 2000");
+			ComboBox_AddString(hwndCombo, L"Windows 2000/Me");
 			ComboBox_AddString(hwndCombo, L"Windows 95/98/NT 4.0");
 
 			WCHAR szFormat[256], szBuffer[256];
