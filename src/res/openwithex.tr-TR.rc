@@ -78,6 +78,25 @@ FONT 8, "MS Shell Dlg", 0, 0, 0
     PUSHBUTTON "İptal", IDCANCEL, 318, 200, 50, 14
 }
 
+
+// Windows 7 shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD DIALOGEX 0, 0, 279, 146
+CAPTION "Windows"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Windows şu dosyayı açamıyor:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Dosya:", IDC_STATIC, 36, 23, 27, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 64, 23, 208, 8, SS_NOPREFIX
+    LTEXT "Windows'un bu dosyayı açması için dosyayı açma işleminde kullanmak istediğiniz programı bilmesi gerekiyor. Windows bu programı belirlemek üzere çevrimiçi olabilir veya bilgisayarınızda yüklü olan programlar listesinden kendiniz bu programı seçebilirsiniz.", IDC_STATIC, 9, 39, 257, 33, NOT WS_GROUP
+    LTEXT "Ne yapmak istiyorsunuz?", IDC_STATIC, 9, 76, 139, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "Doğru pr&ogramı bulmak için Web hizmetini kullanmak", IDD_WEBAUTOLOOKUP, 9, 90, 194, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "Yüklü programlar li&stesinden program seçmek", IDD_OPENWITHLIST, 9, 103, 194, 10, WS_TABSTOP
+    DEFPUSHBUTTON "Tamam", IDOK, 156, 121, 50, 14
+    PUSHBUTTON "İptal", IDCANCEL, 211, 121, 50, 14
+}
+
 // Windows Vista shell32.dll dialog #1063
 DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
 CAPTION "Birlikte Aç"
@@ -188,7 +207,26 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     DEFPUSHBUTTON "Tamam", IDOK, 140, 200, 50, 14
     PUSHBUTTON "İptal", IDCANCEL, 194, 200, 50, 14
 }
-// Windows 2000 shell32.dll dialog #1063
+
+// Windows XP shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD_XP DIALOGEX 0, 0, 279, 146
+CAPTION "Windows"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Windows şu dosyayı açamıyor:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Dosya:", IDC_STATIC, 36, 23, 24, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 64, 23, 208, 8, SS_NOPREFIX
+    LTEXT "Windows'un bu dosyayı açabilmesi için, hangi program tarafından oluşturulduğunu bilmesi gerekiyor. Programı saptamak için Windows otomatik olarak devreye girebilir ya da bilgisayarınızdaki programların listesinden kendiniz seçebilirsiniz.", IDC_STATIC, 9, 39, 257, 24, NOT WS_GROUP
+    LTEXT "Ne yapmak istiyorsunuz?", IDC_STATIC, 9, 72, 139, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "Uygun pr&ogramı bulmak için Web hizmetini kullanmak", IDD_WEBAUTOLOOKUP, 9, 86, 194, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "Li&steden programı seçmek", IDD_OPENWITHLIST, 9, 99, 194, 10, WS_TABSTOP
+    DEFPUSHBUTTON "Tamam", IDOK, 156, 121, 50, 14
+    PUSHBUTTON "İptal", IDCANCEL, 211, 121, 50, 14
+}
+
+// Windows 2000/Me shell32.dll dialog #1063
 DLG_OPENAS_2K DIALOGEX 0, 0, 227, 175
 CAPTION "Birlikte Aç"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -204,7 +242,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     PUSHBUTTON "&Diğer...", IDD_OPENWITH_BROWSE, 143, 154, 50, 14
 }
 
-// Windows 2000 shell32.dll dialog #1070
+// Windows 2000/Me shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 229, 210
 CAPTION "Birlikte Aç..."
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -236,7 +274,8 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     DEFPUSHBUTTON "Tamam", IDOK, 89, 154, 50, 14
     PUSHBUTTON "İptal", IDCANCEL, 143, 154, 50, 14
 }
-// Windows 98 shell32.dll dialog #1063
+
+// Windows 95/98/NT 4.0 shell32.dll dialog #1063
 DLG_OPENAS_NT4 DIALOG 0, 0, 212, 179
 CAPTION "Birlikte Aç"
 STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
@@ -251,7 +290,7 @@ FONT 8, "MS Shell Dlg"
     PUSHBUTTON "&Diğer...", IDD_OPENWITH_BROWSE, 155, 157, 50, 14
 }
 
-// Windows 98 shell32.dll dialog #1070
+// Windows 95/98/NT 4.0 shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 212, 209
 CAPTION "Birlikte Aç"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE

@@ -78,6 +78,25 @@ FONT 8, "MS Shell Dlg", 0, 0, 0
     PUSHBUTTON "Άκυρο", IDCANCEL, 318, 200, 50, 14
 }
 
+
+// Windows 7 shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD DIALOGEX 0, 0, 279, 146
+CAPTION "Windows"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Τα Windows δεν είναι δυνατό να ανοίξουν αυτό το αρχείο:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Αρχείο:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 198, 8, SS_NOPREFIX
+    LTEXT "Για να ανοίξουν αυτό το αρχείο, τα Windows πρέπει να γνωρίζουν με ποιο πρόγραμμα θέλετε να το ανοίξετε. Μπορούν να το αναζητήσουν αυτόματα, μέσω σύνδεσης στο δίκτυο, ή να το επιλέξετε εσείς από μια λίστα των προγραμμάτων που είναι εγκατεστημένα στον υπολογιστή σας.", IDC_STATIC, 9, 39, 257, 34, NOT WS_GROUP
+    LTEXT "Τι θέλετε να κάνετε;", IDC_STATIC, 9, 76, 139, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "Χρήση της &υπηρεσίας Web για εύρεση του σωστού προγράμματος", IDD_WEBAUTOLOOKUP, 9, 90, 263, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "&Επιλογή ενός προγράμματος από λίστα εγκατεστημένων προγραμμάτων", IDD_OPENWITHLIST, 9, 103, 264, 10, WS_TABSTOP
+    DEFPUSHBUTTON "ΟΚ", IDOK, 161, 121, 50, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 216, 121, 50, 14
+}
+
 // Windows Vista shell32.dll dialog #1063
 DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
 CAPTION "Άνοιγμα με"
@@ -188,7 +207,26 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     DEFPUSHBUTTON "ΟΚ", IDOK, 169, 200, 50, 14
     PUSHBUTTON "Άκυρο", IDCANCEL, 224, 200, 50, 14
 }
-// Windows 2000 shell32.dll dialog #1063
+
+// Windows XP shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD_XP DIALOGEX 0, 0, 279, 146
+CAPTION "Windows"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Τα Windows δεν είναι δυνατό να ανοίξουν αυτό το αρχείο:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Αρχείο:", IDC_STATIC, 36, 23, 26, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 66, 23, 202, 8, SS_NOPREFIX
+    LTEXT "Για να ανοίξουν αυτό το αρχείο τα Windows, πρέπει να γνωρίζουν με ποιο πρόγραμμα δημιουργήθηκε.  Είναι δυνατό να το αναζητήσουν τα Windows αυτόματα, μέσω σύνδεσης στο δίκτυο ή να το επιλέξετε εσείς από μια λίστα προγραμμάτων στον υπολογιστή σας.", IDC_STATIC, 9, 39, 257, 32, NOT WS_GROUP
+    LTEXT "Τι θέλετε να κάνετε;", IDC_STATIC, 9, 76, 139, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "Χρήση της &υπηρεσίας Web για εύρεση του κατάλληλου προγράμματος", IDD_WEBAUTOLOOKUP, 9, 90, 259, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "&Επιλογή του προγράμματος από λίστα", IDD_OPENWITHLIST, 9, 103, 194, 10, WS_TABSTOP
+    DEFPUSHBUTTON "ΟΚ", IDOK, 156, 121, 50, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 211, 121, 50, 14
+}
+
+// Windows 2000/Me shell32.dll dialog #1063
 DLG_OPENAS_2K DIALOGEX 0, 0, 370, 175
 CAPTION "Άνοιγμα με"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -204,7 +242,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     PUSHBUTTON "Ά&λλα...", IDD_OPENWITH_BROWSE, 213, 154, 50, 14
 }
 
-// Windows 2000 shell32.dll dialog #1070
+// Windows 2000/Me shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 370, 209
 CAPTION "Άνοιγμα με..."
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -236,7 +274,8 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     DEFPUSHBUTTON "ΟΚ", IDOK, 159, 154, 50, 14
     PUSHBUTTON "Άκυρο", IDCANCEL, 213, 154, 50, 14
 }
-// Windows 98 shell32.dll dialog #1063
+
+// Windows 95/98/NT 4.0 shell32.dll dialog #1063
 DLG_OPENAS_NT4 DIALOG 0, 0, 243, 186
 CAPTION "Άνοιγμα με"
 STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
@@ -251,7 +290,7 @@ FONT 8, "MS Sans Serif"
     PUSHBUTTON "Ά&λλο...", IDD_OPENWITH_BROWSE, 185, 165, 50, 14
 }
 
-// Windows 98 shell32.dll dialog #1070
+// Windows 95/98/NT 4.0 shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 217, 218
 CAPTION "Άνοιγμα με"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE

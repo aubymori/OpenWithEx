@@ -78,6 +78,25 @@ FONT 8, "MS Shell Dlg", 0, 0, 0
     PUSHBUTTON "Anuluj", IDCANCEL, 318, 200, 50, 14
 }
 
+
+// Windows 7 shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD DIALOGEX 0, 0, 279, 146
+CAPTION "System Windows"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "System Windows nie może otworzyć tego pliku:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Plik:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    LTEXT "Aby otworzyć ten plik, system Windows musi wiedzieć jakiego programu chcesz użyć do otwarcia pliku. System Windows może przejść do trybu online, aby wyszukać program automatycznie, lub pozwolić Ci wybrać go z listy programów zainstalowanych na komputerze.", IDC_STATIC, 9, 39, 257, 33, NOT WS_GROUP
+    LTEXT "Co chcesz zrobić?", IDC_STATIC, 9, 77, 139, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "&Użyć usługi sieci Web do znalezienia odpowiedniego programu", IDD_WEBAUTOLOOKUP, 9, 91, 215, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "&Wybrać program z listy zainstalowanych programów", IDD_OPENWITHLIST, 9, 104, 194, 10, WS_TABSTOP
+    DEFPUSHBUTTON "OK", IDOK, 156, 121, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 211, 121, 50, 14
+}
+
 // Windows Vista shell32.dll dialog #1063
 DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
 CAPTION "Otwieranie za pomocą"
@@ -188,7 +207,26 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
     PUSHBUTTON "Anuluj", IDCANCEL, 194, 200, 50, 14
 }
-// Windows 2000 shell32.dll dialog #1063
+
+// Windows XP shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD_XP DIALOGEX 0, 0, 279, 146
+CAPTION "System Windows"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "System Windows nie może otworzyć tego pliku:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Plik:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    LTEXT "Aby otworzyć ten plik, system Windows musi wiedzieć, w którym programie został on utworzony. System Windows może przejść do trybu online, aby wyszukać program automatycznie, lub pozwolić Ci wybrać go z listy programów znajdujących się na komputerze.", IDC_STATIC, 9, 39, 257, 33, NOT WS_GROUP
+    LTEXT "Co chcesz zrobić?", IDC_STATIC, 9, 77, 139, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "&Użyć usługi sieci Web do znalezienia odpowiedniego programu", IDD_WEBAUTOLOOKUP, 9, 91, 215, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "&Wybrać program z listy", IDD_OPENWITHLIST, 9, 104, 194, 10, WS_TABSTOP
+    DEFPUSHBUTTON "OK", IDOK, 156, 121, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 211, 121, 50, 14
+}
+
+// Windows 2000/Me shell32.dll dialog #1063
 DLG_OPENAS_2K DIALOGEX 0, 0, 251, 174
 CAPTION "Otwieranie za pomocą"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -204,7 +242,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     PUSHBUTTON "&Inne...", IDD_OPENWITH_BROWSE, 192, 154, 50, 14
 }
 
-// Windows 2000 shell32.dll dialog #1070
+// Windows 2000/Me shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 238, 210
 CAPTION "Otwieranie za pomocą..."
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -236,7 +274,8 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     DEFPUSHBUTTON "OK", IDOK, 138, 154, 50, 14
     PUSHBUTTON "Anuluj", IDCANCEL, 192, 154, 50, 14
 }
-// Windows 98 shell32.dll dialog #1063
+
+// Windows 95/98/NT 4.0 shell32.dll dialog #1063
 DLG_OPENAS_NT4 DIALOG 0, 0, 218, 178
 CAPTION "Otwórz z"
 STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
@@ -251,7 +290,7 @@ FONT 8, "MS Shell Dlg"
     PUSHBUTTON "&Inne...", IDD_OPENWITH_BROWSE, 155, 157, 50, 14
 }
 
-// Windows 98 shell32.dll dialog #1070
+// Windows 95/98/NT 4.0 shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 212, 210
 CAPTION "Otwórz z"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE

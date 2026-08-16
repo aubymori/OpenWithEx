@@ -78,6 +78,25 @@ FONT 8, "MS Shell Dlg", 0, 0, 0
     PUSHBUTTON "Cancelar", IDCANCEL, 318, 200, 50, 14
 }
 
+
+// Windows 7 shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD DIALOGEX 0, 0, 279, 146
+CAPTION "Windows"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "O Windows não pode abrir este arquivo:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Arquivo:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 69, 23, 203, 8, SS_NOPREFIX
+    LTEXT "O Windows precisa saber com qual programa o arquivo deve ser aberto. Ele pode procurar automaticamente pelo programa online ou você pode selecioná-lo em uma lista de programas instalados no computador.", IDC_STATIC, 9, 39, 260, 25, NOT WS_GROUP
+    LTEXT "O que você deseja fazer?", IDC_STATIC, 9, 72, 161, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "Usar o serviço da &Web para encontrar o programa correto", IDD_WEBAUTOLOOKUP, 9, 86, 242, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "&Selecionar um programa em uma lista de programas instalados", IDD_OPENWITHLIST, 9, 99, 257, 10, WS_TABSTOP
+    DEFPUSHBUTTON "OK", IDOK, 156, 122, 50, 14
+    PUSHBUTTON "Cancelar", IDCANCEL, 211, 122, 50, 14
+}
+
 // Windows Vista shell32.dll dialog #1063
 DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
 CAPTION "Abrir com"
@@ -188,7 +207,26 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
     PUSHBUTTON "Cancelar", IDCANCEL, 194, 200, 50, 14
 }
-// Windows 2000 shell32.dll dialog #1063
+
+// Windows XP shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD_XP DIALOGEX 0, 0, 279, 146
+CAPTION "Windows"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "O Windows não pode abrir este arquivo:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Arquivo:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 69, 23, 203, 8, SS_NOPREFIX
+    LTEXT "Para abrir o arquivo, o Windows precisa saber com que programa ele foi criado. O Windows pode se conectar à Internet para procurar o programa automaticamente ou você pode selecioná-lo em uma lista no computador.", IDC_STATIC, 9, 39, 260, 25, NOT WS_GROUP
+    LTEXT "O que você deseja fazer?", IDC_STATIC, 9, 72, 82, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "Use o serviço da &Web para encontrar o programa apropriado", IDD_WEBAUTOLOOKUP, 9, 86, 207, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "&Selecionar o programa em uma lista", IDD_OPENWITHLIST, 9, 99, 127, 10, WS_TABSTOP
+    DEFPUSHBUTTON "OK", IDOK, 156, 122, 50, 14
+    PUSHBUTTON "Cancelar", IDCANCEL, 211, 122, 50, 14
+}
+
+// Windows 2000/Me shell32.dll dialog #1063
 DLG_OPENAS_2K DIALOGEX 0, 0, 230, 176
 CAPTION "Abrir com"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -204,7 +242,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     PUSHBUTTON "&Outros...", IDD_OPENWITH_BROWSE, 162, 157, 50, 14
 }
 
-// Windows 2000 shell32.dll dialog #1070
+// Windows 2000/Me shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 219, 210
 CAPTION "Abrir com..."
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -236,7 +274,8 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     DEFPUSHBUTTON "OK", IDOK, 108, 157, 50, 14
     PUSHBUTTON "Cancelar", IDCANCEL, 162, 157, 50, 14
 }
-// Windows 98 shell32.dll dialog #1063
+
+// Windows 95/98/NT 4.0 shell32.dll dialog #1063
 DLG_OPENAS_NT4 DIALOG 0, 0, 212, 190
 CAPTION "Abrir com"
 STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
@@ -251,7 +290,7 @@ FONT 8, "MS Shell Dlg"
     PUSHBUTTON "&Outros...", IDD_OPENWITH_BROWSE, 155, 168, 50, 14
 }
 
-// Windows 98 shell32.dll dialog #1070
+// Windows 95/98/NT 4.0 shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 212, 209
 CAPTION "Abrir com"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE

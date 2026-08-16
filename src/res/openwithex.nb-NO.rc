@@ -78,6 +78,25 @@ FONT 8, "MS Shell Dlg", 0, 0, 0
     PUSHBUTTON "Avbryt", IDCANCEL, 318, 200, 50, 14
 }
 
+
+// Windows 7 shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD DIALOGEX 0, 0, 279, 146
+CAPTION "Windows"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Kan ikke åpne denne filen:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Fil:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    LTEXT "Filen kan ikke åpnes hvis ikke Windows vet hvilket program du vil bruke for å åpne den. Et automatisk søk kan gjøres på Internett, eller så kan du manuelt velge i en liste over programmer som er installert på datamaskinen.", IDC_STATIC, 9, 39, 257, 24, NOT WS_GROUP
+    LTEXT "Hva vil du gjøre?", IDC_STATIC, 9, 72, 139, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "Bruk &webtjenesten for å finne det riktige programmet", IDD_WEBAUTOLOOKUP, 9, 86, 194, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "&Velg et program fra en liste over installerte programmer", IDD_OPENWITHLIST, 9, 99, 194, 10, WS_TABSTOP
+    DEFPUSHBUTTON "OK", IDOK, 156, 121, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 211, 121, 50, 14
+}
+
 // Windows Vista shell32.dll dialog #1063
 DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
 CAPTION "Åpne i"
@@ -188,7 +207,26 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
     PUSHBUTTON "Avbryt", IDCANCEL, 194, 200, 50, 14
 }
-// Windows 2000 shell32.dll dialog #1063
+
+// Windows XP shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD_XP DIALOGEX 0, 0, 279, 146
+CAPTION "Windows"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Kan ikke åpne denne filen:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Fil:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    LTEXT "Filen kan ikke åpnes hvis ikke Windows vet hvilket program som opprettet den. Et automatisk søk kan gjøres på Internett, eller så kan du manuelt velge i en liste over programmer på datamaskinen.", IDC_STATIC, 9, 39, 257, 24, NOT WS_GROUP
+    LTEXT "Hva vil du gjøre?", IDC_STATIC, 9, 72, 139, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "Bruk &Web-tjenesten for å finne det riktige programmet", IDD_WEBAUTOLOOKUP, 9, 86, 194, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "&Velg programmet fra en liste", IDD_OPENWITHLIST, 9, 99, 194, 10, WS_TABSTOP
+    DEFPUSHBUTTON "OK", IDOK, 156, 121, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 211, 121, 50, 14
+}
+
+// Windows 2000/Me shell32.dll dialog #1063
 DLG_OPENAS_2K DIALOGEX 0, 0, 209, 175
 CAPTION "Åpne i"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -204,7 +242,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     PUSHBUTTON "&Annet...", IDD_OPENWITH_BROWSE, 151, 154, 51, 14
 }
 
-// Windows 2000 shell32.dll dialog #1070
+// Windows 2000/Me shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 215, 209
 CAPTION "Åpne i..."
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -236,7 +274,8 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     DEFPUSHBUTTON "OK", IDOK, 95, 154, 51, 14
     PUSHBUTTON "Avbryt", IDCANCEL, 150, 154, 52, 14
 }
-// Windows 98 shell32.dll dialog #1063
+
+// Windows 95/98/NT 4.0 shell32.dll dialog #1063
 DLG_OPENAS_NT4 DIALOG 0, 0, 212, 179
 CAPTION "Åpne i"
 STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
@@ -251,7 +290,7 @@ FONT 8, "MS Shell Dlg"
     PUSHBUTTON "&Annet...", IDD_OPENWITH_BROWSE, 155, 157, 50, 14
 }
 
-// Windows 98 shell32.dll dialog #1070
+// Windows 95/98/NT 4.0 shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 212, 209
 CAPTION "Åpne i"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE

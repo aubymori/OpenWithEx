@@ -78,6 +78,25 @@ FONT 9, "MS UI Gothic", 0, 0, 128
     PUSHBUTTON "キャンセル", IDCANCEL, 318, 200, 50, 14
 }
 
+
+// Windows 7 shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD DIALOGEX 0, 0, 279, 146
+CAPTION "Windows"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 9, "MS UI Gothic", 0, 0, 128 // SHIFTJIS_CHARSET
+{
+    ICON 134, IDD_ICON, 7, 7, 18, 19, SS_REALSIZECONTROL
+    LTEXT "このファイルを開けません:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "ファイル:", IDC_STATIC, 36, 23, 26, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 65, 23, 208, 8, SS_NOPREFIX
+    LTEXT "このファイルを開くには、そのためのプログラムが必要です。インターネットで自動的にプログラムを検索するか、またはコンピューターにインストールされたプログラムの一覧から手動で選択してください。", IDC_STATIC, 9, 39, 257, 24, NOT WS_GROUP
+    LTEXT "動作を選択してください。", IDC_STATIC, 9, 72, 139, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "Web サービスを使用して正しいプログラムを探す(&W)", IDD_WEBAUTOLOOKUP, 9, 86, 194, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "インストールされたプログラムの一覧からプログラムを選択する(&S)", IDD_OPENWITHLIST, 9, 99, 201, 10, WS_TABSTOP
+    DEFPUSHBUTTON "OK", IDOK, 156, 121, 50, 14
+    PUSHBUTTON "キャンセル", IDCANCEL, 211, 121, 50, 14
+}
+
 // Windows Vista shell32.dll dialog #1063
 DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
 CAPTION "ファイルを開くプログラムの選択"
@@ -188,7 +207,26 @@ FONT 9, "MS UI Gothic", 0, 0, 128
     DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
     PUSHBUTTON "キャンセル", IDCANCEL, 194, 200, 50, 14
 }
-// Windows 2000 shell32.dll dialog #1063
+
+// Windows XP shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD_XP DIALOGEX 0, 0, 279, 146
+CAPTION "Windows"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 9, "MS UI Gothic", 0, 0, 128 // SHIFTJIS_CHARSET
+{
+    ICON 134, IDD_ICON, 7, 7, 18, 19, SS_REALSIZECONTROL
+    LTEXT "このファイルを開けません:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "ファイル:", IDC_STATIC, 36, 23, 26, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 65, 23, 208, 8, SS_NOPREFIX
+    LTEXT "このファイルを開くには、作成元のプログラム名が必要です。インターネットで自動的にプログラムを検索するか、またはコンピュータにあるプログラム一覧から手動で選択してください。", IDC_STATIC, 9, 39, 257, 24, NOT WS_GROUP
+    LTEXT "動作を選択してください。", IDC_STATIC, 9, 72, 139, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "Web サービスを使用して適切なプログラムを探す(&W)", IDD_WEBAUTOLOOKUP, 9, 86, 194, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "一覧からプログラムを選択する(&S)", IDD_OPENWITHLIST, 9, 99, 194, 10, WS_TABSTOP
+    DEFPUSHBUTTON "OK", IDOK, 156, 121, 50, 14
+    PUSHBUTTON "キャンセル", IDCANCEL, 211, 121, 50, 14
+}
+
+// Windows 2000/Me shell32.dll dialog #1063
 DLG_OPENAS_2K DIALOGEX 0, 0, 201, 175
 CAPTION "ファイルを開くアプリケーションの選択"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -204,7 +242,7 @@ FONT 9, "MS UI Gothic", 0, 0, 128
     PUSHBUTTON "その他(&T)...", IDD_OPENWITH_BROWSE, 144, 154, 50, 14
 }
 
-// Windows 2000 shell32.dll dialog #1070
+// Windows 2000/Me shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 215, 209
 CAPTION "ファイルを開くアプリケーションの選択"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -236,7 +274,8 @@ FONT 9, "MS UI Gothic", 0, 0, 128
     DEFPUSHBUTTON "OK", IDOK, 90, 154, 50, 14
     PUSHBUTTON "キャンセル", IDCANCEL, 144, 154, 50, 14
 }
-// Windows 98 shell32.dll dialog #1063
+
+// Windows 95/98/NT 4.0 shell32.dll dialog #1063
 DLG_OPENAS_NT4 DIALOG 0, 0, 238, 179
 CAPTION "ファイルを開くアプリケーションの選択"
 STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
@@ -251,7 +290,7 @@ FONT 9, "ＭＳ Ｐゴシック"
     PUSHBUTTON "その他(&T)...", IDD_OPENWITH_BROWSE, 181, 156, 50, 14
 }
 
-// Windows 98 shell32.dll dialog #1070
+// Windows 95/98/NT 4.0 shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 214, 209
 CAPTION "ファイルを開くアプリケーションの選択"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE

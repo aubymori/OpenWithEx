@@ -78,6 +78,25 @@ FONT 8, "MS Shell Dlg", 0, 0, 0
     PUSHBUTTON "Cancel", IDCANCEL, 318, 200, 50, 14
 }
 
+
+// Windows 7 shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD DIALOGEX 0, 0, 279, 146
+CAPTION "Windows"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Windows can't open this file:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "File:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    LTEXT "To open this file, Windows needs to know what program you want to use to open it. Windows can go online to look it up automatically, or you can manually select from a list of programs that are installed on your computer.", IDC_STATIC, 9, 39, 257, 24, NOT WS_GROUP
+    LTEXT "What do you want to do?", IDC_STATIC, 9, 72, 139, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "Use the &Web service to find the correct program", IDD_WEBAUTOLOOKUP, 9, 86, 194, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "&Select a program from a list of installed programs", IDD_OPENWITHLIST, 9, 99, 194, 10, WS_TABSTOP
+    DEFPUSHBUTTON "OK", IDOK, 156, 121, 50, 14
+    PUSHBUTTON "Cancel", IDCANCEL, 211, 121, 50, 14
+}
+
 // Windows Vista shell32.dll dialog #1063
 DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
 CAPTION "Open With"
@@ -188,7 +207,26 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
     PUSHBUTTON "Cancel", IDCANCEL, 194, 200, 50, 14
 }
-// Windows 2000 shell32.dll dialog #1063
+
+// Windows XP shell32.dll dialog #1091
+DLG_OPENAS_DOWNALOAD_XP DIALOGEX 0, 0, 279, 146
+CAPTION "Windows"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Windows cannot open this file:", IDC_STATIC, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "File:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    LTEXT "To open this file, Windows needs to know what program created it.  Windows can go online to look it up automatically, or you can manually select from a list of programs on your computer.", IDC_STATIC, 9, 39, 257, 24, NOT WS_GROUP
+    LTEXT "What do you want to do?", IDC_STATIC, 9, 72, 139, 8, NOT WS_GROUP
+    AUTORADIOBUTTON "Use the &Web service to find the appropriate program", IDD_WEBAUTOLOOKUP, 9, 86, 194, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "&Select the program from a list", IDD_OPENWITHLIST, 9, 99, 194, 10, WS_TABSTOP
+    DEFPUSHBUTTON "OK", IDOK, 156, 121, 50, 14
+    PUSHBUTTON "Cancel", IDCANCEL, 211, 121, 50, 14
+}
+
+// Windows 2000/Me shell32.dll dialog #1063
 DLG_OPENAS_2K DIALOGEX 0, 0, 201, 175
 CAPTION "Open With"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -204,7 +242,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     PUSHBUTTON "O&ther...", IDD_OPENWITH_BROWSE, 144, 154, 50, 14
 }
 
-// Windows 2000 shell32.dll dialog #1070
+// Windows 2000/Me shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 215, 209
 CAPTION "Open With..."
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
@@ -236,7 +274,8 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     DEFPUSHBUTTON "OK", IDOK, 90, 154, 50, 14
     PUSHBUTTON "Cancel", IDCANCEL, 144, 154, 50, 14
 }
-// Windows 98 shell32.dll dialog #1063
+
+// Windows 95/98/NT 4.0 shell32.dll dialog #1063
 DLG_OPENAS_NT4 DIALOG 0, 0, 212, 179
 CAPTION "Open With"
 STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
@@ -251,7 +290,7 @@ FONT 8, "MS Shell Dlg"
     PUSHBUTTON "O&ther...", IDD_OPENWITH_BROWSE, 155, 157, 50, 14
 }
 
-// Windows 98 shell32.dll dialog #1070
+// Windows 95/98/NT 4.0 shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 212, 209
 CAPTION "Open With"
 STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE

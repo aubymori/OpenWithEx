@@ -18,31 +18,112 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="openwithex.rc">
+    <ResourceCompile Include="res\openwithex.ar-SA.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex.en-US.rc">
+    <ResourceCompile Include="res\openwithex.bg-BG.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex.es-ES.rc">
+    <ResourceCompile Include="res\openwithex.cs-CZ.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex.ja-JP.rc">
+    <ResourceCompile Include="res\openwithex.da-DK.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex.ko-KR.rc">
+    <ResourceCompile Include="res\openwithex.de-DE.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex.pl-PL.rc">
+    <ResourceCompile Include="res\openwithex.el-GR.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex.pt-BR.rc">
+    <ResourceCompile Include="res\openwithex.en-US.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex.ru-RU.rc">
+    <ResourceCompile Include="res\openwithex.es-ES.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="openwithex.tr-TR.rc">
+    <ResourceCompile Include="res\openwithex.et-EE.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.fi-FI.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.fr-FR.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.he-IL.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.hr-HR.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.hu-HU.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.it-IT.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.ja-JP.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.ko-KR.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.lt-LT.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.lv-LV.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.nb-NO.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.nl-NL.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.pl-PL.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.pt-BR.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.pt-PT.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.ro-RO.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.ru-RU.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.sk-SK.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.sl-SI.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.sr-Latn-RS.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.sv-SE.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.th-TH.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.tr-TR.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.uk-UA.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.zh-CN.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="res\openwithex.zh-TW.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -156,9 +237,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="openwithex.rcconfig">
-      <Filter>Resource Files</Filter>
-    </Xml>
+    <Xml Include="res\openwithex.rcconfig" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defs\shcorep.def">
