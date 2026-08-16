@@ -17,6 +17,8 @@ CClassicOpenAsDlg::CClassicOpenAsDlg(COpenWithExUI *pOpenWithUI,
 void CClassicOpenAsDlg::OnInitDialog()
 {
     _hwndAppList = GetDlgItem(_hwnd, IDD_APPLIST);
+    SetWindowLongW(_hwndAppList, GWL_EXSTYLE, 
+            GetWindowLongW(_hwndAppList, GWL_EXSTYLE) | WS_EX_CLIENTEDGE);
 
     LVCOLUMNW lvcol = { 0 };
     lvcol.mask = LVCF_SUBITEM | LVCF_WIDTH;
