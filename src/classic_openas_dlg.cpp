@@ -25,7 +25,7 @@ void CClassicOpenAsDlg::OnInitDialog()
     lvcol.iSubItem = 0;
     RECT rc;
     GetClientRect(_hwndAppList, &rc);
-    lvcol.cx = rc.right - GetSystemMetrics(SM_CXVSCROLL) - 4 * GetSystemMetrics(SM_CXEDGE);
+    lvcol.cx = rc.right - _GetSystemMetrics(SM_CXVSCROLL) - 4 * _GetSystemMetrics(SM_CXEDGE);
     ListView_InsertColumn(_hwndAppList, 0, &lvcol);
 
     HIMAGELIST himl;
@@ -55,8 +55,12 @@ void CClassicOpenAsDlg::OnInitDialog()
 
     WCHAR szFormat[200];
     WCHAR szTemp[MAX_PATH + 200];
+    WCHAR szFileName[MAX_PATH];
     GetDlgItemTextW(_hwnd, IDD_TEXT, szFormat, 200);
-    swprintf_s(szTemp, szFormat, spszFileName.get());
+    GetClientRect(GetDlgItem(_hwnd, IDD_TEXT), &rc);
+    wcscpy_s(szFileName, spszFileName.get());
+    PathCompactPathW(NULL, szFileName, rc.right - 4 * _GetSystemMetrics(SM_CXBORDER));
+    swprintf_s(szTemp, szFormat, szFileName);
     SetDlgItemTextW(_hwnd, IDD_TEXT, szTemp);
 
     GetDlgItemTextW(_hwnd, IDD_DESCRIPTIONTEXT, szFormat, 200);
