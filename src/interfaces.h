@@ -174,6 +174,24 @@ IApplicationAssociationRegistrationInternal : IUnknown
 	STDMETHOD(TryGetHttpRelatedProgIds)(LPCWSTR, LPCWSTR, LPWSTR *, LPWSTR *) PURE;
 };
 
+MIDL_INTERFACE("C7225171-B9A7-4CF7-861F-85AB7BA3C5B2")
+IApplicationAssociationRegistrationInternal_8 : IUnknown
+{
+	STDMETHOD(ClearUserAssociations)() PURE;
+	STDMETHOD(SetProgIdAsDefault)(LPCWSTR, LPCWSTR, ASSOCIATIONTYPE) PURE;
+	STDMETHOD(SetAppAsDefault)(LPCWSTR, LPCWSTR, ASSOCIATIONTYPE) PURE;
+	STDMETHOD(SetAppAsDefaultAll)(LPCWSTR) PURE;
+	STDMETHOD(QueryAppIsDefault)(LPCWSTR, ASSOCIATIONTYPE, ASSOCIATIONLEVEL, LPCWSTR, int*) PURE;
+	STDMETHOD(QueryAppIsDefaultAll)(ASSOCIATIONLEVEL, LPCWSTR, int*) PURE;
+	STDMETHOD(QueryCurrentDefault)(LPCWSTR, ASSOCIATIONTYPE, ASSOCIATIONLEVEL, LPWSTR *) PURE;
+	STDMETHOD(GetDefaultBrowserInfo)(BROWSER_INFO_TYPE, LPWSTR *) PURE;
+	STDMETHOD(RestoreDefaultBrowserContractRegistration)() PURE;
+	STDMETHOD(IsBrowserAssociation)(LPCWSTR, int*) PURE;
+	STDMETHOD(ExportUserAssociations)(LPCWSTR) PURE;
+	STDMETHOD(ApplyUserAssociations)(LPCWSTR) PURE;
+	STDMETHOD(UpdateProtocolCapabilityCache)(LPCWSTR, int) PURE;
+};
+
 MIDL_INTERFACE("E1B15A0F-2139-44F2-8C6C-3D2CA890F9D9")
 IAssocHandlerWithCompanyName : IUnknown
 {

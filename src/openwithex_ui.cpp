@@ -799,16 +799,27 @@ HRESULT COpenWithExUI::_CreateAndShow()
 
 		bool fHasCommand = false;
 		ComPtr<IApplicationAssociationRegistrationInternal> spIAAR;
+		ComPtr<IApplicationAssociationRegistrationInternal_8> spIAAR_8;
 		hr = SHCreateAssociationRegistration(IID_PPV_ARGS(&spIAAR));
+		if (FAILED(hr))
+		{
+			hr = SHCreateAssociationRegistration(IID_PPV_ARGS(&spIAAR_8));
+		}
 		if (SUCCEEDED(hr) && !_fEmptyExt)
 		{
 			if (_openwithflags & IMMERSIVE_OPENWITH_PROTOCOL)
 			{
-				hr = spIAAR->QueryCurrentDefault(_spszTypeID.get(), AT_URLPROTOCOL, AL_EFFECTIVE, &_spszDefaultProgID);
+				if (spIAAR.Get())
+					hr = spIAAR->QueryCurrentDefault(_spszTypeID.get(), AT_URLPROTOCOL, AL_EFFECTIVE, &_spszDefaultProgID);
+				else
+					hr = spIAAR_8->QueryCurrentDefault(_spszTypeID.get(), AT_URLPROTOCOL, AL_EFFECTIVE, &_spszDefaultProgID);
 			}
 			else
 			{
-				hr = spIAAR->QueryCurrentDefault(_spszTypeID.get(), AT_FILEEXTENSION, AL_EFFECTIVE, &_spszDefaultProgID);
+				if (spIAAR.Get())
+					hr = spIAAR->QueryCurrentDefault(_spszTypeID.get(), AT_FILEEXTENSION, AL_EFFECTIVE, &_spszDefaultProgID);
+				else
+					hr = spIAAR_8->QueryCurrentDefault(_spszTypeID.get(), AT_FILEEXTENSION, AL_EFFECTIVE, &_spszDefaultProgID);
 			}
 
 			if (SUCCEEDED(hr))
