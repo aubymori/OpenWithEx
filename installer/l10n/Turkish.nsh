@@ -1,5 +1,5 @@
 !define LANG "Turkish"
 !insertmacro LANG_STRING STRING_NOT_X64 "OpenWithEx 32-bit işletim sistemlerini desteklememektedir."
-!insertmacro LANG_STRING STRING_NOT_WIN8 "OpenWithEx Windows 8 veya daha yüksek bir sürüm gerektirir."
+!insertmacro LANG_STRING STRING_NOT_WIN10 "OpenWithEx Windows 10 veya daha yüksek bir sürüm gerektirir."
 !insertmacro LANG_STRING STRING_CONFIG_SHORTCUT "OpenWithEx'i yapılandırın"
 !insertmacro LANG_STRING STRING_LANGS "Diller"

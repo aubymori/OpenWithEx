@@ -12,11 +12,7 @@ See [TRANSLATION.md](TRANSLATION.md).
 - Visual Studio 2022 with C++ desktop development workload
 
 To build OpenWithEx and its configurator, simply open OpenWithEx.sln and build the projects in the configurations you want.
-If you want to build the installer, you must build the following projects and configurations:
-
-- OpenWithEx, Release x64
-- OpenWithEx, Release x86
-- OpenWithExConfig, Release x64
+If you want to build the installer, you must build both OpenWithEx and the configurator as Release x64.
 
 ### Building the installer
 **Needed**:

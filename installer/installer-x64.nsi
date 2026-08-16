@@ -5,14 +5,10 @@
 
 !define VERSION "2.0.0"
 
-# The install path is hardcoded.
-# We need both a x64 and x86 OpenWith.exe and putting both
-# in Program Files won't work. Having two directory choices
-# would also be a mess.
-
 Unicode true
 Name "OpenWithEx"
 Outfile "build\OpenWithEx-${VERSION}-x64.exe"
+InstallDir "$PROGRAMFILES64\OpenWithEx"
 RequestExecutionLevel admin
 ManifestSupportedOS all
 
@@ -31,6 +27,7 @@ ManifestSupportedOS all
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE "..\LICENSE"
 !insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
 
@@ -66,9 +63,9 @@ Function .onInit
         Quit
     ${EndIf}
     
-    # Need at least Windows 8.
-    ${IfNot} ${AtLeastWin8}
-        MessageBox MB_OK|MB_ICONSTOP "$(STRING_NOT_WIN8)"
+    # Need at least Windows 10.
+    ${IfNot} ${AtLeastWin10}
+        MessageBox MB_OK|MB_ICONSTOP "$(STRING_NOT_WIN10)"
         Quit
     ${EndIf}
 FunctionEnd
@@ -78,33 +75,28 @@ Section "OpenWithEx" OpenWithEx
     SectionIn RO
 
     # Make sure install directories are clean
-    RMDir /r "$PROGRAMFILES64\OpenWithEx"
-    RMDir /r "$PROGRAMFILES32\OpenWithEx"
+    RMDir /r "$INSTDIR"
 
     # Install x86-64 files
-    SetOutPath "$PROGRAMFILES64\OpenWithEx"
-    WriteUninstaller "$PROGRAMFILES64\OpenWithEx\uninstall.exe"
+    SetOutPath "$INSTDIR"
+    WriteUninstaller "$INSTDIR\uninstall.exe"
     File "..\bin\Release-x64\OpenWith.exe"
     File "..\bin\Release-x64\config\OpenWithExConfig.exe"
-
-    # Install x86-32 files
-    SetOutPath "$PROGRAMFILES32\OpenWithEx"
-    File "..\bin\Release-Win32\OpenWith.exe"
 
     # Create configurator shortcut
     SetShellVarContext all
     CreateDirectory "$SMPROGRAMS\OpenWithEx"
     CreateShortCut "$SMPROGRAMS\OpenWithEx\$(STRING_CONFIG_SHORTCUT).lnk" \
-        "$PROGRAMFILES64\OpenWithEx\OpenWithExConfig.exe"
+        "$INSTDIR\OpenWithExConfig.exe"
     
     # Create Uninstall entry
     SetRegView 64
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenWithEx" \
                  "DisplayName" "OpenWithEx"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenWithEx" \
-                 "DisplayIcon" "$PROGRAMFILES64\OpenWithEx\OpenWith.exe,0"
+                 "DisplayIcon" "$INSTDIR\OpenWith.exe,0"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenWithEx" \
-                 "UninstallString" "$\"$PROGRAMFILES64\OpenWithEx\uninstall.exe$\""
+                 "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenWithEx" \
                  "Publisher" "aubymori"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenWithEx" \
@@ -119,26 +111,30 @@ Section "OpenWithEx" OpenWithEx
     AccessControl::SetRegKeyOwner HKCR "CLSID\{e44e9428-bdbc-4987-a099-40dc8fd255e7}\LocalServer32" $0
     AccessControl::GrantOnRegKey HKCR "CLSID\{e44e9428-bdbc-4987-a099-40dc8fd255e7}\LocalServer32" $0 FullAccess
     WriteRegExpandStr HKCR "CLSID\{e44e9428-bdbc-4987-a099-40dc8fd255e7}\LocalServer32" \
-        "" "$PROGRAMFILES64\OpenWithEx\OpenWith.exe"
+        "" "$INSTDIR\OpenWith.exe"
     AccessControl::SetRegKeyOwner HKCR "WOW6432Node\CLSID\{e44e9428-bdbc-4987-a099-40dc8fd255e7}\LocalServer32" $0
     AccessControl::GrantOnRegKey HKCR "WOW6432Node\CLSID\{e44e9428-bdbc-4987-a099-40dc8fd255e7}\LocalServer32" $0 FullAccess
     WriteRegExpandStr HKCR "WOW6432Node\CLSID\{e44e9428-bdbc-4987-a099-40dc8fd255e7}\LocalServer32" \
-        "" "$PROGRAMFILES32\OpenWithEx\OpenWith.exe"
+        "" "$INSTDIR\OpenWith.exe"
 SectionEnd
 
 !macro InstallLang lang
-    SetOutPath "$PROGRAMFILES64\OpenWithEx\${lang}"
+    SetOutPath "$INSTDIR\${lang}"
     File "..\bin\Release-x64\${lang}\OpenWith.exe.mui"
-    SetOutPath "$PROGRAMFILES32\OpenWithEx\${lang}"
-    File "..\bin\Release-Win32\${lang}\OpenWith.exe.mui"
 !macroend
 
 !macro InstallConfigLang lang
-    SetOutPath "$PROGRAMFILES64\OpenWithEx\${lang}"
+    SetOutPath "$INSTDIR\${lang}"
     File "..\bin\Release-x64\config\${lang}\OpenWithExConfig.exe.mui"
 !macroend
 
 SectionGroup "$(STRING_LANGS)"
+    Section "English (United States)"
+        SectionIn RO
+        !insertmacro InstallLang "en-US"
+        !insertmacro InstallConfigLang "en-US"
+    SectionEnd
+
     Section "العربية (المملكة العربية السعودية)"
         !insertmacro InstallLang "ar-SA"
     SectionEnd
@@ -161,12 +157,6 @@ SectionGroup "$(STRING_LANGS)"
 
     Section "Ελληνικά"
         !insertmacro InstallLang "el-GR"
-    SectionEnd
-
-    Section "English (United States)"
-        SectionIn RO
-        !insertmacro InstallLang "en-US"
-        !insertmacro InstallConfigLang "en-US"
     SectionEnd
 
     Section "Español"
@@ -291,8 +281,7 @@ SectionGroupEnd
 
 Section "Uninstall"
     # Delete files
-    RMDir /r "$PROGRAMFILES64\OpenWithEx"
-    RMDir /r "$PROGRAMFILES32\OpenWithEx"
+    RMDir /r "$INSTDIR"
 
     # Delete config shortcut
     SetShellVarContext all
