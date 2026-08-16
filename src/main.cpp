@@ -6,6 +6,9 @@
 
 HINSTANCE g_hinst = NULL;
 OPENWITHEX_STYLE g_style = OPENWITHEX_STYLE_VISTA;
+RTL_OSVERSIONINFOW g_osvi = { sizeof(g_osvi) };
+
+NTSYSAPI NTSTATUS RtlGetVersion(PRTL_OSVERSIONINFOW lpVersionInformation);
 
 int WINAPI wWinMain(
 	HINSTANCE hInstance,
@@ -15,6 +18,8 @@ int WINAPI wWinMain(
 )
 {
 	g_hinst = hInstance;
+
+	RtlGetVersion(&g_osvi);
 
 	CoInitialize(nullptr);
 

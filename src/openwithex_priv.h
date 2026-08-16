@@ -19,6 +19,7 @@ using namespace Microsoft::WRL;
 
 extern HINSTANCE g_hinst;
 extern OPENWITHEX_STYLE g_style;
+extern RTL_OSVERSIONINFOW g_osvi;
 
 enum IMMERSIVE_OPENWITH_FLAGS
 {
