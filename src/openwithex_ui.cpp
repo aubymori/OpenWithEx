@@ -26,6 +26,19 @@ constexpr GUID SID_QueryAssociationBroker =
 constexpr AHTYPE AHTYPE_PROGID_MASK =
 	static_cast<AHTYPE>(AHTYPE_PROGID | AHTYPE_CLASS_APPLICATION | AHTYPE_ANY_PROGID);
 
+constexpr DWORD WINDOWS_10_BUILD_1511 = 10586;
+constexpr DWORD WINDOWS_10_BUILD_1607 = 14393;
+constexpr DWORD WINDOWS_10_BUILD_1703 = 15063;
+constexpr DWORD WINDOWS_10_BUILD_1709 = 16299;
+constexpr DWORD WINDOWS_10_BUILD_1809 = 17763;
+constexpr DWORD WINDOWS_10_BUILD_1903 = 18362;
+
+bool IsWindows10BuildOrGreater(DWORD build)
+{
+	return g_osvi.dwMajorVersion > 10 ||
+		(g_osvi.dwMajorVersion == 10 && g_osvi.dwBuildNumber >= build);
+}
+
 HRESULT GenerateUserAssocChangeNotification()
 {
 	SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, nullptr, nullptr);
@@ -557,6 +570,45 @@ HRESULT SetDefaultAssociationForAssocHandler(LPCWSTR pszTypeID, IAssocHandler *p
 	return GenerateUserAssocChangeNotification();
 }
 
+HRESULT SetDefaultAssociationForAssocHandler1809(
+	LPCWSTR pszTypeID,
+	IAssocHandler *pah)
+{
+	ComPtr<IAssocHandlerInfo1809> handlerInfo;
+	RETURN_IF_FAILED(pah->QueryInterface(IID_PPV_ARGS(&handlerInfo)));
+
+	wil::unique_cotaskmem_string progID;
+	RETURN_IF_FAILED(handlerInfo->GetInternalProgID(&progID));
+	RETURN_IF_FAILED(SetUserChoiceAndHash(pszTypeID, progID.get()));
+	EnsurePerUserAssociationIdentifier(pszTypeID);
+	return GenerateUserAssocChangeNotification();
+}
+
+HRESULT MakeDefaultThroughAssocHandler(IAssocHandler *pah)
+{
+	if (!IsWindows10BuildOrGreater(WINDOWS_10_BUILD_1511))
+	{
+		ComPtr<IAssocHandlerMakeDefault81> makeDefault;
+		const HRESULT hr = pah->QueryInterface(IID_PPV_ARGS(&makeDefault));
+		if (FAILED(hr))
+		{
+			return pah->MakeDefault(nullptr);
+		}
+		return makeDefault->MakeDefaultPriv(0);
+	}
+
+	if (!IsWindows10BuildOrGreater(WINDOWS_10_BUILD_1703))
+	{
+		ComPtr<IAssocHandlerMakeDefault1511> makeDefault;
+		RETURN_IF_FAILED(pah->QueryInterface(IID_PPV_ARGS(&makeDefault)));
+		return makeDefault->MakeDefaultPriv(1);
+	}
+
+	ComPtr<IAssocHandlerMakeDefault1703> makeDefault;
+	RETURN_IF_FAILED(pah->QueryInterface(IID_PPV_ARGS(&makeDefault)));
+	return makeDefault->MakeDefaultPriv(1);
+}
+
 HRESULT FindExtensionInfoForAppUriHandlersCore(
 	LPCWSTR pszHost,
 	IAppUriExtensionInfoVectorView **extensions)
@@ -672,6 +724,23 @@ bool ShouldRegisteredAppUriHandlerBeDisabled(
 	};
 
 	return CountLabels(pszRegistered) >= CountLabels(pszSelected);
+}
+
+HRESULT MakeDefaultLegacyAppUriHandler(LPCWSTR pszHost, IAssocHandler *pah)
+{
+	ComPtr<IAppUrlDefaults> appUrlDefaults;
+	RETURN_IF_FAILED(CoCreateInstance(
+		CLSID_AppUrlDefaults,
+		nullptr,
+		CLSCTX_INPROC_SERVER,
+		IID_PPV_ARGS(&appUrlDefaults)));
+
+	ComPtr<IObjectWithProgID> objectWithProgID;
+	RETURN_IF_FAILED(pah->QueryInterface(IID_PPV_ARGS(&objectWithProgID)));
+
+	wil::unique_cotaskmem_string progID;
+	RETURN_IF_FAILED(objectWithProgID->GetProgID(&progID));
+	return appUrlDefaults->SetAppUrlChoice(progID.get(), pszHost, TRUE);
 }
 
 HRESULT MakeDefaultAppUriHandler(LPCWSTR pszHost, IAssocHandler *pah)
@@ -959,11 +1028,24 @@ HRESULT COpenWithExUI::_MakeDefault(IAssocHandler *pah)
 {
 	RETURN_HR_IF(E_INVALIDARG, !pah || !_spszTypeID);
 
-	if (_openwithflags & IMMERSIVE_OPENWITH_URL)
+	if ((_openwithflags & IMMERSIVE_OPENWITH_URL) &&
+		IsWindows10BuildOrGreater(WINDOWS_10_BUILD_1607))
 	{
-		return MakeDefaultAppUriHandler(_spszTypeID.get(), pah);
+		if (IsWindows10BuildOrGreater(WINDOWS_10_BUILD_1709))
+		{
+			return MakeDefaultAppUriHandler(_spszTypeID.get(), pah);
+		}
+		return MakeDefaultLegacyAppUriHandler(_spszTypeID.get(), pah);
 	}
 
+	if (!IsWindows10BuildOrGreater(WINDOWS_10_BUILD_1809))
+	{
+		return MakeDefaultThroughAssocHandler(pah);
+	}
+	if (!IsWindows10BuildOrGreater(WINDOWS_10_BUILD_1903))
+	{
+		return SetDefaultAssociationForAssocHandler1809(_spszTypeID.get(), pah);
+	}
 	return SetDefaultAssociationForAssocHandler(_spszTypeID.get(), pah);
 }
 

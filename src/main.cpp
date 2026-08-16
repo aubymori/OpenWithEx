@@ -4,11 +4,13 @@
 #include "openwithex_ui.h"
 #include <stdio.h>
 
+#pragma comment(lib, "ntdll.lib")
+
 HINSTANCE g_hinst = NULL;
 OPENWITHEX_STYLE g_style = OPENWITHEX_STYLE_VISTA;
 RTL_OSVERSIONINFOW g_osvi = { sizeof(g_osvi) };
 
-NTSYSAPI NTSTATUS RtlGetVersion(PRTL_OSVERSIONINFOW lpVersionInformation);
+EXTERN_C NTSYSAPI NTSTATUS NTAPI RtlGetVersion(PRTL_OSVERSIONINFOW lpVersionInformation);
 
 int WINAPI wWinMain(
 	HINSTANCE hInstance,
