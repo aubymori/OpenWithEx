@@ -1,0 +1,283 @@
+#pragma code_page(65001) // enable UTF-8
+
+#include "resource.h"
+
+LANGUAGE LANG_FINNISH, SUBLANG_FINNISH_FINLAND
+
+STRINGTABLE
+{
+    // Windows 7 shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED "Suositellut ohjelmat"
+    // Windows 7 shell32.dll string #29953
+    IDS_OPENWITH_OTHERS "Muut ohjelmat"
+    // Windows XP shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED_XP "Suositellut ohjelmat:"
+    // Windows XP shell32.dll string #29953
+    IDS_OPENWITH_OTHERS_XP "Muut ohjelmat:"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_PROGRAMSFILTER "Ohjelmat"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_ALLFILESFILTER "Kaikki tiedostot"
+    // Windows 7 shell32.dll string #9016
+    IDS_OPENAS "Avaa sovelluksessa..."
+    // Windows Vista shell32.dll string #9016
+    IDS_OPENAS_VISTA "Avaa sovelluksessa..."
+}
+
+// Windows 7 shell32.dll dialog #1063
+DLG_OPENAS DIALOGEX 0, 0, 375, 271
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Valitse sovellus, jossa haluat avata tiedoston:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Tiedosto:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 73, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "&Avaa tämäntyyppiset tiedostot aina valitussa sovelluksessa", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "&Selaa...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Jos haluttu ohjelma ei ole luettelossa tai tässä tietokoneessa, voit <A ID=""Browse"">etsiä ohjelmaa Internetistä</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Peruuta", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE DIALOGEX 0, 0, 375, 271
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Valitse sovellus, jossa haluat avata tiedoston:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Tiedosto:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 75, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "Tämäntyyppisten tiedostojen &kuvaus:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "&Avaa tämäntyyppiset tiedostot aina valitussa sovelluksessa", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "&Selaa...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Jos haluttu ohjelma ei ole luettelossa tai tässä tietokoneessa, voit <A ID=""Browse"">etsiä ohjelmaa Internetistä</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Peruuta", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL DIALOGEX 0, 0, 375, 220
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Valitse ohjelma, jossa haluat avata tämän protokollan:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Protokolla:", IDC_STATIC, 36, 23, 34, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "Käsittele tämä protokolla &aina valitulla ohjelmalla", IDD_MAKEASSOC, 6, 185, 202, 10
+    DEFPUSHBUTTON "OK", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Peruuta", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1063
+DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Valitse sovellus, jossa haluat avata tiedoston:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Tiedosto:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 73, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "&Avaa tämäntyyppiset tiedostot aina valitussa sovelluksessa", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "&Selaa...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Jos haluttu ohjelma ei ole luettelossa tai tässä tietokoneessa, voit <A ID=""Browse"">etsiä ohjelmaa Internetistä</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Peruuta", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Valitse sovellus, jossa haluat avata tiedoston:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Tiedosto:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 75, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "Tämäntyyppisten tiedostojen &kuvaus:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "&Avaa tämäntyyppiset tiedostot aina valitussa sovelluksessa", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "&Selaa...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Jos haluttu ohjelma ei ole luettelossa tai tässä tietokoneessa, voit <A ID=""Browse"">etsiä ohjelmaa Internetistä</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Peruuta", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL_VISTA DIALOGEX 0, 0, 375, 220
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Valitse ohjelma, jossa haluat avata tämän protokollan:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Protokolla:", IDC_STATIC, 36, 23, 34, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "Käsittele tämä protokolla &aina valitulla ohjelmalla", IDD_MAKEASSOC, 6, 185, 202, 10
+    DEFPUSHBUTTON "OK", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Peruuta", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1063
+DLG_OPENAS_XP DIALOGEX 0, 0, 260, 271
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Valitse sovellus, jossa haluat avata tiedoston:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Tiedosto:", IDC_STATIC, 36, 23, 33, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 72, 23, 196, 8, SS_NOPREFIX
+    GROUPBOX "&Ohjelmat", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "&Avaa tämäntyyppiset tiedostot aina valitussa sovelluksessa", IDD_MAKEASSOC, 18, 183, 202, 10
+    PUSHBUTTON "&Selaa...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "Jos haluttu ohjelma ei ole luettelossa tai tässä tietokoneessa, voit <A ID=""Browse"">etsiä ohjelmaa Webistä</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 16
+    DEFPUSHBUTTON "OK", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "Peruuta", IDCANCEL, 194, 251, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_XP DIALOGEX 0, 0, 260, 271
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Valitse sovellus, jossa haluat avata tiedoston:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Tiedosto:", IDC_STATIC, 36, 23, 32, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 198, 8, SS_NOPREFIX
+    GROUPBOX "&Ohjelmat", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 99, WS_EX_CLIENTEDGE
+    LTEXT "Tämäntyyppisten tiedostojen &kuvaus:", IDD_DESCRIPTIONTEXT, 18, 152, 195, 8
+    EDITTEXT IDD_DESCRIPTION, 18, 163, 205, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "&Avaa tämäntyyppiset tiedostot aina valitussa sovelluksessa", IDD_MAKEASSOC, 18, 183, 202, 10
+    PUSHBUTTON "&Selaa...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "Jos haluttu ohjelma ei ole luettelossa tai tässä tietokoneessa, voit <A ID=""Browse"">etsiä ohjelmaa Webistä</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 16
+    DEFPUSHBUTTON "OK", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "Peruuta", IDCANCEL, 194, 251, 50, 14
+}
+
+// Custom generated by an LLM for fi-FI; protocol variant based on DLG_OPENAS_XP
+DLG_OPENAS_PROTOCOL_XP DIALOGEX 0, 0, 260, 220
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Valitse sovellus, jossa haluat avata tämän protokollan:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Protokolla:", IDC_STATIC, 36, 23, 38, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 78, 23, 174, 8, SS_NOPREFIX
+    GROUPBOX "&Ohjelmat", IDC_STATIC, 6, 36, 245, 161
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "&Käytä aina valittua sovellusta tämän protokollan käsittelemiseen", IDD_MAKEASSOC, 18, 183, 234, 10
+    DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
+    PUSHBUTTON "Peruuta", IDCANCEL, 194, 200, 50, 14
+}
+// Windows 2000 shell32.dll dialog #1063
+DLG_OPENAS_2K DIALOGEX 0, 0, 248, 178
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Valitse sovellus, jossa haluat avata kohteen %s. \nJos luettelossa ei ole haluamaasi sovellusta, valitse Muu.", IDD_TEXT, 36, 7, 204, 31, NOT WS_GROUP
+    LTEXT "&Valitse sovellus, jota haluat käyttää:", IDC_STATIC, 36, 43, 158, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 54, 199, 80
+    AUTOCHECKBOX "&Avaa nämä tiedostot aina tässä sovelluksessa", IDD_MAKEASSOC, 36, 140, 169, 10
+    DEFPUSHBUTTON "OK", IDOK, 36, 158, 50, 14
+    PUSHBUTTON "Peruuta", IDCANCEL, 90, 158, 50, 14
+    PUSHBUTTON "&Muu...", IDD_OPENWITH_BROWSE, 144, 158, 50, 14
+}
+
+// Windows 2000 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 215, 209
+CAPTION "Avaa sovelluksessa..."
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20
+    LTEXT "Valitse sovellus, jossa haluat avata tiedoston %s. Jos luettelossa ei ole haluamaasi sovellusta, valitse Muu.", IDD_TEXT, 36, 7, 172, 27
+    LTEXT "Tämäntyyppisten tiedostojen &kuvaus:", IDD_DESCRIPTIONTEXT, 36, 39, 172, 8
+    EDITTEXT IDD_DESCRIPTION, 36, 50, 172, 14, ES_AUTOHSCROLL
+    LTEXT "&Valitse sovellus, jota haluat käyttää:", IDC_STATIC, 36, 70, 172, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 81, 172, 80
+    AUTOCHECKBOX "&Avaa nämä tiedostot aina tässä sovelluksessa", IDD_MAKEASSOC, 36, 166, 172, 10
+    DEFPUSHBUTTON "OK", IDOK, 50, 188, 50, 14
+    PUSHBUTTON "Peruuta", IDCANCEL, 104, 188, 50, 14
+    PUSHBUTTON "&Muu...", IDD_OPENWITH_BROWSE, 158, 188, 50, 14
+}
+
+// Custom generated by an LLM for fi-FI; protocol variant based on DLG_OPENAS_2K
+DLG_OPENAS_PROTOCOL_2K DIALOGEX 0, 0, 248, 178
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Napsauta sovellusta, jota haluat käyttää protokollan %s avaamiseen.", IDD_TEXT, 36, 7, 204, 31, NOT WS_GROUP
+    LTEXT "&Valitse sovellus, jota haluat käyttää:", IDC_STATIC, 36, 43, 158, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 54, 199, 80
+    AUTOCHECKBOX "&Käytä aina tätä sovellusta tämän protokollan käsittelemiseen", IDD_MAKEASSOC, 36, 140, 169, 10
+    DEFPUSHBUTTON "OK", IDOK, 90, 158, 50, 14
+    PUSHBUTTON "Peruuta", IDCANCEL, 144, 158, 50, 14
+}
+// Windows 98 shell32.dll dialog #1063
+DLG_OPENAS_NT4 DIALOG 0, 0, 220, 188
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "&Valitse ohjelma, jota haluat käyttää:", IDC_STATIC, 7, 32, 205, 10
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 42, 205, 78
+    LTEXT "Valitse ohjelma, jota haluat käyttää tiedoston ""%s"" avaamiseen.\nJos haluamasi ohjelma ei ole luettelossa, valitse Muu.", IDD_TEXT, 7, 3, 205, 24, NOT WS_GROUP
+    AUTOCHECKBOX "&Käytä aina tätä ohjelmaa tämän tiedoston avaamiseen", IDD_MAKEASSOC, 7, 131, 198, 10
+    DEFPUSHBUTTON "OK", IDOK, 50, 169, 50, 14, WS_DISABLED
+    PUSHBUTTON "Peruuta", IDCANCEL, 104, 169, 50, 14
+    PUSHBUTTON "&Muu...", IDD_OPENWITH_BROWSE, 158, 169, 54, 14
+}
+
+// Windows 98 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 214, 208
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "Valitse ohjelma, jota haluat käyttää tiedoston ""%s"" avaamiseen.\nJos haluamasi ohjelma ei ole luettelossa, valitse Muu.", IDD_TEXT, 10, 4, 198, 39, NOT WS_GROUP
+    LTEXT "&Tiedostojen ""%s"" kuvaus:", IDD_DESCRIPTIONTEXT, 10, 44, 169, 8
+    EDITTEXT IDD_DESCRIPTION, 10, 55, 197, 14, ES_AUTOHSCROLL
+    LTEXT "&Valitse ohjelma, jota haluat käyttää:", IDC_STATIC, 10, 74, 188, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 10, 86, 196, 78
+    AUTOCHECKBOX "&Käytä aina tätä ohjelmaa tämän tiedoston avaamiseen", IDD_MAKEASSOC, 10, 169, 198, 10
+    DEFPUSHBUTTON "OK", IDOK, 37, 185, 54, 14, WS_DISABLED
+    PUSHBUTTON "Peruuta", IDCANCEL, 95, 185, 54, 14
+    PUSHBUTTON "&Muu...", IDD_OPENWITH_BROWSE, 152, 185, 54, 14
+}
+
+// Custom generated by an LLM for fi-FI; protocol variant based on DLG_OPENAS_NT4
+DLG_OPENAS_PROTOCOL_NT4 DIALOG 0, 0, 232, 188
+CAPTION "Avaa sovelluksessa"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "&Valitse ohjelma, jota haluat käyttää:", IDC_STATIC, 7, 32, 217, 10
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 42, 217, 78
+    LTEXT "Napsauta ohjelmaa, jota haluat käyttää protokollan ""%s"" avaamiseen.", IDD_TEXT, 7, 3, 217, 24, NOT WS_GROUP
+    AUTOCHECKBOX "&Käytä aina tätä ohjelmaa tämän protokollan käsittelemiseen", IDD_MAKEASSOC, 7, 131, 210, 10
+    DEFPUSHBUTTON "OK", IDOK, 120, 169, 50, 14, WS_DISABLED
+    PUSHBUTTON "Peruuta", IDCANCEL, 174, 169, 50, 14
+}

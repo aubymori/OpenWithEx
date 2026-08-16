@@ -1,0 +1,283 @@
+#pragma code_page(65001) // enable UTF-8
+
+#include "resource.h"
+
+LANGUAGE LANG_SWEDISH, SUBLANG_SWEDISH
+
+STRINGTABLE
+{
+    // Windows 7 shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED "Rekommenderade program"
+    // Windows 7 shell32.dll string #29953
+    IDS_OPENWITH_OTHERS "Andra program"
+    // Windows XP shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED_XP "Rekommenderade program:"
+    // Windows XP shell32.dll string #29953
+    IDS_OPENWITH_OTHERS_XP "Andra program:"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_PROGRAMSFILTER "Program"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_ALLFILESFILTER "Alla filer"
+    // Windows 7 shell32.dll string #9016
+    IDS_OPENAS "Öppna med..."
+    // Windows Vista shell32.dll string #9016
+    IDS_OPENAS_VISTA "Öppna med..."
+}
+
+// Windows 7 shell32.dll dialog #1063
+DLG_OPENAS DIALOGEX 0, 0, 375, 271
+CAPTION "Öppna med"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Markera det program som du vill använda för att öppna den här filen:", IDD_TEXT, 36, 7, 292, 8, NOT WS_GROUP
+    LTEXT "Fil:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "&Använd alltid detta program för att öppna den här filtypen", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "&Bläddra...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Om det program du vill använda inte finns i listan eller på din dator kan du <A ID=""Browse"">söka efter programmet på Internet</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE DIALOGEX 0, 0, 375, 271
+CAPTION "Öppna med"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Markera det program som du vill använda för att öppna den här filen:", IDD_TEXT, 36, 7, 258, 8, NOT WS_GROUP
+    LTEXT "Fil:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "&Ange en beskrivning som du vill använda för den här sortens fil:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "An&vänd alltid detta program för att öppna den här filtypen", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "&Bläddra...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Om det program du vill använda inte finns i listan eller på din dator kan du <A ID=""Browse"">söka efter programmet på Internet</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL DIALOGEX 0, 0, 375, 220
+CAPTION "Öppna med"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Välj programmet som du vill använda för att öppna det här protokollet:", IDD_TEXT, 36, 7, 249, 8, NOT WS_GROUP
+    LTEXT "Protokoll:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "&Använd alltid det markerade programmet för att hantera det här protokollet", IDD_MAKEASSOC, 6, 185, 272, 10
+    DEFPUSHBUTTON "OK", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1063
+DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Öppna med"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Markera det program som du vill använda för att öppna den här filen:", IDD_TEXT, 36, 7, 292, 8, NOT WS_GROUP
+    LTEXT "Fil:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "&Använd alltid detta program för att öppna den här filtypen", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "&Bläddra...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Om det program du vill använda inte finns i listan eller på din dator kan du <A ID=""Browse"">söka efter programmet på Internet</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Öppna med"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Markera det program som du vill använda för att öppna den här filen:", IDD_TEXT, 36, 7, 258, 8, NOT WS_GROUP
+    LTEXT "Fil:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "&Ange en beskrivning som du vill använda för den här sortens fil:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "An&vänd alltid detta program för att öppna den här filtypen", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "&Bläddra...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Om det program du vill använda inte finns i listan eller på din dator kan du <A ID=""Browse"">söka efter programmet på Internet</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL_VISTA DIALOGEX 0, 0, 375, 220
+CAPTION "Öppna med"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Välj programmet som du vill använda för att öppna det här protokollet:", IDD_TEXT, 36, 7, 249, 8, NOT WS_GROUP
+    LTEXT "Protokoll:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "&Använd alltid det markerade programmet för att hantera det här protokollet", IDD_MAKEASSOC, 6, 185, 272, 10
+    DEFPUSHBUTTON "OK", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1063
+DLG_OPENAS_XP DIALOGEX 0, 0, 260, 271
+CAPTION "Öppna med"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Markera det program som du vill använda för att öppna den här filen:", IDD_TEXT, 33, 3, 213, 16, NOT WS_GROUP
+    LTEXT "Fil:", IDC_STATIC, 33, 25, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 57, 25, 208, 8, SS_NOPREFIX
+    GROUPBOX "&Program", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "&Använd alltid detta program för att öppna den här filtypen", IDD_MAKEASSOC, 15, 183, 227, 10
+    PUSHBUTTON "&Bläddra...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "Om det program du vill använda inte finns i listan eller på din dator kan du <A ID=""Browse"">söka efter programmet på Internet</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 16
+    DEFPUSHBUTTON "OK", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 194, 251, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_XP DIALOGEX 0, 0, 260, 271
+CAPTION "Öppna med"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Markera det program som du vill använda för att öppna den här filen:", IDD_TEXT, 36, 7, 223, 10, NOT WS_GROUP
+    LTEXT "Fil:", IDC_STATIC, 36, 25, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 190, 8, SS_NOPREFIX
+    GROUPBOX "&Program", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 99, WS_EX_CLIENTEDGE
+    LTEXT "&Ange en beskrivning som du vill använda för den här sortens fil:", IDD_DESCRIPTIONTEXT, 18, 152, 231, 8
+    EDITTEXT IDD_DESCRIPTION, 18, 163, 205, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "An&vänd alltid detta program för att öppna den här filtypen", IDD_MAKEASSOC, 18, 183, 232, 10
+    PUSHBUTTON "&Bläddra...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "Om det program du vill använda inte finns i listan eller på din dator kan du <A ID=""Browse"">söka efter programmet på Internet</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 16
+    DEFPUSHBUTTON "OK", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 194, 251, 50, 14
+}
+
+// Custom generated by an LLM for sv-SE; protocol variant based on DLG_OPENAS_XP
+DLG_OPENAS_PROTOCOL_XP DIALOGEX 0, 0, 260, 220
+CAPTION "Öppna med"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Markera det program som du vill använda för att öppna det här protokollet:", IDD_TEXT, 33, 3, 213, 16, NOT WS_GROUP
+    LTEXT "Protokoll:", IDC_STATIC, 33, 25, 34, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 71, 25, 181, 8, SS_NOPREFIX
+    GROUPBOX "&Program", IDC_STATIC, 6, 36, 245, 161
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "&Använd alltid detta program för att öppna det här protokollet", IDD_MAKEASSOC, 15, 183, 237, 10
+    DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 194, 200, 50, 14
+}
+// Windows 2000 shell32.dll dialog #1063
+DLG_OPENAS_2K DIALOGEX 0, 0, 226, 172
+CAPTION "Öppna med"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Markera det program som du vill använda för att öppna %s.\nKlicka på Annat om programmet inte finns i listan.", IDD_TEXT, 36, 7, 178, 27, NOT WS_GROUP
+    LTEXT "&Markera det program du vill använda:", IDC_STATIC, 36, 39, 158, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 179, 80
+    AUTOCHECKBOX "&Använd alltid detta program för att öppna dessa filer", IDD_MAKEASSOC, 36, 136, 185, 10
+    DEFPUSHBUTTON "OK", IDOK, 36, 154, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 90, 154, 50, 14
+    PUSHBUTTON "A&nnat...", IDD_OPENWITH_BROWSE, 144, 154, 50, 14
+}
+
+// Windows 2000 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 220, 210
+CAPTION "Öppna med..."
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20
+    LTEXT "Markera det program som du vill använda för att öppna %s.\nKlicka på Annat om programmet inte finns i listan.", IDD_TEXT, 36, 7, 175, 27
+    LTEXT "&Beskrivning av filer av den här typen:", IDD_DESCRIPTIONTEXT, 36, 39, 172, 8
+    EDITTEXT IDD_DESCRIPTION, 36, 50, 177, 14, ES_AUTOHSCROLL
+    LTEXT "&Markera det program du vill använda:", IDC_STATIC, 36, 70, 172, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 81, 177, 80
+    AUTOCHECKBOX "&Använd alltid detta program för att öppna dessa filer", IDD_MAKEASSOC, 36, 166, 183, 10
+    DEFPUSHBUTTON "OK", IDOK, 55, 188, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 109, 188, 50, 14
+    PUSHBUTTON "A&nnat...", IDD_OPENWITH_BROWSE, 163, 188, 50, 14
+}
+
+// Custom generated by an LLM for sv-SE; protocol variant based on DLG_OPENAS_2K
+DLG_OPENAS_PROTOCOL_2K DIALOGEX 0, 0, 226, 172
+CAPTION "Öppna med"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Markera det program som du vill använda för att öppna protokollet %s.", IDD_TEXT, 36, 7, 178, 27, NOT WS_GROUP
+    LTEXT "&Markera det program du vill använda:", IDC_STATIC, 36, 39, 158, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 179, 80
+    AUTOCHECKBOX "&Använd alltid detta program för att öppna det här protokollet", IDD_MAKEASSOC, 36, 136, 185, 10
+    DEFPUSHBUTTON "OK", IDOK, 90, 154, 50, 14
+    PUSHBUTTON "Avbryt", IDCANCEL, 144, 154, 50, 14
+}
+// Windows 98 shell32.dll dialog #1063
+DLG_OPENAS_NT4 DIALOG 0, 0, 212, 179
+CAPTION "Öppna med"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "&Markera det program du vill använda:", IDC_STATIC, 7, 36, 169, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 46, 197, 78
+    LTEXT "Markera det program som du vill använda för att öppna filen %s.\nKlicka på Annat om programmet inte finns i listan.", IDD_TEXT, 7, 7, 182, 24, NOT WS_GROUP
+    AUTOCHECKBOX "&Använd alltid detta program för att öppna den här filtypen", IDD_MAKEASSOC, 7, 131, 198, 10
+    DEFPUSHBUTTON "OK", IDOK, 27, 157, 50, 15, WS_DISABLED
+    PUSHBUTTON "Avbryt", IDCANCEL, 81, 157, 50, 15
+    PUSHBUTTON "A&nnat...", IDD_OPENWITH_BROWSE, 135, 157, 50, 15
+}
+
+// Windows 98 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 212, 209
+CAPTION "Öppna med"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "Markera det program som du vill använda för att öppna filen %s.\nKlicka på Annat om programmet inte finns i listan.", IDD_TEXT, 7, 7, 162, 24, NOT WS_GROUP
+    LTEXT "&Beskrivning av %s-filer:", IDD_DESCRIPTIONTEXT, 7, 35, 169, 8
+    EDITTEXT IDD_DESCRIPTION, 7, 45, 197, 14, ES_AUTOHSCROLL
+    LTEXT "&Markera det program du vill använda:", IDC_STATIC, 7, 66, 169, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 76, 197, 78
+    AUTOCHECKBOX "&Använd alltid detta program för att öppna den här filtypen", IDD_MAKEASSOC, 7, 161, 198, 10
+    DEFPUSHBUTTON "OK", IDOK, 47, 187, 50, 15, WS_DISABLED
+    PUSHBUTTON "Avbryt", IDCANCEL, 101, 187, 50, 15
+    PUSHBUTTON "A&nnat...", IDD_OPENWITH_BROWSE, 155, 187, 50, 15
+}
+
+// Custom generated by an LLM for sv-SE; protocol variant based on DLG_OPENAS_NT4
+DLG_OPENAS_PROTOCOL_NT4 DIALOG 0, 0, 232, 179
+CAPTION "Öppna med"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "&Markera det program du vill använda:", IDC_STATIC, 7, 36, 189, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 46, 217, 78
+    LTEXT "Markera det program som du vill använda för att öppna protokollet %s.", IDD_TEXT, 7, 7, 202, 24, NOT WS_GROUP
+    AUTOCHECKBOX "&Använd alltid detta program för att öppna det här protokollet", IDD_MAKEASSOC, 7, 131, 218, 10
+    DEFPUSHBUTTON "OK", IDOK, 101, 157, 50, 15, WS_DISABLED
+    PUSHBUTTON "Avbryt", IDCANCEL, 155, 157, 50, 15
+}

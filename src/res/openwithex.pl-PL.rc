@@ -6,298 +6,278 @@ LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
 
 STRINGTABLE
 {
-	IDS_OPENWITH_RECOMMENDED     "Zalecane programy" // shell32 6000/7600 resource #29952
-	IDS_OPENWITH_OTHERS          "Inne programy"       // shell32 6000/7600 resource #29953
-	IDS_OPENWITH_RECOMMENDED_XP  "Zalecane programy:" // shell32 2600/3790 resource #29952
-	IDS_OPENWITH_OTHERS_XP       "Inne programy:"       // shell32 2600/3790 resource #29953
-	IDS_PROGRAMSFILTER           "Inne programy"  // Broken up from shell32 7600 resource #9014
-	IDS_ALLFILESFILTER           "Wszystkie pliki" // Broken up from shell32 7600 resource #9014
-	IDS_OPENAS                   "Otwieranie za pomocą" // shell32 7600 resource #9016
-	IDS_OPENAS_VISTA             "Otwieranie za pomocą..." // shell32 2600/3790/6000 resource #9016
+    // Windows 7 shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED "Zalecane programy"
+    // Windows 7 shell32.dll string #29953
+    IDS_OPENWITH_OTHERS "Inne programy"
+    // Windows XP shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED_XP "Zalecane programy:"
+    // Windows XP shell32.dll string #29953
+    IDS_OPENWITH_OTHERS_XP "Inne programy:"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_PROGRAMSFILTER "Programy"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_ALLFILESFILTER "Wszystkie pliki"
+    // Windows 7 shell32.dll string #9016
+    IDS_OPENAS "Otwieranie za pomocą..."
+    // Windows Vista shell32.dll string #9016
+    IDS_OPENAS_VISTA "Otwieranie za pomocą..."
 }
 
-// shell32 7600 resource #1063
+// Windows 7 shell32.dll dialog #1063
 DLG_OPENAS DIALOGEX 0, 0, 375, 271
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Otwieranie za pomocą"
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
-FONT 8, "MS Shell Dlg"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
 {
-	CONTROL 0, IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
-		CONTROL "Wybierz program, kt\xF3rego chcesz użyć do otwarcia tego pliku:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8
-		CONTROL "Plik:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 20, 8
-		CONTROL "", IDD_FILE_TEXT, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 60, 23, 208, 8
-		CONTROL "", IDD_APPLIST, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
-		CONTROL "&Zawsze używaj wybranego programu do otwierania tego typu plik\xF3w", IDD_MAKEASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 211, 262, 10
-		CONTROL "Prz&eglądaj...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 211, 50, 14
-		CONTROL "Jeśli potrzebnego programu nie ma na liście ani na tym komputerze, możesz <A ID=""Browse"">poszukać odpowiedniego programu w sieci Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 230, 359, 16
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 264, 251, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 251, 50, 14
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Wybierz program, którego chcesz użyć do otwarcia tego pliku:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Plik:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "&Zawsze używaj wybranego programu do otwierania tego typu plików", IDD_MAKEASSOC, 6, 211, 262, 10
+    PUSHBUTTON "Prz&eglądaj...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Jeśli potrzebnego programu nie ma na liście ani na tym komputerze, możesz <A ID=""Browse"">poszukać odpowiedniego programu w sieci Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 318, 251, 50, 14
 }
 
-// shell32 7600 resource #1070
+// Windows 7 shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE DIALOGEX 0, 0, 375, 271
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Otwieranie za pomocą"
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
-FONT 8, "MS Shell Dlg"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
 {
-	CONTROL 0, IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 20, 20
-		CONTROL "Wybierz program, kt\xF3rego chcesz użyć do otwarcia tego pliku:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8
-		CONTROL "Plik:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 20, 8
-		CONTROL "", IDD_FILE_TEXT, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 60, 23, 208, 8
-		CONTROL "", IDD_APPLIST, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
-		CONTROL "&Wpisz opis, kt\xF3rego chcesz używać dla tego typu plik\xF3w:", 13576, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 6, 182, 361, 8
-		CONTROL "", IDD_DESCRIPTION, EDIT, ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 6, 193, 346, 14
-		CONTROL "&Zawsze używaj wybranego programu do otwierania tego typu plik\xF3w", IDD_MAKEASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 211, 234, 10
-		CONTROL "Prz&eglądaj...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 211, 50, 14
-		CONTROL "Jeśli potrzebnego programu nie ma na liście ani na tym komputerze, możesz <A ID=""Browse"">poszukać odpowiedniego programu w si>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 230, 359, 16
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 264, 251, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 251, 50, 14
+    ICON 134, IDD_ICON, 7, 7, 20, 20, SS_REALSIZECONTROL
+    LTEXT "Wybierz program, którego chcesz użyć do otwarcia tego pliku:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Plik:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "&Wpisz opis, którego chcesz używać dla tego typu plików:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "&Zawsze używaj wybranego programu do otwierania tego typu plików", IDD_MAKEASSOC, 6, 211, 234, 10
+    PUSHBUTTON "Prz&eglądaj...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Jeśli potrzebnego programu nie ma na liście ani na tym komputerze, możesz <A ID=""Browse"">poszukać odpowiedniego programu w sieci Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 318, 251, 50, 14
 }
 
-// shell32 7600 resource #1072
+// Windows 7 shell32.dll dialog #1072
 DLG_OPENAS_PROTOCOL DIALOGEX 0, 0, 375, 220
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Otwieranie za pomocą"
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
-FONT 8, "MS Shell Dlg"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
 {
-	CONTROL 0, IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
-		CONTROL "Wybierz program, kt\xF3rego chcesz użyć do otwarcia tego protokołu:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 220, 8
-		CONTROL "Protok\xF3ł:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 30, 8
-		CONTROL "", IDD_FILE_TEXT, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 70, 23, 208, 8
-		CONTROL "", IDD_APPLIST, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
-		CONTROL "&Zawsze korzystaj z wybranego programu do obsługi tego protokołu", IDD_MAKEASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 185, 234, 10
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 264, 200, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 318, 200, 50, 14
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Wybierz program, którego chcesz użyć do otwarcia tego protokołu:", IDD_TEXT, 36, 7, 220, 8, NOT WS_GROUP
+    LTEXT "Protokół:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "&Zawsze korzystaj z wybranego programu do obsługi tego protokołu", IDD_MAKEASSOC, 6, 185, 234, 10
+    DEFPUSHBUTTON "OK", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 318, 200, 50, 14
 }
 
-// shell32 2600/3790 resource #1063
+// Windows Vista shell32.dll dialog #1063
+DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Otwieranie za pomocą"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Wybierz program, którego chcesz użyć do otwarcia tego pliku:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Plik:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "&Zawsze używaj wybranego programu do otwierania tego typu plików", IDD_MAKEASSOC, 6, 211, 262, 10
+    PUSHBUTTON "Prz&eglądaj...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Jeśli potrzebnego programu nie ma na liście ani na tym komputerze, możesz <A ID=""Browse"">poszukać odpowiedniego programu w sieci Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Otwieranie za pomocą"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20, SS_REALSIZECONTROL
+    LTEXT "Wybierz program, którego chcesz użyć do otwarcia tego pliku:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Plik:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "&Wpisz opis, którego chcesz używać dla tego typu plików:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "&Zawsze używaj wybranego programu do otwierania tego typu plików", IDD_MAKEASSOC, 6, 211, 234, 10
+    PUSHBUTTON "Prz&eglądaj...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Jeśli potrzebnego programu nie ma na liście ani na tym komputerze, możesz <A ID=""Browse"">poszukać odpowiedniego programu w sieci Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL_VISTA DIALOGEX 0, 0, 375, 220
+CAPTION "Otwieranie za pomocą"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Wybierz program, którego chcesz użyć do otwarcia tego protokołu:", IDD_TEXT, 36, 7, 220, 8, NOT WS_GROUP
+    LTEXT "Protokół:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "&Zawsze korzystaj z wybranego programu do obsługi tego protokołu", IDD_MAKEASSOC, 6, 185, 234, 10
+    DEFPUSHBUTTON "OK", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1063
 DLG_OPENAS_XP DIALOGEX 0, 0, 260, 271
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Otwieranie za pomocą"
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
-FONT 8, "MS Shell Dlg"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
 {
-	CONTROL 0, IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
-		CONTROL "Wybierz program, kt\xF3rego chcesz użyć do otwarcia tego pliku:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 215, 9
-		CONTROL "Plik:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 20, 8
-		CONTROL "", IDD_FILE_TEXT, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 60, 23, 192, 8
-		CONTROL "&Programy", -1, BUTTON, BS_GROUPBOX | WS_CHILD | WS_VISIBLE, 6, 36, 248, 181
-		CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 49, 230, 129, TVS_EX_DIMMEDCHECKBOXES
-		CONTROL "&Zawsze używaj wybranego programu do otwierania tego typu plik\xF3w", IDD_MAKEASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 183, 229, 10
-		CONTROL "Prz&eglądaj...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 196, 52, 14
-		CONTROL "Jeśli potrzebnego programu nie ma na licie ani na tym komputerze, możesz <A ID=""Browse"">poszukać odpowiedniego programu w sieci Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 222, 244, 16
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 251, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 251, 50, 14
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Wybierz program, którego chcesz użyć do otwarcia tego pliku:", IDD_TEXT, 36, 7, 215, 9, NOT WS_GROUP
+    LTEXT "Plik:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 192, 8, SS_NOPREFIX
+    GROUPBOX "&Programy", IDC_STATIC, 6, 36, 248, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 230, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "&Zawsze używaj wybranego programu do otwierania tego typu plików", IDD_MAKEASSOC, 18, 183, 229, 10
+    PUSHBUTTON "Prz&eglądaj...", IDD_OPENWITH_BROWSE, 194, 196, 52, 14
+    CONTROL "Jeśli potrzebnego programu nie ma na liście ani na tym komputerze, możesz <A ID=""Browse"">poszukać odpowiedniego programu w sieci Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 244, 16
+    DEFPUSHBUTTON "OK", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 194, 251, 50, 14
 }
 
-// shell32 2600/3790 resource #1070
+// Windows XP shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_XP DIALOGEX 0, 0, 260, 271
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Otwieranie za pomocą"
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
-FONT 8, "MS Shell Dlg"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
 {
-	CONTROL 0, IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 20, 20
-		CONTROL "Wybierz program, kt\xF3rego chcesz użyć do otwarcia tego pliku:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 209, 10
-		CONTROL "Plik:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 20, 8
-		CONTROL "", IDD_FILE_TEXT, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 60, 23, 192, 8
-		CONTROL "&Programy", -1, BUTTON, BS_GROUPBOX | WS_CHILD | WS_VISIBLE, 6, 36, 247, 181
-		CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 49, 225, 99, TVS_EX_DIMMEDCHECKBOXES
-		CONTROL "&Wpisz opis, kt\xF3rego chcesz używać dla tego typu plik\xF3w:", 13576, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 18, 152, 195, 8
-		CONTROL "", IDD_DESCRIPTION, EDIT, ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 18, 163, 230, 14
-		CONTROL "&Zawsze używaj wybranego programu do otwierania tego typu plik\xF3w", IDD_MAKEASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 183, 229, 10
-		CONTROL "Prz&eglądaj...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 196, 50, 14
-		CONTROL "Jeśli potrzebnego programu nie ma na liście ani na tym komputerze, możesz <A ID=""Browse"">poszukać odpowiedniego programu w sieci Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 222, 244, 16
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 251, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 251, 50, 14
+    ICON 134, IDD_ICON, 7, 7, 20, 20, SS_REALSIZECONTROL
+    LTEXT "Wybierz program, którego chcesz użyć do otwarcia tego pliku:", IDD_TEXT, 36, 7, 209, 10, NOT WS_GROUP
+    LTEXT "Plik:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 192, 8, SS_NOPREFIX
+    GROUPBOX "&Programy", IDC_STATIC, 6, 36, 247, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 230, 99, WS_EX_CLIENTEDGE
+    LTEXT "&Wpisz opis, którego chcesz używać dla tego typu plików:", IDD_DESCRIPTIONTEXT, 18, 152, 195, 8
+    EDITTEXT IDD_DESCRIPTION, 18, 163, 230, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "&Zawsze używaj wybranego programu do otwierania tego typu plików", IDD_MAKEASSOC, 18, 183, 229, 10
+    PUSHBUTTON "Prz&eglądaj...", IDD_OPENWITH_BROWSE, 196, 196, 50, 14
+    CONTROL "Jeśli potrzebnego programu nie ma na liście ani na tym komputerze, możesz <A ID=""Browse"">poszukać odpowiedniego programu w sieci Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 244, 16
+    DEFPUSHBUTTON "OK", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 194, 251, 50, 14
 }
 
-// Custom; XP did not support protocols.
-DLG_OPENAS_PROTOCOL_XP DIALOGEX 0, 0, 260, 226
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
+// Custom generated by an LLM for pl-PL; protocol variant based on DLG_OPENAS_XP
+DLG_OPENAS_PROTOCOL_XP DIALOGEX 0, 0, 260, 220
 CAPTION "Otwieranie za pomocą"
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
-FONT 8, "MS Shell Dlg"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
 {
-	CONTROL 0, IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
-		CONTROL "Wybierz program, kt\xF3rego chcesz użyć do otwarcia tego protokołu:", 12291, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8
-		CONTROL "Protokół:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 30, 8
-		CONTROL "", IDD_FILE_TEXT, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 70, 23, 208, 8
-		CONTROL "&Programy", -1, BUTTON, BS_GROUPBOX | WS_CHILD | WS_VISIBLE, 6, 36, 245, 164
-		CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 49, 225, 129, TVS_EX_DIMMEDCHECKBOXES
-		CONTROL "&Zawsze korzystaj z wybranego programu do obsługi tego protokołu", IDD_MAKEASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 183, 229, 10
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 206, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 194, 206, 50, 14
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Wybierz program, którego chcesz użyć do otwarcia tego protokołu:", IDD_TEXT, 36, 7, 215, 9, NOT WS_GROUP
+    LTEXT "Protokół:", IDC_STATIC, 36, 23, 33, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 73, 23, 179, 8, SS_NOPREFIX
+    GROUPBOX "&Programy", IDC_STATIC, 6, 36, 248, 161
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 230, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "&Zawsze używaj wybranego programu do obsługi tego protokołu", IDD_MAKEASSOC, 18, 183, 234, 10
+    DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 194, 200, 50, 14
 }
-
-// shell32 2195 resource #1063
+// Windows 2000 shell32.dll dialog #1063
 DLG_OPENAS_2K DIALOGEX 0, 0, 251, 174
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Otwieranie za pomocą..."
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
-FONT 8, "MS Shell Dlg"
+CAPTION "Otwieranie za pomocą"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
 {
-	CONTROL 0, IDD_ICON, STATIC, SS_ICON | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
-		CONTROL "Kliknij program, kt\xF3rego chcesz używać do otwierania '%s'.\nJeśli żądanego programu nie ma na liście, kliknij przycisk Inne.", IDD_TEXT, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 205, 27
-		CONTROL "&Opis dla plik\xF3w typu:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 39, 205, 8
-		CONTROL "", IDD_APPLIST, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 36, 50, 205, 80
-		CONTROL "&Wybierz program, kt\xF3rego chcesz używać:", IDD_MAKEASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 36, 136, 205, 10
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 84, 154, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 138, 154, 50, 14
-		CONTROL "&Inne...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 192, 154, 50, 14
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Kliknij program, którego chcesz używać do otwierania „%s”.\nJeśli żądanego programu nie ma na liście, kliknij przycisk Inne.", IDD_TEXT, 36, 7, 205, 27, NOT WS_GROUP
+    LTEXT "&Wybierz program, którego chcesz używać:", IDC_STATIC, 36, 39, 205, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 205, 80
+    AUTOCHECKBOX "&Zawsze używaj tego programu do otwierania tych plików", IDD_MAKEASSOC, 36, 136, 205, 10
+    DEFPUSHBUTTON "OK", IDOK, 84, 154, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 138, 154, 50, 14
+    PUSHBUTTON "&Inne...", IDD_OPENWITH_BROWSE, 192, 154, 50, 14
 }
 
-// shell32 2195 resource #1070
+// Windows 2000 shell32.dll dialog #1070
 DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 238, 210
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Otwieranie za pomocą..."
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
-FONT 8, "MS Shell Dlg"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
 {
-	CONTROL 0, IDD_ICON, STATIC, SS_ICON | WS_CHILD | WS_VISIBLE, 7, 7, 20, 20
-		CONTROL "Kliknij program, kt\xF3rego chcesz używać do otwierania pliku '%s'.\nJeśli żądanego programu nie ma na liście, kliknij przycisk Inne.", IDD_TEXT, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 7, 195, 32
-		CONTROL "&Opis dla plik\xF3w typu:", 13576, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 41, 195, 8
-		CONTROL "", IDD_DESCRIPTION, EDIT, ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 53, 176, 14
-		CONTROL "&Wybierz program, kt\xF3rego chcesz używać:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 70, 195, 8
-		CONTROL "", IDD_APPLIST, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 36, 81, 195, 80
-		CONTROL "&Zawsze używaj tego programu do otwierania tych plik\xF3w", IDD_MAKEASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 35, 166, 195, 10
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 73, 188, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 127, 188, 50, 14
-		CONTROL "&Inne...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 181, 188, 50, 14
+    ICON 134, IDD_ICON, 7, 7, 20, 20
+    LTEXT "Kliknij program, którego chcesz używać do otwierania pliku „%s”.\nJeśli żądanego programu nie ma na liście, kliknij przycisk Inne.", IDD_TEXT, 36, 7, 195, 32
+    LTEXT "&Opis dla plików typu:", IDD_DESCRIPTIONTEXT, 36, 41, 195, 8
+    EDITTEXT IDD_DESCRIPTION, 36, 52, 195, 14, ES_AUTOHSCROLL
+    LTEXT "&Wybierz program, którego chcesz używać:", IDC_STATIC, 36, 70, 195, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 81, 195, 80
+    AUTOCHECKBOX "&Zawsze używaj tego programu do otwierania tych plików", IDD_MAKEASSOC, 35, 166, 195, 10
+    DEFPUSHBUTTON "OK", IDOK, 73, 188, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 127, 188, 50, 14
+    PUSHBUTTON "&Inne...", IDD_OPENWITH_BROWSE, 181, 188, 50, 14
 }
 
-// Custom; 2000 did not support protocols.
+// Custom generated by an LLM for pl-PL; protocol variant based on DLG_OPENAS_2K
 DLG_OPENAS_PROTOCOL_2K DIALOGEX 0, 0, 251, 174
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Otwieranie za pomocą..."
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
+CAPTION "Otwieranie za pomocą"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Kliknij program, którego chcesz używać do otwierania protokołu '%s'.", IDD_TEXT, 36, 7, 205, 27, NOT WS_GROUP
+    LTEXT "&Wybierz program, którego chcesz używać:", IDC_STATIC, 36, 39, 205, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 205, 80
+    AUTOCHECKBOX "&Zawsze używaj tego programu do obsługi tego protokołu", IDD_MAKEASSOC, 36, 136, 205, 10
+    DEFPUSHBUTTON "OK", IDOK, 138, 154, 50, 14
+    PUSHBUTTON "Anuluj", IDCANCEL, 192, 154, 50, 14
+}
+// Windows 98 shell32.dll dialog #1063
+DLG_OPENAS_NT4 DIALOG 0, 0, 218, 178
+CAPTION "Otwórz z"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
 FONT 8, "MS Shell Dlg"
 {
-	CONTROL 0, IDD_ICON, STATIC, SS_ICON | WS_CHILD | WS_VISIBLE, 7, 7, 25, 20
-		CONTROL "Kliknij program, kt\xF3rego chcesz używać do otwierania pliku '%s'.", IDD_TEXT, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 5, 172, 40
-		CONTROL "&Wybierz program, kt\xF3rego chcesz używać:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 48, 172, 8
-		CONTROL "", IDD_APPLIST, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 60, 176, 80
-		CONTROL "&Zawsze używaj tego programu do otwierania tego protokołu", IDD_MAKEASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 36, 144, 195, 10
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 108, 157, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 162, 157, 50, 14
+    LTEXT "&Wybierz program, którego chcesz używać:", IDC_STATIC, 7, 46, 169, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 56, 202, 78
+    LTEXT "Kliknij program, którego chcesz używać do otwarcia pliku '%s'.\nJeśli potrzebny program nie występuje na liście, kliknij przycisk Inne.", IDD_TEXT, 7, 7, 202, 32, NOT WS_GROUP
+    AUTOCHECKBOX "D&o otwierania tego typu pliku zawsze używaj tego programu", IDD_MAKEASSOC, 7, 141, 205, 10
+    DEFPUSHBUTTON "OK", IDOK, 47, 157, 50, 14, WS_DISABLED
+    PUSHBUTTON "Anuluj", IDCANCEL, 101, 157, 50, 14
+    PUSHBUTTON "&Inne...", IDD_OPENWITH_BROWSE, 155, 157, 50, 14
 }
 
-// shell32 1381 resource #1063
-DLG_OPENAS_NT4 DIALOG 0, 0, 212, 179
-STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
-CAPTION "Otw\xF3rz z"
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
+// Windows 98 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 212, 210
+CAPTION "Otwórz z"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
 FONT 8, "MS Shell Dlg"
 {
-	CONTROL "&Wybierz program, kt\xF3rego chcesz używać:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 7, 36, 169, 8
-		CONTROL "", IDD_APPLIST, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 46, 197, 78
-		CONTROL "Kliknij program, kt\xF3rego chcesz używać do otwarcia pliku '%s'.\nJeśli potrzebny program nie występuje na liście, kliknij przycisk Inne.", IDD_TEXT, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 7, 7, 198, 24
-		CONTROL "D&o otwierania tego typu pliku zawsze używaj tego programu", IDD_MAKEASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 131, 203, 10
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_TABSTOP, 47, 157, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 101, 157, 50, 14
-		CONTROL "&Inne...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 155, 157, 50, 14
+    LTEXT "Kliknij program, którego chcesz używać do otwierania pliku '%s'.\nJeśli potrzebny program nie występuje na liście, kliknij przycisk Inne.", IDD_TEXT, 7, 7, 198, 32, NOT WS_GROUP
+    LTEXT "&Opis plików typu '%s':", IDD_DESCRIPTIONTEXT, 7, 43, 197, 8
+    EDITTEXT IDD_DESCRIPTION, 7, 56, 197, 14, ES_AUTOHSCROLL
+    LTEXT "&Wybierz program, którego chcesz używać:", IDC_STATIC, 7, 77, 197, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 87, 197, 78
+    AUTOCHECKBOX "&Zawsze używaj tego programu do otwierania pliku tego typu", IDD_MAKEASSOC, 7, 172, 203, 10
+    DEFPUSHBUTTON "OK", IDOK, 47, 190, 50, 14, WS_DISABLED
+    PUSHBUTTON "Anuluj", IDCANCEL, 101, 190, 49, 14
+    PUSHBUTTON "&Inne...", IDD_OPENWITH_BROWSE, 155, 190, 50, 14
 }
 
-// shell32 1381 resource #1070
-DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 212, 209
-STYLE DS_SETFONT | DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
-CAPTION "Otw\xF3rz z"
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
+// Custom generated by an LLM for pl-PL; protocol variant based on DLG_OPENAS_NT4
+DLG_OPENAS_PROTOCOL_NT4 DIALOG 0, 0, 232, 178
+CAPTION "Otwórz z"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
 FONT 8, "MS Shell Dlg"
 {
-	CONTROL "Kliknij program, kt\xF3rego chcesz używać do otwierania pliku '%s'.\nJeśli potrzebny program nie występuje na liście, kliknij przycisk Inne.", IDD_TEXT, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 7, 7, 199, 24
-		CONTROL "&Opis plik\xF3w typu '%s':", IDD_DESCRIPTIONTEXT, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 7, 32, 169, 8
-		CONTROL "", IDD_DESCRIPTION, EDIT, ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 7, 45, 197, 14
-		CONTROL "&Wybierz program, kt\xF3rego chcesz używać:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 7, 66, 169, 8
-		CONTROL "", IDD_APPLIST, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 76, 197, 78
-		CONTROL "&Zawsze używaj tego programu do otwierania pliku tego typu", IDD_MAKEASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 161, 198, 10
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_TABSTOP, 47, 187, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 101, 187, 49, 14
-		CONTROL "&Inne...", IDD_OPENWITH_BROWSE, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 155, 187, 50, 14
-}
-
-// Custom; NT 4.0 did not support protocols.
-DLG_OPENAS_PROTOCOL_NT4 DIALOG 0, 0, 212, 179
-STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | DS_SETFOREGROUND | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
-CAPTION "Otw\xF3rz z"
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
-FONT 8, "MS Shell Dlg"
-{
-	CONTROL "&Wybierz program, kt\xF3rego chcesz używać:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 7, 36, 169, 8
-		CONTROL "", IDD_APPLIST, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SHAREIMAGELISTS | LVS_NOCOLUMNHEADER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 7, 46, 197, 78
-		CONTROL "Kliknij program, kt\xF3rego chcesz używać do otwarcia pliku '%s'.", IDD_TEXT, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 7, 7, 198, 24
-		CONTROL "&Do otwierania tego protokołu zawsze używaj tego programu", IDD_MAKEASSOC, BUTTON, BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 131, 203, 10
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_TABSTOP, 101, 187, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 155, 157, 50, 14
-}
-
-// shell32 6000/7600 resource #1091
-DLG_OPENAS_DOWNALOAD DIALOGEX 0, 0, 279, 146
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "System Windows"
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
-FONT 8, "MS Shell Dlg"
-{
-	CONTROL 0, IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
-		CONTROL "System Windows nie może otworzyć tego pliku:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8
-		CONTROL "Plik:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 20, 8
-		CONTROL "", IDD_FILE_TEXT, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 60, 23, 208, 8
-		CONTROL "Aby otworzyć ten plik, system Windows musi wiedzieć jakiego programu chcesz użyć do otwarcia pliku. System Windows może przejść do trybu online, aby wyszukać program automatycznie, lub pozwolić Ci wybrać go z listy program\xF3w zainstalowanych na komputerze.", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 77, 139, 25
-		CONTROL "Co chcesz zrobić?", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 77, 139, 8
-		CONTROL "&Użyć usługi sieci Web do znalezienia odpowiedniego programu", IDD_WEBAUTOLOOKUP, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 9, 91, 215, 10
-		CONTROL "&Wybrać program z listy zainstalowanych program\xF3w", IDD_OPENWITHLIST, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 9, 104, 194, 10
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 156, 121, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 211, 121, 50, 14
-}
-
-// shell32 2600/3790 resource #1091
-DLG_OPENAS_DOWNALOAD_XP DIALOGEX 0, 0, 279, 146
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_CENTER | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "System Windows"
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
-FONT 8, "MS Shell Dlg"
-{
-	CONTROL 0, IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
-		CONTROL "System Windows nie może otworzyć tego pliku:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 7, 208, 8
-		CONTROL "Plik:", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 23, 20, 8
-		CONTROL "", IDD_FILE_TEXT, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 60, 23, 208, 8
-		CONTROL "Aby otworzyć ten plik, system Windows musi wiedzieć, w kt\xF3rym programie został on utworzony. System Windows może przejść do trybu online, aby wyszukać program automatycznie, lub pozwolić Ci wybrać go z listy program\xF3w znajdujących się na komputerze.", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 39, 257, 33
-		CONTROL "Co chcesz zrobić?", -1, STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 77, 139, 8
-		CONTROL "&Użyć usługi sieci Web do znalezienia odpowiedniego programu", IDD_WEBAUTOLOOKUP, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 9, 91, 215, 10
-		CONTROL "&Wybrać program z listy", IDD_OPENWITHLIST, BUTTON, BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 9, 104, 194, 10
-		CONTROL "OK", IDOK, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 156, 121, 50, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 211, 121, 50, 14
-}
-
-// shell32 7600 resource #1103
-DLG_NOOPEN DIALOGEX 0, 0, 275, 100
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
-CAPTION "Uwaga"
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
-FONT 8, "MS Shell Dlg"
-{
-	CONTROL "", IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
-		CONTROL "Pr\xF3bujesz otworzyć plik typu '%s' (%s)", IDD_TEXT1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 7, 225, 19
-		CONTROL "Pliki te używane są przez system operacyjny i przez r\xF3żne programy. Edytowanie ich lub modyfikowanie może spowodować uszkodzenie systemu.", IDD_TEXT2, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 30, 228, 24
-		CONTROL "Jeśli w dalszym ciągu chcesz otworzyć ten plik, kliknij przycisk Otw\xF3rz za pomocą. W przeciwnym razie kliknij przycisk Anuluj.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 59, 216, 19
-		CONTROL "&Otw\xF3rz za pomocą...", IDD_OPENWITH, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 129, 81, 81, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 214, 81, 53, 14
-}
-
-// shell32 2600/3790/6000 resource #1103
-DLG_NOOPEN_VISTA DIALOGEX 0, 0, 275, 95
-STYLE DS_SHELLFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
-CAPTION "Uwaga"
-LANGUAGE LANG_POLISH, SUBLANG_POLISH_POLAND
-FONT 8, "MS Shell Dlg"
-{
-	CONTROL "", IDD_ICON, STATIC, SS_ICON | SS_REALSIZECONTROL | WS_CHILD | WS_VISIBLE, 7, 7, 21, 20
-		CONTROL "Pr\xF3bujesz otworzyć plik typu '%s' (%s)", IDD_TEXT1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 7, 225, 19
-		CONTROL "Pliki te używane są przez system operacyjny i przez r\xF3żne programy. Edytowanie ich lub modyfikowanie może spowodować uszkodzenie systemu.", IDD_TEXT2, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 30, 228, 24
-		CONTROL "Jeśli w dalszym ciągu chcesz otworzyć ten plik, kliknij przycisk Otw\xF3rz za pomocą; w przeciwnym razie kliknij przycisk Anuluj.", -1, STATIC, SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 38, 59, 216, 19
-		CONTROL "&Otw\xF3rz za pomocą...", IDD_OPENWITH, BUTTON, BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 129, 81, 81, 14
-		CONTROL "Anuluj", IDCANCEL, BUTTON, BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 214, 81, 53, 14
+    LTEXT "&Wybierz program, którego chcesz używać:", IDC_STATIC, 7, 46, 183, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 56, 216, 78
+    LTEXT "Kliknij program, którego chcesz używać do otwarcia protokołu '%s'.", IDD_TEXT, 7, 7, 216, 32, NOT WS_GROUP
+    AUTOCHECKBOX "D&o obsługi tego protokołu zawsze używaj tego programu", IDD_MAKEASSOC, 7, 141, 219, 10
+    DEFPUSHBUTTON "OK", IDOK, 115, 157, 50, 14, WS_DISABLED
+    PUSHBUTTON "Anuluj", IDCANCEL, 169, 157, 50, 14
 }

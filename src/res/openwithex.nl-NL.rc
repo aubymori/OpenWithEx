@@ -1,0 +1,283 @@
+#pragma code_page(65001) // enable UTF-8
+
+#include "resource.h"
+
+LANGUAGE LANG_DUTCH, SUBLANG_DUTCH
+
+STRINGTABLE
+{
+    // Windows 7 shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED "Aanbevolen programma's"
+    // Windows 7 shell32.dll string #29953
+    IDS_OPENWITH_OTHERS "Andere programma's"
+    // Windows XP shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED_XP "Aanbevolen programma's:"
+    // Windows XP shell32.dll string #29953
+    IDS_OPENWITH_OTHERS_XP "Andere programma's:"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_PROGRAMSFILTER "Programma's"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_ALLFILESFILTER "Alle bestanden"
+    // Windows 7 shell32.dll string #9016
+    IDS_OPENAS "Openen met..."
+    // Windows Vista shell32.dll string #9016
+    IDS_OPENAS_VISTA "Openen met..."
+}
+
+// Windows 7 shell32.dll dialog #1063
+DLG_OPENAS DIALOGEX 0, 0, 375, 271
+CAPTION "Openen met"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Klik op het programma waarmee u dit bestand wilt openen.", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Bestand:", IDC_STATIC, 36, 23, 35, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 73, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "&Dit type bestand altijd met dit programma openen", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "&Bladeren...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Als het door u gezochte programma zich niet in de lijst of op uw computer bevindt, kunt u <A ID=""Browse"">het programma op internet opzoeken</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Annuleren", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE DIALOGEX 0, 0, 375, 271
+CAPTION "Openen met"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Klik op het programma waarmee u dit bestand wilt openen.", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Bestand:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 71, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "&Geef een omschrijving op voor dit type bestand:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 362, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "&Dit type bestand altijd met dit programma openen", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "&Bladeren...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Als het door u gezochte programma zich niet in de lijst of op uw computer bevindt, kunt u <A ID=""Browse"">het programma op internet opzoeken</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Annuleren", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL DIALOGEX 0, 0, 375, 220
+CAPTION "Openen met"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Selecteer het programma waarmee u dit protocol wilt openen:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Protocol:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "&Altijd het geselecteerde programma gebruiken om dit protocol te verwerken", IDD_MAKEASSOC, 6, 185, 259, 10
+    DEFPUSHBUTTON "OK", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Annuleren", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1063
+DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Openen met"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Klik op het programma waarmee u dit bestand wilt openen.", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Bestand:", IDC_STATIC, 36, 23, 35, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 73, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "&Dit type bestand altijd met dit programma openen", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "&Bladeren...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Als het door u gezochte programma zich niet in de lijst of op uw computer bevindt, kunt u <A ID=""Browse"">het programma op internet opzoeken</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Annuleren", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Openen met"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Klik op het programma waarmee u dit bestand wilt openen.", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Bestand:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 71, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "&Geef een omschrijving op voor dit type bestand:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 362, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "&Dit type bestand altijd met dit programma openen", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "&Bladeren...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Als het door u gezochte programma zich niet in de lijst of op uw computer bevindt, kunt u <A ID=""Browse"">het programma op internet opzoeken</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Annuleren", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL_VISTA DIALOGEX 0, 0, 375, 220
+CAPTION "Openen met"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Selecteer het programma waarmee u dit protocol wilt openen:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Protocol:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "&Altijd het geselecteerde programma gebruiken om dit protocol te verwerken", IDD_MAKEASSOC, 6, 185, 259, 10
+    DEFPUSHBUTTON "OK", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Annuleren", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1063
+DLG_OPENAS_XP DIALOGEX 0, 0, 260, 271
+CAPTION "Openen met"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Klik op het programma waarmee u dit bestand wilt openen:", IDD_TEXT, 36, 7, 208, 17, NOT WS_GROUP
+    LTEXT "Bestand:", IDC_STATIC, 36, 25, 29, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 69, 25, 182, 8, SS_NOPREFIX
+    GROUPBOX "&Programma's", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "&Dit type bestand altijd met dit programma openen", IDD_MAKEASSOC, 18, 183, 169, 10
+    PUSHBUTTON "&Bladeren...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "Als het door u gezochte programma zich niet in de lijst of op uw computer bevindt, kunt u <A ID=""Browse"">het programma op het Internet opzoeken</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 21
+    DEFPUSHBUTTON "OK", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "Annuleren", IDCANCEL, 194, 251, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_XP DIALOGEX 0, 0, 260, 271
+CAPTION "Openen met"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Klik op het programma waarmee u dit bestand wilt openen.", IDD_TEXT, 36, 7, 208, 11, NOT WS_GROUP
+    LTEXT "Bestand:", IDC_STATIC, 36, 20, 29, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 69, 21, 183, 8, SS_NOPREFIX
+    GROUPBOX "&Programma's", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 99, WS_EX_CLIENTEDGE
+    LTEXT "&Geef een omschrijving op voor dit type bestand:", IDD_DESCRIPTIONTEXT, 18, 153, 217, 8
+    EDITTEXT IDD_DESCRIPTION, 18, 163, 205, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "&Dit type bestand altijd met dit programma openen", IDD_MAKEASSOC, 18, 183, 202, 10
+    PUSHBUTTON "&Bladeren...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "Als het door u gezochte programma zich niet in de lijst of op uw computer bevindt, kunt u <A ID=""Browse"">het programma op het Internet opzoeken</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 22
+    DEFPUSHBUTTON "OK", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "Annuleren", IDCANCEL, 194, 251, 50, 14
+}
+
+// Custom generated by an LLM for nl-NL; protocol variant based on DLG_OPENAS_XP
+DLG_OPENAS_PROTOCOL_XP DIALOGEX 0, 0, 260, 220
+CAPTION "Openen met"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Klik op het programma waarmee u dit protocol wilt openen:", IDD_TEXT, 36, 7, 208, 17, NOT WS_GROUP
+    LTEXT "Protocol:", IDC_STATIC, 36, 25, 33, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 73, 25, 179, 8, SS_NOPREFIX
+    GROUPBOX "&Programma's", IDC_STATIC, 6, 36, 245, 161
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "&Dit protocol altijd met dit programma openen", IDD_MAKEASSOC, 18, 183, 234, 10
+    DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
+    PUSHBUTTON "Annuleren", IDCANCEL, 194, 200, 50, 14
+}
+// Windows 2000 shell32.dll dialog #1063
+DLG_OPENAS_2K DIALOGEX 0, 0, 232, 175
+CAPTION "Openen met"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Klik op het programma dat u wilt gebruiken om het bestand %s te openen. Klik op Overige als het te gebruiken programma niet in de lijst wordt vermeld.", IDD_TEXT, 37, 7, 187, 33, NOT WS_GROUP
+    LTEXT "&Kies het te gebruiken programma:", IDC_STATIC, 10, 43, 158, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 10, 54, 202, 80
+    AUTOCHECKBOX "&Dit programma altijd gebruiken om dit type bestand te openen", IDD_MAKEASSOC, 10, 138, 220, 10
+    DEFPUSHBUTTON "OK", IDOK, 36, 154, 50, 14
+    PUSHBUTTON "Annuleren", IDCANCEL, 90, 154, 50, 14
+    PUSHBUTTON "&Overige...", IDD_OPENWITH_BROWSE, 144, 154, 50, 14
+}
+
+// Windows 2000 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 247, 210
+CAPTION "Openen met..."
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20
+    LTEXT "Klik op het programma dat u wilt gebruiken om het bestand %s te openen. Klik op Overige als het te gebruiken programma niet in de lijst wordt vermeld.", IDD_TEXT, 36, 7, 202, 36
+    LTEXT "&Beschrijving van bestanden van dit type:", IDD_DESCRIPTIONTEXT, 36, 46, 172, 8
+    EDITTEXT IDD_DESCRIPTION, 36, 57, 206, 14, ES_AUTOHSCROLL
+    LTEXT "&Kies het te gebruiken programma:", IDC_STATIC, 36, 77, 172, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 88, 206, 80
+    AUTOCHECKBOX "&Dit programma altijd gebruiken om dit type bestand te openen", IDD_MAKEASSOC, 36, 173, 211, 10
+    DEFPUSHBUTTON "OK", IDOK, 85, 188, 50, 14
+    PUSHBUTTON "Annuleren", IDCANCEL, 139, 188, 50, 14
+    PUSHBUTTON "&Overige...", IDD_OPENWITH_BROWSE, 193, 188, 50, 14
+}
+
+// Custom generated by an LLM for nl-NL; protocol variant based on DLG_OPENAS_2K
+DLG_OPENAS_PROTOCOL_2K DIALOGEX 0, 0, 232, 175
+CAPTION "Openen met"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Klik op het programma dat u wilt gebruiken om het protocol '%s' te openen.", IDD_TEXT, 37, 7, 187, 33, NOT WS_GROUP
+    LTEXT "&Kies het te gebruiken programma:", IDC_STATIC, 10, 43, 158, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 10, 54, 202, 80
+    AUTOCHECKBOX "&Dit programma altijd gebruiken voor dit protocol", IDD_MAKEASSOC, 10, 138, 220, 10
+    DEFPUSHBUTTON "OK", IDOK, 90, 154, 50, 14
+    PUSHBUTTON "Annuleren", IDCANCEL, 144, 154, 50, 14
+}
+// Windows 98 shell32.dll dialog #1063
+DLG_OPENAS_NT4 DIALOG 0, 0, 230, 178
+CAPTION "Openen met"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "&Kies het te gebruiken programma:", IDC_STATIC, 7, 36, 169, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 46, 218, 78
+    LTEXT "Klik op het programma dat u wilt gebruiken om het bestand %s te openen. Klik op Overige als het te gebruiken programma niet in de lijst voorkomt.", IDD_TEXT, 7, 7, 217, 24, NOT WS_GROUP
+    AUTOCHECKBOX "&Dit programma altijd gebruiken om dit type bestand te openen", IDD_MAKEASSOC, 7, 131, 217, 10
+    DEFPUSHBUTTON "OK", IDOK, 63, 157, 50, 14, WS_DISABLED
+    PUSHBUTTON "Annuleren", IDCANCEL, 117, 157, 50, 14
+    PUSHBUTTON "&Overige...", IDD_OPENWITH_BROWSE, 171, 157, 50, 14
+}
+
+// Windows 98 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 212, 209
+CAPTION "Openen met"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "Klik op het programma dat u wilt gebruiken om het bestand %s te openen. Klik op Overige als het te gebruiken programma niet in de lijst voorkomt.", IDD_TEXT, 7, 7, 199, 32, NOT WS_GROUP
+    LTEXT "&Beschrijving van bestanden van het type %s:", IDD_DESCRIPTIONTEXT, 7, 42, 169, 8
+    EDITTEXT IDD_DESCRIPTION, 7, 55, 197, 14, ES_AUTOHSCROLL
+    LTEXT "&Kies het te gebruiken programma:", IDC_STATIC, 7, 74, 169, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 87, 197, 78
+    AUTOCHECKBOX "&Dit programma altijd gebruiken om dit bestand te openen", IDD_MAKEASSOC, 7, 172, 198, 10
+    DEFPUSHBUTTON "OK", IDOK, 28, 187, 54, 14, WS_DISABLED
+    PUSHBUTTON "Annuleren", IDCANCEL, 88, 187, 54, 14
+    PUSHBUTTON "&Overige...", IDD_OPENWITH_BROWSE, 148, 187, 54, 14
+}
+
+// Custom generated by an LLM for nl-NL; protocol variant based on DLG_OPENAS_NT4
+DLG_OPENAS_PROTOCOL_NT4 DIALOG 0, 0, 232, 178
+CAPTION "Openen met"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "&Kies het te gebruiken programma:", IDC_STATIC, 7, 36, 171, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 46, 220, 78
+    LTEXT "Klik op het programma dat u wilt gebruiken om het protocol '%s' te openen.", IDD_TEXT, 7, 7, 219, 24, NOT WS_GROUP
+    AUTOCHECKBOX "&Dit programma altijd gebruiken voor dit protocol", IDD_MAKEASSOC, 7, 131, 219, 10
+    DEFPUSHBUTTON "OK", IDOK, 119, 157, 50, 14, WS_DISABLED
+    PUSHBUTTON "Annuleren", IDCANCEL, 173, 157, 50, 14
+}

@@ -1,0 +1,283 @@
+#pragma code_page(65001) // enable UTF-8
+
+#include "resource.h"
+
+LANGUAGE LANG_CZECH, SUBLANG_CZECH_CZECH_REPUBLIC
+
+STRINGTABLE
+{
+    // Windows 7 shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED "Doporučené programy"
+    // Windows 7 shell32.dll string #29953
+    IDS_OPENWITH_OTHERS "Další programy"
+    // Windows XP shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED_XP "Doporučené programy:"
+    // Windows XP shell32.dll string #29953
+    IDS_OPENWITH_OTHERS_XP "Další programy:"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_PROGRAMSFILTER "Programy"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_ALLFILESFILTER "Všechny soubory (*.*)"
+    // Windows 7 shell32.dll string #9016
+    IDS_OPENAS "Otevřít v programu..."
+    // Windows Vista shell32.dll string #9016
+    IDS_OPENAS_VISTA "Otevřít v programu..."
+}
+
+// Windows 7 shell32.dll dialog #1063
+DLG_OPENAS DIALOGEX 0, 0, 375, 271
+CAPTION "Otevřít v programu"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Vyberte program, ve kterém chcete soubor otevřít:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Soubor:", IDC_STATIC, 36, 23, 26, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "&K otevření souborů tohoto typu vždy použít vybraný program", IDD_MAKEASSOC, 6, 211, 207, 10
+    PUSHBUTTON "P&rocházet...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Pokud požadovaný program není na seznamu nebo v počítači, můžete <A ID=""Browse"">odpovídající program vyhledat na webu</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Storno", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE DIALOGEX 0, 0, 375, 271
+CAPTION "Otevřít v programu"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Vyberte program, ve kterém chcete soubor otevřít:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Soubor:", IDC_STATIC, 36, 23, 26, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 67, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "Za&dejte popis, který chcete použít pro tento druh souborů:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "&K otevření souborů tohoto typu vždy použít vybraný program", IDD_MAKEASSOC, 6, 211, 207, 10
+    PUSHBUTTON "P&rocházet...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Pokud požadovaný program není na seznamu nebo v počítači, můžete <A ID=""Browse"">odpovídající program vyhledat na webu</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Storno", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL DIALOGEX 0, 0, 375, 220
+CAPTION "Otevřít v programu"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Zvolte program, který chcete použít k otevření tohoto protokolu:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Protokol:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "Ke zpracování tohoto protokolu vždy použív&at tento program", IDD_MAKEASSOC, 6, 185, 247, 10
+    DEFPUSHBUTTON "OK", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Storno", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1063
+DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Otevřít v programu"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Vyberte program, ve kterém chcete soubor otevřít:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Soubor:", IDC_STATIC, 36, 23, 26, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "&K otevření souborů tohoto typu vždy použít vybraný program", IDD_MAKEASSOC, 6, 211, 207, 10
+    PUSHBUTTON "P&rocházet...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Pokud požadovaný program není na seznamu nebo v počítači, můžete <A ID=""Browse"">odpovídající program vyhledat na webu</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Storno", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Otevřít v programu"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Vyberte program, ve kterém chcete soubor otevřít:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Soubor:", IDC_STATIC, 36, 23, 26, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 67, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "Za&dejte popis, který chcete použít pro tento druh souborů:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "&K otevření souborů tohoto typu vždy použít vybraný program", IDD_MAKEASSOC, 6, 211, 207, 10
+    PUSHBUTTON "P&rocházet...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Pokud požadovaný program není na seznamu nebo v počítači, můžete <A ID=""Browse"">odpovídající program vyhledat na webu</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "OK", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Storno", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL_VISTA DIALOGEX 0, 0, 375, 220
+CAPTION "Otevřít v programu"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Zvolte program, který chcete použít k otevření tohoto protokolu:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Protokol:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "Ke zpracování tohoto protokolu vždy použív&at tento program", IDD_MAKEASSOC, 6, 185, 247, 10
+    DEFPUSHBUTTON "OK", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Storno", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1063
+DLG_OPENAS_XP DIALOGEX 0, 0, 260, 271
+CAPTION "Otevřít v programu"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Vyberte program, ve kterém chcete soubor otevřít:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Soubor:", IDC_STATIC, 36, 23, 26, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 66, 23, 208, 8, SS_NOPREFIX
+    GROUPBOX "&Programy", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "&K otevření souborů tohoto typu vždy použít vybraný program", IDD_MAKEASSOC, 18, 183, 207, 10
+    PUSHBUTTON "P&rocházet...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "Pokud požadovaný program není na seznamu nebo v počítači, můžete <A ID=""Browse"">odpovídající program vyhledat na webu</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 16
+    DEFPUSHBUTTON "OK", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "Storno", IDCANCEL, 194, 251, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_XP DIALOGEX 0, 0, 260, 271
+CAPTION "Otevřít v programu"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Vyberte program, ve kterém chcete soubor otevřít:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Soubor:", IDC_STATIC, 36, 23, 26, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 66, 23, 202, 8, SS_NOPREFIX
+    GROUPBOX "&Programy", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 99, WS_EX_CLIENTEDGE
+    LTEXT "Za&dejte popis, který chcete použít pro tento druh souborů:", IDD_DESCRIPTIONTEXT, 18, 152, 195, 8
+    EDITTEXT IDD_DESCRIPTION, 18, 163, 205, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "&K otevření souborů tohoto typu vždy použít vybraný program", IDD_MAKEASSOC, 18, 183, 207, 10
+    PUSHBUTTON "P&rocházet...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "Pokud požadovaný program není na seznamu nebo v počítači, můžete <A ID=""Browse"">odpovídající program vyhledat na webu</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 16
+    DEFPUSHBUTTON "OK", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "Storno", IDCANCEL, 194, 251, 50, 14
+}
+
+// Custom generated by an LLM for cs-CZ; protocol variant based on DLG_OPENAS_XP
+DLG_OPENAS_PROTOCOL_XP DIALOGEX 0, 0, 260, 220
+CAPTION "Otevřít v programu"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Vyberte program, ve kterém chcete tento protokol otevřít:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Protokol:", IDC_STATIC, 36, 23, 33, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 73, 23, 179, 8, SS_NOPREFIX
+    GROUPBOX "&Programy", IDC_STATIC, 6, 36, 245, 161
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "&K otevření tohoto protokolu vždy použít vybraný program", IDD_MAKEASSOC, 18, 183, 234, 10
+    DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
+    PUSHBUTTON "Storno", IDCANCEL, 194, 200, 50, 14
+}
+// Windows 2000 shell32.dll dialog #1063
+DLG_OPENAS_2K DIALOGEX 0, 0, 227, 175
+CAPTION "Otevřít v programu"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Klepněte na program, pomocí kterého chcete otevřít %s.\nNení-li program uveden v seznamu, klepněte na tlačítko Jiný.", IDD_TEXT, 36, 7, 174, 34, NOT WS_GROUP
+    LTEXT "&Zvolte program, který chcete použít:", IDC_STATIC, 36, 43, 158, 9
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 54, 181, 80
+    AUTOCHECKBOX "&K otevření těchto souborů vždy použít tento program", IDD_MAKEASSOC, 36, 139, 189, 10
+    DEFPUSHBUTTON "OK", IDOK, 36, 154, 50, 14
+    PUSHBUTTON "Storno", IDCANCEL, 90, 154, 50, 14
+    PUSHBUTTON "&Jiný...", IDD_OPENWITH_BROWSE, 144, 154, 50, 14
+}
+
+// Windows 2000 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 227, 210
+CAPTION "Otevřít v programu..."
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20
+    LTEXT "Klepněte na program, pomocí kterého chcete otevřít %s.\nNení-li program uveden v seznamu, klepněte na tlačítko Jiný.", IDD_TEXT, 36, 7, 176, 35
+    LTEXT "&Popis souborů tohoto typu:", IDD_DESCRIPTIONTEXT, 36, 47, 109, 9
+    EDITTEXT IDD_DESCRIPTION, 36, 58, 172, 14, ES_AUTOHSCROLL
+    LTEXT "&Zvolte program, který chcete použít:", IDC_STATIC, 36, 78, 139, 9
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 89, 172, 80
+    AUTOCHECKBOX "&K otevření těchto souborů vždy použít tento program", IDD_MAKEASSOC, 35, 172, 191, 11
+    DEFPUSHBUTTON "OK", IDOK, 50, 188, 50, 14
+    PUSHBUTTON "Storno", IDCANCEL, 104, 188, 50, 14
+    PUSHBUTTON "&Jiný...", IDD_OPENWITH_BROWSE, 158, 188, 50, 14
+}
+
+// Custom generated by an LLM for cs-CZ; protocol variant based on DLG_OPENAS_2K
+DLG_OPENAS_PROTOCOL_2K DIALOGEX 0, 0, 227, 175
+CAPTION "Otevřít v programu"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Klepněte na program, pomocí kterého chcete otevřít protokol %s.", IDD_TEXT, 36, 7, 174, 34, NOT WS_GROUP
+    LTEXT "&Zvolte program, který chcete použít:", IDC_STATIC, 36, 43, 158, 9
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 54, 181, 80
+    AUTOCHECKBOX "&K otevření tohoto protokolu vždy použít tento program", IDD_MAKEASSOC, 36, 139, 189, 10
+    DEFPUSHBUTTON "OK", IDOK, 90, 154, 50, 14
+    PUSHBUTTON "Storno", IDCANCEL, 144, 154, 50, 14
+}
+// Windows 98 shell32.dll dialog #1063
+DLG_OPENAS_NT4 DIALOG 0, 0, 212, 179
+CAPTION "Otevřít v programu"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "&Zvolte program, který chcete použít:", IDC_STATIC, 7, 36, 169, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 46, 197, 78
+    LTEXT "Klepněte na program, který chcete použít k otevření souboru %s. Není-li požadovaný program v seznamu, klepněte na tlačítko Další.", IDD_TEXT, 7, 7, 198, 24, NOT WS_GROUP
+    AUTOCHECKBOX "&K otevírání tohoto souboru vždy používat tento program", IDD_MAKEASSOC, 7, 131, 198, 10
+    DEFPUSHBUTTON "OK", IDOK, 47, 157, 50, 14, WS_DISABLED
+    PUSHBUTTON "Storno", IDCANCEL, 101, 157, 50, 14
+    PUSHBUTTON "&Jiný…", IDD_OPENWITH_BROWSE, 155, 157, 50, 14
+}
+
+// Windows 98 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 212, 209
+CAPTION "Otevřít v programu"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "Klepněte na program, který chcete použít k otevření souboru %s. Není-li požadovaný program v seznamu, klepněte na tlačítko Jiný.", IDD_TEXT, 7, 7, 199, 24, NOT WS_GROUP
+    LTEXT "&Popis souborů s příponou %s:", IDD_DESCRIPTIONTEXT, 7, 32, 169, 8
+    EDITTEXT IDD_DESCRIPTION, 7, 45, 197, 14, ES_AUTOHSCROLL
+    LTEXT "&Zvolte program, který chcete použít:", IDC_STATIC, 7, 66, 169, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 76, 197, 78
+    AUTOCHECKBOX "&K otevírání tohoto souboru vždy používat tento program", IDD_MAKEASSOC, 7, 161, 198, 10
+    DEFPUSHBUTTON "OK", IDOK, 47, 187, 50, 14, WS_DISABLED
+    PUSHBUTTON "Storno", IDCANCEL, 101, 187, 49, 14
+    PUSHBUTTON "&Jiný…", IDD_OPENWITH_BROWSE, 155, 187, 50, 14
+}
+
+// Custom generated by an LLM for cs-CZ; protocol variant based on DLG_OPENAS_NT4
+DLG_OPENAS_PROTOCOL_NT4 DIALOG 0, 0, 232, 179
+CAPTION "Otevřít v programu"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "&Zvolte program, který chcete použít:", IDC_STATIC, 7, 36, 189, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 46, 217, 78
+    LTEXT "Klepněte na program, který chcete použít k otevření protokolu %s.", IDD_TEXT, 7, 7, 218, 24, NOT WS_GROUP
+    AUTOCHECKBOX "&K otevírání tohoto protokolu vždy používat tento program", IDD_MAKEASSOC, 7, 131, 218, 10
+    DEFPUSHBUTTON "OK", IDOK, 121, 157, 50, 14, WS_DISABLED
+    PUSHBUTTON "Storno", IDCANCEL, 175, 157, 50, 14
+}

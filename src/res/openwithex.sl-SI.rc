@@ -1,0 +1,283 @@
+#pragma code_page(65001) // enable UTF-8
+
+#include "resource.h"
+
+LANGUAGE LANG_SLOVENIAN, SUBLANG_SLOVENIAN_SLOVENIA
+
+STRINGTABLE
+{
+    // Windows 7 shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED "Priporočeni programi"
+    // Windows 7 shell32.dll string #29953
+    IDS_OPENWITH_OTHERS "Drugi programi"
+    // Windows XP shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED_XP "Priporočeni programi:"
+    // Windows XP shell32.dll string #29953
+    IDS_OPENWITH_OTHERS_XP "Drugi programi:"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_PROGRAMSFILTER "Programi"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_ALLFILESFILTER "Vse datoteke"
+    // Windows 7 shell32.dll string #9016
+    IDS_OPENAS "Za odpiranje uporabi ..."
+    // Windows Vista shell32.dll string #9016
+    IDS_OPENAS_VISTA "Za odpiranje uporabi ..."
+}
+
+// Windows 7 shell32.dll dialog #1063
+DLG_OPENAS DIALOGEX 0, 0, 375, 271
+CAPTION "Za odpiranje uporabi"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Izberite program, s katerim želite odpreti to datoteko:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Datoteka:", IDC_STATIC, 36, 23, 32, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 73, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "D&atoteke te vrste vedno odpri z izbranim programom", IDD_MAKEASSOC, 6, 211, 249, 10
+    PUSHBUTTON "P&rebrskaj ...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Če programa, ki ga želite uporabiti, ni na seznamu ali v vašem računalniku, ga lahko <A ID=""Browse"">poiščete v spletu</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "V redu", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Prekliči", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE DIALOGEX 0, 0, 375, 271
+CAPTION "Za odpiranje uporabi"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Izberite program, s katerim želite odpreti to datoteko:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Datoteka:", IDC_STATIC, 36, 23, 32, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 74, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "&Natipkajte opis, ki ga želite uporabiti za datoteke te vrste:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "D&atoteke te vrste vedno odpri z izbranim programom", IDD_MAKEASSOC, 6, 211, 239, 10
+    PUSHBUTTON "P&rebrskaj ...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Če programa, ki ga želite uporabiti, ni na seznamu ali v vašem računalniku, ga lahko <A ID=""Browse"">poiščete v spletu</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "V redu", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Prekliči", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL DIALOGEX 0, 0, 375, 220
+CAPTION "Za odpiranje uporabi"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Izberite program, s katerim želite odpreti ta protokol:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Protokol:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "&Vedno uporabi izbrani program za uporabo tega protokola", IDD_MAKEASSOC, 6, 185, 202, 10
+    DEFPUSHBUTTON "V redu", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Prekliči", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1063
+DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Za odpiranje uporabi"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Izberite program, s katerim želite odpreti to datoteko:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Datoteka:", IDC_STATIC, 36, 23, 32, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 73, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "D&atoteke te vrste vedno odpri z izbranim programom", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "P&rebrskaj ...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Če programa, ki ga želite uporabiti, ni na seznamu ali v vašem računalniku, ga lahko <A ID=""Browse"">poiščete v internetu</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "V redu", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Prekliči", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Za odpiranje uporabi"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Izberite program, s katerim želite odpreti to datoteko:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Datoteka:", IDC_STATIC, 36, 23, 32, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 74, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "&Natipkajte opis, ki ga želite uporabiti za datoteke te vrste:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "D&atoteke te vrste vedno odpri z izbranim programom", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "P&rebrskaj ...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Če programa, ki ga želite uporabiti, ni na seznamu ali v vašem računalniku, ga lahko <A ID=""Browse"">poiščete v internetu</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "V redu", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Prekliči", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL_VISTA DIALOGEX 0, 0, 375, 220
+CAPTION "Za odpiranje uporabi"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Izberite program, s katerim želite odpreti ta protokol:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Protokol:", IDC_STATIC, 36, 23, 30, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 70, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "&Vedno uporabi izbrani program za uporabo tega protokola", IDD_MAKEASSOC, 6, 185, 202, 10
+    DEFPUSHBUTTON "V redu", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Prekliči", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1063
+DLG_OPENAS_XP DIALOGEX 0, 0, 260, 271
+CAPTION "Odpiranje s programom"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Izberite program, s katerim želite odpreti to datoteko:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Datoteka:", IDC_STATIC, 36, 23, 32, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 72, 23, 196, 8, SS_NOPREFIX
+    GROUPBOX "&Programi", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "D&atoteke te vrste vedno odpri z izbranim programom", IDD_MAKEASSOC, 18, 183, 202, 10
+    PUSHBUTTON "P&rebrskaj ...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "Če programa, ki ga želite uporabiti, ni na seznamu ali v vašem računalniku, ga lahko <A ID=""Browse"">poiščete v spletu</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 16
+    DEFPUSHBUTTON "V redu", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "Prekliči", IDCANCEL, 194, 251, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_XP DIALOGEX 0, 0, 260, 271
+CAPTION "Odpiranje s programom"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20, SS_REALSIZECONTROL
+    LTEXT "Izberite program, s katerim želite odpreti to datoteko:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Datoteka:", IDC_STATIC, 36, 23, 32, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 72, 23, 196, 8, SS_NOPREFIX
+    GROUPBOX "&Programi", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 99, WS_EX_CLIENTEDGE
+    LTEXT "&Natipkajte opis, ki ga želite uporabiti za datoteke te vrste:", IDD_DESCRIPTIONTEXT, 18, 152, 195, 8
+    EDITTEXT IDD_DESCRIPTION, 18, 163, 205, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "D&atoteke te vrste vedno odpri z izbranim programom", IDD_MAKEASSOC, 18, 183, 202, 10
+    PUSHBUTTON "P&rebrskaj ...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "Če programa, ki ga želite uporabiti, ni na seznamu ali v vašem računalniku, ga lahko <A ID=""Browse"">poiščete v spletu</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 16
+    DEFPUSHBUTTON "V redu", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "Prekliči", IDCANCEL, 194, 251, 50, 14
+}
+
+// Custom generated by an LLM for sl-SI; protocol variant based on DLG_OPENAS_XP
+DLG_OPENAS_PROTOCOL_XP DIALOGEX 0, 0, 260, 220
+CAPTION "Odpiranje s programom"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Izberite program, s katerim želite odpreti ta protokol:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "Protokol:", IDC_STATIC, 36, 23, 33, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 73, 23, 179, 8, SS_NOPREFIX
+    GROUPBOX "&Programi", IDC_STATIC, 6, 36, 245, 161
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "T&a protokol vedno odpri z izbranim programom", IDD_MAKEASSOC, 18, 183, 234, 10
+    DEFPUSHBUTTON "V redu", IDOK, 140, 200, 50, 14
+    PUSHBUTTON "Prekliči", IDCANCEL, 194, 200, 50, 14
+}
+// Windows 2000 shell32.dll dialog #1063
+DLG_OPENAS_2K DIALOGEX 0, 0, 201, 175
+CAPTION "Za odpiranje uporabi"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Kliknite program, s katerim želite odpreti datoteko »%s«.\nČe programa ni na seznamu, kliknite »Drugo«.", IDD_TEXT, 36, 7, 158, 27, NOT WS_GROUP
+    LTEXT "&Izberite program, ki ga želite uporabiti:", IDC_STATIC, 36, 39, 158, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 158, 80
+    AUTOCHECKBOX "D&atoteke te vrste vedno odpri s tem programom", IDD_MAKEASSOC, 36, 136, 163, 10
+    DEFPUSHBUTTON "V redu", IDOK, 36, 154, 50, 14
+    PUSHBUTTON "Prekliči", IDCANCEL, 90, 154, 50, 14
+    PUSHBUTTON "&Drugo ...", IDD_OPENWITH_BROWSE, 144, 154, 50, 14
+}
+
+// Windows 2000 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 215, 209
+CAPTION "Za odpiranje uporabi ..."
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20
+    LTEXT "Kliknite program, s katerim želite odpreti »%s«.\nČe programa ni na seznamu, kliknite »Drugo«.", IDD_TEXT, 36, 7, 172, 27
+    LTEXT "&Opis datotek te vrste:", IDD_DESCRIPTIONTEXT, 36, 39, 172, 8
+    EDITTEXT IDD_DESCRIPTION, 36, 50, 172, 14, ES_AUTOHSCROLL
+    LTEXT "&Izberite program, ki ga želite uporabiti:", IDC_STATIC, 36, 70, 172, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 81, 172, 80
+    AUTOCHECKBOX "D&atoteke te vrste vedno odpri s tem programom", IDD_MAKEASSOC, 36, 166, 172, 10
+    DEFPUSHBUTTON "V redu", IDOK, 50, 188, 50, 14
+    PUSHBUTTON "Prekliči", IDCANCEL, 104, 188, 50, 14
+    PUSHBUTTON "&Drugo ...", IDD_OPENWITH_BROWSE, 158, 188, 50, 14
+}
+
+// Custom generated by an LLM for sl-SI; protocol variant based on DLG_OPENAS_2K
+DLG_OPENAS_PROTOCOL_2K DIALOGEX 0, 0, 201, 175
+CAPTION "Za odpiranje uporabi"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Kliknite program, s katerim želite odpreti protokol »%s«.", IDD_TEXT, 36, 7, 158, 27, NOT WS_GROUP
+    LTEXT "&Izberite program, ki ga želite uporabiti:", IDC_STATIC, 36, 39, 158, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 158, 80
+    AUTOCHECKBOX "T&a protokol vedno odpri s tem programom", IDD_MAKEASSOC, 36, 136, 163, 10
+    DEFPUSHBUTTON "V redu", IDOK, 90, 154, 50, 14
+    PUSHBUTTON "Prekliči", IDCANCEL, 144, 154, 50, 14
+}
+// Windows 98 shell32.dll dialog #1063
+DLG_OPENAS_NT4 DIALOG 0, 0, 212, 179
+CAPTION "Za odpiranje uporabi"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "&Izberite program, ki ga želite uporabiti:", IDC_STATIC, 7, 36, 169, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 46, 197, 78
+    LTEXT "Kliknite program, s katerim želite odpreti datoteko »%s«.\nČe želenega programa ni na seznamu, kliknite »Drugo«.", IDD_TEXT, 7, 7, 198, 24, NOT WS_GROUP
+    AUTOCHECKBOX "D&atoteko vedno odpri s tem programom", IDD_MAKEASSOC, 7, 131, 198, 10
+    DEFPUSHBUTTON "V redu", IDOK, 47, 157, 50, 14, WS_DISABLED
+    PUSHBUTTON "Prekliči", IDCANCEL, 101, 157, 50, 14
+    PUSHBUTTON "&Drugo ...", IDD_OPENWITH_BROWSE, 155, 157, 50, 14
+}
+
+// Windows 98 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 212, 209
+CAPTION "Za odpiranje uporabi"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "Kliknite program, s katerim želite odpreti datoteko »%s«.\nČe želenega programa ni na seznamu, kliknite »Drugo«.", IDD_TEXT, 7, 7, 199, 24, NOT WS_GROUP
+    LTEXT "&Opis datotek vrste »%s«:", IDD_DESCRIPTIONTEXT, 7, 32, 169, 8
+    EDITTEXT IDD_DESCRIPTION, 7, 45, 197, 14, ES_AUTOHSCROLL
+    LTEXT "&Izberite program, ki ga želite uporabiti:", IDC_STATIC, 7, 66, 169, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 76, 197, 78
+    AUTOCHECKBOX "D&atoteko vedno odpri s tem programom", IDD_MAKEASSOC, 7, 161, 198, 10
+    DEFPUSHBUTTON "V redu", IDOK, 47, 187, 50, 14, WS_DISABLED
+    PUSHBUTTON "Prekliči", IDCANCEL, 101, 187, 49, 14
+    PUSHBUTTON "&Drugo ...", IDD_OPENWITH_BROWSE, 155, 187, 50, 14
+}
+
+// Custom generated by an LLM for sl-SI; protocol variant based on DLG_OPENAS_NT4
+DLG_OPENAS_PROTOCOL_NT4 DIALOG 0, 0, 232, 179
+CAPTION "Za odpiranje uporabi"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT "&Izberite program, ki ga želite uporabiti:", IDC_STATIC, 7, 36, 189, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 46, 217, 78
+    LTEXT "Kliknite program, s katerim želite odpreti protokol »%s«.", IDD_TEXT, 7, 7, 218, 24, NOT WS_GROUP
+    AUTOCHECKBOX "P&rotokol vedno odpri s tem programom", IDD_MAKEASSOC, 7, 131, 218, 10
+    DEFPUSHBUTTON "V redu", IDOK, 121, 157, 50, 14, WS_DISABLED
+    PUSHBUTTON "Prekliči", IDCANCEL, 175, 157, 50, 14
+}

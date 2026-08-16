@@ -1,5 +1,7 @@
 #pragma once
 #include "openwithex.h"
+#include <winuser.h>
+#include <winres.h>
 
 /* Icons */
 #define IDI_OPENWITH                       100

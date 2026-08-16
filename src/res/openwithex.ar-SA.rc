@@ -1,0 +1,298 @@
+#pragma code_page(65001) // enable UTF-8
+
+#include "resource.h"
+
+LANGUAGE LANG_ARABIC, SUBLANG_ARABIC_SAUDI_ARABIA
+
+STRINGTABLE
+{
+    // Windows 7 shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED "برامج ينصح بها"
+    // Windows 7 shell32.dll string #29953
+    IDS_OPENWITH_OTHERS "برامج أخرى"
+    // Windows XP shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED_XP "برامج ينصح بها:"
+    // Windows XP shell32.dll string #29953
+    IDS_OPENWITH_OTHERS_XP "برامج أخرى:"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_PROGRAMSFILTER "Programs"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_ALLFILESFILTER "All Files"
+    // Windows 7 shell32.dll string #9016
+    IDS_OPENAS "فتح باستخدام..."
+    // Windows Vista shell32.dll string #9016
+    IDS_OPENAS_VISTA "فتح باستخدام..."
+}
+
+// Windows 7 shell32.dll dialog #1063
+DLG_OPENAS DIALOGEX 0, 0, 375, 271
+CAPTION "فتح باستخدام"
+STYLE DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "اختر البرنامج الذي تريد استخدامه لفتح هذا الملف:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "ملف:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170, WS_EX_LEFTSCROLLBAR | WS_EX_RTLREADING | WS_EX_RIGHT
+    AUTOCHECKBOX "اس&تخدام البرنامج المحدد دوماً لفتح هذا النوع من الملفات", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "ا&ستعراض...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "إذا لم يكن البرنامج الذي تريده مدرجاً بالقائمة أو لم يكن على الكمبيوتر، يمكنك <A ID=""Browse"">البحث عن البرنامج الملائم على ويب</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "موافق", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE DIALOGEX 0, 0, 375, 271
+CAPTION "فتح باستخدام"
+STYLE DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "اختر البرنامج الذي تريد استخدامه لفتح هذا الملف:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "ملف:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "ا&كتب الوصف الذي تريد استخدامه لهذا النوع من الملفات:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "اس&تخدام البرنامج المحدد دوماً لفتح هذا النوع من الملفات", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "ا&ستعراض...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "إذا لم يكن البرنامج المطلوب مدرجاً بالقائمة أو لم يكن على الكمبيوتر، يمكنك <A ID=""Browse"">البحث عن البرنامج الملائم على ويب</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "موافق", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL DIALOGEX 0, 0, 375, 220
+CAPTION "فتح باستخدام"
+STYLE DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "اختيار البرنامج الذي تريد استخدامه لفتح هذا البروتوكول:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "البروتوكول:", IDC_STATIC, 36, 23, 37, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 75, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "السماح &دوماً باستخدام البرنامج المحدد لمعالجة هذا البروتوكول", IDD_MAKEASSOC, 6, 185, 202, 10
+    DEFPUSHBUTTON "موافق", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1063
+DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "فتح باستخدام"
+STYLE DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "اختر البرنامج الذي تريد استخدامه لفتح هذا الملف:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "الملف:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170, WS_EX_LEFTSCROLLBAR | WS_EX_RTLREADING | WS_EX_RIGHT
+    AUTOCHECKBOX "اس&تخدام البرنامج المحدد دوماً لفتح هذا النوع من الملفات", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "ا&ستعراض...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "إذا لم يكن البرنامج الذي تريده مدرجاً بالقائمة أو لم يكن على الكمبيوتر، يمكنك <A ID=""Browse"">البحث عن البرنامج الملائم على ويب</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "موافق", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "فتح باستخدام"
+STYLE DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "اختر البرنامج الذي تريد استخدامه لفتح هذا الملف:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "الملف:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "ا&كتب الوصف الذي تريد استخدامه لهذا النوع من الملفات:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "اس&تخدام البرنامج المحدد دوماً لفتح هذا النوع من الملفات", IDD_MAKEASSOC, 6, 211, 202, 10
+    PUSHBUTTON "ا&ستعراض...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "إذا لم يكن البرنامج المطلوب مدرجاً بالقائمة أو لم يكن على الكمبيوتر، يمكنك <A ID=""Browse"">البحث عن البرنامج الملائم على ويب</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "موافق", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL_VISTA DIALOGEX 0, 0, 375, 220
+CAPTION "فتح باستخدام"
+STYLE DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "اختيار البرنامج الذي تريد استخدامه لفتح هذا البروتوكول:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "البروتوكول:", IDC_STATIC, 36, 23, 37, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 75, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "السماح &دوماً باستخدام البرنامج المحدد لمعالجة هذا البروتوكول", IDD_MAKEASSOC, 6, 185, 202, 10
+    DEFPUSHBUTTON "موافق", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1063
+DLG_OPENAS_XP DIALOGEX 0, 0, 260, 271
+CAPTION "فتح باستخدام"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "اختر البرنامج الذي تريد استخدامه لفتح هذا الملف:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "الملف:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    GROUPBOX "البرا&مج", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "اس&تخدام البرنامج المحدد دوماً لفتح هذا النوع من الملفات", IDD_MAKEASSOC, 18, 183, 202, 10
+    PUSHBUTTON "ا&ستعراض...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "إذا لم يكن البرنامج الذي تريده مدرجاً بالقائمة أو لم يكن على الكمبيوتر، يمكنك <A ID=""Browse"">البحث عن البرنامج الملائم على ويب</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 16
+    DEFPUSHBUTTON "موافق", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 194, 251, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_XP DIALOGEX 0, 0, 260, 271
+CAPTION "فتح باستخدام"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "اختر البرنامج الذي تريد استخدامه لفتح هذا الملف:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "الملف:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
+    GROUPBOX "البرا&مج", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 99, WS_EX_CLIENTEDGE
+    LTEXT "ا&كتب الوصف الذي تريد استخدامه لهذا النوع من الملفات:", IDD_DESCRIPTIONTEXT, 18, 152, 195, 8
+    EDITTEXT IDD_DESCRIPTION, 18, 163, 205, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "اس&تخدام البرنامج المحدد دوماً لفتح هذا النوع من الملفات", IDD_MAKEASSOC, 18, 183, 202, 10
+    PUSHBUTTON "ا&ستعراض...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "إذا لم يكن البرنامج المطلوب مدرجاً بالقائمة أو لم يكن على الكمبيوتر، يمكنك <A ID=""Browse"">البحث عن البرنامج الملائم على ويب</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 16
+    DEFPUSHBUTTON "موافق", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 194, 251, 50, 14
+}
+
+// Custom generated by an LLM for ar-SA; protocol variant based on DLG_OPENAS_XP
+DLG_OPENAS_PROTOCOL_XP DIALOGEX 0, 0, 260, 220
+CAPTION "فتح باستخدام"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "اختر البرنامج الذي تريد استخدامه لفتح هذا البروتوكول:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "البروتوكول:", IDC_STATIC, 36, 23, 40, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 80, 23, 172, 8, SS_NOPREFIX
+    GROUPBOX "البرا&مج", IDC_STATIC, 6, 36, 245, 161
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "اس&تخدام البرنامج المحدد دوماً لمعالجة هذا البروتوكول", IDD_MAKEASSOC, 18, 183, 234, 10
+    DEFPUSHBUTTON "موافق", IDOK, 140, 200, 50, 14
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 194, 200, 50, 14
+}
+// Windows 2000 shell32.dll dialog #1063
+DLG_OPENAS_2K DIALOGEX 0, 0, 201, 175
+CAPTION "فتح باستخدام"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "Microsoft Sans Serif", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "انقر فوق البرنامج الذي تريد استخدامه لفتح ""%s"".\nفي حالة عدم وجود البرنامج في القائمة، انقر فوق ""غير ذلك"".", IDD_TEXT, 36, 2, 158, 32, NOT WS_GROUP
+    LTEXT "اختر البر&نامج الذي تريد استخدامه:", IDC_STATIC, 36, 39, 158, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 158, 80
+    AUTOCHECKBOX "اس&تخدام هذا البرنامج لفتح هذه الملفات دائما", IDD_MAKEASSOC, 36, 136, 151, 10
+    DEFPUSHBUTTON "موافق", IDOK, 36, 154, 50, 14
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 90, 154, 50, 14
+    PUSHBUTTON "&غير ذلك...", IDD_OPENWITH_BROWSE, 144, 154, 50, 14
+}
+
+// Windows 2000 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 215, 209
+CAPTION "فتح باستخدام..."
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "Microsoft Sans Serif", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20
+    LTEXT "انقر فوق البرنامج الذي تريد استخدامه لفتح ""%s"".\nإذا كان البرنامج غير موجود بالقائمة انقر فوق ""غير ذلك"".", IDD_TEXT, 36, 7, 172, 27
+    LTEXT "و&صف للملفات من هذا النوع:", IDD_DESCRIPTIONTEXT, 36, 39, 172, 8
+    EDITTEXT IDD_DESCRIPTION, 36, 50, 172, 14, ES_AUTOHSCROLL
+    LTEXT "اختر البر&نامج الذي تريد استخدامه:", IDC_STATIC, 36, 70, 172, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 81, 172, 80
+    AUTOCHECKBOX "اس&تخدام هذا البرنامج لفتح هذه الملفات دائما", IDD_MAKEASSOC, 36, 166, 172, 10
+    DEFPUSHBUTTON "موافق", IDOK, 50, 188, 50, 14
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 104, 188, 50, 14
+    PUSHBUTTON "&غير ذلك...", IDD_OPENWITH_BROWSE, 158, 188, 50, 14
+}
+
+// Custom generated by an LLM for ar-SA; protocol variant based on DLG_OPENAS_2K
+DLG_OPENAS_PROTOCOL_2K DIALOGEX 0, 0, 201, 175
+CAPTION "فتح باستخدام"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "Microsoft Sans Serif", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "انقر فوق البرنامج الذي تريد استخدامه لفتح البروتوكول ""%s"".", IDD_TEXT, 36, 2, 158, 32, NOT WS_GROUP
+    LTEXT "اختر البر&نامج الذي تريد استخدامه:", IDC_STATIC, 36, 39, 158, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 158, 80
+    AUTOCHECKBOX "اس&تخدام هذا البرنامج لمعالجة هذا البروتوكول دائما", IDD_MAKEASSOC, 36, 136, 151, 10
+    DEFPUSHBUTTON "موافق", IDOK, 90, 154, 50, 14
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 144, 154, 50, 14
+}
+// Windows 98 shell32.dll dialog #1063
+DLG_OPENAS_NT4 DIALOGEX 0, 0, 212, 179
+CAPTION "فتح بواسطة"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Sans Serif", 0, 0, 0
+{
+    LTEXT "اخ&تر البرنامج الذي تريد استخدامه:", IDC_STATIC, 7, 36, 169, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 46, 197, 78
+    LTEXT "انقر فوق البرنامج الذي تريد استخدامه لفتح الملف '%s'.\nإذا لم يوجد البرنامج الذي تريده بالقائمة، انقر فوق ""غير ذلك"".", IDD_TEXT, 7, 7, 181, 24, NOT WS_GROUP
+    AUTOCHECKBOX "ا&ستخدم دوماً هذا البرنامج لفتح هذا النوع من الملفات", IDD_MAKEASSOC, 7, 131, 198, 10
+    DEFPUSHBUTTON "موافق", IDOK, 47, 157, 50, 14, WS_DISABLED
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 101, 157, 50, 14
+    PUSHBUTTON "&غير ذلك...", IDD_OPENWITH_BROWSE, 155, 157, 50, 14
+}
+
+// Windows 98 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_NT4 DIALOGEX 0, 0, 212, 209
+CAPTION "فتح بواسطة"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Sans Serif", 0, 0, 0
+{
+    LTEXT "انقر فوق البرنامج الذي تريد استخدامه لفتح الملف '%s'.\nإذا لم يوجد البرنامج الذي تريده بالقائمة، انقر فوق ""غير ذلك"".", IDD_TEXT, 11, 6, 185, 24, NOT WS_GROUP
+    LTEXT "و&صف ملفات '%s':", IDD_DESCRIPTIONTEXT, 7, 32, 169, 8
+    EDITTEXT IDD_DESCRIPTION, 7, 45, 197, 14, ES_AUTOHSCROLL
+    LTEXT "ا&ختر البرنامج الذي تريد استخدامه:", IDC_STATIC, 7, 66, 169, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 76, 197, 78
+    AUTOCHECKBOX "ا&ستخدم دوماً هذا البرنامج لفتح هذا الملف", IDD_MAKEASSOC, 7, 161, 198, 10
+    DEFPUSHBUTTON "موافق", IDOK, 47, 187, 50, 14, WS_DISABLED
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 101, 187, 49, 14
+    PUSHBUTTON "&غير ذلك...", IDD_OPENWITH_BROWSE, 155, 187, 50, 14
+}
+
+// Custom generated by an LLM for ar-SA; protocol variant based on DLG_OPENAS_NT4
+DLG_OPENAS_PROTOCOL_NT4 DIALOGEX 0, 0, 232, 179
+CAPTION "فتح بواسطة"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Sans Serif", 0, 0, 0
+{
+    LTEXT "اخ&تر البرنامج الذي تريد استخدامه:", IDC_STATIC, 7, 36, 189, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 46, 217, 78
+    LTEXT "انقر فوق البرنامج الذي تريد استخدامه لفتح البروتوكول '%s'.", IDD_TEXT, 7, 7, 201, 24, NOT WS_GROUP
+    AUTOCHECKBOX "ا&ستخدم دوماً هذا البرنامج لمعالجة هذا البروتوكول", IDD_MAKEASSOC, 7, 131, 218, 10
+    DEFPUSHBUTTON "موافق", IDOK, 121, 157, 50, 14, WS_DISABLED
+    PUSHBUTTON "إلغاء الأمر", IDCANCEL, 175, 157, 50, 14
+}

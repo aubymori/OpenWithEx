@@ -1,0 +1,298 @@
+#pragma code_page(65001) // enable UTF-8
+
+#include "resource.h"
+
+LANGUAGE LANG_HEBREW, SUBLANG_HEBREW_ISRAEL
+
+STRINGTABLE
+{
+    // Windows 7 shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED "תוכניות מומלצות"
+    // Windows 7 shell32.dll string #29953
+    IDS_OPENWITH_OTHERS "תוכניות אחרות"
+    // Windows XP shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED_XP "תוכניות מומלצות:"
+    // Windows XP shell32.dll string #29953
+    IDS_OPENWITH_OTHERS_XP "תוכניות אחרות:"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_PROGRAMSFILTER "Programs"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_ALLFILESFILTER "All Files"
+    // Windows 7 shell32.dll string #9016
+    IDS_OPENAS "פתיחה באמצעות..."
+    // Windows Vista shell32.dll string #9016
+    IDS_OPENAS_VISTA "פתיחה באמצעות..."
+}
+
+// Windows 7 shell32.dll dialog #1063
+DLG_OPENAS DIALOGEX 0, 0, 375, 271
+CAPTION "פתיחה באמצעות"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "בחר את התוכנית בה ברצונך להשתמש לפתיחת קובץ זה:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "קובץ:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 191, 8, SS_NOPREFIX, WS_EX_RTLREADING
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "ה&שתמש תמיד בתוכנית שנבחרה לפתיחת קבצים מסוג זה", IDD_MAKEASSOC, 6, 211, 208, 10
+    PUSHBUTTON "&עיון...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "אם התוכנית הרצויה אינה מופיעה ברשימה או אינה נמצאת במחשב שלך, באפשרותך <A ID=""Browse"">לחפש את התוכנית המתאימה באינטרנט</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "אישור", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "ביטול", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE DIALOGEX 0, 0, 375, 271
+CAPTION "פתיחה באמצעות"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20, SS_REALSIZECONTROL
+    LTEXT "בחר את התוכנית בה ברצונך להשתמש לפתיחת קובץ זה:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "קובץ:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 191, 8, SS_NOPREFIX, WS_EX_RTLREADING
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "הקלד את התי&אור בו ברצונך להשתמש עבור קבצים מסוג זה:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "ה&שתמש תמיד בתוכנית שנבחרה לפתיחת קבצים מסוג זה", IDD_MAKEASSOC, 6, 211, 208, 10
+    PUSHBUTTON "&עיון...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "אם התוכנית הרצויה אינה מופיעה ברשימה או אינה נמצאת במחשב שלך, באפשרותך <A ID=""Browse"">לחפש את התוכנית המתאימה באינטרנט</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "אישור", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "ביטול", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL DIALOGEX 0, 0, 375, 220
+CAPTION "פתיחה באמצעות"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "בחר בתוכנית בה ברצונך להשתמש לפתיחת פרוטוקול זה:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "פרוטוקול:", IDC_STATIC, 36, 23, 36, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 77, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "&השתמש תמיד בתוכנית הנבחרת לטיפול בפרוטוקול זה", IDD_MAKEASSOC, 6, 185, 202, 10
+    DEFPUSHBUTTON "אישור", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "ביטול", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1063
+DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "פתיחה באמצעות"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "בחר את התוכנית בה ברצונך להשתמש לפתיחת קובץ זה:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "קובץ:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 191, 8, SS_NOPREFIX, WS_EX_RTLREADING
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "ה&שתמש תמיד בתוכנית שנבחרה לפתיחת קבצים מסוג זה", IDD_MAKEASSOC, 6, 211, 208, 10
+    PUSHBUTTON "&עיון...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "אם התוכנית הרצויה אינה מופיעה ברשימה או אינה נמצאת במחשב שלך, באפשרותך <A ID=""Browse"">לחפש את התוכנית המתאימה באינטרנט</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "אישור", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "ביטול", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "פתיחה באמצעות"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20, SS_REALSIZECONTROL
+    LTEXT "בחר את התוכנית בה ברצונך להשתמש לפתיחת קובץ זה:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "קובץ:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 191, 8, SS_NOPREFIX, WS_EX_RTLREADING
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "הקלד את התי&אור בו ברצונך להשתמש עבור קבצים מסוג זה:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "ה&שתמש תמיד בתוכנית שנבחרה לפתיחת קבצים מסוג זה", IDD_MAKEASSOC, 6, 211, 208, 10
+    PUSHBUTTON "&עיון...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "אם התוכנית הרצויה אינה מופיעה ברשימה או אינה נמצאת במחשב שלך, באפשרותך <A ID=""Browse"">לחפש את התוכנית המתאימה באינטרנט</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "אישור", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "ביטול", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL_VISTA DIALOGEX 0, 0, 375, 220
+CAPTION "פתיחה באמצעות"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "בחר בתוכנית בה ברצונך להשתמש לפתיחת פרוטוקול זה:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "פרוטוקול:", IDC_STATIC, 36, 23, 36, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 77, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "&השתמש תמיד בתוכנית הנבחרת לטיפול בפרוטוקול זה", IDD_MAKEASSOC, 6, 185, 202, 10
+    DEFPUSHBUTTON "אישור", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "ביטול", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1063
+DLG_OPENAS_XP DIALOGEX 0, 0, 260, 271
+CAPTION "פתיחה באמצעות"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "בחר את התוכנית בה ברצונך להשתמש לפתיחת קובץ זה:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "קובץ:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 191, 8, SS_NOPREFIX, WS_EX_RTLREADING
+    GROUPBOX "&תוכניות", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "ה&שתמש תמיד בתוכנית שנבחרה לפתיחת קבצים מסוג זה", IDD_MAKEASSOC, 18, 183, 202, 10
+    PUSHBUTTON "&עיון...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "אם התוכנית הרצויה אינה מופיעה ברשימה או אינה נמצאת במחשב שלך, באפשרותך <A ID=""Browse"">לחפש את התוכנית המתאימה באינטרנט</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 16
+    DEFPUSHBUTTON "אישור", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "ביטול", IDCANCEL, 194, 251, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_XP DIALOGEX 0, 0, 260, 271
+CAPTION "פתיחה באמצעות"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20, SS_REALSIZECONTROL
+    LTEXT "בחר את התוכנית בה ברצונך להשתמש לפתיחת קובץ זה:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "קובץ:", IDC_STATIC, 36, 23, 20, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 60, 23, 191, 8, SS_NOPREFIX, WS_EX_RTLREADING
+    GROUPBOX "&תוכניות", IDC_STATIC, 6, 36, 245, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 99, WS_EX_RTLREADING | WS_EX_CLIENTEDGE
+    LTEXT "הקלד את התי&אור בו ברצונך להשתמש עבור קבצים מסוג זה:", IDD_DESCRIPTIONTEXT, 18, 152, 214, 8
+    EDITTEXT IDD_DESCRIPTION, 18, 163, 205, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "ה&שתמש תמיד בתוכנית שנבחרה לפתיחת קבצים מסוג זה", IDD_MAKEASSOC, 18, 183, 202, 10
+    PUSHBUTTON "&עיון...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
+    CONTROL "אם התוכנית הרצויה אינה מופיעה ברשימה או אינה נמצאת במחשב שלך, באפשרותך <A ID=""Browse"">לחפש את התוכנית המתאימה באינטרנט</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 242, 16
+    DEFPUSHBUTTON "אישור", IDOK, 140, 251, 50, 14
+    PUSHBUTTON "ביטול", IDCANCEL, 194, 251, 50, 14
+}
+
+// Custom generated by an LLM for he-IL; protocol variant based on DLG_OPENAS_XP
+DLG_OPENAS_PROTOCOL_XP DIALOGEX 0, 0, 260, 220
+CAPTION "פתיחה באמצעות"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "בחר את התוכנית בה ברצונך להשתמש לפתיחת פרוטוקול זה:", IDD_TEXT, 36, 7, 208, 8, NOT WS_GROUP
+    LTEXT "פרוטוקול:", IDC_STATIC, 36, 23, 39, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 79, 23, 173, 8, SS_NOPREFIX, WS_EX_RTLREADING
+    GROUPBOX "&תוכניות", IDC_STATIC, 6, 36, 245, 161
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "ה&שתמש תמיד בתוכנית שנבחרה לפתיחת פרוטוקול זה", IDD_MAKEASSOC, 18, 183, 234, 10
+    DEFPUSHBUTTON "אישור", IDOK, 140, 200, 50, 14
+    PUSHBUTTON "ביטול", IDCANCEL, 194, 200, 50, 14
+}
+// Windows 2000 shell32.dll dialog #1063
+DLG_OPENAS_2K DIALOGEX 0, 0, 201, 175
+CAPTION "פתיחה באמצעות"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "Microsoft Sans Serif", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "לחץ על התוכנית בה ברצונך להשתמש כדי לפתוח את '%s'.\nאם התוכנית אינה מופיעה ברשימה, לחץ על אחר.", IDD_TEXT, 36, 2, 158, 32, NOT WS_GROUP
+    LTEXT "&בחר את התוכנית בה ברצונך להשתמש:", IDC_STATIC, 36, 39, 158, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 158, 80
+    AUTOCHECKBOX "ה&שתמש תמיד בתוכנית זו לפתיחת קבצים אלה", IDD_MAKEASSOC, 33, 136, 168, 10
+    DEFPUSHBUTTON "אישור", IDOK, 36, 154, 50, 14
+    PUSHBUTTON "ביטול", IDCANCEL, 90, 154, 50, 14
+    PUSHBUTTON "&אחר...", IDD_OPENWITH_BROWSE, 144, 154, 50, 14
+}
+
+// Windows 2000 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 215, 209
+CAPTION "פתיחה באמצעות..."
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "Microsoft Sans Serif", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20
+    LTEXT "לחץ על התוכנית בה ברצונך להשתמש כדי לפתוח את '%s'.\nאם התוכנית אינה מופיעה ברשימה, לחץ על אחר.", IDD_TEXT, 36, 7, 172, 27
+    LTEXT "&תיאור עבור קבצים מסוג זה:", IDD_DESCRIPTIONTEXT, 36, 39, 172, 8
+    EDITTEXT IDD_DESCRIPTION, 36, 50, 172, 14, ES_AUTOHSCROLL
+    LTEXT "&בחר את התוכנית בה ברצונך להשתמש:", IDC_STATIC, 36, 70, 172, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 81, 172, 80
+    AUTOCHECKBOX "ה&שתמש תמיד בתוכנית זו לפתיחת קבצים אלה", IDD_MAKEASSOC, 36, 166, 172, 10
+    DEFPUSHBUTTON "אישור", IDOK, 50, 188, 50, 14
+    PUSHBUTTON "ביטול", IDCANCEL, 104, 188, 50, 14
+    PUSHBUTTON "&אחר...", IDD_OPENWITH_BROWSE, 158, 188, 50, 14
+}
+
+// Custom generated by an LLM for he-IL; protocol variant based on DLG_OPENAS_2K
+DLG_OPENAS_PROTOCOL_2K DIALOGEX 0, 0, 201, 175
+CAPTION "פתיחה באמצעות"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "Microsoft Sans Serif", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "לחץ על התוכנית בה ברצונך להשתמש כדי לפתוח את הפרוטוקול '%s'.", IDD_TEXT, 36, 2, 158, 32, NOT WS_GROUP
+    LTEXT "&בחר את התוכנית בה ברצונך להשתמש:", IDC_STATIC, 36, 39, 158, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 158, 80
+    AUTOCHECKBOX "ה&שתמש תמיד בתוכנית זו לפתיחת פרוטוקול זה", IDD_MAKEASSOC, 33, 136, 168, 10
+    DEFPUSHBUTTON "אישור", IDOK, 90, 154, 50, 14
+    PUSHBUTTON "ביטול", IDCANCEL, 144, 154, 50, 14
+}
+// Windows 98 shell32.dll dialog #1063
+DLG_OPENAS_NT4 DIALOGEX 0, 0, 212, 179
+CAPTION "פתיחה באמצעות"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Sans Serif", 0, 0, 0
+{
+    LTEXT "&בחר את התוכנית בה ברצונך להשתמש:", IDC_STATIC, 7, 36, 169, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 46, 197, 78
+    LTEXT "בחר את התוכנית בה ברצונך להשתמש לפתיחת הקובץ '%s'‏.\nאם התוכנית הרצויה אינה מופיעה ברשימה, לחץ על לחצן אחר.", IDD_TEXT, 7, 7, 198, 24, NOT WS_GROUP
+    AUTOCHECKBOX "&השתמש תמיד בתוכנית זו לפתיחת סוג קובץ זה", IDD_MAKEASSOC, 7, 131, 198, 10
+    DEFPUSHBUTTON "אישור", IDOK, 47, 157, 50, 14, WS_DISABLED
+    PUSHBUTTON "ביטול", IDCANCEL, 101, 157, 50, 14
+    PUSHBUTTON "&אחר...", IDD_OPENWITH_BROWSE, 155, 157, 50, 14
+}
+
+// Windows 98 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_NT4 DIALOGEX 0, 0, 212, 209
+CAPTION "פתיחה באמצעות"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Sans Serif", 0, 0, 0
+{
+    LTEXT "לחץ על התוכנית בה ברצונך להשתמש לפתיחת הקובץ '%s'‏.\nאם התוכנית הרצויה אינה מופיעה ברשימה, לחץ על לחצן אחר.", IDD_TEXT, 7, 7, 199, 24, NOT WS_GROUP
+    LTEXT "&תיאור של קבצי '%s':", IDD_DESCRIPTIONTEXT, 7, 34, 169, 8
+    EDITTEXT IDD_DESCRIPTION, 7, 45, 197, 14, ES_AUTOHSCROLL
+    LTEXT "&בחר את התוכנית בה ברצונך להשתמש:", IDC_STATIC, 7, 66, 169, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 76, 197, 78
+    AUTOCHECKBOX "&השתמש תמיד בתוכנית זו לפתיחת קובץ זה", IDD_MAKEASSOC, 7, 161, 198, 10
+    DEFPUSHBUTTON "אישור", IDOK, 47, 187, 50, 14, WS_DISABLED
+    PUSHBUTTON "ביטול", IDCANCEL, 101, 187, 49, 14
+    PUSHBUTTON "&אחר...", IDD_OPENWITH_BROWSE, 155, 187, 50, 14
+}
+
+// Custom generated by an LLM for he-IL; protocol variant based on DLG_OPENAS_NT4
+DLG_OPENAS_PROTOCOL_NT4 DIALOGEX 0, 0, 232, 179
+CAPTION "פתיחה באמצעות"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+EXSTYLE WS_EX_LAYOUTRTL
+FONT 8, "MS Sans Serif", 0, 0, 0
+{
+    LTEXT "&בחר את התוכנית בה ברצונך להשתמש:", IDC_STATIC, 7, 36, 189, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 46, 217, 78
+    LTEXT "לחץ על התוכנית בה ברצונך להשתמש לפתיחת הפרוטוקול '%s'‏.", IDD_TEXT, 7, 7, 218, 24, NOT WS_GROUP
+    AUTOCHECKBOX "&השתמש תמיד בתוכנית זו לפתיחת פרוטוקול זה", IDD_MAKEASSOC, 7, 131, 218, 10
+    DEFPUSHBUTTON "אישור", IDOK, 121, 157, 50, 14, WS_DISABLED
+    PUSHBUTTON "ביטול", IDCANCEL, 175, 157, 50, 14
+}

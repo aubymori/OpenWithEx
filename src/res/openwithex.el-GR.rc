@@ -1,0 +1,283 @@
+#pragma code_page(65001) // enable UTF-8
+
+#include "resource.h"
+
+LANGUAGE LANG_GREEK, SUBLANG_GREEK_GREECE
+
+STRINGTABLE
+{
+    // Windows 7 shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED "Προτεινόμενα προγράμματα"
+    // Windows 7 shell32.dll string #29953
+    IDS_OPENWITH_OTHERS "Άλλα προγράμματα"
+    // Windows XP shell32.dll string #29952
+    IDS_OPENWITH_RECOMMENDED_XP "Προτεινόμενα προγράμματα:"
+    // Windows XP shell32.dll string #29953
+    IDS_OPENWITH_OTHERS_XP "Άλλα προγράμματα:"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_PROGRAMSFILTER "Προγράμματα"
+    // Split from Windows 7 shell32.dll string #9014
+    IDS_ALLFILESFILTER "Όλα τα αρχεία"
+    // Windows 7 shell32.dll string #9016
+    IDS_OPENAS "Άνοιγμα με..."
+    // Windows Vista shell32.dll string #9016
+    IDS_OPENAS_VISTA "Άνοιγμα με..."
+}
+
+// Windows 7 shell32.dll dialog #1063
+DLG_OPENAS DIALOGEX 0, 0, 375, 271
+CAPTION "Άνοιγμα με"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε για άνοιγμα αυτού του αρχείου:", IDD_TEXT, 36, 7, 298, 8, NOT WS_GROUP
+    LTEXT "Αρχείο:", IDC_STATIC, 36, 23, 26, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 67, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "Ά&νοιγμα αυτού του είδους αρχείου πάντα με το επιλεγμένο πρόγραμμα", IDD_MAKEASSOC, 6, 211, 255, 10
+    PUSHBUTTON "Ανα&ζήτηση...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Αν το πρόγραμμα που θέλετε δεν είναι στη λίστα ή στον υπολογιστή σας, μπορείτε να <A ID=""Browse"">αναζητήσετε το κατάλληλο πρόγραμμα στο Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "ΟΚ", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows 7 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE DIALOGEX 0, 0, 375, 271
+CAPTION "Άνοιγμα με"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε για άνοιγμα αυτού του αρχείου:", IDD_TEXT, 36, 7, 324, 8, NOT WS_GROUP
+    LTEXT "Αρχείο:", IDC_STATIC, 36, 23, 55, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 68, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "Π&ληκτρολογήστε μια περιγραφή που θέλετε να χρησιμοποιήσετε για αυτόν τον τύπο αρχείου:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "Ά&νοιγμα αυτού του είδους αρχείου πάντα με το επιλεγμένο πρόγραμμα", IDD_MAKEASSOC, 6, 211, 271, 10
+    PUSHBUTTON "Ανα&ζήτηση...", IDD_OPENWITH_BROWSE, 311, 211, 57, 14
+    CONTROL "Αν το πρόγραμμα που θέλετε δεν είναι στη λίστα ή στον υπολογιστή σας, μπορείτε να <A ID=""Browse"">αναζητήσετε το κατάλληλο πρόγραμμα στο Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "ΟΚ", IDOK, 249, 251, 57, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 311, 251, 57, 14
+}
+
+// Windows 7 shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL DIALOGEX 0, 0, 375, 220
+CAPTION "Άνοιγμα με"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε για άνοιγμα αυτού του πρωτοκόλλου:", IDD_TEXT, 36, 7, 329, 8, NOT WS_GROUP
+    LTEXT "Πρωτόκολλο:", IDC_STATIC, 36, 23, 60, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 83, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "&Να γίνεται πάντα χρήση του επιλεγμένου προγράμματος για χειρισμό αυτού του πρωτοκόλλου", IDD_MAKEASSOC, 6, 185, 359, 10
+    DEFPUSHBUTTON "ΟΚ", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1063
+DLG_OPENAS_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Άνοιγμα με"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε για άνοιγμα αυτού του αρχείου:", IDD_TEXT, 36, 7, 298, 8, NOT WS_GROUP
+    LTEXT "Αρχείο:", IDC_STATIC, 36, 23, 26, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 67, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 170
+    AUTOCHECKBOX "Ά&νοιγμα αυτού του είδους αρχείου πάντα με το επιλεγμένο πρόγραμμα", IDD_MAKEASSOC, 6, 211, 255, 10
+    PUSHBUTTON "Ανα&ζήτηση...", IDD_OPENWITH_BROWSE, 318, 211, 50, 14
+    CONTROL "Αν το πρόγραμμα που θέλετε δεν είναι στη λίστα ή στον υπολογιστή σας, μπορείτε να <A ID=""Browse"">αναζητήσετε το κατάλληλο πρόγραμμα στο Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "ΟΚ", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_VISTA DIALOGEX 0, 0, 375, 271
+CAPTION "Άνοιγμα με"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε για άνοιγμα αυτού του αρχείου:", IDD_TEXT, 36, 7, 324, 8, NOT WS_GROUP
+    LTEXT "Αρχείο:", IDC_STATIC, 36, 23, 55, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 68, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    LTEXT "Π&ληκτρολογήστε μια περιγραφή που θέλετε να χρησιμοποιήσετε για αυτόν τον τύπο αρχείου:", IDD_DESCRIPTIONTEXT, 6, 182, 361, 8
+    EDITTEXT IDD_DESCRIPTION, 6, 193, 346, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "Ά&νοιγμα αυτού του είδους αρχείου πάντα με το επιλεγμένο πρόγραμμα", IDD_MAKEASSOC, 6, 211, 271, 10
+    PUSHBUTTON "Ανα&ζήτηση...", IDD_OPENWITH_BROWSE, 311, 211, 57, 14
+    CONTROL "Αν το πρόγραμμα που θέλετε δεν είναι στη λίστα ή στον υπολογιστή σας, μπορείτε να <A ID=""Browse"">αναζητήσετε το κατάλληλο πρόγραμμα στο Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 359, 16
+    DEFPUSHBUTTON "ΟΚ", IDOK, 264, 251, 50, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 318, 251, 50, 14
+}
+
+// Windows Vista shell32.dll dialog #1072
+DLG_OPENAS_PROTOCOL_VISTA DIALOGEX 0, 0, 375, 220
+CAPTION "Άνοιγμα με"
+STYLE DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε για άνοιγμα αυτού του πρωτοκόλλου:", IDD_TEXT, 36, 7, 329, 8, NOT WS_GROUP
+    LTEXT "Πρωτόκολλο:", IDC_STATIC, 36, 23, 60, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 83, 23, 208, 8, SS_NOPREFIX
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOSORTHEADER | LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_BORDER | WS_TABSTOP, 6, 36, 361, 144
+    AUTOCHECKBOX "&Να γίνεται πάντα χρήση του επιλεγμένου προγράμματος για χειρισμό αυτού του πρωτοκόλλου", IDD_MAKEASSOC, 6, 185, 359, 10
+    DEFPUSHBUTTON "ΟΚ", IDOK, 264, 200, 50, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 318, 200, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1063
+DLG_OPENAS_XP DIALOGEX 0, 0, 282, 271
+CAPTION "Άνοιγμα με"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε για άνοιγμα αυτού του αρχείου:", IDD_TEXT, 36, 3, 237, 16, NOT WS_GROUP
+    LTEXT "Αρχείο:", IDC_STATIC, 36, 23, 26, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 66, 23, 190, 8, SS_NOPREFIX
+    GROUPBOX "&Προγράμματα", IDC_STATIC, 6, 36, 268, 181
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 248, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "Ά&νοιγμα αυτού του είδους αρχείου πάντα με το επιλεγμένο πρόγραμμα", IDD_MAKEASSOC, 18, 183, 255, 10
+    PUSHBUTTON "Ανα&ζήτηση...", IDD_OPENWITH_BROWSE, 215, 196, 50, 14
+    CONTROL "Αν το πρόγραμμα που θέλετε δεν είναι στη λίστα ή στον υπολογιστή σας, μπορείτε να <A ID=""Browse"">αναζητήσετε το κατάλληλο πρόγραμμα στο Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 222, 266, 16
+    DEFPUSHBUTTON "ΟΚ", IDOK, 169, 251, 50, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 224, 251, 50, 14
+}
+
+// Windows XP shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_XP DIALOGEX 0, 0, 278, 271
+CAPTION "Άνοιγμα με"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20, SS_REALSIZECONTROL
+    LTEXT "Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε για άνοιγμα αυτού του αρχείου:", IDD_TEXT, 36, 3, 232, 16, NOT WS_GROUP
+    LTEXT "Αρχείο:", IDC_STATIC, 36, 23, 26, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 66, 23, 208, 8, SS_NOPREFIX
+    GROUPBOX "&Προγράμματα", IDC_STATIC, 6, 36, 267, 189
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 246, 99, WS_EX_CLIENTEDGE
+    LTEXT "Π&ληκτρολογήστε μια περιγραφή που θέλετε να χρησιμοποιήσετε για αυτόν τον τύπο αρχείου:", IDD_DESCRIPTIONTEXT, 18, 152, 241, 16
+    EDITTEXT IDD_DESCRIPTION, 18, 175, 205, 14, ES_AUTOHSCROLL
+    AUTOCHECKBOX "Ά&νοιγμα αυτού του είδους αρχείου πάντα με το επιλεγμένο πρόγραμμα", IDD_MAKEASSOC, 18, 195, 255, 10
+    PUSHBUTTON "Ανα&ζήτηση...", IDD_OPENWITH_BROWSE, 217, 208, 50, 14
+    CONTROL "Αν το πρόγραμμα που θέλετε δεν είναι στη λίστα ή στον υπολογιστή σας, μπορείτε να <A ID=""Browse"">αναζητήσετε το κατάλληλο πρόγραμμα στο Web</A>.", IDD_OPENWITH_WEBSITE, "SysLink", WS_TABSTOP, 8, 230, 262, 16
+    DEFPUSHBUTTON "ΟΚ", IDOK, 163, 253, 50, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 217, 253, 50, 14
+}
+
+// Custom generated by an LLM for el-GR; protocol variant based on DLG_OPENAS_XP
+DLG_OPENAS_PROTOCOL_XP DIALOGEX 0, 0, 282, 220
+CAPTION "Άνοιγμα με"
+STYLE DS_CONTEXTHELP | DS_CENTER | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20, SS_REALSIZECONTROL
+    LTEXT "Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε για άνοιγμα αυτού του πρωτοκόλλου:", IDD_TEXT, 36, 3, 237, 16, NOT WS_GROUP
+    LTEXT "Πρωτόκολλο:", IDC_STATIC, 36, 23, 48, 8, NOT WS_GROUP
+    LTEXT "", IDD_FILE_TEXT, 88, 23, 186, 8, SS_NOPREFIX
+    GROUPBOX "&Προγράμματα", IDC_STATIC, 6, 36, 268, 161
+    CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 248, 129, WS_EX_CLIENTEDGE
+    AUTOCHECKBOX "Χ&ρήση αυτού του πρωτοκόλλου πάντα με το επιλεγμένο πρόγραμμα", IDD_MAKEASSOC, 18, 183, 256, 10
+    DEFPUSHBUTTON "ΟΚ", IDOK, 169, 200, 50, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 224, 200, 50, 14
+}
+// Windows 2000 shell32.dll dialog #1063
+DLG_OPENAS_2K DIALOGEX 0, 0, 370, 175
+CAPTION "Άνοιγμα με"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Κάντε κλικ στο πρόγραμμα που θέλετε να χρησιμοποιήσετε για να ανοίξετε το αρχείο ""%s"".\nΕάν το πρόγραμμα δεν περιλαμβάνεται στη λίστα, κάντε κλικ στο κουμπί ""Άλλα"".", IDD_TEXT, 36, 7, 298, 31, NOT WS_GROUP
+    LTEXT "&Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε:", IDC_STATIC, 36, 39, 298, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 298, 80
+    AUTOCHECKBOX "Ά&νοιγμα αυτών των αρχείων πάντα με αυτό το πρόγραμμα", IDD_MAKEASSOC, 36, 136, 298, 10
+    DEFPUSHBUTTON "ΟΚ", IDOK, 105, 154, 50, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 159, 154, 50, 14
+    PUSHBUTTON "Ά&λλα...", IDD_OPENWITH_BROWSE, 213, 154, 50, 14
+}
+
+// Windows 2000 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_2K DIALOGEX 0, 0, 370, 209
+CAPTION "Άνοιγμα με..."
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 20, 20
+    LTEXT "Κάντε κλικ στο πρόγραμμα που θέλετε να χρησιμοποιήσετε για να ανοίξετε το αρχείο ""%s"".\nΕάν το πρόγραμμα δεν περιλαμβάνεται στη λίστα, κάντε κλικ στο κουμπί ""Άλλα"".", IDD_TEXT, 36, 7, 298, 27
+    LTEXT "&Περιγραφή αρχείων αυτού του τύπου:", IDD_DESCRIPTIONTEXT, 36, 39, 298, 8
+    EDITTEXT IDD_DESCRIPTION, 36, 50, 298, 14, ES_AUTOHSCROLL
+    LTEXT "&Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε:", IDC_STATIC, 36, 70, 298, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 81, 298, 80
+    AUTOCHECKBOX "Ά&νοιγμα αυτών των αρχείων πάντα με αυτό το πρόγραμμα", IDD_MAKEASSOC, 36, 166, 298, 10
+    DEFPUSHBUTTON "ΟΚ", IDOK, 105, 188, 50, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 159, 188, 50, 14
+    PUSHBUTTON "Ά&λλα...", IDD_OPENWITH_BROWSE, 213, 188, 50, 14
+}
+
+// Custom generated by an LLM for el-GR; protocol variant based on DLG_OPENAS_2K
+DLG_OPENAS_PROTOCOL_2K DIALOGEX 0, 0, 370, 175
+CAPTION "Άνοιγμα με"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_SHELLFONT | WS_POPUPWINDOW | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 1
+{
+    ICON 134, IDD_ICON, 7, 7, 21, 20
+    LTEXT "Κάντε κλικ στο πρόγραμμα που θέλετε να χρησιμοποιήσετε για να ανοίξετε το πρωτόκολλο ""%s"".", IDD_TEXT, 36, 7, 298, 31, NOT WS_GROUP
+    LTEXT "&Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε:", IDC_STATIC, 36, 39, 298, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 298, 80
+    AUTOCHECKBOX "&Χρήση αυτού του προγράμματος πάντα για αυτό το πρωτόκολλο", IDD_MAKEASSOC, 36, 136, 298, 10
+    DEFPUSHBUTTON "ΟΚ", IDOK, 159, 154, 50, 14
+    PUSHBUTTON "Άκυρο", IDCANCEL, 213, 154, 50, 14
+}
+// Windows 98 shell32.dll dialog #1063
+DLG_OPENAS_NT4 DIALOG 0, 0, 243, 186
+CAPTION "Άνοιγμα με"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+{
+    LTEXT "&Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε:", IDC_STATIC, 7, 43, 224, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 54, 228, 78
+    LTEXT "Κάντε κλικ στο πρόγραμμα με το οποίο θέλετε να ανοίξετε το αρχείο ""%s"".\nΕάν αυτό το πρόγραμμα δεν υπάρχει στη λίστα, κάντε κλικ στο κουμπί ""Άλλο"".", IDD_TEXT, 7, 7, 225, 32, NOT WS_GROUP
+    AUTOCHECKBOX "Άνοιγμα αυτού του τύπου αρχείων &πάντα με αυτό το πρόγραμμα", IDD_MAKEASSOC, 7, 139, 233, 10
+    DEFPUSHBUTTON "ΟΚ", IDOK, 77, 165, 50, 14, WS_DISABLED
+    PUSHBUTTON "Άκυρο", IDCANCEL, 131, 165, 50, 14
+    PUSHBUTTON "Ά&λλο...", IDD_OPENWITH_BROWSE, 185, 165, 50, 14
+}
+
+// Windows 98 shell32.dll dialog #1070
+DLG_OPENAS_NOTYPE_NT4 DIALOG 0, 0, 217, 218
+CAPTION "Άνοιγμα με"
+STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+{
+    LTEXT "Κάντε κλικ στο πρόγραμμα με το οποίο θέλετε να ανοίξετε το αρχείο ""%s"".\nΕάν αυτό το πρόγραμμα δεν υπάρχει στη λίστα, κάντε κλικ στο κουμπί ""Άλλο"".", IDD_TEXT, 7, 4, 200, 32, NOT WS_GROUP
+    LTEXT "&Περιγραφή των αρχείων ""%s"":", IDD_DESCRIPTIONTEXT, 7, 42, 199, 8
+    EDITTEXT IDD_DESCRIPTION, 7, 53, 201, 14, ES_AUTOHSCROLL
+    LTEXT "&Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε:", IDC_STATIC, 7, 74, 201, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 84, 201, 78
+    AUTOCHECKBOX "Ά&νοιγμα αυτού του αρχείου πάντα με το ίδιο πρόγραμμα", IDD_MAKEASSOC, 7, 171, 207, 14
+    DEFPUSHBUTTON "ΟΚ", IDOK, 50, 195, 50, 14, WS_DISABLED
+    PUSHBUTTON "Άκυρο", IDCANCEL, 104, 195, 49, 14
+    PUSHBUTTON "Ά&λλο...", IDD_OPENWITH_BROWSE, 158, 195, 50, 14
+}
+
+// Custom generated by an LLM for el-GR; protocol variant based on DLG_OPENAS_NT4
+DLG_OPENAS_PROTOCOL_NT4 DIALOG 0, 0, 243, 186
+CAPTION "Άνοιγμα με"
+STYLE DS_CONTEXTHELP | DS_SETFOREGROUND | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+{
+    LTEXT "&Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε:", IDC_STATIC, 7, 43, 224, 8
+    CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 54, 228, 78
+    LTEXT "Κάντε κλικ στο πρόγραμμα με το οποίο θέλετε να ανοίξετε το πρωτόκολλο ""%s"".", IDD_TEXT, 7, 7, 225, 32, NOT WS_GROUP
+    AUTOCHECKBOX "Χρήση αυτού του προγράμματος &πάντα για αυτό το πρωτόκολλο", IDD_MAKEASSOC, 7, 139, 233, 10
+    DEFPUSHBUTTON "ΟΚ", IDOK, 131, 165, 50, 14, WS_DISABLED
+    PUSHBUTTON "Άκυρο", IDCANCEL, 185, 165, 50, 14
+}
