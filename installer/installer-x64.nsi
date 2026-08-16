@@ -129,43 +129,163 @@ SectionEnd
 !macro InstallLang lang
     SetOutPath "$PROGRAMFILES64\OpenWithEx\${lang}"
     File "..\bin\Release-x64\${lang}\OpenWith.exe.mui"
-	File "..\bin\Release-x64\config\${lang}\OpenWithExConfig.exe.mui"
     SetOutPath "$PROGRAMFILES32\OpenWithEx\${lang}"
     File "..\bin\Release-Win32\${lang}\OpenWith.exe.mui"
 !macroend
 
+!macro InstallConfigLang lang
+    SetOutPath "$PROGRAMFILES64\OpenWithEx\${lang}"
+    File "..\bin\Release-x64\config\${lang}\OpenWithExConfig.exe.mui"
+!macroend
+
 SectionGroup "$(STRING_LANGS)"
+    Section "العربية (المملكة العربية السعودية)"
+        !insertmacro InstallLang "ar-SA"
+    SectionEnd
+
+    Section "Български"
+        !insertmacro InstallLang "bg-BG"
+    SectionEnd
+
+    Section "Čeština"
+        !insertmacro InstallLang "cs-CZ"
+    SectionEnd
+
+    Section "Dansk"
+        !insertmacro InstallLang "da-DK"
+    SectionEnd
+
+    Section "Deutsch"
+        !insertmacro InstallLang "de-DE"
+    SectionEnd
+
+    Section "Ελληνικά"
+        !insertmacro InstallLang "el-GR"
+    SectionEnd
+
     Section "English (United States)"
         SectionIn RO
         !insertmacro InstallLang "en-US"
-    SectionEnd
-
-	Section "日本語"
-        !insertmacro InstallLang "ja-JP"
-    SectionEnd
-
-    Section "Polish"
-        !insertmacro InstallLang "pl-PL"
-    SectionEnd
-
-    Section "Português (Brasil)"
-        !insertmacro InstallLang "pt-BR"
-    SectionEnd
-
-    Section "Русский"
-        !insertmacro InstallLang "ru-RU"
+        !insertmacro InstallConfigLang "en-US"
     SectionEnd
 
     Section "Español"
         !insertmacro InstallLang "es-ES"
+        !insertmacro InstallConfigLang "es-ES"
+    SectionEnd
+
+    Section "Eesti"
+        !insertmacro InstallLang "et-EE"
+    SectionEnd
+
+    Section "Suomi"
+        !insertmacro InstallLang "fi-FI"
+    SectionEnd
+
+    Section "Français"
+        !insertmacro InstallLang "fr-FR"
+    SectionEnd
+
+    Section "עברית"
+        !insertmacro InstallLang "he-IL"
+    SectionEnd
+
+    Section "Hrvatski"
+        !insertmacro InstallLang "hr-HR"
+    SectionEnd
+
+    Section "Magyar"
+        !insertmacro InstallLang "hu-HU"
+    SectionEnd
+
+    Section "Italiano"
+        !insertmacro InstallLang "it-IT"
+    SectionEnd
+
+    Section "日本語"
+        !insertmacro InstallLang "ja-JP"
+        !insertmacro InstallConfigLang "ja-JP"
+    SectionEnd
+
+    Section "한국어"
+        !insertmacro InstallLang "ko-KR"
+        !insertmacro InstallConfigLang "ko-KR"
+    SectionEnd
+
+    Section "Lietuvių"
+        !insertmacro InstallLang "lt-LT"
+    SectionEnd
+
+    Section "Latviešu"
+        !insertmacro InstallLang "lv-LV"
+    SectionEnd
+
+    Section "Norsk bokmål"
+        !insertmacro InstallLang "nb-NO"
+    SectionEnd
+
+    Section "Nederlands"
+        !insertmacro InstallLang "nl-NL"
+    SectionEnd
+
+    Section "Polski"
+        !insertmacro InstallLang "pl-PL"
+        !insertmacro InstallConfigLang "pl-PL"
+    SectionEnd
+
+    Section "Português (Brasil)"
+        !insertmacro InstallLang "pt-BR"
+        !insertmacro InstallConfigLang "pt-BR"
+    SectionEnd
+
+    Section "Português (Portugal)"
+        !insertmacro InstallLang "pt-PT"
+    SectionEnd
+
+    Section "Română"
+        !insertmacro InstallLang "ro-RO"
+    SectionEnd
+
+    Section "Русский"
+        !insertmacro InstallLang "ru-RU"
+        !insertmacro InstallConfigLang "ru-RU"
+    SectionEnd
+
+    Section "Slovenčina"
+        !insertmacro InstallLang "sk-SK"
+    SectionEnd
+
+    Section "Slovenščina"
+        !insertmacro InstallLang "sl-SI"
+    SectionEnd
+
+    Section "Srpski (latinica)"
+        !insertmacro InstallLang "sr-Latn-RS"
+    SectionEnd
+
+    Section "Svenska"
+        !insertmacro InstallLang "sv-SE"
+    SectionEnd
+
+    Section "ไทย"
+        !insertmacro InstallLang "th-TH"
     SectionEnd
 
     Section "Türkçe"
         !insertmacro InstallLang "tr-TR"
+        !insertmacro InstallConfigLang "tr-TR"
     SectionEnd
 
-    Section "한국어"
-	!insertmacro InstallLang "ko-KR"
+    Section "Українська"
+        !insertmacro InstallLang "uk-UA"
+    SectionEnd
+
+    Section "简体中文"
+        !insertmacro InstallLang "zh-CN"
+    SectionEnd
+
+    Section "繁體中文"
+        !insertmacro InstallLang "zh-TW"
     SectionEnd
 SectionGroupEnd
 
