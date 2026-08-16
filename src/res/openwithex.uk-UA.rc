@@ -178,7 +178,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "", IDD_FILE_TEXT, 60, 23, 208, 8, SS_NOPREFIX
     GROUPBOX "Програми", IDC_STATIC, 6, 36, 245, 181
     CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 99, WS_EX_CLIENTEDGE
-    LTEXT "Type a &description that you want to use for this kind of file:", IDD_DESCRIPTIONTEXT, 18, 152, 195, 8
+    LTEXT "Введіть &опис для цього типу файлів:", IDD_DESCRIPTIONTEXT, 18, 152, 195, 8
     EDITTEXT IDD_DESCRIPTION, 18, 163, 205, 14, ES_AUTOHSCROLL
     AUTOCHECKBOX "Зав&жди відкривати файли цього типу за допомогою цієї програми", IDD_MAKEASSOC, 18, 183, 202, 10
     PUSHBUTTON "О&гляд...", IDD_OPENWITH_BROWSE, 194, 196, 50, 14
@@ -246,7 +246,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
 {
     ICON 134, IDD_ICON, 7, 7, 20, 20
     LTEXT "Виберіть програму, за допомогою якої слід відкрити цей файл:", IDD_TEXT, 36, 7, 172, 27
-    LTEXT "&Description for files of this type:", IDD_DESCRIPTIONTEXT, 36, 39, 172, 8
+    LTEXT "&Опис файлів цього типу:", IDD_DESCRIPTIONTEXT, 36, 39, 172, 8
     EDITTEXT IDD_DESCRIPTION, 36, 50, 172, 14, ES_AUTOHSCROLL
     LTEXT "Програми", IDC_STATIC, 36, 70, 172, 8
     CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 81, 172, 80
@@ -293,7 +293,7 @@ STYLE DS_CONTEXTHELP | DS_MODALFRAME | DS_3DLOOK | WS_POPUPWINDOW | WS_CAPTION |
 FONT 8, "MS Shell Dlg"
 {
     LTEXT "Виберіть програму, за допомогою якої слід відкрити цей файл:", IDD_TEXT, 7, 7, 199, 24, NOT WS_GROUP
-    LTEXT "&Description of '%s' files:", IDD_DESCRIPTIONTEXT, 7, 32, 169, 8
+    LTEXT "&Опис файлів «%s»:", IDD_DESCRIPTIONTEXT, 7, 32, 169, 8
     EDITTEXT IDD_DESCRIPTION, 7, 45, 197, 14, ES_AUTOHSCROLL
     LTEXT "Програми", IDC_STATIC, 7, 66, 169, 8
     CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 7, 76, 197, 78
