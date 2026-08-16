@@ -2,7 +2,7 @@
 build/
 bin/
 installer/build/
-*.user
+src/OpenWithEx.vcxproj.user
 
 # Configurator
 x64/
