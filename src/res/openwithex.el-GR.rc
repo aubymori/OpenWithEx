@@ -203,7 +203,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "", IDD_FILE_TEXT, 88, 23, 186, 8, SS_NOPREFIX
     GROUPBOX "&Προγράμματα", IDC_STATIC, 6, 36, 268, 161
     CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 248, 129, WS_EX_CLIENTEDGE
-    AUTOCHECKBOX "Χ&ρήση αυτού του πρωτοκόλλου πάντα με το επιλεγμένο πρόγραμμα", IDD_MAKEASSOC, 18, 183, 256, 10
+    AUTOCHECKBOX "Χ&ρήση αυτού του πρωτοκόλλου πάντα με το επιλεγμένο πρόγραμμα", IDD_MAKEASSOC, 18, 183, 232, 10
     DEFPUSHBUTTON "ΟΚ", IDOK, 169, 200, 50, 14
     PUSHBUTTON "Άκυρο", IDCANCEL, 224, 200, 50, 14
 }
@@ -270,7 +270,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "Κάντε κλικ στο πρόγραμμα που θέλετε να χρησιμοποιήσετε για να ανοίξετε το πρωτόκολλο ""%s"".", IDD_TEXT, 36, 7, 298, 31, NOT WS_GROUP
     LTEXT "&Επιλέξτε το πρόγραμμα που θέλετε να χρησιμοποιήσετε:", IDC_STATIC, 36, 39, 298, 8
     CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 298, 80
-    AUTOCHECKBOX "&Χρήση αυτού του προγράμματος πάντα για αυτό το πρωτόκολλο", IDD_MAKEASSOC, 36, 136, 298, 10
+    AUTOCHECKBOX "&Χρήση αυτού του προγράμματος πάντα για αυτό το πρωτόκολλο", IDD_MAKEASSOC, 36, 136, 220, 10
     DEFPUSHBUTTON "ΟΚ", IDOK, 159, 154, 50, 14
     PUSHBUTTON "Άκυρο", IDCANCEL, 213, 154, 50, 14
 }

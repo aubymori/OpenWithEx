@@ -203,7 +203,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "", IDD_FILE_TEXT, 73, 23, 179, 8, SS_NOPREFIX
     GROUPBOX "&Programy", IDC_STATIC, 6, 36, 248, 161
     CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 230, 129, WS_EX_CLIENTEDGE
-    AUTOCHECKBOX "&Zawsze używaj wybranego programu do obsługi tego protokołu", IDD_MAKEASSOC, 18, 183, 234, 10
+    AUTOCHECKBOX "&Zawsze używaj wybranego programu do obsługi tego protokołu", IDD_MAKEASSOC, 18, 183, 218, 10
     DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
     PUSHBUTTON "Anuluj", IDCANCEL, 194, 200, 50, 14
 }
@@ -270,7 +270,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "Kliknij program, którego chcesz używać do otwierania protokołu '%s'.", IDD_TEXT, 36, 7, 205, 27, NOT WS_GROUP
     LTEXT "&Wybierz program, którego chcesz używać:", IDC_STATIC, 36, 39, 205, 8
     CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 205, 80
-    AUTOCHECKBOX "&Zawsze używaj tego programu do obsługi tego protokołu", IDD_MAKEASSOC, 36, 136, 205, 10
+    AUTOCHECKBOX "&Zawsze używaj tego programu do obsługi tego protokołu", IDD_MAKEASSOC, 36, 136, 197, 10
     DEFPUSHBUTTON "OK", IDOK, 138, 154, 50, 14
     PUSHBUTTON "Anuluj", IDCANCEL, 192, 154, 50, 14
 }

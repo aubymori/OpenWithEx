@@ -203,7 +203,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "", IDD_FILE_TEXT, 79, 23, 173, 8, SS_NOPREFIX
     GROUPBOX "&Программы", IDC_STATIC, 6, 36, 245, 161
     CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
-    AUTOCHECKBOX "&Использовать ее для этого протокола", IDD_MAKEASSOC, 18, 183, 234, 10
+    AUTOCHECKBOX "&Использовать ее для этого протокола", IDD_MAKEASSOC, 18, 183, 146, 10
     DEFPUSHBUTTON "ОК", IDOK, 140, 200, 50, 14
     PUSHBUTTON "Отмена", IDCANCEL, 194, 200, 50, 14
 }
@@ -270,7 +270,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "Выберите программу для открытия протокола ""%s"".", IDD_TEXT, 36, 7, 180, 25, NOT WS_GROUP
     LTEXT "&Список программ:", IDC_STATIC, 36, 39, 178, 8
     CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 178, 80
-    AUTOCHECKBOX "&Использовать ее для этого протокола", IDD_MAKEASSOC, 36, 136, 176, 10
+    AUTOCHECKBOX "&Использовать ее для этого протокола", IDD_MAKEASSOC, 36, 136, 146, 10
     DEFPUSHBUTTON "ОК", IDOK, 110, 154, 50, 14
     PUSHBUTTON "Отмена", IDCANCEL, 164, 154, 50, 14
 }

@@ -203,7 +203,7 @@ FONT 9, "굴림", 0, 0, 129
     LTEXT "", IDD_FILE_TEXT, 73, 23, 179, 8, SS_NOPREFIX
     GROUPBOX "프로그램(&P)", IDC_STATIC, 6, 36, 245, 161
     CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
-    AUTOCHECKBOX "이 프로토콜을 사용할 때 항상 선택된 프로그램 사용(&A)", IDD_MAKEASSOC, 18, 183, 234, 10
+    AUTOCHECKBOX "이 프로토콜을 사용할 때 항상 선택된 프로그램 사용(&A)", IDD_MAKEASSOC, 18, 183, 160, 10
     DEFPUSHBUTTON "확인", IDOK, 140, 200, 50, 14
     PUSHBUTTON "취소", IDCANCEL, 194, 200, 50, 14
 }
@@ -270,7 +270,7 @@ FONT 9, "굴림", 0, 0, 129
     LTEXT "'%s' 프로토콜을 열 때 사용할 프로그램을 선택하십시오.", IDD_TEXT, 36, 5, 158, 34, NOT WS_GROUP
     LTEXT "사용할 프로그램을 선택하십시오(&C).", IDC_STATIC, 36, 45, 158, 9
     CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 56, 158, 80
-    AUTOCHECKBOX "이 프로토콜을 사용할 때 항상 이 프로그램을 사용(&A)", IDD_MAKEASSOC, 36, 140, 164, 10
+    AUTOCHECKBOX "이 프로토콜을 사용할 때 항상 이 프로그램을 사용(&A)", IDD_MAKEASSOC, 36, 140, 155, 10
     DEFPUSHBUTTON "확인", IDOK, 90, 154, 50, 16
     PUSHBUTTON "취소", IDCANCEL, 144, 154, 50, 16
 }

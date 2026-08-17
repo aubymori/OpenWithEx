@@ -203,7 +203,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "", IDD_FILE_TEXT, 73, 23, 179, 8, SS_NOPREFIX
     GROUPBOX "&Programlar", IDC_STATIC, 6, 36, 245, 161
     CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
-    AUTOCHECKBOX "Bu protokolü işlemek içi&n her zaman seçili programı kullan", IDD_MAKEASSOC, 18, 183, 234, 10
+    AUTOCHECKBOX "Bu protokolü işlemek içi&n her zaman seçili programı kullan", IDD_MAKEASSOC, 18, 183, 194, 10
     DEFPUSHBUTTON "Tamam", IDOK, 140, 200, 50, 14
     PUSHBUTTON "İptal", IDCANCEL, 194, 200, 50, 14
 }
@@ -270,7 +270,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "'%s' protokolünü açmak için kullanmak istediğiniz programı tıklatın.", IDD_TEXT, 36, 3, 188, 33, NOT WS_GROUP
     LTEXT "&Kullanmak istediğiniz programı seçin:", IDC_STATIC, 36, 39, 158, 8
     CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 158, 80
-    AUTOCHECKBOX "Bu protokol içi&n her zaman bu programı kullan", IDD_MAKEASSOC, 36, 136, 227, 10
+    AUTOCHECKBOX "Bu protokol içi&n her zaman bu programı kullan", IDD_MAKEASSOC, 36, 136, 158, 10
     DEFPUSHBUTTON "Tamam", IDOK, 89, 154, 50, 14
     PUSHBUTTON "İptal", IDCANCEL, 143, 154, 50, 14
 }

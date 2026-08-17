@@ -203,7 +203,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "", IDD_FILE_TEXT, 73, 25, 179, 8, SS_NOPREFIX
     GROUPBOX "&Programma's", IDC_STATIC, 6, 36, 245, 161
     CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
-    AUTOCHECKBOX "&Dit protocol altijd met dit programma openen", IDD_MAKEASSOC, 18, 183, 234, 10
+    AUTOCHECKBOX "&Dit protocol altijd met dit programma openen", IDD_MAKEASSOC, 18, 183, 157, 10
     DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
     PUSHBUTTON "Annuleren", IDCANCEL, 194, 200, 50, 14
 }
@@ -270,7 +270,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "Klik op het programma dat u wilt gebruiken om het protocol '%s' te openen.", IDD_TEXT, 37, 7, 187, 33, NOT WS_GROUP
     LTEXT "&Kies het te gebruiken programma:", IDC_STATIC, 10, 43, 158, 8
     CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 10, 54, 202, 80
-    AUTOCHECKBOX "&Dit programma altijd gebruiken voor dit protocol", IDD_MAKEASSOC, 10, 138, 220, 10
+    AUTOCHECKBOX "&Dit programma altijd gebruiken voor dit protocol", IDD_MAKEASSOC, 10, 138, 167, 10
     DEFPUSHBUTTON "OK", IDOK, 90, 154, 50, 14
     PUSHBUTTON "Annuleren", IDCANCEL, 144, 154, 50, 14
 }

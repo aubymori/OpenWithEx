@@ -203,7 +203,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "", IDD_FILE_TEXT, 77, 23, 175, 8, SS_NOPREFIX
     GROUPBOX "P&rogramas", IDC_STATIC, 6, 36, 245, 161
     CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
-    AUTOCHECKBOX "Sempre &usar o programa selecionado para abrir este protocolo", IDD_MAKEASSOC, 18, 183, 234, 10
+    AUTOCHECKBOX "Sempre &usar o programa selecionado para abrir este protocolo", IDD_MAKEASSOC, 18, 183, 214, 10
     DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
     PUSHBUTTON "Cancelar", IDCANCEL, 194, 200, 50, 14
 }
@@ -270,7 +270,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "Clique no programa a ser usado para abrir o protocolo '%s'.", IDD_TEXT, 36, 5, 187, 40, NOT WS_GROUP
     LTEXT "&Escolha o programa que deseja usar:", IDC_STATIC, 36, 48, 178, 8
     CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 60, 176, 80
-    AUTOCHECKBOX "&Usar sempre este programa para abrir este protocolo", IDD_MAKEASSOC, 36, 144, 190, 10
+    AUTOCHECKBOX "&Usar sempre este programa para abrir este protocolo", IDD_MAKEASSOC, 36, 144, 185, 10
     DEFPUSHBUTTON "OK", IDOK, 108, 157, 50, 14
     PUSHBUTTON "Cancelar", IDCANCEL, 162, 157, 50, 14
 }

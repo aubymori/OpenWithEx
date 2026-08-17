@@ -203,7 +203,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 1
     LTEXT "", IDD_FILE_TEXT, 73, 23, 179, 8, SS_NOPREFIX
     GROUPBOX "&Programi", IDC_STATIC, 6, 36, 245, 161
     CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
-    AUTOCHECKBOX "T&a protokol vedno odpri z izbranim programom", IDD_MAKEASSOC, 18, 183, 234, 10
+    AUTOCHECKBOX "T&a protokol vedno odpri z izbranim programom", IDD_MAKEASSOC, 18, 183, 162, 10
     DEFPUSHBUTTON "V redu", IDOK, 140, 200, 50, 14
     PUSHBUTTON "Prekliči", IDCANCEL, 194, 200, 50, 14
 }
@@ -270,7 +270,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 0
     LTEXT "Kliknite program, s katerim želite odpreti protokol »%s«.", IDD_TEXT, 36, 7, 158, 27, NOT WS_GROUP
     LTEXT "&Izberite program, ki ga želite uporabiti:", IDC_STATIC, 36, 39, 158, 8
     CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 50, 158, 80
-    AUTOCHECKBOX "T&a protokol vedno odpri s tem programom", IDD_MAKEASSOC, 36, 136, 163, 10
+    AUTOCHECKBOX "T&a protokol vedno odpri s tem programom", IDD_MAKEASSOC, 36, 136, 146, 10
     DEFPUSHBUTTON "V redu", IDOK, 90, 154, 50, 14
     PUSHBUTTON "Prekliči", IDCANCEL, 144, 154, 50, 14
 }

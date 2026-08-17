@@ -203,7 +203,7 @@ FONT 9, "MS UI Gothic", 0, 0, 128
     LTEXT "", IDD_FILE_TEXT, 73, 23, 179, 8, SS_NOPREFIX
     GROUPBOX "プログラム(&P)", IDC_STATIC, 6, 36, 245, 161
     CONTROL "", IDD_APPLIST, "SysTreeView32", TVS_SHOWSELALWAYS | WS_TABSTOP, 16, 49, 225, 129, WS_EX_CLIENTEDGE
-    AUTOCHECKBOX "このプロトコルを使うときは、選択したプログラムをいつも使う(&A)", IDD_MAKEASSOC, 18, 183, 234, 10
+    AUTOCHECKBOX "このプロトコルを使うときは、選択したプログラムをいつも使う(&A)", IDD_MAKEASSOC, 18, 183, 177, 10
     DEFPUSHBUTTON "OK", IDOK, 140, 200, 50, 14
     PUSHBUTTON "キャンセル", IDCANCEL, 194, 200, 50, 14
 }
@@ -270,7 +270,7 @@ FONT 9, "MS UI Gothic", 0, 0, 128
     LTEXT "プロトコル '%s' を開くアプリケーションを選んでください。", IDD_TEXT, 36, 4, 158, 37, NOT WS_GROUP
     LTEXT "このプロトコルを開くアプリケーション(&C):", IDC_STATIC, 36, 44, 158, 8
     CONTROL "", IDD_APPLIST, "SysListView32", LVS_NOCOLUMNHEADER | LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS | LVS_SINGLESEL | LVS_REPORT | WS_TABSTOP, 36, 55, 158, 80
-    AUTOCHECKBOX "このプロトコルを開くときは、いつもこのアプリケーションを使う(&A)", IDD_MAKEASSOC, 7, 139, 191, 10
+    AUTOCHECKBOX "このプロトコルを開くときは、いつもこのアプリケーションを使う(&A)", IDD_MAKEASSOC, 7, 139, 177, 10
     DEFPUSHBUTTON "OK", IDOK, 90, 154, 50, 14
     PUSHBUTTON "キャンセル", IDCANCEL, 144, 154, 50, 14
 }
