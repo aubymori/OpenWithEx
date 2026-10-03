@@ -55,6 +55,7 @@ ManifestSupportedOS all
 !insertmacro LANG_LOAD "Portuguese"
 !insertmacro LANG_LOAD "Spanish"
 !insertmacro LANG_LOAD "Turkish"
+!insertmacro LANG_LOAD "Finnish"
 
 Function .onInit
     # NSIS produces an x86-32 installer. Deny installation if
@@ -164,6 +165,10 @@ SectionGroup "$(STRING_LANGS)"
 
     Section "한국어"
 	!insertmacro InstallLang "ko-KR"
+    SectionEnd
+
+	Section "Suomi"
+    !insertmacro InstallLang "fi-FI"
     SectionEnd
 SectionGroupEnd
 

@@ -143,6 +143,11 @@ if not exist "$(OutDir)ko-KR" md "$(OutDir)ko-KR"
 link /dll /noentry /out:"$(OutDir)ko-KR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ko-KR.res"
 muirct -c "$(TargetPath)" -e "$(OutDir)ko-KR\$(TargetFileName).mui"
 
+rc /D "_UNICODE" /D "UNICODE" /l 0x040b /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.fi-FI.res" openwithexconfig.fi-FI.rc
+if not exist "$(OutDir)fi-FI" md "$(OutDir)fi-FI"
+link /dll /noentry /out:"$(OutDir)fi-FI\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.fi-FI.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)fi-FI\$(TargetFileName).mui"
+
 del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -207,6 +212,11 @@ if not exist "$(OutDir)ko-KR" md "$(OutDir)ko-KR"
 link /dll /noentry /out:"$(OutDir)ko-KR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ko-KR.res"
 muirct -c "$(TargetPath)" -e "$(OutDir)ko-KR\$(TargetFileName).mui"
 
+rc /D "_UNICODE" /D "UNICODE" /l 0x040b /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.fi-FI.res" openwithexconfig.fi-FI.rc
+if not exist "$(OutDir)fi-FI" md "$(OutDir)fi-FI"
+link /dll /noentry /out:"$(OutDir)fi-FI\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.fi-FI.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)fi-FI\$(TargetFileName).mui"
+
 del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -266,6 +276,11 @@ rc /D "_UNICODE" /D "UNICODE" /l 0x0412 /q "muiconfig.xml" /g 0x0409 /nologo /fo
 if not exist "$(OutDir)ko-KR" md "$(OutDir)ko-KR"
 link /dll /noentry /out:"$(OutDir)ko-KR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ko-KR.res"
 muirct -c "$(TargetPath)" -e "$(OutDir)ko-KR\$(TargetFileName).mui"
+
+rc /D "_UNICODE" /D "UNICODE" /l 0x040b /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.fi-FI.res" openwithexconfig.fi-FI.rc
+if not exist "$(OutDir)fi-FI" md "$(OutDir)fi-FI"
+link /dll /noentry /out:"$(OutDir)fi-FI\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.fi-FI.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)fi-FI\$(TargetFileName).mui"
 
 del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
@@ -330,6 +345,11 @@ rc /D "_UNICODE" /D "UNICODE" /l 0x0412 /q "muiconfig.xml" /g 0x0409 /nologo /fo
 if not exist "$(OutDir)ko-KR" md "$(OutDir)ko-KR"
 link /dll /noentry /out:"$(OutDir)ko-KR\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.ko-KR.res"
 muirct -c "$(TargetPath)" -e "$(OutDir)ko-KR\$(TargetFileName).mui"
+
+rc /D "_UNICODE" /D "UNICODE" /l 0x040b /q "muiconfig.xml" /g 0x0409 /nologo /fo"$(IntermediateOutputPath)temp.res" /fm"$(IntermediateOutputPath)openwithexconfig.fi-FI.res" openwithexconfig.fi-FI.rc
+if not exist "$(OutDir)fi-FI" md "$(OutDir)fi-FI"
+link /dll /noentry /out:"$(OutDir)fi-FI\$(TargetFileName).mui" "$(IntermediateOutputPath)openwithexconfig.fi-FI.res"
+muirct -c "$(TargetPath)" -e "$(OutDir)fi-FI\$(TargetFileName).mui"
 
 del "$(IntermediateOutputPath)temp.res"</Command>
     </PostBuildEvent>
