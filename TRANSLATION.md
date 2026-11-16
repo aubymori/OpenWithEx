@@ -7,7 +7,8 @@ Translations should be submitted as RC files, not compiled MUIs.
 
 ## How to extract `shell32.dll` resources from a Windows ISO
 You will need [7-Zip](https://7-zip.org/) for all of these methods.
-You should use [Resource Hacker](https://www.angusj.com/resourcehacker/) to view the resources from the extracted file.
+You should use [Resource Hacker](https://www.angusj.com/resourcehacker/) or [Resource Cracker](https://www.pelock.com/products/resource-cracker)
+to view the resources from the extracted file.
 
 ## Windows Vista/7
 1. Open the ISO in 7-Zip.
